@@ -1,0 +1,543 @@
+INFO 2025-06-03 13:40:31,447 autoreload 4276 24488 Watching for file changes with StatReloader
+INFO 2025-06-03 13:51:24,666 autoreload 15148 21060 Watching for file changes with StatReloader
+WARNING 2025-06-03 13:54:09,252 log 15148 1456 Not Found: /api/consultant/process-cv/
+WARNING 2025-06-03 13:54:09,255 basehttp 15148 1456 "POST /api/consultant/process-cv/ HTTP/1.1" 404 13025
+INFO 2025-06-03 13:59:32,660 autoreload 15148 21060 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-03 13:59:35,488 autoreload 4324 9916 Watching for file changes with StatReloader
+WARNING 2025-06-03 14:00:41,866 log 4324 6372 Not Found: /api/consultant/process-cv/
+WARNING 2025-06-03 14:00:41,872 basehttp 4324 6372 "POST /api/consultant/process-cv/ HTTP/1.1" 404 12829
+INFO 2025-06-03 14:05:50,851 autoreload 4324 9916 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-03 14:05:54,759 autoreload 17516 23120 Watching for file changes with StatReloader
+INFO 2025-06-03 14:06:04,741 autoreload 17516 23120 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-03 14:06:07,316 autoreload 18400 17008 Watching for file changes with StatReloader
+INFO 2025-06-03 14:07:14,796 autoreload 18400 17008 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-03 14:07:16,498 autoreload 22024 7072 Watching for file changes with StatReloader
+INFO 2025-06-03 14:08:06,324 autoreload 22024 7072 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-03 14:08:09,876 autoreload 13176 17148 Watching for file changes with StatReloader
+INFO 2025-06-03 14:08:25,026 autoreload 3652 13096 Watching for file changes with StatReloader
+WARNING 2025-06-03 14:08:59,928 log 3652 10108 Not Found: /api/consultant/process-cv/
+WARNING 2025-06-03 14:08:59,988 basehttp 3652 10108 "POST /api/consultant/process-cv/ HTTP/1.1" 404 13025
+INFO 2025-06-03 14:13:50,146 autoreload 3652 13096 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-03 14:13:51,636 autoreload 20784 21980 Watching for file changes with StatReloader
+INFO 2025-06-03 14:14:11,824 CVProcessor 20784 19164 === DÉBUT DU TRAITEMENT CV ===
+INFO 2025-06-03 14:14:11,827 CVProcessor 20784 19164 Données reçues: ['consultant_id', 'cv']
+INFO 2025-06-03 14:14:11,827 CVProcessor 20784 19164 Fichiers reçus: ['cv']
+INFO 2025-06-03 14:14:11,827 CVProcessor 20784 19164 Fichier CV reçu: cv_mariemkah.pdf, taille: 309308 bytes
+INFO 2025-06-03 14:14:11,828 CVProcessor 20784 19164 Extension du fichier: .pdf
+INFO 2025-06-03 14:14:11,828 CVProcessor 20784 19164 Création du processeur CV...
+INFO 2025-06-03 14:14:11,829 CVProcessor 20784 19164 === EXTRACTION DU TEXTE ===
+INFO 2025-06-03 14:14:11,829 CVProcessor 20784 19164 Début d'extraction de texte pour le fichier: cv_mariemkah.pdf, extension: .pdf
+INFO 2025-06-03 14:14:11,831 CVProcessor 20784 19164 Traitement d'un fichier PDF...
+INFO 2025-06-03 14:14:11,868 CVProcessor 20784 19164 Page 1: 0 caractères extraits
+INFO 2025-06-03 14:14:11,868 CVProcessor 20784 19164 Extraction PDF terminée. Total: 1 caractères
+ERROR 2025-06-03 14:14:11,869 CVProcessor 20784 19164 Très peu de texte extrait (1 caractères). Le fichier pourrait être corrompu ou vide.
+INFO 2025-06-03 14:14:11,870 CVProcessor 20784 19164 Tentative d'extraction alternative pour PDF...
+ERROR 2025-06-03 14:14:12,287 CVProcessor 20784 19164 Impossible d'extraire du texte significatif du fichier
+WARNING 2025-06-03 14:14:12,289 CVProcessor 20784 19164 Impossible de supprimer le fichier temporaire: [WinError 32] Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus: 'C:\\Users\\HP\\AppData\\Local\\Temp\\tmpif0x22d9.pdf'
+ERROR 2025-06-03 14:14:12,290 CVProcessor 20784 19164 Échec de l'extraction du texte
+WARNING 2025-06-03 14:14:12,291 log 20784 19164 Bad Request: /api/consultant/process-cv/
+WARNING 2025-06-03 14:14:12,292 basehttp 20784 19164 "POST /api/consultant/process-cv/ HTTP/1.1" 400 59
+INFO 2025-06-03 22:03:43,610 autoreload 21660 19452 Watching for file changes with StatReloader
+INFO 2025-06-03 22:06:02,352 CVProcessor 21660 22376 === DÉBUT DU TRAITEMENT CV ===
+INFO 2025-06-03 22:06:02,358 CVProcessor 21660 22376 Données reçues: ['consultant_id', 'cv']
+INFO 2025-06-03 22:06:02,358 CVProcessor 21660 22376 Fichiers reçus: ['cv']
+INFO 2025-06-03 22:06:02,359 CVProcessor 21660 22376 Fichier CV reçu: Cv_toutouMouslih.pdf, taille: 370445 bytes
+INFO 2025-06-03 22:06:02,360 CVProcessor 21660 22376 Extension du fichier: .pdf
+INFO 2025-06-03 22:06:02,360 CVProcessor 21660 22376 Création du processeur CV...
+INFO 2025-06-03 22:06:02,363 CVProcessor 21660 22376 === EXTRACTION DU TEXTE ===
+INFO 2025-06-03 22:06:02,364 CVProcessor 21660 22376 Début d'extraction de texte pour le fichier: Cv_toutouMouslih.pdf, extension: .pdf
+INFO 2025-06-03 22:06:02,370 CVProcessor 21660 22376 Traitement d'un fichier PDF...
+INFO 2025-06-03 22:06:02,542 CVProcessor 21660 22376 Page 1: 1407 caractères extraits
+INFO 2025-06-03 22:06:02,545 CVProcessor 21660 22376 Extraction PDF terminée. Total: 1408 caractères
+INFO 2025-06-03 22:06:02,546 CVProcessor 21660 22376 Aperçu du texte extrait: Langues Compétences Certificats Éducation Stages et Projets Académiques à propos de moi Étudiante en troisième année de licence professionnelle (L3),au sein de l'Institut Supérieur du Numérique (SupNu...
+WARNING 2025-06-03 22:06:02,550 CVProcessor 21660 22376 Impossible de supprimer le fichier temporaire: [WinError 32] Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus: 'C:\\Users\\HP\\AppData\\Local\\Temp\\tmp3lxvs1x9.pdf'
+INFO 2025-06-03 22:06:02,556 CVProcessor 21660 22376 Texte extrait avec succès: 1408 caractères
+INFO 2025-06-03 22:06:02,557 CVProcessor 21660 22376 === ANALYSE DU CV ===
+INFO 2025-06-03 22:06:02,558 CVProcessor 21660 22376 Début de l'analyse du CV - 1408 caractères à traiter
+INFO 2025-06-03 22:06:02,560 CVProcessor 21660 22376 Nom détecté: Stages et Projets Académiques
+INFO 2025-06-03 22:06:02,562 CVProcessor 21660 22376 Email détecté: 22072@supnum.mr
+INFO 2025-06-03 22:06:02,568 CVProcessor 21660 22376 Téléphone détecté: 31346121
+31346121
+22072
+INFO 2025-06-03 22:06:02,597 CVProcessor 21660 22376 0 formations détectées
+INFO 2025-06-03 22:06:02,615 CVProcessor 21660 22376 2 compétences détectées
+INFO 2025-06-03 22:06:02,620 CVProcessor 21660 22376 Peu de compétences trouvées, tentative d'extraction élargie...
+INFO 2025-06-03 22:06:02,623 CVProcessor 21660 22376 Total après extraction élargie: 12 compétences
+INFO 2025-06-03 22:06:02,641 CVProcessor 21660 22376 Analyse du CV terminée avec succès
+INFO 2025-06-03 22:06:02,642 CVProcessor 21660 22376 Analyse du CV réussie
+INFO 2025-06-03 22:06:02,643 CVProcessor 21660 22376 Données extraites: nom=Stages et Projets Académiques, email=22072@supnum.mr, compétences=12
+INFO 2025-06-03 22:06:02,644 CVProcessor 21660 22376 === GÉNÉRATION DU CV RICHAT ===
+INFO 2025-06-03 22:06:02,646 CVProcessor 21660 22376 Début de la génération du CV Richat
+INFO 2025-06-03 22:06:02,690 CVProcessor 21660 22376 CV Richat généré avec succès - 2530 bytes
+INFO 2025-06-03 22:06:02,691 CVProcessor 21660 22376 CV Richat généré: 2530 bytes
+INFO 2025-06-03 22:06:02,697 CVProcessor 21660 22376 CV sauvegardé: standardized_cvs/richat_cv_1748984762248_20250603_220602.pdf
+INFO 2025-06-03 22:06:02,700 CVProcessor 21660 22376 === TRAITEMENT CV TERMINÉ AVEC SUCCÈS ===
+INFO 2025-06-03 22:06:02,705 basehttp 21660 22376 "POST /api/consultant/process-cv/ HTTP/1.1" 200 733
+INFO 2025-06-03 22:06:38,195 CVProcessor 21660 22376 === DÉBUT DU TRAITEMENT CV ===
+INFO 2025-06-03 22:06:38,198 CVProcessor 21660 22376 Données reçues: ['consultant_id', 'cv']
+INFO 2025-06-03 22:06:38,199 CVProcessor 21660 22376 Fichiers reçus: ['cv']
+INFO 2025-06-03 22:06:38,200 CVProcessor 21660 22376 Fichier CV reçu: cv_wevanahi (1).pdf, taille: 309876 bytes
+INFO 2025-06-03 22:06:38,200 CVProcessor 21660 22376 Extension du fichier: .pdf
+INFO 2025-06-03 22:06:38,201 CVProcessor 21660 22376 Création du processeur CV...
+INFO 2025-06-03 22:06:38,208 CVProcessor 21660 22376 === EXTRACTION DU TEXTE ===
+INFO 2025-06-03 22:06:38,209 CVProcessor 21660 22376 Début d'extraction de texte pour le fichier: cv_wevanahi (1).pdf, extension: .pdf
+INFO 2025-06-03 22:06:38,215 CVProcessor 21660 22376 Traitement d'un fichier PDF...
+INFO 2025-06-03 22:06:38,250 CVProcessor 21660 22376 Page 1: 0 caractères extraits
+INFO 2025-06-03 22:06:38,251 CVProcessor 21660 22376 Extraction PDF terminée. Total: 1 caractères
+ERROR 2025-06-03 22:06:38,251 CVProcessor 21660 22376 Très peu de texte extrait (1 caractères). Le fichier pourrait être corrompu ou vide.
+INFO 2025-06-03 22:06:38,252 CVProcessor 21660 22376 Tentative d'extraction alternative pour PDF...
+ERROR 2025-06-03 22:06:39,199 CVProcessor 21660 22376 Impossible d'extraire du texte significatif du fichier
+WARNING 2025-06-03 22:06:39,199 CVProcessor 21660 22376 Impossible de supprimer le fichier temporaire: [WinError 32] Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus: 'C:\\Users\\HP\\AppData\\Local\\Temp\\tmpdjj9fh_8.pdf'
+ERROR 2025-06-03 22:06:39,199 CVProcessor 21660 22376 Échec de l'extraction du texte
+WARNING 2025-06-03 22:06:39,204 log 21660 22376 Bad Request: /api/consultant/process-cv/
+WARNING 2025-06-03 22:06:39,206 basehttp 21660 22376 "POST /api/consultant/process-cv/ HTTP/1.1" 400 59
+INFO 2025-06-03 22:06:54,000 CVProcessor 21660 22376 === DÉBUT DU TRAITEMENT CV ===
+INFO 2025-06-03 22:06:54,001 CVProcessor 21660 22376 Données reçues: ['consultant_id', 'cv']
+INFO 2025-06-03 22:06:54,002 CVProcessor 21660 22376 Fichiers reçus: ['cv']
+INFO 2025-06-03 22:06:54,003 CVProcessor 21660 22376 Fichier CV reçu: Mohamed_Lemine_Zeidane.pdf, taille: 57132 bytes
+INFO 2025-06-03 22:06:54,003 CVProcessor 21660 22376 Extension du fichier: .pdf
+INFO 2025-06-03 22:06:54,003 CVProcessor 21660 22376 Création du processeur CV...
+INFO 2025-06-03 22:06:54,005 CVProcessor 21660 22376 === EXTRACTION DU TEXTE ===
+INFO 2025-06-03 22:06:54,007 CVProcessor 21660 22376 Début d'extraction de texte pour le fichier: Mohamed_Lemine_Zeidane.pdf, extension: .pdf
+INFO 2025-06-03 22:06:54,011 CVProcessor 21660 22376 Traitement d'un fichier PDF...
+INFO 2025-06-03 22:06:54,073 CVProcessor 21660 22376 Page 1: 1825 caractères extraits
+INFO 2025-06-03 22:06:54,076 CVProcessor 21660 22376 Extraction PDF terminée. Total: 1826 caractères
+INFO 2025-06-03 22:06:54,076 CVProcessor 21660 22376 Aperçu du texte extrait: M O H A M E D  L E M I N E   Z E I D A N E   CONTACT PROFIL Etudient en Develloppement de Systeme informatiaue au sein de l’établissement SUPNUM , je suis passionné par l’exploration des technologies...
+WARNING 2025-06-03 22:06:54,077 CVProcessor 21660 22376 Impossible de supprimer le fichier temporaire: [WinError 32] Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus: 'C:\\Users\\HP\\AppData\\Local\\Temp\\tmp9kkqil56.pdf'
+INFO 2025-06-03 22:06:54,079 CVProcessor 21660 22376 Texte extrait avec succès: 1826 caractères
+INFO 2025-06-03 22:06:54,079 CVProcessor 21660 22376 === ANALYSE DU CV ===
+INFO 2025-06-03 22:06:54,080 CVProcessor 21660 22376 Début de l'analyse du CV - 1826 caractères à traiter
+INFO 2025-06-03 22:06:54,080 CVProcessor 21660 22376 Nom détecté: M O H A M E D  L E M I N E
+INFO 2025-06-03 22:06:54,081 CVProcessor 21660 22376 Email détecté: 22077@supnum.com
+INFO 2025-06-03 22:06:54,082 CVProcessor 21660 22376 Téléphone détecté: +00 222 26 44 94 44
+22077
+INFO 2025-06-03 22:06:54,087 CVProcessor 21660 22376 1 formations détectées
+INFO 2025-06-03 22:06:54,095 CVProcessor 21660 22376 3 compétences détectées
+INFO 2025-06-03 22:06:54,095 CVProcessor 21660 22376 Peu de compétences trouvées, tentative d'extraction élargie...
+INFO 2025-06-03 22:06:54,096 CVProcessor 21660 22376 Total après extraction élargie: 13 compétences
+INFO 2025-06-03 22:06:54,098 CVProcessor 21660 22376 Analyse du CV terminée avec succès
+INFO 2025-06-03 22:06:54,098 CVProcessor 21660 22376 Analyse du CV réussie
+INFO 2025-06-03 22:06:54,100 CVProcessor 21660 22376 Données extraites: nom=M O H A M E D  L E M I N E, email=22077@supnum.com, compétences=13
+INFO 2025-06-03 22:06:54,100 CVProcessor 21660 22376 === GÉNÉRATION DU CV RICHAT ===
+INFO 2025-06-03 22:06:54,100 CVProcessor 21660 22376 Début de la génération du CV Richat
+INFO 2025-06-03 22:06:54,127 CVProcessor 21660 22376 CV Richat généré avec succès - 2800 bytes
+INFO 2025-06-03 22:06:54,128 CVProcessor 21660 22376 CV Richat généré: 2800 bytes
+INFO 2025-06-03 22:06:54,133 CVProcessor 21660 22376 CV sauvegardé: standardized_cvs/richat_cv_1748984813990_20250603_220654.pdf
+INFO 2025-06-03 22:06:54,134 CVProcessor 21660 22376 === TRAITEMENT CV TERMINÉ AVEC SUCCÈS ===
+INFO 2025-06-03 22:06:54,137 basehttp 21660 22376 "POST /api/consultant/process-cv/ HTTP/1.1" 200 847
+INFO 2025-06-03 22:08:58,397 views 21660 22376 Données reçues pour l'inscription:
+INFO 2025-06-03 22:08:59,457 views 21660 22376 Utilisateur créé: 220777@supnum.com (ID: 28)
+INFO 2025-06-03 22:08:59,498 views 21660 22376 Consultant créé: MO H A M E D  L E M I N E zeidan (ID: 28)
+INFO 2025-06-03 22:08:59,503 views 21660 22376 CV reçu: Mohamed_Lemine_Zeidane.pdf
+INFO 2025-06-03 22:08:59,508 views 21660 22376 CV enregistré à: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\cvs\Mohamed_Lemine_Zeidane.pdf
+INFO 2025-06-03 22:08:59,510 views 21660 18116 Début d'extraction des compétences pour MO H A M E D  L E M I N E depuis C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\cvs\Mohamed_Lemine_Zeidane.pdf
+INFO 2025-06-03 22:08:59,510 views 21660 22376 Thread d'extraction démarré pour MO H A M E D  L E M I N E
+INFO 2025-06-03 22:08:59,512 views 21660 18116 Extraction depuis le fichier: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\cvs\Mohamed_Lemine_Zeidane.pdf
+INFO 2025-06-03 22:08:59,574 views 21660 18116 Texte extrait du PDF (1825 caractères)
+INFO 2025-06-03 22:08:59,583 views 21660 18116 Compétences extraites: ['AWS', 'Angular', 'CSS', 'Django', 'EV', 'Flutter', 'HTML', 'MongoDB', 'MySQL', 'Or', 'PHP', 'R', 'SQL', 'Spring Boot']
+INFO 2025-06-03 22:08:59,585 views 21660 18116 Domaine principal détecté: DIGITAL
+INFO 2025-06-03 22:08:59,591 views 21660 18116 Compétences trouvées pour MO H A M E D  L E M I N E: ['AWS', 'Angular', 'CSS', 'Django', 'EV', 'Flutter', 'HTML', 'MongoDB', 'MySQL', 'Or', 'PHP', 'R', 'SQL', 'Spring Boot']
+INFO 2025-06-03 22:08:59,593 views 21660 18116 Domaine principal détecté: DIGITAL
+INFO 2025-06-03 22:08:59,623 views 21660 18116 Domaine principal mis à jour pour MO H A M E D  L E M I N E: DIGITAL
+INFO 2025-06-03 22:08:59,639 views 21660 18116 Compétence ajoutée pour MO H A M E D  L E M I N E: Aws
+INFO 2025-06-03 22:08:59,684 views 21660 18116 Compétence ajoutée pour MO H A M E D  L E M I N E: Ev
+INFO 2025-06-03 22:08:59,701 views 21660 18116 Compétence ajoutée pour MO H A M E D  L E M I N E: Flutter
+INFO 2025-06-03 22:08:59,716 views 21660 22376 13 compétences manuelles ajoutées
+INFO 2025-06-03 22:08:59,716 views 21660 22376 Tentative d'envoi d'email à 220777@supnum.com
+INFO 2025-06-03 22:08:59,717 views 21660 22376 Configuration email: HOST=smtp.gmail.com, PORT=587, FROM=Richat Partners <nahiweva@gmail.com>
+INFO 2025-06-03 22:08:59,734 views 21660 18116 Compétence ajoutée pour MO H A M E D  L E M I N E: Or
+INFO 2025-06-03 22:08:59,756 views 21660 18116 Compétence ajoutée pour MO H A M E D  L E M I N E: R
+INFO 2025-06-03 22:08:59,769 views 21660 18116 Compétence ajoutée pour MO H A M E D  L E M I N E: Spring Boot
+INFO 2025-06-03 22:08:59,790 views 21660 18116 Extraction terminée pour MO H A M E D  L E M I N E - 6 compétences ajoutées
+INFO 2025-06-03 22:08:59,800 email_service 21660 22376 Tentative d'envoi d'email à 220777@supnum.com depuis Richat Partners <nahiweva@gmail.com>
+INFO 2025-06-03 22:08:59,801 email_service 21660 22376 Sujet: Bienvenue chez Richat Partners - Confirmation d'inscription
+INFO 2025-06-03 22:08:59,801 email_service 21660 22376 Configuration SMTP - Host: smtp.gmail.com, Port: 587
+INFO 2025-06-03 22:09:03,189 email_service 21660 22376 Résultat de l'envoi: 1
+INFO 2025-06-03 22:09:03,190 views 21660 22376 Email de confirmation envoyé avec succès à 220777@supnum.com
+INFO 2025-06-03 22:09:03,190 views 21660 22376 Inscription réussie pour MO H A M E D  L E M I N E (ID: 28)
+INFO 2025-06-03 22:09:03,194 basehttp 21660 22376 "POST /api/consultant/register/ HTTP/1.1" 201 150
+INFO 2025-06-03 22:09:16,213 basehttp 21660 728 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:16,279 basehttp 21660 13268 "GET /api/matching/validated/ HTTP/1.1" 200 3048
+INFO 2025-06-03 22:09:16,279 basehttp 21660 728 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:16,279 basehttp 21660 3124 "GET /api/dashboard/ HTTP/1.1" 200 579
+INFO 2025-06-03 22:09:16,318 basehttp 21660 13268 "GET /api/matching/validated/ HTTP/1.1" 200 3048
+INFO 2025-06-03 22:09:16,318 basehttp 21660 3124 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:16,328 basehttp 21660 728 "GET /api/dashboard/ HTTP/1.1" 200 579
+INFO 2025-06-03 22:09:16,335 basehttp 21660 3124 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:18,485 basehttp 21660 3124 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:18,533 basehttp 21660 3124 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:18,584 basehttp 21660 3124 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:18,604 basehttp 21660 3124 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:18,857 basehttp 21660 3124 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:18,880 basehttp 21660 3124 "GET /api/admin/consultants/pending/ HTTP/1.1" 200 383
+INFO 2025-06-03 22:09:20,372 basehttp 21660 3124 "OPTIONS /api/admin/consultants/validate/28/ HTTP/1.1" 200 0
+INFO 2025-06-03 22:09:22,167 email_service 21660 3124 Email de validation envoyé à 220777@supnum.com
+INFO 2025-06-03 22:09:22,168 views 21660 3124 Email de validation envoyé à 220777@supnum.com
+INFO 2025-06-03 22:09:22,175 basehttp 21660 3124 "PUT /api/admin/consultants/validate/28/ HTTP/1.1" 200 93
+INFO 2025-06-03 22:09:43,379 basehttp 21660 22376 "OPTIONS /api/consultant/login/ HTTP/1.1" 200 0
+INFO 2025-06-03 22:09:43,383 views 21660 22376 Tentative de connexion consultant:
+INFO 2025-06-03 22:09:43,393 views 21660 22376 Utilisateur trouvé: 220777@supnum.com (ID: 28)
+INFO 2025-06-03 22:09:44,448 views 21660 22376 Connexion réussie pour 220777@supnum.com - ID consultant: 28
+INFO 2025-06-03 22:09:44,450 basehttp 21660 22376 "POST /api/consultant/login/ HTTP/1.1" 200 40
+INFO 2025-06-03 22:09:44,482 views 21660 22376 Récupération des données pour consultant ID 28: MO H A M E D  L E M I N E zeidan
+INFO 2025-06-03 22:09:44,492 views 21660 22376 Compétences trouvées: ['Spring', 'Css', 'Angular', 'Mysql', 'Html', 'Django', 'Aws', 'De L’Information', 'Php', '22077@Supnum.Com', 'Mongodb', 'Ev', 'Flutter', '+00 222 26 44 94 44', 'Sql', 'Or', 'R', 'Spring Boot']
+INFO 2025-06-03 22:09:44,499 basehttp 21660 22376 "GET /api/consultant/28/data/ HTTP/1.1" 200 497
+INFO 2025-06-03 22:09:44,517 views 21660 22376 Récupération des données pour consultant ID 28: MO H A M E D  L E M I N E zeidan
+INFO 2025-06-03 22:09:44,527 views 21660 22376 Compétences trouvées: ['Spring', 'Css', 'Angular', 'Mysql', 'Html', 'Django', 'Aws', 'De L’Information', 'Php', '22077@Supnum.Com', 'Mongodb', 'Ev', 'Flutter', '+00 222 26 44 94 44', 'Sql', 'Or', 'R', 'Spring Boot']
+INFO 2025-06-03 22:09:44,531 basehttp 21660 22376 "GET /api/consultant/28/data/ HTTP/1.1" 200 497
+WARNING 2025-06-03 22:09:45,082 log 21660 22048 Not Found: /api/consultant/28/check-cv/
+WARNING 2025-06-03 22:09:45,085 basehttp 21660 22048 "GET /api/consultant/28/check-cv/ HTTP/1.1" 404 13023
+INFO 2025-06-03 22:09:45,117 views 21660 22376 Récupération des missions pour le consultant ID=28 (zeidan MO H A M E D  L E M I N E)
+INFO 2025-06-03 22:09:45,125 views 21660 22376 Nombre de matchings validés trouvés: 0
+INFO 2025-06-03 22:09:45,130 views 21660 22376 Total de 0 missions formatées pour le consultant 28
+INFO 2025-06-03 22:09:45,136 basehttp 21660 22376 "GET /api/consultant/28/missions/ HTTP/1.1" 200 30
+WARNING 2025-06-03 22:09:45,163 log 21660 22048 Not Found: /api/consultant/28/check-cv/
+WARNING 2025-06-03 22:09:45,168 basehttp 21660 22048 "GET /api/consultant/28/check-cv/ HTTP/1.1" 404 13023
+INFO 2025-06-03 22:09:45,212 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+INFO 2025-06-03 22:09:45,229 views 21660 22048 Récupération des missions pour le consultant ID=28 (zeidan MO H A M E D  L E M I N E)
+INFO 2025-06-03 22:09:45,238 views 21660 22048 Nombre de matchings validés trouvés: 0
+INFO 2025-06-03 22:09:45,245 views 21660 22048 Total de 0 missions formatées pour le consultant 28
+INFO 2025-06-03 22:09:45,248 basehttp 21660 22048 "GET /api/consultant/28/missions/ HTTP/1.1" 200 30
+INFO 2025-06-03 22:09:45,248 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+WARNING 2025-06-03 22:10:07,174 log 21660 22048 Not Found: /api/consultant/28/check-cv/
+WARNING 2025-06-03 22:10:07,177 basehttp 21660 22048 "GET /api/consultant/28/check-cv/ HTTP/1.1" 404 13023
+INFO 2025-06-03 22:10:15,177 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+INFO 2025-06-03 22:10:46,018 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+INFO 2025-06-03 22:11:16,011 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+INFO 2025-06-03 22:11:46,016 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+INFO 2025-06-03 22:12:16,015 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+INFO 2025-06-03 22:12:46,014 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+INFO 2025-06-03 22:13:38,997 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+INFO 2025-06-03 22:14:28,793 basehttp 21660 3124 "GET /api/consultant/28/notifications/ HTTP/1.1" 200 52
+INFO 2025-06-03 22:14:56,530 CVProcessor 21660 22048 === DÉBUT DU TRAITEMENT CV ===
+INFO 2025-06-03 22:14:56,534 CVProcessor 21660 22048 Données reçues: ['consultant_id', 'cv']
+INFO 2025-06-03 22:14:56,534 CVProcessor 21660 22048 Fichiers reçus: ['cv']
+INFO 2025-06-03 22:14:56,534 CVProcessor 21660 22048 Fichier CV reçu: CV-Colas.pdf, taille: 285299 bytes
+INFO 2025-06-03 22:14:56,535 CVProcessor 21660 22048 Extension du fichier: .pdf
+INFO 2025-06-03 22:14:56,535 CVProcessor 21660 22048 Création du processeur CV...
+INFO 2025-06-03 22:14:56,538 CVProcessor 21660 22048 === EXTRACTION DU TEXTE ===
+INFO 2025-06-03 22:14:56,539 CVProcessor 21660 22048 Début d'extraction de texte pour le fichier: CV-Colas.pdf, extension: .pdf
+INFO 2025-06-03 22:14:56,541 CVProcessor 21660 22048 Traitement d'un fichier PDF...
+INFO 2025-06-03 22:14:56,612 CVProcessor 21660 22048 Page 1: 1939 caractères extraits
+INFO 2025-06-03 22:14:56,614 CVProcessor 21660 22048 Extraction PDF terminée. Total: 1940 caractères
+INFO 2025-06-03 22:14:56,614 CVProcessor 21660 22048 Aperçu du texte extrait: Ely cheikh Ndedou Profil  Expériences professionnelles  Projets  Actuellement ingénieur exploitation chez Carrières Blanc  Compétences  CPT (certificat de Préposé au Tir) Implantaions des tirs de mine...
+WARNING 2025-06-03 22:14:56,615 CVProcessor 21660 22048 Impossible de supprimer le fichier temporaire: [WinError 32] Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus: 'C:\\Users\\HP\\AppData\\Local\\Temp\\tmpuaxlqvm7.pdf'
+INFO 2025-06-03 22:14:56,616 CVProcessor 21660 22048 Texte extrait avec succès: 1940 caractères
+INFO 2025-06-03 22:14:56,616 CVProcessor 21660 22048 === ANALYSE DU CV ===
+INFO 2025-06-03 22:14:56,617 CVProcessor 21660 22048 Début de l'analyse du CV - 1940 caractères à traiter
+INFO 2025-06-03 22:14:56,617 CVProcessor 21660 22048 Nom détecté: Ely cheikh
+INFO 2025-06-03 22:14:56,619 CVProcessor 21660 22048 Email détecté: ely-cheikh.ndedou@etu.mines
+INFO 2025-06-03 22:14:56,620 CVProcessor 21660 22048 Téléphone détecté: 2022-2024
+INFO 2025-06-03 22:14:56,623 CVProcessor 21660 22048 Titre professionnel détecté: ingénieur exploitation chez Carrières
+INFO 2025-06-03 22:14:56,630 CVProcessor 21660 22048 0 compétences détectées
+INFO 2025-06-03 22:14:56,631 CVProcessor 21660 22048 Peu de compétences trouvées, tentative d'extraction élargie...
+INFO 2025-06-03 22:14:56,632 CVProcessor 21660 22048 Total après extraction élargie: 6 compétences
+INFO 2025-06-03 22:14:56,633 CVProcessor 21660 22048 Analyse du CV terminée avec succès
+INFO 2025-06-03 22:14:56,634 CVProcessor 21660 22048 Analyse du CV réussie
+INFO 2025-06-03 22:14:56,634 CVProcessor 21660 22048 Données extraites: nom=Ely cheikh, email=ely-cheikh.ndedou@etu.mines, compétences=6
+INFO 2025-06-03 22:14:56,634 CVProcessor 21660 22048 === GÉNÉRATION DU CV RICHAT ===
+INFO 2025-06-03 22:14:56,635 CVProcessor 21660 22048 Début de la génération du CV Richat
+INFO 2025-06-03 22:14:56,649 CVProcessor 21660 22048 CV Richat généré avec succès - 2512 bytes
+INFO 2025-06-03 22:14:56,650 CVProcessor 21660 22048 CV Richat généré: 2512 bytes
+INFO 2025-06-03 22:14:56,655 CVProcessor 21660 22048 CV sauvegardé: standardized_cvs/richat_cv_1748985296486_20250603_221456.pdf
+INFO 2025-06-03 22:14:56,656 CVProcessor 21660 22048 === TRAITEMENT CV TERMINÉ AVEC SUCCÈS ===
+INFO 2025-06-03 22:14:56,658 basehttp 21660 22048 "POST /api/consultant/process-cv/ HTTP/1.1" 200 685
+INFO 2025-06-03 22:24:51,811 CVProcessor 21660 21120 === DÉBUT DU TRAITEMENT CV ===
+INFO 2025-06-03 22:24:51,816 CVProcessor 21660 21120 Données reçues: ['consultant_id', 'cv']
+INFO 2025-06-03 22:24:51,816 CVProcessor 21660 21120 Fichiers reçus: ['cv']
+INFO 2025-06-03 22:24:51,816 CVProcessor 21660 21120 Fichier CV reçu: cv_wevanahi (2).pdf, taille: 309876 bytes
+INFO 2025-06-03 22:24:51,817 CVProcessor 21660 21120 Extension du fichier: .pdf
+INFO 2025-06-03 22:24:51,818 CVProcessor 21660 21120 Création du processeur CV...
+INFO 2025-06-03 22:24:51,825 CVProcessor 21660 21120 === EXTRACTION DU TEXTE ===
+INFO 2025-06-03 22:24:51,825 CVProcessor 21660 21120 Début d'extraction de texte pour le fichier: cv_wevanahi (2).pdf, extension: .pdf
+INFO 2025-06-03 22:24:51,830 CVProcessor 21660 21120 Traitement d'un fichier PDF...
+INFO 2025-06-03 22:24:51,867 CVProcessor 21660 21120 Page 1: 0 caractères extraits
+INFO 2025-06-03 22:24:51,868 CVProcessor 21660 21120 Extraction PDF terminée. Total: 1 caractères
+ERROR 2025-06-03 22:24:51,868 CVProcessor 21660 21120 Très peu de texte extrait (1 caractères). Le fichier pourrait être corrompu ou vide.
+INFO 2025-06-03 22:24:51,870 CVProcessor 21660 21120 Tentative d'extraction alternative pour PDF...
+ERROR 2025-06-03 22:24:52,674 CVProcessor 21660 21120 Impossible d'extraire du texte significatif du fichier
+WARNING 2025-06-03 22:24:52,676 CVProcessor 21660 21120 Impossible de supprimer le fichier temporaire: [WinError 32] Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus: 'C:\\Users\\HP\\AppData\\Local\\Temp\\tmp967gvhwd.pdf'
+ERROR 2025-06-03 22:24:52,677 CVProcessor 21660 21120 Échec de l'extraction du texte
+WARNING 2025-06-03 22:24:52,678 log 21660 21120 Bad Request: /api/consultant/process-cv/
+WARNING 2025-06-03 22:24:52,679 basehttp 21660 21120 "POST /api/consultant/process-cv/ HTTP/1.1" 400 59
+INFO 2025-06-04 00:15:31,572 autoreload 21660 19452 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 00:15:33,826 autoreload 8080 2332 Watching for file changes with StatReloader
+INFO 2025-06-04 00:17:43,666 autoreload 8080 2332 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 00:17:45,307 autoreload 24044 18868 Watching for file changes with StatReloader
+INFO 2025-06-04 00:20:00,526 CVProcessor 24044 5800 === DÉBUT DU TRAITEMENT CV ===
+INFO 2025-06-04 00:20:00,531 CVProcessor 24044 5800 Données reçues: ['consultant_id', 'cv']
+INFO 2025-06-04 00:20:00,531 CVProcessor 24044 5800 Fichiers reçus: ['cv']
+INFO 2025-06-04 00:20:00,532 CVProcessor 24044 5800 Fichier CV reçu: cv_khire_elouma (1).pdf, taille: 352051 bytes
+INFO 2025-06-04 00:20:00,533 CVProcessor 24044 5800 Extension du fichier: .pdf
+INFO 2025-06-04 00:20:00,534 CVProcessor 24044 5800 Création du processeur CV...
+INFO 2025-06-04 00:20:00,536 CVProcessor 24044 5800 === EXTRACTION DU TEXTE ===
+INFO 2025-06-04 00:20:00,536 CVProcessor 24044 5800 Début d'extraction de texte pour le fichier: cv_khire_elouma (1).pdf, extension: .pdf
+INFO 2025-06-04 00:20:00,538 CVProcessor 24044 5800 Traitement d'un fichier PDF...
+INFO 2025-06-04 00:20:00,561 CVProcessor 24044 5800 Peu de texte trouvé sur la page 1, essai extraction détaillée...
+INFO 2025-06-04 00:20:00,845 CVProcessor 24044 5800 Page 1: 0 caractères extraits
+INFO 2025-06-04 00:20:00,845 CVProcessor 24044 5800 Extraction PDF terminée. Total: 1 caractères
+ERROR 2025-06-04 00:20:00,846 CVProcessor 24044 5800 Très peu de texte extrait (0 caractères).
+WARNING 2025-06-04 00:20:00,846 CVProcessor 24044 5800 Impossible de supprimer le fichier temporaire: [WinError 32] Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus: 'C:\\Users\\HP\\AppData\\Local\\Temp\\tmpxzbaqmw9.pdf'
+ERROR 2025-06-04 00:20:00,847 CVProcessor 24044 5800 Échec de l'extraction du texte
+WARNING 2025-06-04 00:20:00,849 log 24044 5800 Bad Request: /api/consultant/process-cv/
+WARNING 2025-06-04 00:20:00,850 basehttp 24044 5800 "POST /api/consultant/process-cv/ HTTP/1.1" 400 59
+INFO 2025-06-04 00:20:19,380 CVProcessor 24044 5800 === DÉBUT DU TRAITEMENT CV ===
+INFO 2025-06-04 00:20:19,381 CVProcessor 24044 5800 Données reçues: ['consultant_id', 'cv']
+INFO 2025-06-04 00:20:19,382 CVProcessor 24044 5800 Fichiers reçus: ['cv']
+INFO 2025-06-04 00:20:19,382 CVProcessor 24044 5800 Fichier CV reçu: CV de Mariem Erebih-1.pdf, taille: 40688 bytes
+INFO 2025-06-04 00:20:19,382 CVProcessor 24044 5800 Extension du fichier: .pdf
+INFO 2025-06-04 00:20:19,382 CVProcessor 24044 5800 Création du processeur CV...
+INFO 2025-06-04 00:20:19,383 CVProcessor 24044 5800 === EXTRACTION DU TEXTE ===
+INFO 2025-06-04 00:20:19,383 CVProcessor 24044 5800 Début d'extraction de texte pour le fichier: CV de Mariem Erebih-1.pdf, extension: .pdf
+INFO 2025-06-04 00:20:19,385 CVProcessor 24044 5800 Traitement d'un fichier PDF...
+INFO 2025-06-04 00:20:19,415 CVProcessor 24044 5800 Page 1: 1312 caractères extraits
+INFO 2025-06-04 00:20:19,415 CVProcessor 24044 5800 Extraction PDF terminée. Total: 1313 caractères
+INFO 2025-06-04 00:20:19,416 CVProcessor 24044 5800 Aperçu du texte extrait: MARIEM EREBIH mariememed08@gmail.com +22249400466 16 Dar naim Noukchoutt COMPÉTENCES Sql/Mongodb WordPress Pthon/Java/PHP, HTML/CSS/JavaScript/Flask Securite informatique Administration réseau Developpement Web Excellentes compétences en communication et travail d'équipe Management de projet Adaptab...
+WARNING 2025-06-04 00:20:19,419 CVProcessor 24044 5800 Impossible de supprimer le fichier temporaire: [WinError 32] Le processus ne peut pas accéder au fichier car ce fichier est utilisé par un autre processus: 'C:\\Users\\HP\\AppData\\Local\\Temp\\tmpitzwmypx.pdf'
+INFO 2025-06-04 00:20:19,419 CVProcessor 24044 5800 Texte extrait avec succès: 1298 caractères
+INFO 2025-06-04 00:20:19,420 CVProcessor 24044 5800 === ANALYSE DU CV ===
+INFO 2025-06-04 00:20:19,420 CVProcessor 24044 5800 Début de l'analyse du CV - 1298 caractères à traiter
+INFO 2025-06-04 00:20:19,421 CVProcessor 24044 5800 Email détecté: mariememed08@gmail.com
+INFO 2025-06-04 00:20:19,422 CVProcessor 24044 5800 Téléphone détecté: 22249400466
+INFO 2025-06-04 00:20:19,425 CVProcessor 24044 5800 Analyse du CV terminée avec succès
+INFO 2025-06-04 00:20:19,425 CVProcessor 24044 5800 Analyse du CV réussie
+INFO 2025-06-04 00:20:19,425 CVProcessor 24044 5800 Données extraites: nom=, email=mariememed08@gmail.com, compétences=15
+INFO 2025-06-04 00:20:19,425 CVProcessor 24044 5800 === GÉNÉRATION DU CV RICHAT ===
+INFO 2025-06-04 00:20:19,425 CVProcessor 24044 5800 Début de la génération du CV Richat complet
+INFO 2025-06-04 00:20:19,432 CVProcessor 24044 5800 CV Richat complet généré avec succès - 2562 bytes
+INFO 2025-06-04 00:20:19,433 CVProcessor 24044 5800 CV Richat généré: 2562 bytes
+INFO 2025-06-04 00:20:19,436 CVProcessor 24044 5800 CV sauvegardé: standardized_cvs/richat_cv_1748992819376_20250604_002019.pdf
+INFO 2025-06-04 00:20:19,437 CVProcessor 24044 5800 === TRAITEMENT CV TERMINÉ AVEC SUCCÈS ===
+INFO 2025-06-04 00:20:19,437 basehttp 24044 5800 "POST /api/consultant/process-cv/ HTTP/1.1" 200 713
+INFO 2025-06-04 00:21:19,520 views 24044 5800 Données reçues pour l'inscription:
+INFO 2025-06-04 00:21:19,931 views 24044 5800 Utilisateur créé: mariememed08@gmail.com (ID: 29)
+INFO 2025-06-04 00:21:19,941 views 24044 5800 Consultant créé: erebih mariem (ID: 29)
+INFO 2025-06-04 00:21:19,943 views 24044 5800 CV reçu: CV de Mariem Erebih-1.pdf
+INFO 2025-06-04 00:21:19,944 views 24044 5800 CV enregistré à: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\cvs\CV de Mariem Erebih-1.pdf
+INFO 2025-06-04 00:21:19,944 views 24044 6548 Début d'extraction des compétences pour erebih depuis C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\cvs\CV de Mariem Erebih-1.pdf
+INFO 2025-06-04 00:21:19,946 views 24044 5800 Thread d'extraction démarré pour erebih
+INFO 2025-06-04 00:21:19,946 views 24044 6548 Extraction depuis le fichier: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\cvs\CV de Mariem Erebih-1.pdf
+INFO 2025-06-04 00:21:19,970 views 24044 6548 Texte extrait du PDF (1312 caractères)
+INFO 2025-06-04 00:21:19,972 views 24044 6548 Compétences extraites: ['ADSL', 'CSS', 'Cybersécurité', 'EV', 'FTTH', 'Firewall', 'Flask', 'HTML', 'JavaScript', 'MongoDB', 'Or', 'PHP', 'R', 'Réseau', 'SQL', 'WAF', 'WordPress']
+INFO 2025-06-04 00:21:19,972 views 24044 6548 Domaine principal détecté: DIGITAL
+INFO 2025-06-04 00:21:19,972 views 24044 6548 Compétences trouvées pour erebih: ['ADSL', 'CSS', 'Cybersécurité', 'EV', 'FTTH', 'Firewall', 'Flask', 'HTML', 'JavaScript', 'MongoDB', 'Or', 'PHP', 'R', 'Réseau', 'SQL', 'WAF', 'WordPress']
+INFO 2025-06-04 00:21:19,973 views 24044 6548 Domaine principal détecté: DIGITAL
+INFO 2025-06-04 00:21:19,978 views 24044 6548 Domaine principal mis à jour pour erebih: DIGITAL
+INFO 2025-06-04 00:21:19,984 views 24044 6548 Compétence ajoutée pour erebih: Adsl
+INFO 2025-06-04 00:21:19,993 views 24044 6548 Compétence ajoutée pour erebih: Cybersécurité
+INFO 2025-06-04 00:21:19,996 views 24044 6548 Compétence ajoutée pour erebih: Ev
+INFO 2025-06-04 00:21:20,005 views 24044 6548 Compétence ajoutée pour erebih: Firewall
+INFO 2025-06-04 00:21:20,011 views 24044 6548 Compétence ajoutée pour erebih: Html
+INFO 2025-06-04 00:21:20,020 views 24044 5800 15 compétences manuelles ajoutées
+INFO 2025-06-04 00:21:20,020 views 24044 5800 Tentative d'envoi d'email à mariememed08@gmail.com
+INFO 2025-06-04 00:21:20,021 views 24044 5800 Configuration email: HOST=smtp.gmail.com, PORT=587, FROM=Richat Partners <nahiweva@gmail.com>
+INFO 2025-06-04 00:21:20,021 views 24044 6548 Compétence ajoutée pour erebih: Or
+INFO 2025-06-04 00:21:20,028 views 24044 6548 Compétence ajoutée pour erebih: R
+INFO 2025-06-04 00:21:20,031 email_service 24044 5800 Tentative d'envoi d'email à mariememed08@gmail.com depuis Richat Partners <nahiweva@gmail.com>
+INFO 2025-06-04 00:21:20,032 email_service 24044 5800 Sujet: Bienvenue chez Richat Partners - Confirmation d'inscription
+INFO 2025-06-04 00:21:20,032 views 24044 6548 Compétence ajoutée pour erebih: Réseau
+INFO 2025-06-04 00:21:20,032 email_service 24044 5800 Configuration SMTP - Host: smtp.gmail.com, Port: 587
+INFO 2025-06-04 00:21:20,040 views 24044 6548 Compétence ajoutée pour erebih: Waf
+INFO 2025-06-04 00:21:20,044 views 24044 6548 Compétence ajoutée pour erebih: Wordpress
+INFO 2025-06-04 00:21:20,050 views 24044 6548 Extraction terminée pour erebih - 10 compétences ajoutées
+INFO 2025-06-04 00:21:23,106 email_service 24044 5800 Résultat de l'envoi: 1
+INFO 2025-06-04 00:21:23,107 views 24044 5800 Email de confirmation envoyé avec succès à mariememed08@gmail.com
+INFO 2025-06-04 00:21:23,107 views 24044 5800 Inscription réussie pour erebih (ID: 29)
+INFO 2025-06-04 00:21:23,108 basehttp 24044 5800 "POST /api/consultant/register/ HTTP/1.1" 201 150
+INFO 2025-06-04 00:50:32,148 autoreload 24044 18868 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 00:50:33,811 autoreload 21080 19444 Watching for file changes with StatReloader
+INFO 2025-06-04 00:52:59,019 autoreload 21080 19444 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\text_processing_utils.py changed, reloading.
+INFO 2025-06-04 00:53:00,638 autoreload 19912 8552 Watching for file changes with StatReloader
+INFO 2025-06-04 00:54:06,555 autoreload 19912 8552 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:54:08,179 autoreload 22900 21208 Watching for file changes with StatReloader
+INFO 2025-06-04 00:54:11,572 autoreload 22900 21208 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:54:12,560 autoreload 23472 23164 Watching for file changes with StatReloader
+INFO 2025-06-04 00:55:06,083 autoreload 23472 23164 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:55:07,661 autoreload 20392 6932 Watching for file changes with StatReloader
+INFO 2025-06-04 00:55:58,499 autoreload 20392 6932 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:56:00,162 autoreload 11508 21392 Watching for file changes with StatReloader
+INFO 2025-06-04 00:56:23,949 autoreload 11508 21392 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:56:24,763 autoreload 7072 23680 Watching for file changes with StatReloader
+INFO 2025-06-04 00:57:01,831 autoreload 7072 23680 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:57:03,357 autoreload 17404 23216 Watching for file changes with StatReloader
+INFO 2025-06-04 00:57:12,277 autoreload 17404 23216 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:57:13,033 autoreload 12344 3272 Watching for file changes with StatReloader
+INFO 2025-06-04 00:57:14,381 autoreload 12344 3272 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:57:15,217 autoreload 24784 25028 Watching for file changes with StatReloader
+INFO 2025-06-04 00:57:27,178 autoreload 24784 25028 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:57:28,029 autoreload 16908 23556 Watching for file changes with StatReloader
+INFO 2025-06-04 00:57:45,168 autoreload 16908 23556 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 00:57:46,692 autoreload 21896 25224 Watching for file changes with StatReloader
+INFO 2025-06-04 01:00:24,765 autoreload 21896 25224 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 01:00:26,526 autoreload 6652 24868 Watching for file changes with StatReloader
+INFO 2025-06-04 01:00:50,329 autoreload 6652 24868 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 01:00:51,946 autoreload 20956 22384 Watching for file changes with StatReloader
+INFO 2025-06-04 01:02:42,651 autoreload 20956 22384 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 01:02:44,183 autoreload 6196 10728 Watching for file changes with StatReloader
+INFO 2025-06-04 01:02:53,654 autoreload 6196 10728 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 01:02:55,082 autoreload 24696 24044 Watching for file changes with StatReloader
+INFO 2025-06-04 01:03:55,437 CVProcessor 24696 12740 === TRAITEMENT CV ORIGINAL ===
+INFO 2025-06-04 01:03:55,439 CVProcessor 24696 12740 Extraction de texte pour: Mohamed Lemine Zeidane.pdf
+INFO 2025-06-04 01:03:55,473 CVProcessor 24696 12740 Extraction réussie: 1812 caractères
+INFO 2025-06-04 01:03:55,473 CVProcessor 24696 12740 Début de l'analyse CV
+INFO 2025-06-04 01:03:55,477 CVProcessor 24696 12740 Analyse CV terminée
+INFO 2025-06-04 01:03:55,477 CVProcessor 24696 12740 Génération du CV Richat
+INFO 2025-06-04 01:03:55,490 CVProcessor 24696 12740 CV Richat généré: 4211 bytes
+INFO 2025-06-04 01:03:55,493 basehttp 24696 12740 "POST /api/consultant/process-cv/ HTTP/1.1" 200 1565
+INFO 2025-06-04 01:59:33,169 autoreload 24696 24044 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 01:59:36,447 autoreload 14060 26312 Watching for file changes with StatReloader
+INFO 2025-06-04 02:01:48,175 autoreload 14060 26312 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\competences_data.py changed, reloading.
+INFO 2025-06-04 02:01:51,984 autoreload 7892 23284 Watching for file changes with StatReloader
+INFO 2025-06-04 02:03:42,884 autoreload 7892 23284 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py changed, reloading.
+INFO 2025-06-04 02:03:44,770 autoreload 27328 25188 Watching for file changes with StatReloader
+INFO 2025-06-04 02:03:53,251 autoreload 27328 25188 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py changed, reloading.
+INFO 2025-06-04 02:03:54,971 autoreload 16496 27372 Watching for file changes with StatReloader
+INFO 2025-06-04 02:04:01,388 autoreload 16496 27372 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py changed, reloading.
+INFO 2025-06-04 02:04:03,146 autoreload 4432 26292 Watching for file changes with StatReloader
+INFO 2025-06-04 02:07:50,866 autoreload 4432 26292 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\competences_data.py changed, reloading.
+INFO 2025-06-04 02:07:52,597 autoreload 19024 26832 Watching for file changes with StatReloader
+INFO 2025-06-04 02:10:30,463 autoreload 19024 26832 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\competences_data.py changed, reloading.
+INFO 2025-06-04 02:10:33,308 autoreload 13556 23152 Watching for file changes with StatReloader
+INFO 2025-06-04 02:11:45,757 autoreload 13556 23152 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\competences_data.py changed, reloading.
+INFO 2025-06-04 02:11:47,281 autoreload 9068 3676 Watching for file changes with StatReloader
+INFO 2025-06-04 02:11:57,963 autoreload 9068 3676 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\competences_data.py changed, reloading.
+INFO 2025-06-04 02:12:00,175 autoreload 25320 20352 Watching for file changes with StatReloader
+INFO 2025-06-04 02:12:04,175 autoreload 25320 20352 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\competences_data.py changed, reloading.
+INFO 2025-06-04 02:12:06,395 autoreload 24144 24840 Watching for file changes with StatReloader
+INFO 2025-06-04 02:12:19,274 autoreload 24144 24840 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\competences_data.py changed, reloading.
+INFO 2025-06-04 02:12:21,256 autoreload 11444 25536 Watching for file changes with StatReloader
+INFO 2025-06-04 02:13:05,466 autoreload 11444 25536 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 02:13:08,735 autoreload 16396 2856 Watching for file changes with StatReloader
+INFO 2025-06-04 02:13:31,924 autoreload 16396 2856 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 02:13:35,150 autoreload 24144 3220 Watching for file changes with StatReloader
+INFO 2025-06-04 02:14:32,826 autoreload 24144 3220 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\competences_data.py changed, reloading.
+INFO 2025-06-04 02:14:35,832 autoreload 22004 25740 Watching for file changes with StatReloader
+INFO 2025-06-04 02:15:40,575 autoreload 22004 25740 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py changed, reloading.
+INFO 2025-06-04 02:15:43,514 autoreload 18620 1328 Watching for file changes with StatReloader
+INFO 2025-06-04 02:16:10,597 autoreload 18620 1328 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 02:16:13,417 autoreload 2204 23248 Watching for file changes with StatReloader
+INFO 2025-06-04 02:17:20,701 CVProcessor 2204 23816 === TRAITEMENT CV ORIGINAL ===
+INFO 2025-06-04 02:17:20,704 CVProcessor 2204 23816 Extraction de texte pour: Mohamed_Lemine_Zeidane.pdf
+INFO 2025-06-04 02:17:20,808 CVProcessor 2204 23816 Extraction réussie: 1812 caractères
+INFO 2025-06-04 02:17:20,809 CVProcessor 2204 23816 Début de l'analyse CV
+INFO 2025-06-04 02:17:20,824 CVProcessor 2204 23816 Analyse CV terminée
+INFO 2025-06-04 02:17:20,825 CVProcessor 2204 23816 Génération du CV Richat
+INFO 2025-06-04 02:17:20,865 CVProcessor 2204 23816 CV Richat généré: 4212 bytes
+INFO 2025-06-04 02:17:20,873 basehttp 2204 23816 "POST /api/consultant/process-cv/ HTTP/1.1" 200 1565
+INFO 2025-06-04 02:17:35,753 CVProcessor 2204 23816 === TRAITEMENT CV ORIGINAL ===
+INFO 2025-06-04 02:17:35,756 CVProcessor 2204 23816 Extraction de texte pour: CV-Colas.pdf
+INFO 2025-06-04 02:17:35,846 CVProcessor 2204 23816 Extraction réussie: 1740 caractères
+INFO 2025-06-04 02:17:35,848 CVProcessor 2204 23816 Début de l'analyse CV
+INFO 2025-06-04 02:17:35,857 CVProcessor 2204 23816 Analyse CV terminée
+INFO 2025-06-04 02:17:35,858 CVProcessor 2204 23816 Génération du CV Richat
+INFO 2025-06-04 02:17:35,909 CVProcessor 2204 23816 CV Richat généré: 3016 bytes
+INFO 2025-06-04 02:17:35,925 basehttp 2204 23816 "POST /api/consultant/process-cv/ HTTP/1.1" 200 1008
+INFO 2025-06-04 02:18:44,245 CVProcessor 2204 23816 === TRAITEMENT CV ORIGINAL ===
+INFO 2025-06-04 02:18:44,249 CVProcessor 2204 23816 Extraction de texte pour: Cv_toutouMouslih.pdf
+INFO 2025-06-04 02:18:44,322 CVProcessor 2204 23816 Extraction réussie: 1392 caractères
+INFO 2025-06-04 02:18:44,323 CVProcessor 2204 23816 Début de l'analyse CV
+INFO 2025-06-04 02:18:44,325 CVProcessor 2204 23816 Analyse CV terminée
+INFO 2025-06-04 02:18:44,327 CVProcessor 2204 23816 Génération du CV Richat
+INFO 2025-06-04 02:18:44,339 CVProcessor 2204 23816 CV Richat généré: 2670 bytes
+INFO 2025-06-04 02:18:44,348 basehttp 2204 23816 "POST /api/consultant/process-cv/ HTTP/1.1" 200 579
+INFO 2025-06-04 02:19:11,318 CVProcessor 2204 23816 === TRAITEMENT CV ORIGINAL ===
+INFO 2025-06-04 02:19:11,326 CVProcessor 2204 23816 Extraction de texte pour: CV Mohamed Yehdhih Sidatt Ver 2.pdf
+INFO 2025-06-04 02:19:11,584 CVProcessor 2204 23816 Extraction réussie: 9402 caractères
+INFO 2025-06-04 02:19:11,589 CVProcessor 2204 23816 Début de l'analyse CV
+INFO 2025-06-04 02:19:11,644 CVProcessor 2204 23816 Analyse CV terminée
+INFO 2025-06-04 02:19:11,646 CVProcessor 2204 23816 Génération du CV Richat
+INFO 2025-06-04 02:19:11,680 CVProcessor 2204 23816 CV Richat généré: 4265 bytes
+INFO 2025-06-04 02:19:11,685 basehttp 2204 23816 "POST /api/consultant/process-cv/ HTTP/1.1" 200 1335
+INFO 2025-06-04 08:50:27,479 CVProcessor 2204 24840 === TRAITEMENT CV ORIGINAL ===
+INFO 2025-06-04 08:50:27,502 CVProcessor 2204 24840 Extraction de texte pour: 1714923136335.pdf
+INFO 2025-06-04 08:50:27,551 CVProcessor 2204 24840 Extraction réussie: 2106 caractères
+INFO 2025-06-04 08:50:27,552 CVProcessor 2204 24840 Début de l'analyse CV
+INFO 2025-06-04 08:50:27,555 CVProcessor 2204 24840 Analyse CV terminée
+INFO 2025-06-04 08:50:27,556 CVProcessor 2204 24840 Génération du CV Richat
+INFO 2025-06-04 08:50:27,573 CVProcessor 2204 24840 CV Richat généré: 3570 bytes
+INFO 2025-06-04 08:50:27,578 basehttp 2204 24840 "POST /api/consultant/process-cv/ HTTP/1.1" 200 1312
+INFO 2025-06-04 08:55:00,616 autoreload 2204 23248 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 08:55:04,835 autoreload 8504 23908 Watching for file changes with StatReloader
+INFO 2025-06-04 08:55:43,368 autoreload 8504 23908 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 08:55:46,246 autoreload 27288 11152 Watching for file changes with StatReloader
+INFO 2025-06-04 09:04:54,627 autoreload 27288 11152 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 09:04:58,073 autoreload 24836 8760 Watching for file changes with StatReloader
+INFO 2025-06-04 09:15:18,216 autoreload 24836 8760 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 09:15:21,747 autoreload 12760 14308 Watching for file changes with StatReloader
+WARNING 2025-06-04 09:16:11,919 log 12760 10876 Forbidden (Origin checking failed - http://localhost:8080 does not match any trusted origins.): /api/consultant/process-cv/
+WARNING 2025-06-04 09:16:11,932 basehttp 12760 10876 "POST /api/consultant/process-cv/ HTTP/1.1" 403 2569
+INFO 2025-06-04 09:23:20,078 autoreload 27240 3088 Watching for file changes with StatReloader
+WARNING 2025-06-04 09:25:49,118 log 27240 19052 Forbidden (Origin checking failed - http://localhost:8080 does not match any trusted origins.): /api/consultant/process-cv/
+WARNING 2025-06-04 09:25:49,123 basehttp 27240 19052 "POST /api/consultant/process-cv/ HTTP/1.1" 403 2569
+INFO 2025-06-04 12:54:27,542 autoreload 27240 3088 C:\Users\HP\Desktop\5alih 3ala ellah\richat\backend\settings.py changed, reloading.
+INFO 2025-06-04 12:54:32,383 autoreload 24008 26136 Watching for file changes with StatReloader
+WARNING 2025-06-04 12:55:27,506 log 24008 1240 Forbidden (CSRF cookie not set.): /api/consultant/process-cv/
+WARNING 2025-06-04 12:55:27,514 basehttp 24008 1240 "POST /api/consultant/process-cv/ HTTP/1.1" 403 2986
+INFO 2025-06-04 13:18:55,438 autoreload 24008 26136 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+INFO 2025-06-04 13:18:59,065 autoreload 15068 29032 Watching for file changes with StatReloader
+INFO 2025-06-04 13:19:55,496 autoreload 15068 29032 C:\Users\HP\Desktop\5alih 3ala ellah\richat\backend\urls.py changed, reloading.
+INFO 2025-06-04 13:19:58,480 autoreload 10184 1788 Watching for file changes with StatReloader
+INFO 2025-06-04 13:20:28,074 autoreload 10184 1788 C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+INFO 2025-06-04 13:20:31,680 autoreload 18284 26500 Watching for file changes with StatReloader
+INFO 2025-06-04 13:21:00,388 CVProcessor 18284 6660 Extraction PDF réussie avec pdfplumber: 1250 caractères
+INFO 2025-06-04 13:21:00,410 improved_cv_extractor 18284 6660 Début extraction améliorée - 1250 caractères
+ERROR 2025-06-04 13:21:00,424 improved_cv_extractor 18284 6660 Erreur lors de l'extraction améliorée: 'ImprovedCVExtractor' object has no attribute '_find_section'
+WARNING 2025-06-04 13:21:00,425 log 18284 6660 Bad Request: /api/consultant/process-cv/
+WARNING 2025-06-04 13:21:00,427 basehttp 18284 6660 "POST /api/consultant/process-cv/ HTTP/1.1" 400 160
+INFO 2025-06-04 13:28:51,465 autoreload 18284 26500 C:\Users\HP\Desktop\5alih 3ala ellah\richat\backend\settings.py changed, reloading.
+[2025-06-04 13:28:55,275] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:29:14,171] INFO CVProcessor  CVProcessor chargÃ© avec suppression CSRF
+[2025-06-04 13:29:14,172] INFO CVProcessor  process_cv_improved: CSRF exempt
+[2025-06-04 13:29:14,173] INFO CVProcessor  diagnose_cv: CSRF exempt
+[2025-06-04 13:29:14,173] INFO CVProcessor  check_standardized_cv: CSRF exempt
+[2025-06-04 13:29:14,175] INFO CVProcessor  download_standardized_cv: CSRF exempt
+[2025-06-04 13:29:14,175] INFO CVProcessor  Headers CORS ajoutÃ©s manuellement Ã  toutes les rÃ©ponses
+[2025-06-04 13:33:34,355] INFO CVProcessor  RequÃªte CV reÃ§ue depuis: http://localhost:8080
+[2025-06-04 13:33:34,356] INFO CVProcessor  Headers: {'Content-Length': '57448', 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryj8wb366l4cDPyY4A', 'Host': '127.0.0.1:8000', 'Connection': 'keep-alive', 'Sec-Ch-Ua-Platform': '"Windows"', 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36 Edg/136.0.0.0', 'Sec-Ch-Ua': '"Chromium";v="136", "Microsoft Edge";v="136", "Not.A/Brand";v="99"', 'Sec-Ch-Ua-Mobile': '?0', 'Accept': '*/*', 'Origin': 'http://localhost:8080', 'Sec-Fetch-Site': 'cross-site', 'Sec-Fetch-Mode': 'cors', 'Sec-Fetch-Dest': 'empty', 'Referer': 'http://localhost:8080/', 'Accept-Encoding': 'gzip, deflate, br, zstd', 'Accept-Language': 'fr,fr-FR;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6'}
+[2025-06-04 13:33:34,359] INFO CVProcessor  Fichier reÃ§u: Mohamed_Lemine_Zeidane.pdf
+[2025-06-04 13:33:34,361] INFO CVProcessor  Taille: 57132 bytes
+[2025-06-04 13:33:34,362] INFO CVProcessor  Type: application/pdf
+[2025-06-04 13:33:34,363] INFO CVProcessor  Ã‰tape 1: Extraction du texte...
+[2025-06-04 13:33:35,858] INFO CVProcessor Extraction PDF rÃ©ussie avec pdfplumber: 1790 caractÃ¨res
+[2025-06-04 13:33:35,860] INFO CVProcessor  Ã‰tape 2: Analyse et extraction des donnÃ©es...
+[2025-06-04 13:33:35,867] INFO improved_cv_extractor DÃ©but extraction amÃ©liorÃ©e - 1790 caractÃ¨res
+[2025-06-04 13:33:35,898] ERROR improved_cv_extractor Erreur lors de l'extraction amÃ©liorÃ©e: 'ImprovedCVExtractor' object has no attribute '_find_section'
+[2025-06-04 13:33:35,904] WARNING log Bad Request: /api/consultant/process-cv/
+[2025-06-04 13:33:35,908] WARNING basehttp "POST /api/consultant/process-cv/ HTTP/1.1" 400 160
+[2025-06-04 13:34:26,543] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+[2025-06-04 13:34:29,715] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:34:48,414] INFO CVProcessor Extraction PDF rÃ©ussie avec pdfplumber: 1250 caractÃ¨res
+[2025-06-04 13:34:48,419] INFO improved_cv_extractor DÃ©but extraction amÃ©liorÃ©e - 1250 caractÃ¨res
+[2025-06-04 13:34:48,449] ERROR improved_cv_extractor Erreur lors de l'extraction amÃ©liorÃ©e: 'ImprovedCVExtractor' object has no attribute '_find_section'
+[2025-06-04 13:34:48,459] WARNING log Bad Request: /api/consultant/process-cv/
+[2025-06-04 13:34:48,464] WARNING basehttp "POST /api/consultant/process-cv/ HTTP/1.1" 400 160
+[2025-06-04 13:35:06,477] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\improved_cv_extractor.py changed, reloading.
+[2025-06-04 13:35:09,723] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:36:10,362] INFO CVProcessor Extraction PDF rÃ©ussie avec pdfplumber: 1372 caractÃ¨res
+[2025-06-04 13:36:10,365] INFO improved_cv_extractor DÃ©but extraction amÃ©liorÃ©e - 1372 caractÃ¨res
+[2025-06-04 13:36:10,383] ERROR improved_cv_extractor Erreur lors de l'extraction amÃ©liorÃ©e: 'ImprovedCVExtractor' object has no attribute '_find_section'
+[2025-06-04 13:36:10,391] WARNING log Bad Request: /api/consultant/process-cv/
+[2025-06-04 13:36:10,394] WARNING basehttp "POST /api/consultant/process-cv/ HTTP/1.1" 400 160
+[2025-06-04 13:36:22,439] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+[2025-06-04 13:36:26,084] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:38:48,849] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+[2025-06-04 13:38:52,478] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:52:32,132] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\CVProcessor.py changed, reloading.
+[2025-06-04 13:52:33,914] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:54:23,773] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+[2025-06-04 13:54:25,292] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:55:25,355] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\backend\urls.py changed, reloading.
+[2025-06-04 13:55:26,976] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:56:37,307] WARNING log Forbidden (CSRF cookie not set.): /api/consultant/process-cv/
+[2025-06-04 13:56:37,315] WARNING basehttp "POST /api/consultant/process-cv/ HTTP/1.1" 403 2986
+[2025-06-04 13:57:17,049] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+[2025-06-04 13:57:18,656] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:57:39,089] WARNING log Forbidden (CSRF cookie not set.): /api/consultant/process-cv/
+[2025-06-04 13:57:39,090] WARNING basehttp "POST /api/consultant/process-cv/ HTTP/1.1" 403 2986
+[2025-06-04 13:57:51,738] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\urls.py changed, reloading.
+[2025-06-04 13:57:53,348] INFO autoreload Watching for file changes with StatReloader
+[2025-06-04 13:59:14,227] WARNING log Forbidden (CSRF cookie not set.): /api/consultant/process-cv/
+[2025-06-04 13:59:14,242] WARNING basehttp "POST /api/consultant/process-cv/ HTTP/1.1" 403 2986
+[2025-06-04 14:56:50,070] WARNING log Forbidden (CSRF cookie not set.): /api/consultant/process-cv/
+[2025-06-04 14:56:50,105] WARNING basehttp "POST /api/consultant/process-cv/ HTTP/1.1" 403 2986
+[2025-06-04 21:13:27,820] INFO autoreload C:\Users\HP\Desktop\5alih 3ala ellah\richat\backend\settings.py changed, reloading.

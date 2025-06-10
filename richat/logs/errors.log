@@ -1,0 +1,1002 @@
+[2025-06-09 05:16:26,226] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 05:16:40,880] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 16:45:20,662] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 16:45:32,712] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 16:45:43,205] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 19:53:28,390] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 19:54:35,797] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 19:55:56,408] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 19:56:20,036] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-10 01:35:07,818] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 01:35:07,820] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:35:09,313] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:35:09,503] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 01:35:09,719] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:35:09,941] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:39,012] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:39,580] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:39,633] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 01:39:39,932] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:40,021] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 01:39:40,163] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:41,416] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:22,281] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 02:03:22,293] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:22,445] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:22,480] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 02:03:22,539] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:22,607] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:25,080] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:58,873] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:58,934] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:36:45,457] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+[2025-06-10 02:36:45,469] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+[2025-06-10 02:36:45,469] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/

@@ -1,0 +1,190 @@
+[2025-06-08 17:56:34,458] CV-PROCESS INFO - CSRF token gnr: rUBzCzMQX6...
+[2025-06-08 17:56:34,477] CV-PROCESS INFO - Dbut traitement CV: CV_Abdellahimenem.pdf, taille: 892433 bytes
+[2025-06-08 22:20:01,056] CV-PROCESS INFO - CSRF token gnr: hsG45XzMgO...
+[2025-06-08 22:20:01,060] CV-PROCESS INFO - Dbut traitement CV: cv_mariemkah.pdf, taille: 309308 bytes
+[2025-06-08 22:48:45,015] CV-PROCESS INFO - Dbut traitement CV - Mthode: POST
+[2025-06-08 22:48:45,016] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 22:48:45,021] CV-PROCESS INFO - Files dans request: ['cv']
+[2025-06-08 22:48:45,025] CV-PROCESS INFO - Fichier reu: Cv_toutouMouslih (1).pdf, taille: 370445 bytes
+[2025-06-08 22:48:45,026] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 22:48:45,026] CV-PROCESS INFO - Traitement fichier: Cv_toutouMouslih (1).pdf, extension: pdf
+[2025-06-08 22:48:47,350] CV-PROCESS INFO - Extraction PDF russie avec pdfplumber: 1372 caractres
+[2025-06-08 22:48:47,354] CV-PROCESS INFO - Texte extrait: 1372 caractres
+[2025-06-08 22:48:47,355] CV-PROCESS INFO - tape 2: Analyse des donnes...
+[2025-06-08 22:48:47,357] CV-PROCESS INFO - Dbut traitement CV basique: 1372 caractres
+[2025-06-08 22:48:47,362] CV-PROCESS INFO - Traitement CV russi - Score qualit: 95%
+[2025-06-08 22:48:47,363] CV-PROCESS INFO - tape 3: Gnration CV Richat...
+[2025-06-08 22:48:47,855] CV-PROCESS INFO - CV Richat simple gnr: 2626 bytes
+[2025-06-08 22:48:47,857] CV-PROCESS INFO - CV Richat gnr: 2626 bytes
+[2025-06-08 22:48:47,859] CV-PROCESS INFO - CV trait avec succs - Consultant: temp_1749419325008, Qualit: 95%
+[2025-06-08 22:56:00,087] CV-PROCESS INFO - Dbut traitement CV - Mthode: POST
+[2025-06-08 22:56:00,088] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 22:56:00,092] CV-PROCESS INFO - Files dans request: ['cv']
+[2025-06-08 22:56:00,093] CV-PROCESS INFO - Fichier reu: cv_wevanahi (3).pdf, taille: 309876 bytes
+[2025-06-08 22:56:00,095] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 22:56:00,096] CV-PROCESS INFO - Traitement fichier: cv_wevanahi (3).pdf, extension: pdf
+[2025-06-08 22:56:01,691] CV-PROCESS INFO - Extraction PDF fallback russie: 166016 caractres
+[2025-06-08 22:56:01,692] CV-PROCESS INFO - Texte extrait: 166016 caractres
+[2025-06-08 22:56:01,693] CV-PROCESS INFO - tape 2: Analyse des donnes...
+[2025-06-08 22:56:01,696] CV-PROCESS INFO - Dbut traitement CV basique: 166016 caractres
+[2025-06-08 22:56:01,775] CV-PROCESS INFO - Traitement CV russi - Score qualit: 55%
+[2025-06-08 22:56:01,777] CV-PROCESS INFO - tape 3: Gnration CV Richat...
+[2025-06-08 22:56:01,787] CV-PROCESS INFO - CV Richat simple gnr: 2489 bytes
+[2025-06-08 22:56:01,789] CV-PROCESS INFO - CV Richat gnr: 2489 bytes
+[2025-06-08 22:56:01,790] CV-PROCESS INFO - CV trait avec succs - Consultant: temp_1749419760078, Qualit: 55%
+[2025-06-08 22:58:57,764] CV-PROCESS INFO - Dbut traitement CV - Mthode: POST
+[2025-06-08 22:58:57,766] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 22:58:57,772] CV-PROCESS INFO - Files dans request: ['cv']
+[2025-06-08 22:58:57,774] CV-PROCESS INFO - Fichier reu: CV-Colas.pdf, taille: 285299 bytes
+[2025-06-08 22:58:57,775] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 22:58:57,778] CV-PROCESS INFO - Traitement fichier: CV-Colas.pdf, extension: pdf
+[2025-06-08 22:58:59,279] CV-PROCESS INFO - Extraction PDF russie avec pdfplumber: 3429 caractres
+[2025-06-08 22:58:59,281] CV-PROCESS INFO - Texte extrait: 3429 caractres
+[2025-06-08 22:58:59,288] CV-PROCESS INFO - tape 2: Analyse des donnes...
+[2025-06-08 22:58:59,290] CV-PROCESS INFO - Dbut traitement CV basique: 3429 caractres
+[2025-06-08 22:58:59,296] CV-PROCESS INFO - Traitement CV russi - Score qualit: 85%
+[2025-06-08 22:58:59,297] CV-PROCESS INFO - tape 3: Gnration CV Richat...
+[2025-06-08 22:58:59,313] CV-PROCESS INFO - CV Richat simple gnr: 2523 bytes
+[2025-06-08 22:58:59,316] CV-PROCESS INFO - CV Richat gnr: 2523 bytes
+[2025-06-08 22:58:59,322] CV-PROCESS INFO - CV trait avec succs - Consultant: temp_1749419937758, Qualit: 85%
+[2025-06-08 23:42:13,832] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-08 23:42:13,833] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-08 23:42:13,835] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 23:42:13,836] CV-PROCESS INFO - Method: POST
+[2025-06-08 23:42:13,840] CV-PROCESS INFO - Fichier reu: CV de Mariem Erebih-1.pdf, taille: 40688 bytes
+[2025-06-08 23:42:13,843] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 23:42:13,846] CV-PROCESS INFO - Traitement fichier: CV de Mariem Erebih-1.pdf, extension: pdf
+[2025-06-08 23:42:14,234] CV-PROCESS INFO - Extraction PDF russie avec pdfplumber: 1450 caractres
+[2025-06-08 23:42:14,236] CV-PROCESS INFO - Texte extrait: 1450 caractres
+[2025-06-08 23:42:14,238] CV-PROCESS INFO - tape 2: Analyse avance selon format Mohamed Yehdhih...
+[2025-06-08 23:42:14,242] CV-PROCESS INFO - Dbut traitement CV avanc: 1450 caractres
+[2025-06-08 23:42:14,246] CV-PROCESS INFO - Traitement CV russi - Score qualit: 95%
+[2025-06-08 23:42:14,249] CV-PROCESS INFO - tape 3: Gnration CV Richat format Mohamed Yehdhih...
+[2025-06-08 23:42:14,616] CV-PROCESS INFO - CV Richat sauvegard: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_MARIEM EREBIH_20250608_234214.pdf
+[2025-06-08 23:42:14,619] CV-PROCESS INFO - CV Richat format Mohamed gnr: 3105 bytes
+[2025-06-08 23:42:14,620] CV-PROCESS INFO - CV Richat format Mohamed gnr: 3105 bytes
+[2025-06-08 23:42:14,621] CV-PROCESS INFO - CV trait avec succs - Consultant: temp_1749422533795, Qualit: 95%
+[2025-06-08 23:47:23,688] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-08 23:47:23,689] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-08 23:47:23,690] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 23:47:23,691] CV-PROCESS INFO - Method: POST
+[2025-06-08 23:47:23,702] CV-PROCESS INFO - Fichier reu: Expert Postal.pdf, taille: 812663 bytes
+[2025-06-08 23:47:23,706] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 23:47:23,709] CV-PROCESS INFO - Traitement fichier: Expert Postal.pdf, extension: pdf
+[2025-06-08 23:47:29,147] CV-PROCESS INFO - Extraction PDF russie avec pdfplumber: 20310 caractres
+[2025-06-08 23:47:29,150] CV-PROCESS INFO - Texte extrait: 20310 caractres
+[2025-06-08 23:47:29,153] CV-PROCESS INFO - tape 2: Analyse avance selon format Mohamed Yehdhih...
+[2025-06-08 23:47:29,157] CV-PROCESS INFO - Dbut traitement CV avanc: 20310 caractres
+[2025-06-08 23:47:29,228] CV-PROCESS INFO - Traitement CV russi - Score qualit: 55%
+[2025-06-08 23:47:29,233] CV-PROCESS INFO - tape 3: Gnration CV Richat format Mohamed Yehdhih...
+[2025-06-08 23:47:29,280] CV-PROCESS INFO - CV Richat sauvegard: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Titre Mr_20250608_234729.pdf
+[2025-06-08 23:47:29,283] CV-PROCESS INFO - CV Richat format Mohamed gnr: 2920 bytes
+[2025-06-08 23:47:29,286] CV-PROCESS INFO - CV Richat format Mohamed gnr: 2920 bytes
+[2025-06-08 23:47:29,290] CV-PROCESS INFO - CV trait avec succs - Consultant: temp_1749422843679, Qualit: 55%
+[2025-06-08 23:49:38,975] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-08 23:49:38,976] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-08 23:49:38,977] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 23:49:38,978] CV-PROCESS INFO - Method: POST
+[2025-06-08 23:49:38,981] CV-PROCESS INFO - Fichier reu: cv_wevanahi (3).pdf, taille: 309876 bytes
+[2025-06-08 23:49:38,984] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 23:49:38,986] CV-PROCESS INFO - Traitement fichier: cv_wevanahi (3).pdf, extension: pdf
+[2025-06-08 23:49:39,535] CV-PROCESS ERROR - chec extraction texte
+[2025-06-08 23:49:46,588] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-08 23:49:46,590] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-08 23:49:46,592] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 23:49:46,594] CV-PROCESS INFO - Method: POST
+[2025-06-08 23:49:46,603] CV-PROCESS INFO - Fichier reu: cv_wevanahi (3).pdf, taille: 309876 bytes
+[2025-06-08 23:49:46,607] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 23:49:46,609] CV-PROCESS INFO - Traitement fichier: cv_wevanahi (3).pdf, extension: pdf
+[2025-06-08 23:49:46,620] CV-PROCESS ERROR - chec extraction texte
+[2025-06-08 23:51:22,546] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-08 23:51:22,547] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-08 23:51:22,548] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 23:51:22,551] CV-PROCESS INFO - Method: POST
+[2025-06-08 23:51:22,558] CV-PROCESS INFO - Fichier reu: cv_khire_elouma (1).pdf, taille: 352051 bytes
+[2025-06-08 23:51:22,560] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 23:51:22,561] CV-PROCESS INFO - Traitement fichier: cv_khire_elouma (1).pdf, extension: pdf
+[2025-06-08 23:51:22,571] CV-PROCESS ERROR - chec extraction texte
+[2025-06-08 23:51:53,299] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-08 23:51:53,302] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-08 23:51:53,303] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 23:51:53,304] CV-PROCESS INFO - Method: POST
+[2025-06-08 23:51:53,308] CV-PROCESS INFO - Fichier reu: cv_khire_elouma.pdf, taille: 352051 bytes
+[2025-06-08 23:51:53,313] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 23:51:53,315] CV-PROCESS INFO - Traitement fichier: cv_khire_elouma.pdf, extension: pdf
+[2025-06-08 23:51:53,327] CV-PROCESS ERROR - chec extraction texte
+[2025-06-08 23:52:21,951] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-08 23:52:21,952] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-08 23:52:21,954] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-08 23:52:21,956] CV-PROCESS INFO - Method: POST
+[2025-06-08 23:52:21,959] CV-PROCESS INFO - Fichier reu: 21036.pdf, taille: 47265 bytes
+[2025-06-08 23:52:21,961] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-08 23:52:21,966] CV-PROCESS INFO - Traitement fichier: 21036.pdf, extension: pdf
+[2025-06-08 23:52:23,581] CV-PROCESS INFO - Extraction PDF russie avec pdfplumber: 2510 caractres
+[2025-06-08 23:52:23,584] CV-PROCESS INFO - Texte extrait: 2510 caractres
+[2025-06-08 23:52:23,590] CV-PROCESS INFO - tape 2: Analyse avance selon format Mohamed Yehdhih...
+[2025-06-08 23:52:23,593] CV-PROCESS INFO - Dbut traitement CV avanc: 2510 caractres
+[2025-06-08 23:52:23,601] CV-PROCESS INFO - Traitement CV russi - Score qualit: 85%
+[2025-06-08 23:52:23,603] CV-PROCESS INFO - tape 3: Gnration CV Richat format Mohamed Yehdhih...
+[2025-06-08 23:52:23,629] CV-PROCESS INFO - CV Richat sauvegard: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Full-Stack Developer_20250608_235223.pdf
+[2025-06-08 23:52:23,631] CV-PROCESS INFO - CV Richat format Mohamed gnr: 2992 bytes
+[2025-06-08 23:52:23,632] CV-PROCESS INFO - CV Richat format Mohamed gnr: 2992 bytes
+[2025-06-08 23:52:23,634] CV-PROCESS INFO - CV trait avec succs - Consultant: temp_1749423141944, Qualit: 85%
+[2025-06-09 19:55:13,180] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-09 19:55:13,183] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-09 19:55:13,185] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-09 19:55:13,187] CV-PROCESS INFO - Method: POST
+[2025-06-09 19:55:13,202] CV-PROCESS INFO - Fichier reu: CV_Abdellahimenem.pdf, taille: 892433 bytes
+[2025-06-09 19:55:13,205] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-09 19:55:13,209] CV-PROCESS INFO - Traitement fichier: CV_Abdellahimenem.pdf, extension: pdf
+[2025-06-09 19:55:16,575] CV-PROCESS ERROR - chec extraction texte
+[2025-06-09 19:59:03,593] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-09 19:59:03,595] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-09 19:59:03,597] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-09 19:59:03,598] CV-PROCESS INFO - Method: POST
+[2025-06-09 19:59:03,608] CV-PROCESS INFO - Fichier reu: cv_khire_elouma.pdf, taille: 352051 bytes
+[2025-06-09 19:59:03,611] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-09 19:59:03,612] CV-PROCESS INFO - Traitement fichier: cv_khire_elouma.pdf, extension: pdf
+[2025-06-09 19:59:04,804] CV-PROCESS ERROR - chec extraction texte
+[2025-06-09 19:59:36,290] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-09 19:59:36,292] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-09 19:59:36,294] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-09 19:59:36,295] CV-PROCESS INFO - Method: POST
+[2025-06-09 19:59:36,299] CV-PROCESS INFO - Fichier reu: 21036.pdf, taille: 47265 bytes
+[2025-06-09 19:59:36,307] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-09 19:59:36,309] CV-PROCESS INFO - Traitement fichier: 21036.pdf, extension: pdf
+[2025-06-09 19:59:37,105] CV-PROCESS INFO - Extraction PDF russie avec pdfplumber: 2510 caractres
+[2025-06-09 19:59:37,107] CV-PROCESS INFO - Texte extrait: 2510 caractres
+[2025-06-09 19:59:37,111] CV-PROCESS INFO - tape 2: Analyse avance selon format Mohamed Yehdhih...
+[2025-06-09 19:59:37,117] CV-PROCESS INFO - Dbut traitement CV avanc: 2510 caractres
+[2025-06-09 19:59:37,133] CV-PROCESS INFO - Traitement CV russi - Score qualit: 85%
+[2025-06-09 19:59:37,136] CV-PROCESS INFO - tape 3: Gnration CV Richat format Mohamed Yehdhih...
+[2025-06-09 19:59:37,673] CV-PROCESS INFO - CV Richat sauvegard: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Full-Stack Developer_20250609_195937.pdf
+[2025-06-09 19:59:37,681] CV-PROCESS INFO - CV Richat format Mohamed gnr: 2993 bytes
+[2025-06-09 19:59:37,686] CV-PROCESS INFO - CV Richat format Mohamed gnr: 2993 bytes
+[2025-06-09 19:59:37,690] CV-PROCESS INFO - CV trait avec succs - Consultant: temp_1749495576283, Qualit: 85%
+[2025-06-10 17:46:19,609] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-10 17:46:19,611] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-10 17:46:19,613] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-10 17:46:19,614] CV-PROCESS INFO - Method: POST
+[2025-06-10 17:46:19,621] CV-PROCESS INFO - Fichier reu: cv_wevanahi (2).pdf, taille: 309876 bytes
+[2025-06-10 17:46:19,626] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-10 17:46:19,634] CV-PROCESS INFO - Traitement fichier: cv_wevanahi (2).pdf, extension: pdf
+[2025-06-10 17:46:22,937] CV-PROCESS ERROR - chec extraction texte
+[2025-06-10 17:46:57,757] CV-PROCESS INFO - Dbut traitement CV - IP: 127.0.0.1
+[2025-06-10 17:46:57,759] CV-PROCESS INFO - User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36 Edg/137.0.0.0
+[2025-06-10 17:46:57,760] CV-PROCESS INFO - Content-Type: multipart/form-data
+[2025-06-10 17:46:57,761] CV-PROCESS INFO - Method: POST
+[2025-06-10 17:46:57,764] CV-PROCESS INFO - Fichier reu: Mohamed Lemine Zeidane.pdf, taille: 57132 bytes
+[2025-06-10 17:46:57,766] CV-PROCESS INFO - tape 1: Extraction du texte...
+[2025-06-10 17:46:57,768] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-10 17:46:58,877] CV-PROCESS INFO - Extraction PDF russie avec pdfplumber: 1790 caractres
+[2025-06-10 17:46:58,880] CV-PROCESS INFO - Texte extrait: 1790 caractres
+[2025-06-10 17:46:58,883] CV-PROCESS INFO - tape 2: Analyse avance selon format Mohamed Yehdhih...
+[2025-06-10 17:46:58,891] CV-PROCESS INFO - Dbut traitement CV avanc: 1790 caractres
+[2025-06-10 17:46:58,899] CV-PROCESS INFO - Traitement CV russi - Score qualit: 95%
+[2025-06-10 17:46:58,900] CV-PROCESS INFO - tape 3: Gnration CV Richat format Mohamed Yehdhih...
+[2025-06-10 17:46:59,642] CV-PROCESS INFO - CV Richat sauvegard: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_CONTACT PROFIL_20250610_174659.pdf
+[2025-06-10 17:46:59,648] CV-PROCESS INFO - CV Richat format Mohamed gnr: 3026 bytes
+[2025-06-10 17:46:59,651] CV-PROCESS INFO - CV Richat format Mohamed gnr: 3026 bytes
+[2025-06-10 17:46:59,659] CV-PROCESS INFO - CV trait avec succs - Consultant: temp_1749574017750, Qualit: 95%

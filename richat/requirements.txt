@@ -1,0 +1,27 @@
+# Dépendances Django de base
+Django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+python-decouple==3.8
+mysqlclient==2.2.0
+
+# Dépendances pour le traitement des CV
+PyMuPDF==1.23.10
+python-docx==1.1.0
+reportlab==4.0.7
+Pillow==10.1.0
+
+# Dépendances optionnelles pour l'analyse avancée (commentées par défaut)
+# pytesseract==0.3.10
+# spacy==3.7.2
+# scikit-learn==1.3.2
+# numpy==1.24.4
+# pandas==2.1.4
+# textdistance==4.6.1
+
+# Pour l'envoi d'emails
+email-validator==2.1.0
+
+# Pour les tests et le débogage
+pytest==7.4.3
+pytest-django==4.7.0

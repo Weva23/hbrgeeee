@@ -1,0 +1,69 @@
+INFO 2025-05-18 21:58:51,075 views 25808 15220 Tentative de connexion consultant:
+INFO 2025-05-18 21:58:51,093 views 25808 15220 Utilisateur trouvé: 22046@supnum.mr (ID: 15)
+INFO 2025-05-18 21:58:52,316 views 25808 15220 Connexion réussie pour 22046@supnum.mr - ID consultant: 15
+INFO 2025-05-18 21:58:52,381 views 25808 15220 Récupération des données pour consultant ID 15: nahi weva
+INFO 2025-05-18 21:58:52,391 views 25808 15220 Compétences trouvées: ['Wordpress', 'Spring Boot', 'Sql', 'React', 'R', 'Python', 'Php', 'Or', 'Nosql', 'Html', 'Ges', 'Flask', 'Ets', 'Django', 'Css']
+INFO 2025-05-18 21:58:52,439 views 25808 15220 Récupération des données pour consultant ID 15: nahi weva
+INFO 2025-05-18 21:58:52,460 views 25808 15220 Compétences trouvées: ['Wordpress', 'Spring Boot', 'Sql', 'React', 'R', 'Python', 'Php', 'Or', 'Nosql', 'Html', 'Ges', 'Flask', 'Ets', 'Django', 'Css']
+INFO 2025-05-18 21:58:52,472 views 25808 10896 Récupération des missions pour le consultant ID=15 (weva nahi)
+INFO 2025-05-18 21:58:52,507 views 25808 10896 Nombre de matchings validés trouvés: 0
+INFO 2025-05-18 21:58:52,529 views 25808 10896 Total de 0 missions formatées pour le consultant 15
+INFO 2025-05-18 21:58:52,599 views 25808 10896 Récupération des missions pour le consultant ID=15 (weva nahi)
+INFO 2025-05-18 21:58:52,608 views 25808 10896 Nombre de matchings validés trouvés: 0
+INFO 2025-05-18 21:58:52,615 views 25808 10896 Total de 0 missions formatées pour le consultant 15
+INFO 2025-05-18 21:59:16,630 views 25808 4780 Récupération des missions pour le consultant ID=15 (weva nahi)
+INFO 2025-05-18 21:59:16,635 views 25808 4780 Nombre de matchings validés trouvés: 0
+INFO 2025-05-18 21:59:16,643 views 25808 4780 Total de 0 missions formatées pour le consultant 15
+INFO 2025-05-18 22:01:34,302 views 25808 4780 Données reçues pour l'inscription:
+INFO 2025-05-18 22:01:35,365 views 25808 4780 Utilisateur créé: nahggggiweva@gmail.com (ID: 17)
+INFO 2025-05-18 22:01:35,391 views 25808 4780 Consultant créé: abdellhi betoulhh (ID: 17)
+INFO 2025-05-18 22:01:35,396 views 25808 4780 CV reçu: 21036.pdf
+INFO 2025-05-18 22:01:35,403 views 25808 4780 CV enregistré à: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\cvs\21036_w8yL9Cz.pdf
+INFO 2025-05-18 22:01:35,406 views 25808 7984 Début d'extraction des compétences pour abdellhi depuis C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\cvs\21036_w8yL9Cz.pdf
+INFO 2025-05-18 22:01:35,407 views 25808 4780 Thread d'extraction démarré pour abdellhi
+INFO 2025-05-18 22:01:35,409 views 25808 7984 Extraction depuis le fichier: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\cvs\21036_w8yL9Cz.pdf
+INFO 2025-05-18 22:01:35,410 views 25808 4780 Tentative d'envoi d'email à nahggggiweva@gmail.com
+INFO 2025-05-18 22:01:35,412 views 25808 4780 Configuration email: HOST=smtp.gmail.com, PORT=587, FROM=Richat Partners <nahiweva@gmail.com>
+INFO 2025-05-18 22:01:35,474 views 25808 7984 Texte extrait du PDF (1255 caractères)
+INFO 2025-05-18 22:01:35,479 views 25808 7984 Compétences extraites: ['AWS', 'Angular', 'Django', 'ETS', 'EV', 'Laravel', 'Or', 'Oracle', 'R', 'REST API', 'React', 'Repo', 'SSO', 'Spring Boot', 'TypeScript']
+INFO 2025-05-18 22:01:35,481 views 25808 7984 Domaine principal détecté: DIGITAL
+INFO 2025-05-18 22:01:35,485 views 25808 7984 Compétences trouvées pour abdellhi: ['AWS', 'Angular', 'Django', 'ETS', 'EV', 'Laravel', 'Or', 'Oracle', 'R', 'REST API', 'React', 'Repo', 'SSO', 'Spring Boot', 'TypeScript']
+INFO 2025-05-18 22:01:35,487 views 25808 7984 Domaine principal détecté: DIGITAL
+INFO 2025-05-18 22:01:35,504 email_service 25808 4780 Tentative d'envoi d'email à nahggggiweva@gmail.com depuis Richat Partners <nahiweva@gmail.com>
+INFO 2025-05-18 22:01:35,506 views 25808 7984 Domaine principal mis à jour pour abdellhi: DIGITAL
+INFO 2025-05-18 22:01:35,507 email_service 25808 4780 Sujet: Bienvenue chez Richat Partners - Confirmation d'inscription
+INFO 2025-05-18 22:01:35,511 email_service 25808 4780 Configuration SMTP - Host: smtp.gmail.com, Port: 587
+INFO 2025-05-18 22:01:35,517 views 25808 7984 Compétence ajoutée pour abdellhi: Aws
+INFO 2025-05-18 22:01:35,525 views 25808 7984 Compétence ajoutée pour abdellhi: Angular
+INFO 2025-05-18 22:01:35,532 views 25808 7984 Compétence ajoutée pour abdellhi: Django
+INFO 2025-05-18 22:01:35,543 views 25808 7984 Compétence ajoutée pour abdellhi: Ets
+INFO 2025-05-18 22:01:35,551 views 25808 7984 Compétence ajoutée pour abdellhi: Ev
+INFO 2025-05-18 22:01:35,563 views 25808 7984 Compétence ajoutée pour abdellhi: Laravel
+INFO 2025-05-18 22:01:35,576 views 25808 7984 Compétence ajoutée pour abdellhi: Or
+INFO 2025-05-18 22:01:35,589 views 25808 7984 Compétence ajoutée pour abdellhi: Oracle
+INFO 2025-05-18 22:01:35,603 views 25808 7984 Compétence ajoutée pour abdellhi: R
+INFO 2025-05-18 22:01:35,618 views 25808 7984 Compétence ajoutée pour abdellhi: Rest Api
+INFO 2025-05-18 22:01:35,630 views 25808 7984 Compétence ajoutée pour abdellhi: React
+INFO 2025-05-18 22:01:35,644 views 25808 7984 Compétence ajoutée pour abdellhi: Repo
+INFO 2025-05-18 22:01:35,659 views 25808 7984 Compétence ajoutée pour abdellhi: Sso
+INFO 2025-05-18 22:01:35,673 views 25808 7984 Compétence ajoutée pour abdellhi: Spring Boot
+INFO 2025-05-18 22:01:35,684 views 25808 7984 Compétence ajoutée pour abdellhi: Typescript
+INFO 2025-05-18 22:01:35,702 views 25808 7984 Extraction terminée pour abdellhi - 15 compétences ajoutées
+INFO 2025-05-18 22:01:38,763 email_service 25808 4780 Résultat de l'envoi: 1
+INFO 2025-05-18 22:01:38,764 views 25808 4780 Email de confirmation envoyé avec succès à nahggggiweva@gmail.com
+INFO 2025-05-18 22:01:38,766 views 25808 4780 Inscription réussie pour abdellhi (ID: 17)
+INFO 2025-05-18 22:02:02,049 email_service 25808 15924 Email de validation envoyé à nahggggiweva@gmail.com
+INFO 2025-05-18 22:02:02,051 views 25808 15924 Email de validation envoyé à nahggggiweva@gmail.com
+INFO 2025-05-18 22:02:19,350 views 25808 4780 Tentative de connexion consultant:
+INFO 2025-05-18 22:02:19,357 views 25808 4780 Utilisateur trouvé: nahggggiweva@gmail.com (ID: 17)
+INFO 2025-05-18 22:02:20,467 views 25808 4780 Connexion réussie pour nahggggiweva@gmail.com - ID consultant: 17
+INFO 2025-05-18 22:02:20,501 views 25808 4780 Récupération des données pour consultant ID 17: abdellhi betoulhh
+INFO 2025-05-18 22:02:20,507 views 25808 4780 Compétences trouvées: ['Aws', 'Angular', 'Django', 'Ets', 'Ev', 'Laravel', 'Or', 'Oracle', 'R', 'Rest Api', 'React', 'Repo', 'Sso', 'Spring Boot', 'Typescript']
+INFO 2025-05-18 22:02:20,565 views 25808 4780 Récupération des données pour consultant ID 17: abdellhi betoulhh
+INFO 2025-05-18 22:02:20,575 views 25808 10896 Récupération des missions pour le consultant ID=17 (betoulhh abdellhi)
+INFO 2025-05-18 22:02:20,593 views 25808 4780 Compétences trouvées: ['Aws', 'Angular', 'Django', 'Ets', 'Ev', 'Laravel', 'Or', 'Oracle', 'R', 'Rest Api', 'React', 'Repo', 'Sso', 'Spring Boot', 'Typescript']
+INFO 2025-05-18 22:02:20,593 views 25808 10896 Nombre de matchings validés trouvés: 0
+INFO 2025-05-18 22:02:20,640 views 25808 10896 Total de 0 missions formatées pour le consultant 17
+INFO 2025-05-18 22:02:20,694 views 25808 10896 Récupération des missions pour le consultant ID=17 (betoulhh abdellhi)
+INFO 2025-05-18 22:02:20,710 views 25808 10896 Nombre de matchings validés trouvés: 0
+INFO 2025-05-18 22:02:20,736 views 25808 10896 Total de 0 missions formatées pour le consultant 17

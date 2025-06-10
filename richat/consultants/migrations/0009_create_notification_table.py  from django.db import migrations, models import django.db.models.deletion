@@ -1,0 +1,37 @@
+# Créez un fichier dans votre répertoire migrations nommé, par exemple: 0005_create_notification_table.py
+
+from django.db import migrations, models
+import django.db.models.deletion
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('consultants', '0008_alter_notification_type'),  # Remplacez par la dernière migration de votre application
+    ]
+
+    operations = [
+        # Assurez-vous que la table Notification n'existe plus
+        migrations.RunSQL(
+            "DROP TABLE IF EXISTS consultants_notification CASCADE;",
+            reverse_sql=migrations.RunSQL.noop,
+        ),
+        
+        # Créer explicitement la table Notification
+        migrations.CreateModel(
+            name='Notification',
+            fields=[
+                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('type', models.CharField(choices=[('MATCH_VALID', 'Validation de matching'), ('NEW_OFFER', 'Nouvelle offre'), ('SYSTEM', 'Notification système'), ('MATCH_SUGGEST', 'Suggestion de matching'), ('ADMIN_INFO', 'Information administrative')], default='SYSTEM', max_length=20)),
+                ('title', models.CharField(max_length=255)),
+                ('content', models.TextField()),
+                ('is_read', models.BooleanField(default=False)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('consultant', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notifications', to='consultants.Consultant')),
+                ('related_appel', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='notifications', to='consultants.AppelOffre')),
+                ('related_match', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='consultants.MatchingResult')),
+            ],
+            options={
+                'ordering': ['-created_at'],
+            },
+        ),
+    ]

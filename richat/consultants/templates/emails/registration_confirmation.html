@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue chez Richat Partners</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            background-color: #2563eb;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-radius: 5px 5px 0 0;
+        }
+        .content {
+            background-color: #ffffff;
+            padding: 20px;
+            border-left: 1px solid #e2e8f0;
+            border-right: 1px solid #e2e8f0;
+        }
+        .footer {
+            background-color: #f8fafc;
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+            border-radius: 0 0 5px 5px;
+            border: 1px solid #e2e8f0;
+        }
+        .button {
+            display: inline-block;
+            background-color: #2563eb;
+            color: #ffffff;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        .info-box {
+            background-color: #f1f5f9;
+            border-left: 4px solid #2563eb;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Bienvenue chez Richat Partners</h1>
+        </div>
+        <div class="content">
+            <p>Bonjour <span class="highlight">{{ first_name }} {{ last_name }}</span>,</p>
+
+            <p>Nous sommes ravis de vous accueillir dans notre réseau de consultants. Votre inscription a été finalisée avec succès et votre profil est maintenant actif sur notre plateforme.</p>
+
+            <div class="info-box">
+                <h3>Récapitulatif de votre profil :</h3>
+                <p><strong>Email :</strong> {{ email }}</p>
+                <p><strong>Niveau d'expertise :</strong> {{ expertise }}</p>
+                <p><strong>Disponibilité :</strong> Du {{ start_date }} au {{ end_date }}</p>
+            </div>
+
+            <p>Vous pouvez dès à présent vous connecter à votre espace consultant pour :</p>
+            <ul>
+                <li>Compléter votre profil</li>
+                <li>Consulter les offres de missions</li>
+                <li>Mettre à jour vos disponibilités</li>
+                <li>Gérer vos compétences</li>
+            </ul>
+
+            <p style="text-align: center;">
+                <a href="http://127.0.0.1:8000/consultant/login" class="button">Accéder à mon espace</a>
+            </p>
+
+            <p>Si vous avez des questions ou besoin d'assistance, n'hésitez pas à nous contacter à l'adresse <a href="mailto:support@richat-partners.com">support@richat-partners.com</a>.</p>
+
+            <p>Cordialement,</p>
+            <p>L'équipe Richat Partners</p>
+        </div>
+        <div class="footer">
+            <p>© {{ now.year }} Richat Partners. Tous droits réservés.</p>
+            <p>Cet email a été envoyé à {{ email }}.</p>
+        </div>
+    </div>
+</body>
+</html>
