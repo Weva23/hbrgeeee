@@ -188,3 +188,726 @@
 [2025-06-10 17:46:59,648] CV-PROCESS INFO - CV Richat format Mohamed gnr: 3026 bytes
 [2025-06-10 17:46:59,651] CV-PROCESS INFO - CV Richat format Mohamed gnr: 3026 bytes
 [2025-06-10 17:46:59,659] CV-PROCESS INFO - CV trait avec succs - Consultant: temp_1749574017750, Qualit: 95%
+[2025-06-10 23:50:49,150] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-10 23:50:49,151] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-10 23:50:49,152] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-10 23:50:49,152] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 00:00:07,071] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 00:00:07,072] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 00:00:07,074] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 00:00:07,074] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 00:03:40,770] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 00:03:40,772] CV-PROCESS INFO - Traitement fichier: 21036.pdf, extension: pdf
+[2025-06-11 00:03:41,352] CV-PROCESS INFO - Extraction PDF russie: 6829 caractres, 1 tableaux
+[2025-06-11 00:03:41,353] CV-PROCESS INFO - Format dtect: professional_modern
+[2025-06-11 00:03:41,361] CV-PROCESS INFO - Scores calculs - Qualit: 65%, Conformit: 55%
+[2025-06-11 00:03:41,362] CV-PROCESS INFO - Extraction Richat russie - Score: 65%
+[2025-06-11 00:03:41,762] CV-PROCESS INFO - CV Richat complet gnr: 4411 bytes - Conformit: 55%
+[2025-06-11 00:03:41,763] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 65%, Conformit: 55%
+[2025-06-11 00:17:54,820] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 00:17:54,821] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 00:17:54,821] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 00:17:54,822] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 00:36:37,358] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 00:36:37,361] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-11 00:36:38,136] CV-PROCESS INFO - Extraction PDF russie: 6275 caractres, 0 tableaux
+[2025-06-11 00:36:38,141] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 00:36:38,151] CV-PROCESS INFO - Scores calculs - Qualit: 65%, Conformit: 55%
+[2025-06-11 00:36:38,152] CV-PROCESS INFO - Extraction Richat russie - Score: 65%
+[2025-06-11 00:36:38,381] CV-PROCESS INFO - CV Richat complet gnr: 4402 bytes - Conformit: 55%
+[2025-06-11 00:36:38,382] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 65%, Conformit: 55%
+[2025-06-11 00:41:24,886] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 00:41:24,890] CV-PROCESS INFO - Traitement fichier: Cv_toutouMouslih (1).pdf, extension: pdf
+[2025-06-11 00:41:25,745] CV-PROCESS INFO - Extraction PDF russie: 5543 caractres, 1 tableaux
+[2025-06-11 00:41:25,746] CV-PROCESS INFO - Format dtect: traditional
+[2025-06-11 00:41:25,781] CV-PROCESS INFO - Scores calculs - Qualit: 68%, Conformit: 55%
+[2025-06-11 00:41:25,782] CV-PROCESS INFO - Extraction Richat russie - Score: 68%
+[2025-06-11 00:41:25,800] CV-PROCESS INFO - CV Richat complet gnr: 4485 bytes - Conformit: 55%
+[2025-06-11 00:41:25,804] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 68%, Conformit: 55%
+[2025-06-11 00:46:12,933] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 00:46:12,934] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 00:46:12,935] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 00:46:12,935] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 00:48:27,245] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 00:48:27,246] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 00:48:27,246] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 00:48:27,248] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 00:48:54,351] CV-PROCESS INFO - Dbut traitement CV format Richat complet - AVEC SAUVEGARDE AUTO
+[2025-06-11 00:48:54,355] CV-PROCESS INFO - Traitement fichier: cv_wevanahi.pdf, extension: pdf
+[2025-06-11 00:48:54,451] CV-PROCESS INFO - Extraction PDF russie: 1 caractres, 0 tableaux
+[2025-06-11 00:48:54,454] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 00:48:54,458] CV-PROCESS INFO - Scores calculs - Qualit: 45%, Conformit: 38%
+[2025-06-11 00:48:54,459] CV-PROCESS INFO - Extraction Richat russie - Score: 45%
+[2025-06-11 00:48:54,608] CV-PROCESS INFO - CV Richat complet gnr: 3403 bytes - Conformit: 38%
+[2025-06-11 00:48:54,609] CV-PROCESS ERROR - Erreur gnration CV Richat: 'RichatCVProcessor' object has no attribute 'get_saved_cv_info'
+[2025-06-11 00:48:54,610] CV-PROCESS INFO - CV Richat trait et sauvegard - Qualit: 45%, Conformit: 38%
+[2025-06-11 00:50:18,018] CV-PROCESS INFO - Dbut traitement CV format Richat complet - AVEC SAUVEGARDE AUTO
+[2025-06-11 00:50:18,019] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-11 00:50:18,323] CV-PROCESS INFO - Extraction PDF russie: 6275 caractres, 0 tableaux
+[2025-06-11 00:50:18,325] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 00:50:18,329] CV-PROCESS INFO - Scores calculs - Qualit: 65%, Conformit: 55%
+[2025-06-11 00:50:18,331] CV-PROCESS INFO - Extraction Richat russie - Score: 65%
+[2025-06-11 00:50:18,343] CV-PROCESS INFO - CV Richat complet gnr: 4402 bytes - Conformit: 55%
+[2025-06-11 00:50:18,344] CV-PROCESS ERROR - Erreur gnration CV Richat: 'RichatCVProcessor' object has no attribute 'get_saved_cv_info'
+[2025-06-11 00:50:18,345] CV-PROCESS INFO - CV Richat trait et sauvegard - Qualit: 65%, Conformit: 55%
+[2025-06-11 10:32:23,396] CV-PROCESS INFO - Dbut traitement CV format Richat complet - AVEC SAUVEGARDE AUTO
+[2025-06-11 10:32:23,398] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-11 10:32:23,834] CV-PROCESS INFO - Extraction PDF russie: 6275 caractres, 0 tableaux
+[2025-06-11 10:32:23,837] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 10:32:23,842] CV-PROCESS INFO - Scores calculs - Qualit: 65%, Conformit: 55%
+[2025-06-11 10:32:23,844] CV-PROCESS INFO - Extraction Richat russie - Score: 65%
+[2025-06-11 10:32:23,871] CV-PROCESS INFO - CV Richat complet gnr: 4402 bytes - Conformit: 55%
+[2025-06-11 10:32:23,872] CV-PROCESS ERROR - Erreur gnration CV Richat: 'RichatCVProcessor' object has no attribute 'get_saved_cv_info'
+[2025-06-11 10:32:23,873] CV-PROCESS INFO - CV Richat trait et sauvegard - Qualit: 65%, Conformit: 55%
+[2025-06-11 10:42:03,307] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 10:42:03,307] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 10:42:03,308] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 10:42:03,309] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 10:43:03,876] CV-PROCESS INFO - Dbut traitement CV format Richat complet - AVEC SAUVEGARDE AUTO
+[2025-06-11 10:43:03,878] CV-PROCESS INFO - Traitement fichier: Cv_toutouMouslih.pdf, extension: pdf
+[2025-06-11 10:43:05,031] CV-PROCESS INFO - Extraction PDF russie: 5543 caractres, 1 tableaux
+[2025-06-11 10:43:05,034] CV-PROCESS INFO - Format dtect: traditional
+[2025-06-11 10:43:05,076] CV-PROCESS INFO - Scores calculs - Qualit: 68%, Conformit: 55%
+[2025-06-11 10:43:05,076] CV-PROCESS INFO - Extraction Richat russie - Score: 68%
+[2025-06-11 10:43:05,441] CV-PROCESS INFO - CV Richat complet gnr: 4485 bytes - Conformit: 55%
+[2025-06-11 10:43:05,442] CV-PROCESS ERROR - Erreur gnration CV Richat: 'RichatCVProcessor' object has no attribute 'get_saved_cv_info'
+[2025-06-11 10:43:05,443] CV-PROCESS INFO - CV Richat trait et sauvegard - Qualit: 68%, Conformit: 55%
+[2025-06-11 11:03:41,032] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 11:03:41,033] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 11:03:41,034] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 11:03:41,034] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 11:03:58,615] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 11:03:58,616] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-11 11:03:59,543] CV-PROCESS INFO - Extraction PDF russie: 6275 caractres, 0 tableaux
+[2025-06-11 11:03:59,545] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 11:03:59,554] CV-PROCESS INFO - Scores calculs - Qualit: 65%, Conformit: 55%
+[2025-06-11 11:03:59,554] CV-PROCESS INFO - Extraction Richat russie - Score: 65%
+[2025-06-11 11:03:59,851] CV-PROCESS INFO - CV Richat complet gnr: 4402 bytes - Conformit: 55%
+[2025-06-11 11:03:59,853] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 65%, Conformit: 55%
+[2025-06-11 13:23:33,191] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 13:23:33,192] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 13:23:33,193] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 13:23:33,194] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 13:56:15,599] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 13:56:15,600] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 13:56:15,601] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 13:56:15,602] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 13:58:27,982] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 13:58:27,983] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 13:58:27,986] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 13:58:27,987] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 13:59:54,359] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 13:59:54,360] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 13:59:54,363] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 13:59:54,365] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:00:45,795] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:00:45,797] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:00:45,799] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:00:45,800] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:06:24,741] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:06:24,742] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:06:24,742] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:06:24,744] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:10:54,268] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:10:54,273] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:10:54,275] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:10:54,279] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:11:45,628] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:11:45,628] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:11:45,629] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:11:45,630] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:14:36,507] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:14:36,508] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:14:36,509] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:14:36,510] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:15:01,277] CV-PROCESS INFO - Dbut traitement CV format Richat complet depuis views.py
+[2025-06-11 14:15:05,046] CV-PROCESS INFO - Dbut traitement CV format Richat complet depuis views.py
+[2025-06-11 14:18:31,568] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:18:31,569] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:18:31,572] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:18:31,574] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:18:59,443] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:18:59,444] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:18:59,446] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:18:59,446] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:19:45,207] CV-PROCESS INFO - Dbut traitement CV format Richat complet depuis views.py
+[2025-06-11 14:46:03,496] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:46:03,497] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:46:03,498] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:46:03,499] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:46:58,524] CV-PROCESS INFO - Dbut traitement CV format Richat complet depuis views.py
+[2025-06-11 14:47:20,739] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:47:20,742] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:47:20,744] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:47:20,745] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:47:43,502] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:47:43,503] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:47:43,504] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:47:43,505] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:48:53,547] CV-PROCESS INFO - CVProcessor Richat complet initialis avec succs
+[2025-06-11 14:48:53,548] CV-PROCESS INFO - Format de rfrence: Mohamed Yehdhih Sidatt
+[2025-06-11 14:48:53,548] CV-PROCESS INFO - CSRF dsactiv sur les endpoints principaux
+[2025-06-11 14:48:53,549] CV-PROCESS INFO - Headers CORS configurs pour rsoudre les problmes cross-origin
+[2025-06-11 14:49:16,484] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 14:49:16,488] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-11 14:49:17,824] CV-PROCESS INFO - Extraction PDF russie: 6275 caractres, 0 tableaux
+[2025-06-11 14:49:17,834] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 14:49:17,902] CV-PROCESS INFO - Scores calculs - Qualit: 65%, Conformit: 55%
+[2025-06-11 14:49:17,907] CV-PROCESS INFO - Extraction Richat russie - Score: 65%
+[2025-06-11 14:49:18,900] CV-PROCESS INFO - CV Richat complet gnr: 4402 bytes - Conformit: 55%
+[2025-06-11 14:49:18,902] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 65%, Conformit: 55%
+[2025-06-11 15:06:02,907] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 15:06:02,909] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-11 15:06:03,495] CV-PROCESS INFO - Extraction PDF russie: 6275 caractres, 0 tableaux
+[2025-06-11 15:06:03,496] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 15:06:03,502] CV-PROCESS INFO - Scores calculs - Qualit: 65%, Conformit: 55%
+[2025-06-11 15:06:03,503] CV-PROCESS INFO - Extraction Richat russie - Score: 65%
+[2025-06-11 15:06:03,515] CV-PROCESS INFO - CV Richat complet gnr: 4402 bytes - Conformit: 55%
+[2025-06-11 15:06:03,516] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 65%, Conformit: 55%
+[2025-06-11 17:14:31,483] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 17:14:31,487] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-11 17:14:32,395] CV-PROCESS INFO - Extraction PDF russie: 6275 caractres, 0 tableaux
+[2025-06-11 17:14:32,397] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 17:14:32,407] CV-PROCESS INFO - Scores calculs - Qualit: 65%, Conformit: 55%
+[2025-06-11 17:14:32,408] CV-PROCESS INFO - Extraction Richat russie - Score: 65%
+[2025-06-11 17:14:32,462] CV-PROCESS INFO - CV Richat complet gnr: 4402 bytes - Conformit: 55%
+[2025-06-11 17:14:32,465] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 65%, Conformit: 55%
+[2025-06-11 17:15:32,110] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 17:15:32,120] CV-PROCESS INFO - Traitement fichier: CV_Abdellahimenem.pdf, extension: pdf
+[2025-06-11 17:15:32,125] CV-PROCESS INFO - Extraction PDF russie: 1 caractres, 0 tableaux
+[2025-06-11 17:15:32,127] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 17:15:32,130] CV-PROCESS INFO - Scores calculs - Qualit: 45%, Conformit: 38%
+[2025-06-11 17:15:32,131] CV-PROCESS INFO - Extraction Richat russie - Score: 45%
+[2025-06-11 17:15:32,156] CV-PROCESS INFO - CV Richat complet gnr: 3405 bytes - Conformit: 38%
+[2025-06-11 17:15:32,158] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 45%, Conformit: 38%
+[2025-06-11 17:15:56,617] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 17:15:56,622] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-11 17:15:57,655] CV-PROCESS INFO - Extraction PDF russie: 6275 caractres, 0 tableaux
+[2025-06-11 17:15:57,658] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 17:15:57,676] CV-PROCESS INFO - Scores calculs - Qualit: 65%, Conformit: 55%
+[2025-06-11 17:15:57,678] CV-PROCESS INFO - Extraction Richat russie - Score: 65%
+[2025-06-11 17:15:57,723] CV-PROCESS INFO - CV Richat complet gnr: 4402 bytes - Conformit: 55%
+[2025-06-11 17:15:57,726] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 65%, Conformit: 55%
+[2025-06-11 23:05:27,409] CV-PROCESS INFO - Dbut traitement CV format Richat complet - CSRF Fixed
+[2025-06-11 23:05:27,418] CV-PROCESS INFO - Traitement fichier: CV_Abdellahimenem.pdf, extension: pdf
+[2025-06-11 23:05:27,427] CV-PROCESS INFO - Extraction PDF russie: 1 caractres, 0 tableaux
+[2025-06-11 23:05:27,428] CV-PROCESS INFO - Format dtect: generic
+[2025-06-11 23:05:27,431] CV-PROCESS INFO - Scores calculs - Qualit: 45%, Conformit: 38%
+[2025-06-11 23:05:27,432] CV-PROCESS INFO - Extraction Richat russie - Score: 45%
+[2025-06-11 23:05:27,471] CV-PROCESS INFO - CV Richat complet gnr: 3405 bytes - Conformit: 38%
+[2025-06-11 23:05:27,474] CV-PROCESS INFO - CV Richat trait avec succs - Qualit: 45%, Conformit: 38%
+[2025-06-11 23:41:47,811] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-11 23:41:47,813] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-11 23:41:47,814] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-11 23:41:47,816] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 01:10:36,927] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 01:10:36,929] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 01:10:36,930] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 01:10:36,932] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 01:11:22,779] CV-PROCESS INFO - Début traitement CV format Richat complet - CSRF Fixed
+[2025-06-12 01:11:22,784] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-12 01:11:24,721] CV-PROCESS INFO - Extraction PDF réussie: 6275 caractères, 0 tableaux
+[2025-06-12 01:11:24,729] CV-PROCESS INFO - Format détecté: generic
+[2025-06-12 01:11:24,790] CV-PROCESS INFO - Scores calculés - Qualité: 65%, Conformité: 55%
+[2025-06-12 01:11:24,793] CV-PROCESS INFO - Extraction Richat réussie - Score: 65%
+[2025-06-12 01:11:25,641] CV-PROCESS INFO - CV Richat complet généré: 4402 bytes - Conformité: 55%
+[2025-06-12 01:11:25,647] CV-PROCESS INFO - CV Richat traité avec succès - Qualité: 65%, Conformité: 55%
+[2025-06-12 02:19:02,460] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 02:19:02,462] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 02:19:02,463] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 02:19:02,465] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 09:23:05,999] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 09:23:06,002] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 09:23:06,004] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 09:23:06,007] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 09:24:12,264] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 09:24:12,265] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 09:24:12,266] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 09:24:12,269] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 09:29:57,930] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 09:29:57,930] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 09:29:57,931] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 09:29:57,931] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 09:36:18,017] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 09:36:18,018] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 09:36:18,020] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 09:36:18,021] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 09:37:34,159] CV-PROCESS INFO - Début traitement CV format Richat avec sauvegarde automatique
+[2025-06-12 09:37:34,162] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-12 09:37:35,683] CV-PROCESS INFO - Extraction PDF réussie: 6275 caractères, 0 tableaux
+[2025-06-12 09:37:35,687] CV-PROCESS INFO - Format détecté: generic
+[2025-06-12 09:37:35,726] CV-PROCESS INFO - Scores calculés - Qualité: 65%, Conformité: 55%
+[2025-06-12 09:37:35,729] CV-PROCESS INFO - Extraction Richat réussie - Score: 65%
+[2025-06-12 09:37:36,696] CV-PROCESS INFO - CV Richat complet généré: 4403 bytes - Conformité: 55%
+[2025-06-12 09:37:36,701] CV-PROCESS INFO - PDF généré: 4403 bytes
+[2025-06-12 09:37:36,707] CV-PROCESS INFO - 📁 Dossier CV: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs
+[2025-06-12 09:37:36,711] CV-PROCESS INFO - 📁 Existe: True
+[2025-06-12 09:37:36,722] CV-PROCESS INFO - 📁 Écriture: True
+[2025-06-12 09:37:36,726] CV-PROCESS INFO - 📄 Nom fichier: CV_Richat_M_O_H_A_M_E_D_20250612_093736.pdf
+[2025-06-12 09:37:36,734] CV-PROCESS INFO - 📍 Chemin complet: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_M_O_H_A_M_E_D_20250612_093736.pdf
+[2025-06-12 09:37:36,742] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_M_O_H_A_M_E_D_20250612_093736.pdf
+[2025-06-12 09:37:36,757] CV-PROCESS INFO - 📊 Taille fichier: 4403 bytes
+[2025-06-12 09:37:36,767] CV-PROCESS INFO - 📝 Métadonnées sauvegardées: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\metadata_M_O_H_A_M_E_D_20250612_093736.json
+[2025-06-12 09:37:36,772] CV-PROCESS INFO - ✅ Sauvegarde réussie et vérifiée: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_M_O_H_A_M_E_D_20250612_093736.pdf
+[2025-06-12 09:37:36,774] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_M_O_H_A_M_E_D_20250612_093736.pdf
+[2025-06-12 09:37:36,778] CV-PROCESS INFO - CV Richat traité avec sauvegarde - Qualité: 65%, Conformité: 55%
+[2025-06-12 11:07:30,996] CV-PROCESS INFO - Début traitement CV format Richat avec sauvegarde automatique
+[2025-06-12 11:07:31,006] CV-PROCESS INFO - Traitement fichier: CV Mohamed Yehdhih Sidatt Ver 2.pdf, extension: pdf
+[2025-06-12 11:07:35,789] CV-PROCESS INFO - Extraction PDF réussie: 41272 caractères, 10 tableaux
+[2025-06-12 11:07:35,792] CV-PROCESS INFO - Format détecté: richat_standard
+[2025-06-12 11:07:35,958] CV-PROCESS INFO - Scores calculés - Qualité: 61%, Conformité: 72%
+[2025-06-12 11:07:35,960] CV-PROCESS INFO - Extraction Richat réussie - Score: 61%
+[2025-06-12 11:07:36,006] CV-PROCESS INFO - CV Richat complet généré: 5514 bytes - Conformité: 72%
+[2025-06-12 11:07:36,008] CV-PROCESS INFO - PDF généré: 5514 bytes
+[2025-06-12 11:07:36,011] CV-PROCESS INFO - 📁 Dossier CV: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs
+[2025-06-12 11:07:36,012] CV-PROCESS INFO - 📁 Existe: True
+[2025-06-12 11:07:36,015] CV-PROCESS INFO - 📁 Écriture: True
+[2025-06-12 11:07:36,018] CV-PROCESS INFO - 📄 Nom fichier: CV_Richat_Mohamed_Yehdhih_Sida_20250612_110736.pdf
+[2025-06-12 11:07:36,020] CV-PROCESS INFO - 📍 Chemin complet: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Mohamed_Yehdhih_Sida_20250612_110736.pdf
+[2025-06-12 11:07:36,024] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Mohamed_Yehdhih_Sida_20250612_110736.pdf
+[2025-06-12 11:07:36,027] CV-PROCESS INFO - 📊 Taille fichier: 5514 bytes
+[2025-06-12 11:07:36,029] CV-PROCESS INFO - 📝 Métadonnées sauvegardées: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\metadata_Mohamed_Yehdhih_Sida_20250612_110736.json
+[2025-06-12 11:07:36,032] CV-PROCESS INFO - ✅ Sauvegarde réussie et vérifiée: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Mohamed_Yehdhih_Sida_20250612_110736.pdf
+[2025-06-12 11:07:36,035] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Mohamed_Yehdhih_Sida_20250612_110736.pdf
+[2025-06-12 11:07:36,039] CV-PROCESS INFO - CV Richat traité avec sauvegarde - Qualité: 61%, Conformité: 72%
+[2025-06-12 11:11:38,373] CV-PROCESS INFO - Début traitement CV format Richat avec sauvegarde automatique
+[2025-06-12 11:11:38,377] CV-PROCESS INFO - Traitement fichier: cv_wevanahi.pdf, extension: pdf
+[2025-06-12 11:11:38,387] CV-PROCESS INFO - Extraction PDF réussie: 1 caractères, 0 tableaux
+[2025-06-12 11:11:38,390] CV-PROCESS INFO - Format détecté: generic
+[2025-06-12 11:11:38,392] CV-PROCESS INFO - Scores calculés - Qualité: 45%, Conformité: 38%
+[2025-06-12 11:11:38,395] CV-PROCESS INFO - Extraction Richat réussie - Score: 45%
+[2025-06-12 11:11:38,439] CV-PROCESS INFO - CV Richat complet généré: 3403 bytes - Conformité: 38%
+[2025-06-12 11:11:38,440] CV-PROCESS INFO - PDF généré: 3403 bytes
+[2025-06-12 11:11:38,443] CV-PROCESS INFO - 📁 Dossier CV: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs
+[2025-06-12 11:11:38,447] CV-PROCESS INFO - 📁 Existe: True
+[2025-06-12 11:11:38,452] CV-PROCESS INFO - 📁 Écriture: True
+[2025-06-12 11:11:38,456] CV-PROCESS INFO - 📄 Nom fichier: CV_Richat_temp_1749723098366_20250612_111138.pdf
+[2025-06-12 11:11:38,457] CV-PROCESS INFO - 📍 Chemin complet: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_temp_1749723098366_20250612_111138.pdf
+[2025-06-12 11:11:38,461] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_temp_1749723098366_20250612_111138.pdf
+[2025-06-12 11:11:38,465] CV-PROCESS INFO - 📊 Taille fichier: 3403 bytes
+[2025-06-12 11:11:38,470] CV-PROCESS INFO - 📝 Métadonnées sauvegardées: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\metadata_temp_1749723098366_20250612_111138.json
+[2025-06-12 11:11:38,473] CV-PROCESS INFO - ✅ Sauvegarde réussie et vérifiée: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_temp_1749723098366_20250612_111138.pdf
+[2025-06-12 11:11:38,475] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_temp_1749723098366_20250612_111138.pdf
+[2025-06-12 11:11:38,476] CV-PROCESS INFO - CV Richat traité avec sauvegarde - Qualité: 45%, Conformité: 38%
+[2025-06-12 11:13:23,115] CV-PROCESS INFO - Début traitement CV format Richat avec sauvegarde automatique
+[2025-06-12 11:13:23,119] CV-PROCESS INFO - Traitement fichier: CV-Colas.pdf, extension: pdf
+[2025-06-12 11:13:24,824] CV-PROCESS INFO - Extraction PDF réussie: 7437 caractères, 2 tableaux
+[2025-06-12 11:13:24,832] CV-PROCESS INFO - Format détecté: generic
+[2025-06-12 11:13:24,880] CV-PROCESS INFO - Scores calculés - Qualité: 61%, Conformité: 55%
+[2025-06-12 11:13:24,890] CV-PROCESS INFO - Extraction Richat réussie - Score: 61%
+[2025-06-12 11:13:24,948] CV-PROCESS INFO - CV Richat complet généré: 4289 bytes - Conformité: 55%
+[2025-06-12 11:13:24,952] CV-PROCESS INFO - PDF généré: 4289 bytes
+[2025-06-12 11:13:24,958] CV-PROCESS INFO - 📁 Dossier CV: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs
+[2025-06-12 11:13:24,969] CV-PROCESS INFO - 📁 Existe: True
+[2025-06-12 11:13:24,974] CV-PROCESS INFO - 📁 Écriture: True
+[2025-06-12 11:13:24,984] CV-PROCESS INFO - 📄 Nom fichier: CV_Richat_Ely_cheikh_20250612_111324.pdf
+[2025-06-12 11:13:24,987] CV-PROCESS INFO - 📍 Chemin complet: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Ely_cheikh_20250612_111324.pdf
+[2025-06-12 11:13:24,997] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Ely_cheikh_20250612_111324.pdf
+[2025-06-12 11:13:25,002] CV-PROCESS INFO - 📊 Taille fichier: 4289 bytes
+[2025-06-12 11:13:25,011] CV-PROCESS INFO - 📝 Métadonnées sauvegardées: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\metadata_Ely_cheikh_20250612_111324.json
+[2025-06-12 11:13:25,017] CV-PROCESS INFO - ✅ Sauvegarde réussie et vérifiée: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Ely_cheikh_20250612_111324.pdf
+[2025-06-12 11:13:25,020] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Ely_cheikh_20250612_111324.pdf
+[2025-06-12 11:13:25,024] CV-PROCESS INFO - CV Richat traité avec sauvegarde - Qualité: 61%, Conformité: 55%
+[2025-06-12 11:16:29,391] CV-PROCESS INFO - Début traitement CV format Richat avec sauvegarde automatique
+[2025-06-12 11:16:29,398] CV-PROCESS INFO - Traitement fichier: Expert Postal.pdf, extension: pdf
+[2025-06-12 11:16:33,715] CV-PROCESS INFO - Extraction PDF réussie: 53763 caractères, 10 tableaux
+[2025-06-12 11:16:33,719] CV-PROCESS INFO - Format détecté: richat_standard
+[2025-06-12 11:16:34,861] CV-PROCESS INFO - Scores calculés - Qualité: 50%, Conformité: 72%
+[2025-06-12 11:16:34,862] CV-PROCESS INFO - Extraction Richat réussie - Score: 50%
+[2025-06-12 11:16:34,907] CV-PROCESS INFO - CV Richat complet généré: 4769 bytes - Conformité: 72%
+[2025-06-12 11:16:34,909] CV-PROCESS INFO - PDF généré: 4769 bytes
+[2025-06-12 11:16:34,914] CV-PROCESS INFO - 📁 Dossier CV: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs
+[2025-06-12 11:16:34,916] CV-PROCESS INFO - 📁 Existe: True
+[2025-06-12 11:16:34,917] CV-PROCESS INFO - 📁 Écriture: True
+[2025-06-12 11:16:34,919] CV-PROCESS INFO - 📄 Nom fichier: CV_Richat_Amadou_Tidjane_Dieng_20250612_111634.pdf
+[2025-06-12 11:16:34,921] CV-PROCESS INFO - 📍 Chemin complet: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Amadou_Tidjane_Dieng_20250612_111634.pdf
+[2025-06-12 11:16:34,928] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Amadou_Tidjane_Dieng_20250612_111634.pdf
+[2025-06-12 11:16:34,932] CV-PROCESS INFO - 📊 Taille fichier: 4769 bytes
+[2025-06-12 11:16:34,937] CV-PROCESS INFO - 📝 Métadonnées sauvegardées: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\metadata_Amadou_Tidjane_Dieng_20250612_111634.json
+[2025-06-12 11:16:34,940] CV-PROCESS INFO - ✅ Sauvegarde réussie et vérifiée: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Amadou_Tidjane_Dieng_20250612_111634.pdf
+[2025-06-12 11:16:34,943] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_Amadou_Tidjane_Dieng_20250612_111634.pdf
+[2025-06-12 11:16:34,948] CV-PROCESS INFO - CV Richat traité avec sauvegarde - Qualité: 50%, Conformité: 72%
+[2025-06-12 12:48:17,572] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 12:48:17,574] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 12:48:17,574] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 12:48:17,575] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 12:48:30,652] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 12:48:30,654] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 12:48:30,655] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 12:48:30,656] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 12:48:38,263] CV-PROCESS INFO - Début traitement CV format Richat complet - CSRF Fixed
+[2025-06-12 12:48:38,264] CV-PROCESS INFO - Traitement fichier: 21036.pdf, extension: pdf
+[2025-06-12 12:48:38,864] CV-PROCESS INFO - Extraction PDF réussie: 6829 caractères, 1 tableaux
+[2025-06-12 12:48:38,866] CV-PROCESS INFO - Format détecté: professional_modern
+[2025-06-12 12:48:38,876] CV-PROCESS INFO - Scores calculés - Qualité: 65%, Conformité: 55%
+[2025-06-12 12:48:38,877] CV-PROCESS INFO - Extraction Richat réussie - Score: 65%
+[2025-06-12 12:48:39,091] CV-PROCESS INFO - CV Richat complet généré: 4410 bytes - Conformité: 55%
+[2025-06-12 12:48:39,093] CV-PROCESS INFO - CV Richat traité avec succès - Qualité: 65%, Conformité: 55%
+[2025-06-12 12:49:42,869] CV-PROCESS INFO - Début traitement CV format Richat complet - CSRF Fixed
+[2025-06-12 12:49:42,874] CV-PROCESS INFO - Traitement fichier: CV_Abdellahimenem.pdf, extension: pdf
+[2025-06-12 12:49:42,877] CV-PROCESS INFO - Extraction PDF réussie: 1 caractères, 0 tableaux
+[2025-06-12 12:49:42,878] CV-PROCESS INFO - Format détecté: generic
+[2025-06-12 12:49:42,879] CV-PROCESS INFO - Scores calculés - Qualité: 45%, Conformité: 38%
+[2025-06-12 12:49:42,880] CV-PROCESS INFO - Extraction Richat réussie - Score: 45%
+[2025-06-12 12:49:42,911] CV-PROCESS INFO - CV Richat complet généré: 3405 bytes - Conformité: 38%
+[2025-06-12 12:49:42,915] CV-PROCESS INFO - CV Richat traité avec succès - Qualité: 45%, Conformité: 38%
+[2025-06-12 12:50:37,305] CV-PROCESS INFO - Début traitement CV format Richat complet - CSRF Fixed
+[2025-06-12 12:50:37,306] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-12 12:50:37,825] CV-PROCESS INFO - Extraction PDF réussie: 6275 caractères, 0 tableaux
+[2025-06-12 12:50:37,826] CV-PROCESS INFO - Format détecté: generic
+[2025-06-12 12:50:37,830] CV-PROCESS INFO - Scores calculés - Qualité: 65%, Conformité: 55%
+[2025-06-12 12:50:37,830] CV-PROCESS INFO - Extraction Richat réussie - Score: 65%
+[2025-06-12 12:50:37,846] CV-PROCESS INFO - CV Richat complet généré: 4402 bytes - Conformité: 55%
+[2025-06-12 12:50:37,847] CV-PROCESS INFO - CV Richat traité avec succès - Qualité: 65%, Conformité: 55%
+[2025-06-12 12:55:08,170] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 12:55:08,170] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 12:55:08,170] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 12:55:08,171] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 12:55:41,495] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 12:55:41,496] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 12:55:41,497] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 12:55:41,497] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 12:57:50,740] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 12:57:50,741] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 12:57:50,741] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 12:57:50,742] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 12:59:07,209] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 12:59:07,210] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 12:59:07,210] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 12:59:07,211] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 13:05:53,680] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 13:05:53,681] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 13:05:53,682] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 13:05:53,682] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 13:06:32,257] CV-PROCESS INFO - Début traitement CV format Richat complet - CSRF Fixed
+[2025-06-12 13:06:32,259] CV-PROCESS INFO - Traitement fichier: CV de Mariem Erebih-1.pdf, extension: pdf
+[2025-06-12 13:06:32,667] CV-PROCESS INFO - Extraction PDF réussie: 5613 caractères, 4 tableaux
+[2025-06-12 13:06:32,670] CV-PROCESS INFO - Format détecté: traditional
+[2025-06-12 13:06:32,679] CV-PROCESS INFO - Scores calculés - Qualité: 68%, Conformité: 55%
+[2025-06-12 13:06:32,680] CV-PROCESS INFO - Extraction Richat réussie - Score: 68%
+[2025-06-12 13:06:32,861] CV-PROCESS INFO - CV Richat complet généré: 4474 bytes - Conformité: 55%
+[2025-06-12 13:06:32,862] CV-PROCESS INFO - CV Richat traité avec succès - Qualité: 68%, Conformité: 55%
+[2025-06-12 13:09:53,969] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 13:09:53,970] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 13:09:53,972] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 13:09:53,972] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 13:10:17,318] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 13:10:17,319] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 13:10:17,319] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 13:10:17,320] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 13:12:47,568] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 13:12:47,569] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 13:12:47,570] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 13:12:47,570] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 13:13:03,050] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 13:13:03,051] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 13:13:03,052] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 13:13:03,052] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 13:15:29,123] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 13:15:29,124] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 13:15:29,125] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 13:15:29,125] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 13:18:04,323] CV-PROCESS INFO - Début traitement CV format Richat avec sauvegarde automatique
+[2025-06-12 13:18:04,324] CV-PROCESS INFO - Traitement fichier: Mohamed Lemine Zeidane.pdf, extension: pdf
+[2025-06-12 13:18:05,045] CV-PROCESS INFO - Extraction PDF réussie: 6275 caractères, 0 tableaux
+[2025-06-12 13:18:05,047] CV-PROCESS INFO - Format détecté: generic
+[2025-06-12 13:18:05,059] CV-PROCESS INFO - Scores calculés - Qualité: 65%, Conformité: 55%
+[2025-06-12 13:18:05,060] CV-PROCESS INFO - Extraction Richat réussie - Score: 65%
+[2025-06-12 13:18:05,386] CV-PROCESS INFO - CV Richat complet généré: 4402 bytes - Conformité: 55%
+[2025-06-12 13:18:05,387] CV-PROCESS INFO - PDF généré: 4402 bytes
+[2025-06-12 13:18:05,388] CV-PROCESS INFO - 📁 Dossier CV: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs
+[2025-06-12 13:18:05,389] CV-PROCESS INFO - 📁 Existe: True
+[2025-06-12 13:18:05,390] CV-PROCESS INFO - 📁 Écriture: True
+[2025-06-12 13:18:05,391] CV-PROCESS INFO - 📄 Nom fichier: CV_Richat_M_O_H_A_M_E_D_20250612_131805.pdf
+[2025-06-12 13:18:05,393] CV-PROCESS INFO - 📍 Chemin complet: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_M_O_H_A_M_E_D_20250612_131805.pdf
+[2025-06-12 13:18:05,395] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_M_O_H_A_M_E_D_20250612_131805.pdf
+[2025-06-12 13:18:05,396] CV-PROCESS INFO - 📊 Taille fichier: 4402 bytes
+[2025-06-12 13:18:05,398] CV-PROCESS INFO - 📝 Métadonnées sauvegardées: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\metadata_M_O_H_A_M_E_D_20250612_131805.json
+[2025-06-12 13:18:05,400] CV-PROCESS INFO - ✅ Sauvegarde réussie et vérifiée: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_M_O_H_A_M_E_D_20250612_131805.pdf
+[2025-06-12 13:18:05,402] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_M_O_H_A_M_E_D_20250612_131805.pdf
+[2025-06-12 13:18:05,403] CV-PROCESS INFO - CV Richat traité avec sauvegarde - Qualité: 65%, Conformité: 55%
+[2025-06-12 14:28:48,955] CV-PROCESS INFO - Début traitement CV format Richat avec sauvegarde automatique
+[2025-06-12 14:28:48,958] CV-PROCESS INFO - Traitement fichier: cv-Aichetou.pdf, extension: pdf
+[2025-06-12 14:28:50,016] CV-PROCESS INFO - Extraction PDF réussie: 5551 caractères, 0 tableaux
+[2025-06-12 14:28:50,020] CV-PROCESS INFO - Format détecté: generic
+[2025-06-12 14:28:50,038] CV-PROCESS INFO - Scores calculés - Qualité: 72%, Conformité: 55%
+[2025-06-12 14:28:50,039] CV-PROCESS INFO - Extraction Richat réussie - Score: 72%
+[2025-06-12 14:28:50,083] CV-PROCESS INFO - CV Richat complet généré: 4509 bytes - Conformité: 55%
+[2025-06-12 14:28:50,085] CV-PROCESS INFO - PDF généré: 4509 bytes
+[2025-06-12 14:28:50,088] CV-PROCESS INFO - 📁 Dossier CV: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs
+[2025-06-12 14:28:50,089] CV-PROCESS INFO - 📁 Existe: True
+[2025-06-12 14:28:50,095] CV-PROCESS INFO - 📁 Écriture: True
+[2025-06-12 14:28:50,096] CV-PROCESS INFO - 📄 Nom fichier: CV_Richat_AICHETOU__20250612_142850.pdf
+[2025-06-12 14:28:50,098] CV-PROCESS INFO - 📍 Chemin complet: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_AICHETOU__20250612_142850.pdf
+[2025-06-12 14:28:50,100] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_AICHETOU__20250612_142850.pdf
+[2025-06-12 14:28:50,104] CV-PROCESS INFO - 📊 Taille fichier: 4509 bytes
+[2025-06-12 14:28:50,107] CV-PROCESS INFO - 📝 Métadonnées sauvegardées: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\metadata_AICHETOU__20250612_142850.json
+[2025-06-12 14:28:50,112] CV-PROCESS INFO - ✅ Sauvegarde réussie et vérifiée: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_AICHETOU__20250612_142850.pdf
+[2025-06-12 14:28:50,114] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_AICHETOU__20250612_142850.pdf
+[2025-06-12 14:28:50,116] CV-PROCESS INFO - CV Richat traité avec sauvegarde - Qualité: 72%, Conformité: 55%
+[2025-06-12 15:10:32,391] CV-PROCESS INFO - Début traitement CV format Richat avec sauvegarde automatique
+[2025-06-12 15:10:32,418] CV-PROCESS INFO - Traitement fichier: CV_Abdellahimenem.pdf, extension: pdf
+[2025-06-12 15:10:32,442] CV-PROCESS INFO - Extraction PDF réussie: 1 caractères, 0 tableaux
+[2025-06-12 15:10:32,444] CV-PROCESS INFO - Format détecté: generic
+[2025-06-12 15:10:32,449] CV-PROCESS INFO - Scores calculés - Qualité: 45%, Conformité: 38%
+[2025-06-12 15:10:32,451] CV-PROCESS INFO - Extraction Richat réussie - Score: 45%
+[2025-06-12 15:10:32,498] CV-PROCESS INFO - CV Richat complet généré: 3391 bytes - Conformité: 38%
+[2025-06-12 15:10:32,501] CV-PROCESS INFO - PDF généré: 3391 bytes
+[2025-06-12 15:10:32,506] CV-PROCESS INFO - 📁 Dossier CV: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs
+[2025-06-12 15:10:32,510] CV-PROCESS INFO - 📁 Existe: True
+[2025-06-12 15:10:32,512] CV-PROCESS INFO - 📁 Écriture: True
+[2025-06-12 15:10:32,519] CV-PROCESS INFO - 📄 Nom fichier: CV_Richat_40_20250612_151032.pdf
+[2025-06-12 15:10:32,523] CV-PROCESS INFO - 📍 Chemin complet: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_40_20250612_151032.pdf
+[2025-06-12 15:10:32,529] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_40_20250612_151032.pdf
+[2025-06-12 15:10:32,532] CV-PROCESS INFO - 📊 Taille fichier: 3391 bytes
+[2025-06-12 15:10:32,541] CV-PROCESS INFO - 📝 Métadonnées sauvegardées: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\metadata_40_20250612_151032.json
+[2025-06-12 15:10:32,544] CV-PROCESS INFO - ✅ Sauvegarde réussie et vérifiée: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_40_20250612_151032.pdf
+[2025-06-12 15:10:32,547] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_40_20250612_151032.pdf
+[2025-06-12 15:10:32,552] CV-PROCESS INFO - CV Richat traité avec sauvegarde - Qualité: 45%, Conformité: 38%
+[2025-06-12 15:14:55,646] CV-PROCESS INFO - Début traitement CV format Richat avec sauvegarde automatique
+[2025-06-12 15:14:55,649] CV-PROCESS INFO - Traitement fichier: CV de Mariem Erebih-1.pdf, extension: pdf
+[2025-06-12 15:14:56,227] CV-PROCESS INFO - Extraction PDF réussie: 5613 caractères, 4 tableaux
+[2025-06-12 15:14:56,230] CV-PROCESS INFO - Format détecté: traditional
+[2025-06-12 15:14:56,242] CV-PROCESS INFO - Scores calculés - Qualité: 68%, Conformité: 55%
+[2025-06-12 15:14:56,244] CV-PROCESS INFO - Extraction Richat réussie - Score: 68%
+[2025-06-12 15:14:56,274] CV-PROCESS INFO - CV Richat complet généré: 4474 bytes - Conformité: 55%
+[2025-06-12 15:14:56,276] CV-PROCESS INFO - PDF généré: 4474 bytes
+[2025-06-12 15:14:56,278] CV-PROCESS INFO - 📁 Dossier CV: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs
+[2025-06-12 15:14:56,280] CV-PROCESS INFO - 📁 Existe: True
+[2025-06-12 15:14:56,284] CV-PROCESS INFO - 📁 Écriture: True
+[2025-06-12 15:14:56,286] CV-PROCESS INFO - 📄 Nom fichier: CV_Richat_MARIEM__20250612_151456.pdf
+[2025-06-12 15:14:56,288] CV-PROCESS INFO - 📍 Chemin complet: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_MARIEM__20250612_151456.pdf
+[2025-06-12 15:14:56,292] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_MARIEM__20250612_151456.pdf
+[2025-06-12 15:14:56,294] CV-PROCESS INFO - 📊 Taille fichier: 4474 bytes
+[2025-06-12 15:14:56,297] CV-PROCESS INFO - 📝 Métadonnées sauvegardées: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\metadata_MARIEM__20250612_151456.json
+[2025-06-12 15:14:56,299] CV-PROCESS INFO - ✅ Sauvegarde réussie et vérifiée: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_MARIEM__20250612_151456.pdf
+[2025-06-12 15:14:56,300] CV-PROCESS INFO - ✅ CV sauvegardé avec succès: C:\Users\HP\Desktop\5alih 3ala ellah\richat\media\standardized_cvs\CV_Richat_MARIEM__20250612_151456.pdf
+[2025-06-12 15:14:56,304] CV-PROCESS INFO - CV Richat traité avec sauvegarde - Qualité: 68%, Conformité: 55%
+[2025-06-12 15:50:15,574] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 15:50:15,575] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 15:50:15,577] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 15:50:15,579] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 15:56:47,799] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 15:56:47,800] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 15:56:47,801] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 15:56:47,801] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 15:57:12,711] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 15:57:12,711] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 15:57:12,712] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 15:57:12,714] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 22:21:05,100] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 22:21:05,102] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 22:21:05,103] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 22:21:05,104] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 22:21:39,228] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 22:21:39,230] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 22:21:39,231] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 22:21:39,232] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 22:21:59,411] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 22:21:59,411] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 22:21:59,412] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 22:21:59,412] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 22:26:50,656] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 22:26:50,658] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 22:26:50,659] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 22:26:50,660] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 22:27:45,949] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 22:27:45,951] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 22:27:45,951] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 22:27:45,953] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 22:29:14,100] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 22:29:14,101] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 22:29:14,102] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 22:29:14,103] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 22:30:08,387] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 22:30:08,389] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 22:30:08,390] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 22:30:08,391] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 22:30:26,975] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 22:30:26,976] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 22:30:26,976] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 22:30:26,977] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-12 22:33:58,734] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-12 22:33:58,735] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-12 22:33:58,737] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-12 22:33:58,737] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 00:23:21,575] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 00:23:21,576] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 00:23:21,578] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 00:23:21,580] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 03:24:16,710] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 03:24:16,711] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 03:24:16,712] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 03:24:16,714] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 03:29:42,669] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 03:29:42,671] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 03:29:42,672] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 03:29:42,672] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 03:32:03,666] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 03:32:03,667] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 03:32:03,668] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 03:32:03,669] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 03:32:29,107] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 03:32:29,108] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 03:32:29,109] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 03:32:29,109] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 03:32:54,446] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 03:32:54,447] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 03:32:54,448] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 03:32:54,449] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:14:57,946] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:14:57,947] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:14:57,948] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:14:57,949] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:16:31,746] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:16:31,747] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:16:31,747] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:16:31,748] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:18:11,572] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:18:11,573] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:18:11,573] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:18:11,574] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:19:07,853] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:19:07,853] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:19:07,855] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:19:07,855] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:19:24,015] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:19:24,016] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:19:24,017] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:19:24,018] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:20:04,605] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:20:04,606] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:20:04,606] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:20:04,607] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:21:12,869] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:21:12,870] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:21:12,870] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:21:12,870] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:22:11,698] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:22:11,700] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:22:11,700] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:22:11,701] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:22:59,974] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:22:59,975] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:22:59,975] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:22:59,976] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:23:24,047] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:23:24,048] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:23:24,048] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:23:24,049] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:23:40,458] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:23:40,459] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:23:40,459] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:23:40,460] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:24:13,817] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:24:13,817] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:24:13,818] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:24:13,818] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:25:07,147] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:25:07,148] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:25:07,149] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:25:07,150] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:25:57,675] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:25:57,676] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:25:57,676] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:25:57,677] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:26:54,155] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:26:54,156] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:26:54,157] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:26:54,158] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:30:12,536] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:30:12,536] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:30:12,538] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:30:12,538] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:30:31,385] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:30:31,385] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:30:31,386] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:30:31,386] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:31:17,515] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:31:17,516] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:31:17,516] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:31:17,517] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:38:10,314] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:38:10,316] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:38:10,318] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:38:10,319] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:38:45,858] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:38:45,859] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:38:45,860] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:38:45,862] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:39:15,460] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:39:15,461] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:39:15,462] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:39:15,462] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:42:08,219] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:42:08,220] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:42:08,221] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:42:08,222] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:42:47,363] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:42:47,363] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:42:47,365] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:42:47,366] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:43:22,142] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:43:22,143] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:43:22,144] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:43:22,144] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:45:21,952] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:45:21,953] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:45:21,953] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:45:21,954] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:47:22,438] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:47:22,438] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:47:22,440] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:47:22,440] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:50:25,114] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:50:25,115] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:50:25,117] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:50:25,118] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:52:27,160] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:52:27,161] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:52:27,162] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:52:27,163] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:56:12,795] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:56:12,796] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:56:12,797] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:56:12,798] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:59:41,202] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:59:41,203] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:59:41,204] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:59:41,205] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 12:59:55,332] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 12:59:55,332] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 12:59:55,333] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 12:59:55,334] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 13:01:49,996] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 13:01:49,997] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 13:01:49,997] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 13:01:49,999] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 13:19:01,195] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 13:19:01,197] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 13:19:01,199] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 13:19:01,201] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 13:19:49,616] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 13:19:49,617] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 13:19:49,618] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 13:19:49,618] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 13:20:14,679] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 13:20:14,680] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 13:20:14,681] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 13:20:14,681] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 13:20:32,616] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 13:20:32,616] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 13:20:32,617] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 13:20:32,617] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 13:20:51,524] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 13:20:51,525] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 13:20:51,526] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 13:20:51,527] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 13:21:35,420] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 13:21:35,421] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 13:21:35,422] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 13:21:35,423] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin
+[2025-06-13 13:21:55,653] CV-PROCESS INFO - CVProcessor Richat complet initialisé avec succès
+[2025-06-13 13:21:55,653] CV-PROCESS INFO - Format de référence: Mohamed Yehdhih Sidatt
+[2025-06-13 13:21:55,654] CV-PROCESS INFO - CSRF désactivé sur les endpoints principaux
+[2025-06-13 13:21:55,654] CV-PROCESS INFO - Headers CORS configurés pour résoudre les problèmes cross-origin

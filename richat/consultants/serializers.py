@@ -3,7 +3,7 @@
 from rest_framework import serializers
 from .models import (
     Consultant, Competence, AppelOffre, CriteresEvaluation, MatchingResult,
-    DocumentGED, DocumentCategory, DocumentVersion, DocumentAccess
+    DocumentGED, DocumentCategory, DocumentVersion, DocumentAccess,User
 )
 import logging
 
@@ -14,6 +14,98 @@ class ConsultantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Consultant
         fields = '__all__'
+        extra_kwargs = {
+            'user': {'required': False},
+            'photo': {'required': False},
+            'cv': {'required': False},
+            'ville': {'required': False},
+            'specialite': {'required': False},
+        }
+
+    def validate_email(self, value):
+        # Vérifier l'unicité de l'email en excluant l'instance actuelle
+        if self.instance:
+            if Consultant.objects.exclude(pk=self.instance.pk).filter(email=value).exists():
+                raise serializers.ValidationError("Un consultant avec cet email existe déjà.")
+        else:
+            if Consultant.objects.filter(email=value).exists():
+                raise serializers.ValidationError("Un consultant avec cet email existe déjà.")
+        return value
+
+    def validate(self, data):
+        # Validation des dates de disponibilité
+        if 'date_debut_dispo' in data and 'date_fin_dispo' in data:
+            if data['date_debut_dispo'] and data['date_fin_dispo']:
+                if data['date_debut_dispo'] >= data['date_fin_dispo']:
+                    raise serializers.ValidationError({
+                        'date_fin_dispo': 'La date de fin doit être postérieure à la date de début.'
+                    })
+        return data
+
+    def update(self, instance, validated_data):
+        # Gestion spéciale des fichiers
+        if 'photo' in validated_data and validated_data['photo']:
+            # Supprimer l'ancienne photo si elle existe
+            if instance.photo and instance.photo.name:
+                try:
+                    if os.path.exists(instance.photo.path):
+                        os.remove(instance.photo.path)
+                except Exception as e:
+                    logger.warning(f"Erreur lors de la suppression de l'ancienne photo: {e}")
+        
+        if 'cv' in validated_data and validated_data['cv']:
+            # Supprimer l'ancien CV si il existe
+            if instance.cv and instance.cv.name:
+                try:
+                    if os.path.exists(instance.cv.path):
+                        os.remove(instance.cv.path)
+                except Exception as e:
+                    logger.warning(f"Erreur lors de la suppression de l'ancien CV: {e}")
+
+        # Mettre à jour tous les champs
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        
+        instance.save()
+        return instance
+
+
+class AppelOffreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AppelOffre
+        fields = '__all__'
+
+    def validate_budget(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("Le budget doit être supérieur à 0.")
+        return value
+
+    def validate(self, data):
+        # Validation des dates
+        if 'date_debut' in data and 'date_fin' in data:
+            if data['date_debut'] and data['date_fin']:
+                if data['date_debut'] >= data['date_fin']:
+                    raise serializers.ValidationError({
+                        'date_fin': 'La date de fin doit être postérieure à la date de début.'
+                    })
+        return data
+
+    def update(self, instance, validated_data):
+        # Mettre à jour tous les champs
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        
+        instance.save()
+        return instance
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username', 'email', 'role', 'nom', 'created_at']
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
 
 class CompetenceSerializer(serializers.ModelSerializer):
@@ -22,23 +114,30 @@ class CompetenceSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class AppelOffreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AppelOffre
-        fields = '__all__'
-
-
 class CriteresEvaluationSerializer(serializers.ModelSerializer):
     class Meta:
         model = CriteresEvaluation
         fields = '__all__'
 
+    def validate_poids(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("Le poids doit être supérieur à 0.")
+        return value
+
 
 class MatchingResultSerializer(serializers.ModelSerializer):
+    consultant_name = serializers.SerializerMethodField()
+    appel_offre_name = serializers.SerializerMethodField()
+
     class Meta:
         model = MatchingResult
         fields = '__all__'
 
+    def get_consultant_name(self, obj):
+        return f"{obj.consultant.prenom} {obj.consultant.nom}"
+
+    def get_appel_offre_name(self, obj):
+        return obj.appel_offre.nom_projet
 
 class DocumentCategorySerializer(serializers.ModelSerializer):
     document_count = serializers.SerializerMethodField()

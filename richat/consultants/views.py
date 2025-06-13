@@ -101,207 +101,180 @@ def admin_consultants(request):
 # Remplacez la fonction admin_consultant_detail dans votre fichier views.py
 
 @api_view(['PUT', 'DELETE'])
+@parser_classes([MultiPartParser, FormParser, JSONParser])
 def admin_consultant_detail(request, pk):
-    """Modifie ou supprime un consultant spécifique (accès admin)"""
+    """
+    Modifie ou supprime un consultant spécifique (accès admin) - VERSION CORRIGÉE FINALE
+    """
     try:
         consultant = get_object_or_404(Consultant, pk=pk)
 
         if request.method == 'PUT':
-            # Code existant pour PUT...
-            serializer = ConsultantSerializer(consultant, data=request.data, partial=True)
+            logger.info(f"Début modification consultant {pk}")
+            logger.info(f"Données reçues: {request.data}")
+            
+            # Créer une copie des données pour manipulation
+            data = {}
+            
+            # Traiter chaque champ individuellement
+            for key, value in request.data.items():
+                if key in ['cv', 'photo']:
+                    # Les fichiers sont traités séparément
+                    continue
+                elif value is not None and value != '':
+                    data[key] = value
+            
+            # Ajouter les fichiers s'ils sont présents
+            if 'cv' in request.FILES:
+                data['cv'] = request.FILES['cv']
+                logger.info(f"Fichier CV reçu: {request.FILES['cv'].name}")
+            
+            if 'photo' in request.FILES:
+                data['photo'] = request.FILES['photo']
+                logger.info(f"Fichier photo reçu: {request.FILES['photo'].name}")
+            
+            logger.info(f"Données finales pour serializer: {list(data.keys())}")
+            
+            # Utiliser le serializer avec partial=True
+            serializer = ConsultantSerializer(consultant, data=data, partial=True)
+            
             if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-        if request.method == 'DELETE':
-            try:
-                # Récupérer l'utilisateur associé avant de supprimer le consultant
-                user = consultant.user
-                user_id = None
-                user_email = None
-
-                if user:
-                    user_id = user.id
-                    user_email = user.email
-                    logger.info(f"Utilisateur associé trouvé: ID={user_id}, Email={user_email}")
-
-                # Supprimer explicitement les entités liées dans cet ordre
-                # 1. Notifications
                 try:
-                    from .models import Notification
-                    notifications = Notification.objects.filter(consultant=consultant)
-                    if notifications.exists():
-                        count = notifications.count()
-                        notifications.delete()
-                        logger.info(f"{count} notifications liées au consultant ID={pk} supprimées")
-                except Exception as notif_error:
-                    logger.warning(f"Erreur lors de la suppression des notifications: {str(notif_error)}")
+                    # Sauvegarder avec gestion d'erreur
+                    updated_consultant = serializer.save()
+                    
+                    # Mettre à jour l'utilisateur associé si nécessaire
+                    if 'email' in data and consultant.user:
+                        try:
+                            consultant.user.email = data['email']
+                            consultant.user.username = data['email']
+                            consultant.user.save()
+                            logger.info(f"Utilisateur mis à jour pour consultant {pk}")
+                        except Exception as user_error:
+                            logger.error(f"Erreur mise à jour utilisateur: {user_error}")
+                    
+                    # Préparer la réponse
+                    response_serializer = ConsultantSerializer(updated_consultant)
+                    logger.info(f"Consultant {pk} modifié avec succès")
+                    
+                    return Response({
+                        'success': True,
+                        'data': response_serializer.data,
+                        'message': f'Consultant {updated_consultant.prenom} {updated_consultant.nom} modifié avec succès'
+                    }, status=200)
+                    
+                except Exception as save_error:
+                    logger.error(f"Erreur lors de la sauvegarde: {save_error}")
+                    return Response({
+                        'success': False,
+                        'error': f'Erreur lors de la sauvegarde: {str(save_error)}'
+                    }, status=500)
+            else:
+                logger.error(f"Erreurs de validation: {serializer.errors}")
+                return Response({
+                    'success': False,
+                    'errors': serializer.errors,
+                    'message': 'Erreurs de validation'
+                }, status=400)
 
-                # 2. Matchings
-                matchings = MatchingResult.objects.filter(consultant=consultant)
-                if matchings.exists():
-                    count = matchings.count()
-                    matchings.delete()
-                    logger.info(f"{count} matchings liés au consultant ID={pk} supprimés")
-                
-                # 3. Compétences
-                competences = Competence.objects.filter(consultant=consultant)
-                if competences.exists():
-                    count = competences.count()
-                    competences.delete()
-                    logger.info(f"{count} compétences liées au consultant ID={pk} supprimées")
-                
-                # 4. Documents GED - mettre à NULL la clé étrangère de consultant
-                doc_ged = DocumentGED.objects.filter(consultant=consultant)
-                if doc_ged.exists():
-                    count = doc_ged.count()
-                    # Mettre à jour chaque document en définissant consultant à NULL
-                    doc_ged.update(consultant=None)
-                    logger.info(f"{count} documents GED liés au consultant ID={pk} mis à jour")
-                
-                # 5. Documents réguliers
-                documents = Document.objects.filter(consultant=consultant)
-                if documents.exists():
-                    count = documents.count()
-                    documents.delete()
-                    logger.info(f"{count} documents liés au consultant ID={pk} supprimés")
-                
-                # 6. Le consultant lui-même
-                consultant.delete()
-                logger.info(f"Consultant ID={pk} supprimé")
-                
-                # 7. L'utilisateur en dernier
-                if user:
-                    user.delete()
-                    logger.info(f"Utilisateur ID={user_id} supprimé")
-
-                return Response(status=status.HTTP_204_NO_CONTENT)
-            except Exception as e:
-                logger.error(f"Erreur lors de la suppression: {str(e)}")
-                return Response({"error": f"Erreur: {str(e)}"}, status=500)
-    except Exception as e:
-        logger.error(f"Erreur lors de l'accès au consultant ID={pk}: {str(e)}")
-        return Response({"error": str(e)}, status=404)
-    """Modifie ou supprime un consultant spécifique (accès admin)"""
-    try:
-        consultant = get_object_or_404(Consultant, pk=pk)
-
-        if request.method == 'PUT':
-            # Code existant pour PUT...
-            return Response(serializer.data)
-
-        if request.method == 'DELETE':
+        elif request.method == 'DELETE':
             try:
-                # Récupérer l'utilisateur associé avant de supprimer le consultant
                 user = consultant.user
-                user_id = None
-                user_email = None
+                consultant_name = f"{consultant.prenom} {consultant.nom}"
+                consultant_id = consultant.id
+                
+                logger.info(f"Début suppression consultant {pk}: {consultant_name}")
 
-                if user:
-                    user_id = user.id
-                    user_email = user.email
-                    logger.info(f"Utilisateur associé trouvé: ID={user_id}, Email={user_email}")
+                # Utiliser une transaction pour garantir la cohérence
+                with transaction.atomic():
+                    # 1. Supprimer les notifications
+                    try:
+                        notifications_deleted = Notification.objects.filter(consultant=consultant).delete()[0]
+                        logger.info(f"Notifications supprimées: {notifications_deleted}")
+                    except Exception as e:
+                        logger.warning(f"Erreur suppression notifications: {e}")
 
-                # Supprimer explicitement les entités liées dans cet ordre
-                # 1. Notifications
-                try:
-                    from .models import Notification
-                    notifications = Notification.objects.filter(consultant=consultant)
-                    if notifications.exists():
-                        count = notifications.count()
-                        notifications.delete()
-                        logger.info(f"{count} notifications liées au consultant ID={pk} supprimées")
-                except Exception as notif_error:
-                    logger.warning(f"Erreur lors de la suppression des notifications: {str(notif_error)}")
+                    # 2. Supprimer les matchings
+                    try:
+                        matchings_deleted = MatchingResult.objects.filter(consultant=consultant).delete()[0]
+                        logger.info(f"Matchings supprimés: {matchings_deleted}")
+                    except Exception as e:
+                        logger.warning(f"Erreur suppression matchings: {e}")
 
-                # 2. Matchings
-                MatchingResult.objects.filter(consultant=consultant).delete()
-                
-                # 3. Compétences
-                Competence.objects.filter(consultant=consultant).delete()
-                
-                # 4. Documents GED
-                DocumentGED.objects.filter(consultant=consultant).set_null()
-                
-                # 5. Documents
-                Document.objects.filter(consultant=consultant).delete()
-                
-                # 6. Le consultant lui-même
-                consultant.delete()
-                
-                # 7. L'utilisateur en dernier
-                if user:
-                    user.delete()
+                    # 3. Supprimer les compétences
+                    try:
+                        competences_deleted = Competence.objects.filter(consultant=consultant).delete()[0]
+                        logger.info(f"Compétences supprimées: {competences_deleted}")
+                    except Exception as e:
+                        logger.warning(f"Erreur suppression compétences: {e}")
 
-                return Response(status=status.HTTP_204_NO_CONTENT)
+                    # 4. Mettre à jour les documents GED
+                    try:
+                        doc_ged_updated = DocumentGED.objects.filter(consultant=consultant).update(consultant=None)
+                        logger.info(f"Documents GED mis à jour: {doc_ged_updated}")
+                    except Exception as e:
+                        logger.warning(f"Erreur mise à jour documents GED: {e}")
+
+                    # 5. Supprimer autres documents si le modèle existe
+                    try:
+                        if hasattr(consultant, 'document_set'):
+                            documents_deleted = consultant.document_set.all().delete()[0]
+                            logger.info(f"Documents supprimés: {documents_deleted}")
+                    except Exception as e:
+                        logger.warning(f"Erreur suppression documents: {e}")
+
+                    # 6. Supprimer les fichiers physiques
+                    try:
+                        if consultant.cv and consultant.cv.name:
+                            if os.path.exists(consultant.cv.path):
+                                os.remove(consultant.cv.path)
+                                logger.info(f"Fichier CV supprimé: {consultant.cv.path}")
+                    except Exception as e:
+                        logger.warning(f"Erreur suppression fichier CV: {e}")
+                    
+                    try:
+                        if consultant.photo and consultant.photo.name:
+                            if os.path.exists(consultant.photo.path):
+                                os.remove(consultant.photo.path)
+                                logger.info(f"Fichier photo supprimé: {consultant.photo.path}")
+                    except Exception as e:
+                        logger.warning(f"Erreur suppression fichier photo: {e}")
+
+                    # 7. Supprimer le consultant
+                    consultant.delete()
+                    logger.info(f"Consultant {consultant_id} supprimé")
+
+                    # 8. Supprimer l'utilisateur associé
+                    if user:
+                        try:
+                            user_id = user.id
+                            user.delete()
+                            logger.info(f"Utilisateur {user_id} supprimé")
+                        except Exception as e:
+                            logger.error(f"Erreur suppression utilisateur: {e}")
+
+                return Response({
+                    'success': True,
+                    'message': f'Consultant {consultant_name} supprimé avec succès'
+                }, status=200)
+
             except Exception as e:
-                logger.error(f"Erreur lors de la suppression: {str(e)}")
-                return Response({"error": f"Erreur: {str(e)}"}, status=500)
+                logger.error(f"Erreur lors de la suppression du consultant {pk}: {str(e)}")
+                return Response({
+                    'success': False,
+                    'error': f'Erreur lors de la suppression: {str(e)}'
+                }, status=500)
+
     except Exception as e:
-        logger.error(f"Erreur lors de l'accès au consultant ID={pk}: {str(e)}")
-        return Response({"error": str(e)}, status=404)
-    """Modifie ou supprime un consultant spécifique (accès admin)"""
-    try:
-        consultant = get_object_or_404(Consultant, pk=pk)
+        logger.error(f"Erreur générale dans admin_consultant_detail pour consultant {pk}: {str(e)}")
+        return Response({
+            'success': False,
+            'error': f'Erreur: {str(e)}'
+        }, status=500)
 
-        if request.method == 'PUT':
-            serializer = ConsultantSerializer(consultant, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        if request.method == 'DELETE':
-            try:
-                # Récupérer l'utilisateur associé avant de supprimer le consultant
-                user = consultant.user
-                user_id = None
-                user_email = None
 
-                if user:
-                    user_id = user.id
-                    user_email = user.email
-                    logger.info(f"Utilisateur associé trouvé: ID={user_id}, Email={user_email}")
 
-                # 1. Supprimer d'abord les notifications liées au consultant
-                from .models import Notification  # Import ici pour éviter les problèmes d'import circulaire
-                notifications = Notification.objects.filter(consultant=consultant)
-                if notifications.exists():
-                    count = notifications.count()
-                    notifications.delete()
-                    logger.info(f"{count} notifications liées au consultant ID={pk} supprimées")
-
-                # 2. Supprimer les matchings liés au consultant
-                matchings = MatchingResult.objects.filter(consultant=consultant)
-                if matchings.exists():
-                    count = matchings.count()
-                    matchings.delete()
-                    logger.info(f"{count} matchings liés au consultant ID={pk} supprimés")
-
-                # 3. Supprimer les compétences liées au consultant
-                competences = Competence.objects.filter(consultant=consultant)
-                if competences.exists():
-                    count = competences.count()
-                    competences.delete()
-                    logger.info(f"{count} compétences liées au consultant ID={pk} supprimées")
-
-                # 4. Supprimer le consultant lui-même
-                consultant.delete()
-                logger.info(f"Consultant ID={pk} supprimé")
-
-                # 5. Si un utilisateur est associé, le supprimer en dernier
-                if user:
-                    user.delete()
-                    logger.info(f"Utilisateur ID={user_id} supprimé")
-
-                return Response(status=status.HTTP_204_NO_CONTENT)
-            except Exception as e:
-                logger.error(f"Erreur lors de la suppression du consultant ID={pk}: {str(e)}")
-                return Response({"error": f"Erreur lors de la suppression: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    except Exception as e:
-        logger.error(f"Erreur lors de l'accès au consultant ID={pk}: {str(e)}")
-        return Response({"error": str(e)}, status=status.HTTP_404_NOT_FOUND)
 @api_view(['GET'])
 def consultant_competences(request, consultant_id):
     """Récupère les compétences d'un consultant spécifique"""
@@ -427,38 +400,55 @@ def dashboard_stats(request):
 @api_view(['GET', 'POST'])
 def admin_appels_offres(request):
     """Liste ou crée des appels d'offres (accès admin)"""
-    # Vérifier l'authentification admin (à implémenter)
-
-    if request.method == 'GET':
-        appels = AppelOffre.objects.all()
-        serializer = AppelOffreSerializer(appels, many=True)
-        return Response(serializer.data)
-
-    if request.method == 'POST':
-        serializer = AppelOffreSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-@api_view(['PUT', 'DELETE'])
-def admin_appel_offre_detail(request, pk):
-    """Modifie ou supprime un appel d'offre spécifique (accès admin)"""
-    # Vérifier l'authentification admin (à implémenter)
-
-    appel = get_object_or_404(AppelOffre, pk=pk)
-
-    if request.method == 'PUT':
-        serializer = AppelOffreSerializer(appel, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
+    try:
+        if request.method == 'GET':
+            appels = AppelOffre.objects.all().order_by('-id')
+            serializer = AppelOffreSerializer(appels, many=True)
             return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    if request.method == 'DELETE':
-        appel.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        if request.method == 'POST':
+            serializer = AppelOffreSerializer(data=request.data)
+            if serializer.is_valid():
+                appel_offre = serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        logger.error(f"Erreur dans admin_appels_offres: {str(e)}")
+        return Response({
+            'error': 'Erreur lors de la récupération des appels d\'offres',
+            'detail': str(e)
+        }, status=500)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def admin_appel_offre_detail(request, pk):
+    """Récupère, modifie ou supprime un appel d'offre spécifique (accès admin)"""
+    try:
+        appel = get_object_or_404(AppelOffre, pk=pk)
+
+        if request.method == 'GET':
+            serializer = AppelOffreSerializer(appel)
+            return Response(serializer.data)
+
+        if request.method == 'PUT':
+            serializer = AppelOffreSerializer(appel, data=request.data, partial=True)
+            if serializer.is_valid():
+                appel_offre = serializer.save()
+                return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        if request.method == 'DELETE':
+            # Supprimer les matchings associés d'abord
+            MatchingResult.objects.filter(appel_offre=appel).delete()
+            # Supprimer les critères associés
+            CriteresEvaluation.objects.filter(appel_offre=appel).delete()
+            # Supprimer l'appel d'offre
+            appel.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+    except Exception as e:
+        logger.error(f"Erreur dans admin_appel_offre_detail: {str(e)}")
+        return Response({
+            'error': f'Erreur lors de la gestion de l\'appel d\'offre: {str(e)}'
+        }, status=500)
 
 
 def extract_competences(cv_text):
@@ -594,12 +584,11 @@ def extract_and_save_competences_async(file_path, consultant):
     except Exception as e:
         logger.error(f"Erreur complète lors de l'extraction pour {consultant.nom}: {e}")
 
-
 @api_view(['POST'])
 @parser_classes([MultiPartParser, FormParser])
 def consultant_register(request):
     """
-    Enregistre un nouveau consultant
+    Enregistre un nouveau consultant avec support d'image - VERSION CORRIGÉE
     """
     try:
         logger.info("Données reçues pour l'inscription:", request.data)
@@ -612,16 +601,11 @@ def consultant_register(request):
         # Vérifier si un utilisateur avec cet email existe
         existing_user = User.objects.filter(username=email).first()
 
-        # Si l'utilisateur existe, vérifier s'il est associé à un consultant actif
         if existing_user:
-            # Vérifier si l'utilisateur est associé à un consultant
             has_consultant = Consultant.objects.filter(user=existing_user).exists()
-
             if has_consultant:
                 return Response({"error": "Utilisateur existe déjà."}, status=400)
             else:
-                # L'utilisateur existe mais n'a pas de consultant associé
-                # Nous allons le supprimer pour permettre la réinscription
                 logger.info(f"Suppression de l'utilisateur orphelin: {existing_user.username}")
                 existing_user.delete()
 
@@ -649,11 +633,18 @@ def consultant_register(request):
             if 'domaine_principal' not in data or not data['domaine_principal']:
                 data['domaine_principal'] = domaine_principal
 
+            # Traitement des fichiers
+            if 'cv' in request.FILES:
+                data['cv'] = request.FILES['cv']
+            
+            # Nouveau: Support de l'image de profil
+            if 'photo' in request.FILES:
+                data['photo'] = request.FILES['photo']
+
             # Création du consultant
             serializer = ConsultantSerializer(data=data)
             if serializer.is_valid():
                 consultant = serializer.save()
-                # Définir le consultant comme non validé par défaut
                 consultant.is_validated = False
                 consultant.save()
 
@@ -662,10 +653,10 @@ def consultant_register(request):
                 # Calculer statut actif/inactif
                 dispo_debut = request.data.get('date_debut_dispo')
                 dispo_fin = request.data.get('date_fin_dispo')
-                from datetime import datetime
-                now = datetime.now().date()
-
+                
                 if dispo_debut and dispo_fin:
+                    from datetime import datetime
+                    now = datetime.now().date()
                     d1 = datetime.strptime(dispo_debut, "%Y-%m-%d").date()
                     d2 = datetime.strptime(dispo_fin, "%Y-%m-%d").date()
                     consultant.status = "Actif" if d1 <= now <= d2 else "Inactif"
@@ -703,17 +694,6 @@ def consultant_register(request):
 
                 # Envoi d'email de confirmation
                 try:
-                    # Vérifier que les données de l'email sont correctes
-                    logger.info(f"Tentative d'envoi d'email à {consultant.email}")
-
-                    # Vérifier la configuration des emails dans settings.py
-                    email_host = getattr(settings, 'EMAIL_HOST', None)
-                    email_port = getattr(settings, 'EMAIL_PORT', None)
-                    default_from = getattr(settings, 'DEFAULT_FROM_EMAIL', None)
-
-                    logger.info(f"Configuration email: HOST={email_host}, PORT={email_port}, FROM={default_from}")
-
-                    # Envoi de l'email avec gestion d'erreur améliorée
                     email_sent = send_registration_email(consultant)
                     if email_sent:
                         logger.info(f"Email de confirmation envoyé avec succès à {consultant.email}")
@@ -725,6 +705,7 @@ def consultant_register(request):
                 # Retour réussi avec l'ID consultant
                 logger.info(f"Inscription réussie pour {consultant.nom} (ID: {consultant.id})")
                 return Response({
+                    "success": True,
                     "message": "Consultant créé avec succès. Votre compte est en attente de validation par un administrateur.",
                     "consultant_id": consultant.id,
                     "is_validated": False
@@ -732,11 +713,17 @@ def consultant_register(request):
 
             # Erreur de validation
             logger.error(f"Erreur de validation: {serializer.errors}")
-            return Response(serializer.errors, status=400)
+            return Response({
+                "success": False,
+                "errors": serializer.errors
+            }, status=400)
 
     except Exception as e:
         logger.error(f"Erreur lors de l'inscription: {str(e)}")
-        return Response({"error": str(e)}, status=500)
+        return Response({
+            "success": False,
+            "error": str(e)
+        }, status=500)
 
 
 @api_view(['POST'])
@@ -2386,55 +2373,41 @@ def appel_offre_detail(request, pk):
         return Response({"error": str(e)}, status=500)
 
 
-@api_view(['GET', 'PUT', 'DELETE'])
-def admin_appel_offre_detail(request, pk):
-    """
-    Récupère, modifie ou supprime un appel d'offre spécifique
-    """
-    appel = get_object_or_404(AppelOffre, pk=pk)
 
-    if request.method == 'GET':
-        serializer = AppelOffreSerializer(appel)
-        return Response(serializer.data)
 
-    if request.method == 'PUT':
-        serializer = AppelOffreSerializer(appel, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    if request.method == 'DELETE':
-        appel.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @api_view(['GET', 'POST', 'DELETE'])
 def appel_offre_criteres(request, appel_id):
-    """
-    Gère les critères d'un appel d'offre
-    """
-    appel = get_object_or_404(AppelOffre, id=appel_id)
+    """Gère les critères d'un appel d'offre"""
+    try:
+        appel = get_object_or_404(AppelOffre, id=appel_id)
 
-    if request.method == 'GET':
-        criteres = CriteresEvaluation.objects.filter(appel_offre=appel)
-        serializer = CriteresEvaluationSerializer(criteres, many=True)
-        return Response(serializer.data)
+        if request.method == 'GET':
+            criteres = CriteresEvaluation.objects.filter(appel_offre=appel)
+            serializer = CriteresEvaluationSerializer(criteres, many=True)
+            return Response(serializer.data)
 
-    elif request.method == 'POST':
-        data = request.data.copy()
-        data['appel_offre'] = appel_id
-        serializer = CriteresEvaluationSerializer(data=data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=201)
-        return Response(serializer.errors, status=400)
+        elif request.method == 'POST':
+            data = request.data.copy()
+            data['appel_offre'] = appel_id
+            serializer = CriteresEvaluationSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=201)
+            return Response(serializer.errors, status=400)
 
-    elif request.method == 'DELETE':
-        # Supprimer tous les critères de cet appel d'offre
-        CriteresEvaluation.objects.filter(appel_offre=appel).delete()
-        return Response(status=204)
-
+        elif request.method == 'DELETE':
+            # Supprimer tous les critères de cet appel d'offre
+            deleted_count = CriteresEvaluation.objects.filter(appel_offre=appel).delete()[0]
+            return Response({
+                'message': f'{deleted_count} critères supprimés'
+            }, status=204)
+    except Exception as e:
+        logger.error(f"Erreur dans appel_offre_criteres: {str(e)}")
+        return Response({
+            'error': f'Erreur lors de la gestion des critères: {str(e)}'
+        }, status=500)
 
 @api_view(['GET'])
 def validated_matches(request):
@@ -3730,62 +3703,124 @@ def get_top_skills(consultant, limit=5):
         return []
     
 @api_view(['PUT'])
+@parser_classes([MultiPartParser, FormParser, JSONParser])
 def update_consultant_profile(request, consultant_id):
     """
-    Met à jour le profil d'un consultant
+    Met à jour le profil d'un consultant - VERSION CORRIGÉE FINALE
     """
     try:
         consultant = get_object_or_404(Consultant, id=consultant_id)
         
-        # Extraire les données du profil
-        data = request.data
+        logger.info(f"Début mise à jour profil consultant {consultant_id}")
+        logger.info(f"Données reçues: {request.data}")
         
-        # Mettre à jour les champs
-        if 'firstName' in data:
-            consultant.prenom = data['firstName']
-        if 'lastName' in data:
-            consultant.nom = data['lastName']
-        if 'email' in data:
-            consultant.email = data['email']
-            # Mettre à jour l'email de l'utilisateur si présent
-            if consultant.user:
-                consultant.user.email = data['email']
-                consultant.user.username = data['email']  # Si username = email
-                consultant.user.save()
-        if 'phone' in data:
-            consultant.telephone = data['phone']
-        if 'country' in data:
-            consultant.pays = data['country']
-        if 'city' in data:
-            consultant.ville = data['city']
-        if 'startAvailability' in data and data['startAvailability']:
-            consultant.date_debut_dispo = data['startAvailability']
-        if 'endAvailability' in data and data['endAvailability']:
-            consultant.date_fin_dispo = data['endAvailability']
+        # Préparer les données pour la mise à jour
+        data = {}
+        updated_fields = []
+        
+        # Mapping des champs frontend vers backend
+        field_mapping = {
+            'firstName': 'prenom',
+            'lastName': 'nom',
+            'email': 'email',
+            'phone': 'telephone',
+            'country': 'pays',
+            'city': 'ville',
+            'startAvailability': 'date_debut_dispo',
+            'endAvailability': 'date_fin_dispo',
+            'domaine_principal': 'domaine_principal',
+            'specialite': 'specialite',
+            'expertise': 'expertise'
+        }
+        
+        # Traiter chaque champ
+        for frontend_field, backend_field in field_mapping.items():
+            if frontend_field in request.data:
+                value = request.data[frontend_field]
+                if value is not None and value != '':
+                    data[backend_field] = value
+                    updated_fields.append(backend_field)
+        
+        # Traiter les fichiers
+        if 'photo' in request.FILES:
+            data['photo'] = request.FILES['photo']
+            updated_fields.append('photo')
+            logger.info(f"Photo reçue: {request.FILES['photo'].name}")
             
-        # Sauvegarder les modifications
-        consultant.save()
+        if 'cv' in request.FILES:
+            data['cv'] = request.FILES['cv']
+            updated_fields.append('cv')
+            logger.info(f"CV reçu: {request.FILES['cv'].name}")
         
-        # Renvoyer les données mises à jour
-        return Response({
-            "firstName": consultant.prenom,
-            "lastName": consultant.nom,
-            "email": consultant.email,
-            "phone": consultant.telephone,
-            "country": consultant.pays,
-            "city": consultant.ville,
-            "startAvailability": consultant.date_debut_dispo,
-            "endAvailability": consultant.date_fin_dispo,
-            "expertise": consultant.expertise,
-            "domaine_principal": consultant.domaine_principal,
-            "specialite": consultant.specialite
-        })
+        logger.info(f"Champs à mettre à jour: {updated_fields}")
+        
+        # Utiliser le serializer pour la validation et la mise à jour
+        serializer = ConsultantSerializer(consultant, data=data, partial=True)
+        
+        if serializer.is_valid():
+            try:
+                updated_consultant = serializer.save()
+                
+                # Mettre à jour l'utilisateur associé si l'email a changé
+                if 'email' in data and consultant.user:
+                    try:
+                        consultant.user.email = data['email']
+                        consultant.user.username = data['email']
+                        consultant.user.save()
+                        logger.info(f"Utilisateur mis à jour pour consultant {consultant_id}")
+                    except Exception as user_error:
+                        logger.error(f"Erreur mise à jour utilisateur: {user_error}")
+                
+                # Récupérer les compétences pour la réponse
+                competences = Competence.objects.filter(consultant=updated_consultant)
+                competences_list = [c.nom_competence for c in competences]
+                
+                logger.info(f"Consultant {consultant_id} mis à jour avec succès")
+                
+                # Préparer la réponse avec les données mises à jour
+                response_data = {
+                    "firstName": updated_consultant.prenom,
+                    "lastName": updated_consultant.nom,
+                    "email": updated_consultant.email,
+                    "phone": updated_consultant.telephone,
+                    "country": updated_consultant.pays,
+                    "city": updated_consultant.ville,
+                    "startAvailability": updated_consultant.date_debut_dispo,
+                    "endAvailability": updated_consultant.date_fin_dispo,
+                    "expertise": updated_consultant.expertise,
+                    "domaine_principal": updated_consultant.domaine_principal,
+                    "specialite": updated_consultant.specialite,
+                    "skills": ", ".join(competences_list),
+                    "cvFilename": updated_consultant.cv.name.split('/')[-1] if updated_consultant.cv else None,
+                    "photo": updated_consultant.photo.url if updated_consultant.photo else None
+                }
+                
+                return Response({
+                    "success": True,
+                    "message": "Profil mis à jour avec succès",
+                    "data": response_data
+                }, status=200)
+                
+            except Exception as save_error:
+                logger.error(f"Erreur lors de la sauvegarde du profil: {save_error}")
+                return Response({
+                    "success": False,
+                    "error": f"Erreur lors de la sauvegarde: {str(save_error)}"
+                }, status=500)
+        else:
+            logger.error(f"Erreurs de validation pour profil {consultant_id}: {serializer.errors}")
+            return Response({
+                "success": False,
+                "errors": serializer.errors,
+                "message": "Erreurs de validation"
+            }, status=400)
+        
     except Exception as e:
-        logger.error(f"Erreur lors de la mise à jour du profil consultant {consultant_id}: {str(e)}")
-        return Response({"error": str(e)}, status=500)
-            
-            
-
+        logger.error(f"Erreur générale lors de la mise à jour du profil consultant {consultant_id}: {str(e)}")
+        return Response({
+            "success": False,
+            "error": f"Erreur: {str(e)}"
+        }, status=500)
 
 
 @api_view(['GET'])
@@ -3931,3 +3966,73 @@ def process_cv(request):
         })
     except Exception as e:
         return Response({"error": str(e)}, status=500)
+    
+def clean_request_data(data, allowed_fields=None):
+    """
+    Nettoie les données de la requête en supprimant les valeurs vides et nulles
+    """
+    cleaned = {}
+    
+    for key, value in data.items():
+        # Ignorer les champs non autorisés si spécifiés
+        if allowed_fields and key not in allowed_fields:
+            continue
+            
+        # Ignorer les valeurs vides ou nulles
+        if value is not None and value != '' and value != 'null':
+            cleaned[key] = value
+    
+    return cleaned
+
+
+# Fonction utilitaire pour valider les dates
+def validate_date_range(start_date, end_date, field_prefix="date"):
+    """
+    Valide qu'une date de fin est postérieure à une date de début
+    """
+    from datetime import datetime
+    
+    try:
+        if isinstance(start_date, str):
+            start = datetime.strptime(start_date, '%Y-%m-%d').date()
+        else:
+            start = start_date
+            
+        if isinstance(end_date, str):
+            end = datetime.strptime(end_date, '%Y-%m-%d').date()
+        else:
+            end = end_date
+            
+        if start >= end:
+            return {
+                f'{field_prefix}_fin': f'La date de fin doit être postérieure à la date de début'
+            }
+    except ValueError as e:
+        return {
+            f'{field_prefix}': f'Format de date invalide: {str(e)}'
+        }
+    
+    return None
+
+
+# Décorateur pour logger les requêtes
+def log_request(func):
+    """
+    Décorateur pour logger automatiquement les requêtes
+    """
+    def wrapper(request, *args, **kwargs):
+        logger.info(f"=== DÉBUT {func.__name__} ===")
+        logger.info(f"Méthode: {request.method}")
+        logger.info(f"Paramètres URL: {kwargs}")
+        logger.info(f"Données: {request.data if hasattr(request, 'data') else 'Aucune'}")
+        
+        try:
+            response = func(request, *args, **kwargs)
+            logger.info(f"=== FIN {func.__name__} - Succès ===")
+            return response
+        except Exception as e:
+            logger.error(f"=== FIN {func.__name__} - Erreur: {str(e)} ===")
+            raise
+    
+    return wrapper
+                

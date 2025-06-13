@@ -1,11 +1,14 @@
+# settings.py - Configuration corrigée pour la sauvegarde automatique des CVs
+
 """
-Django settings for backend project - Version corrigée avec gestion CSRF optimisée
+Django settings for backend project - Version corrigée avec sauvegarde automatique
 
 Configuration spécialement adaptée pour le système de transformation CV avec :
-- Gestion CSRF cross-origin améliorée
+- Sauvegarde automatique dans le dossier standardized_cvs
+- Gestion CSRF cross-origin optimisée
 - Support des uploads de fichiers volumineux
 - Logging détaillé pour le debugging
-- Sécurité renforcée pour la production
+- Chemins absolus pour les dossiers de stockage
 """
 
 from pathlib import Path
@@ -205,13 +208,35 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o755
 
 # ==========================================
-# MEDIA AND STATIC FILES
+# MEDIA AND STATIC FILES - CONFIGURATION CRITIQUE
 # ==========================================
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# ==========================================
+# CONFIGURATION SPÉCIFIQUE CV STANDARDISÉS
+# ==========================================
+
+# Dossier principal pour les CVs standardisés - CRITIQUE POUR LA SAUVEGARDE
+CV_STANDARDISE_DIR = MEDIA_ROOT / 'standardized_cvs'
+CV_STANDARDISE_URL = '/media/standardized_cvs/'
+
+# Configuration avancée pour les CVs
+CV_STORAGE_SETTINGS = {
+    'BASE_DIR': CV_STANDARDISE_DIR,
+    'METADATA_DIR': CV_STANDARDISE_DIR / 'metadata',
+    'ARCHIVE_DIR': CV_STANDARDISE_DIR / 'archive',
+    'TEMP_DIR': MEDIA_ROOT / 'temp',
+    'MAX_CVS_PER_CONSULTANT': 5,  # Nombre max de CVs gardés par consultant
+    'AUTO_ARCHIVE_DAYS': 90,      # Archivage automatique après X jours
+    'CLEANUP_ENABLED': True,       # Nettoyage automatique activé
+    'BACKUP_ENABLED': False,       # Sauvegarde externe (à configurer)
+    'ALLOWED_FORMATS': ['.pdf'],  # Formats autorisés pour sauvegarde
+    'MAX_TOTAL_SIZE_GB': 10,      # Taille max totale en GB
+}
 
 # ==========================================
 # DATABASE CONFIGURATION
@@ -282,11 +307,10 @@ except ImportError:
     EMAIL_HOST_PASSWORD = 'ajfm quom kouj xuof'  # Fallback
 
 # ==========================================
-# LOGGING CONFIGURATION - AMÉLIORÉE
+# LOGGING CONFIGURATION - AMÉLIORÉE POUR CV
 # ==========================================
 
 # Création automatique du répertoire des logs
-import os
 log_dir = BASE_DIR / 'logs'
 os.makedirs(log_dir, exist_ok=True)
 
@@ -302,8 +326,12 @@ LOGGING = {
             'format': '[{levelname}] {module} - {message}',
             'style': '{',
         },
-        'csv_processing': {
+        'cv_processing': {
             'format': '[{asctime}] CV-PROCESS {levelname} - {message}',
+            'style': '{',
+        },
+        'cv_storage': {
+            'format': '[{asctime}] CV-STORAGE {levelname} - {message}',
             'style': '{',
         },
         'csrf_debug': {
@@ -329,7 +357,14 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': log_dir / 'cv_processing.log',
-            'formatter': 'csv_processing',
+            'formatter': 'cv_processing',
+            'encoding': 'utf-8',
+        },
+        'cv_storage': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': log_dir / 'cv_storage.log',
+            'formatter': 'cv_storage',
             'encoding': 'utf-8',
         },
         'csrf_handler': {
@@ -368,6 +403,11 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+        'consultants.views_cv_storage': {
+            'handlers': ['console', 'cv_storage'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
         'django.middleware.csrf': {
             'handlers': ['console', 'csrf_handler'],
             'level': 'DEBUG',
@@ -386,7 +426,7 @@ LOGGING = {
 }
 
 # ==========================================
-# CONFIGURATION CV PROCESSING
+# CONFIGURATION CV PROCESSING - ÉTENDUE
 # ==========================================
 CV_PROCESSING = {
     'MAX_FILE_SIZE': 25 * 1024 * 1024,  # 25MB
@@ -398,7 +438,9 @@ CV_PROCESSING = {
         'text/plain',
     ],
     'TEMP_DIR': MEDIA_ROOT / 'temp',
-    'OUTPUT_DIR': MEDIA_ROOT / 'standardized_cvs',
+    'OUTPUT_DIR': CV_STANDARDISE_DIR,  # UTILISE LE DOSSIER STANDARDISÉ
+    'METADATA_DIR': CV_STANDARDISE_DIR / 'metadata',
+    'ARCHIVE_DIR': CV_STANDARDISE_DIR / 'archive',
     'TIMEOUT': 300,  # 5 minutes
     'QUALITY_THRESHOLDS': {
         'EXCELLENT': 80,
@@ -409,6 +451,9 @@ CV_PROCESSING = {
     'MAX_SKILLS': 25,
     'MAX_EXPERIENCE_ENTRIES': 10,
     'MAX_EDUCATION_ENTRIES': 8,
+    'AUTO_SAVE_ENABLED': True,  # SAUVEGARDE AUTOMATIQUE ACTIVÉE
+    'GENERATE_METADATA': True,   # GÉNÉRATION MÉTADONNÉES ACTIVÉE
+    'COMPRESS_PDF': False,       # Compression PDF (optionnel)
 }
 
 # ==========================================
@@ -437,18 +482,32 @@ else:
     SECURE_HSTS_PRELOAD = True
 
 # ==========================================
-# CRÉATION AUTOMATIQUE DES RÉPERTOIRES
+# CRÉATION AUTOMATIQUE DES RÉPERTOIRES - CRITIQUE
 # ==========================================
 directories_to_create = [
-    MEDIA_ROOT / 'standardized_cvs',
-    MEDIA_ROOT / 'cv',
-    MEDIA_ROOT / 'temp',
-    MEDIA_ROOT / 'uploads',
-    BASE_DIR / 'logs',
+    MEDIA_ROOT,
+    CV_STANDARDISE_DIR,                    # DOSSIER PRINCIPAL CVS
+    CV_STORAGE_SETTINGS['METADATA_DIR'],   # MÉTADONNÉES
+    CV_STORAGE_SETTINGS['ARCHIVE_DIR'],    # ARCHIVES
+    CV_STORAGE_SETTINGS['TEMP_DIR'],       # TEMPORAIRE
+    MEDIA_ROOT / 'cv',                     # CVs uploads
+    MEDIA_ROOT / 'uploads',                # Autres uploads
+    log_dir,                               # Logs
 ]
 
+created_dirs = []
+failed_dirs = []
+
 for directory in directories_to_create:
-    os.makedirs(directory, exist_ok=True)
+    try:
+        os.makedirs(directory, exist_ok=True)
+        # Vérifier que le dossier existe vraiment
+        if directory.exists():
+            created_dirs.append(str(directory))
+        else:
+            failed_dirs.append(str(directory))
+    except Exception as e:
+        failed_dirs.append(f"{directory} (Erreur: {e})")
 
 # ==========================================
 # CONFIGURATION KDRIVE (OPTIONNEL)
@@ -457,25 +516,43 @@ KDRIVE_API_KEY = os.environ.get('KDRIVE_API_KEY', '')
 KDRIVE_DEFAULT_FOLDER_ID = os.environ.get('KDRIVE_DEFAULT_FOLDER_ID', '')
 
 # ==========================================
-# VÉRIFICATIONS DE DÉMARRAGE
+# VÉRIFICATIONS DE DÉMARRAGE - ÉTENDUES
 # ==========================================
 
 def startup_checks():
-    """Vérifications à effectuer au démarrage"""
-    print("=" * 60)
-    print("🔧 DÉMARRAGE DJANGO - SYSTÈME CV RICHAT")
-    print("=" * 60)
+    """Vérifications à effectuer au démarrage avec focus CV storage"""
+    print("=" * 80)
+    print("🔧 DÉMARRAGE DJANGO - SYSTÈME CV RICHAT AVEC SAUVEGARDE AUTOMATIQUE")
+    print("=" * 80)
     
-    # Vérification des répertoires
-    missing_dirs = []
-    for directory in directories_to_create:
-        if not directory.exists():
-            missing_dirs.append(str(directory))
+    # Vérification des répertoires CRITIQUES
+    print(f"📁 Vérification des répertoires ({len(directories_to_create)} dossiers):")
     
-    if missing_dirs:
-        print(f"❌ Répertoires manquants: {', '.join(missing_dirs)}")
-    else:
-        print(f"✅ Tous les répertoires requis existent ({len(directories_to_create)} vérifiés)")
+    if created_dirs:
+        print(f"✅ Dossiers créés avec succès ({len(created_dirs)}):")
+        for directory in created_dirs:
+            print(f"   ✓ {directory}")
+    
+    if failed_dirs:
+        print(f"❌ Dossiers échoués ({len(failed_dirs)}):")
+        for directory in failed_dirs:
+            print(f"   ✗ {directory}")
+    
+    # Vérification spécifique du dossier CV standardisé
+    print(f"\n📂 Vérification dossier CV standardisé:")
+    print(f"   📍 Chemin: {CV_STANDARDISE_DIR}")
+    print(f"   📊 Existence: {'✅ OUI' if CV_STANDARDISE_DIR.exists() else '❌ NON'}")
+    print(f"   📝 Écriture: {'✅ OUI' if os.access(CV_STANDARDISE_DIR, os.W_OK) else '❌ NON'}")
+    print(f"   📖 Lecture: {'✅ OUI' if os.access(CV_STANDARDISE_DIR, os.R_OK) else '❌ NON'}")
+    
+    # Test de création d'un fichier test
+    try:
+        test_file = CV_STANDARDISE_DIR / 'test_write.tmp'
+        test_file.write_text('test')
+        test_file.unlink()
+        print(f"   ✍️  Test écriture: ✅ SUCCÈS")
+    except Exception as e:
+        print(f"   ✍️  Test écriture: ❌ ÉCHEC ({e})")
     
     # Vérification CORS
     cors_issues = []
@@ -488,11 +565,11 @@ def startup_checks():
         cors_issues.append("CorsMiddleware n'est pas en première position")
     
     if cors_issues:
-        print("❌ Problèmes CORS détectés:")
+        print(f"\n❌ Problèmes CORS détectés:")
         for issue in cors_issues:
             print(f"   - {issue}")
     else:
-        print("✅ Configuration CORS correcte")
+        print(f"\n✅ Configuration CORS correcte")
     
     # Vérification CSRF
     csrf_origins_count = len(CSRF_TRUSTED_ORIGINS)
@@ -513,6 +590,13 @@ def startup_checks():
     # Configuration CV Processing
     max_size_mb = CV_PROCESSING['MAX_FILE_SIZE'] / (1024 * 1024)
     print(f"✅ Upload CV: max {max_size_mb}MB, {len(CV_PROCESSING['ALLOWED_EXTENSIONS'])} formats")
+    print(f"✅ Sauvegarde auto: {'ACTIVÉE' if CV_PROCESSING['AUTO_SAVE_ENABLED'] else 'DÉSACTIVÉE'}")
+    print(f"✅ Métadonnées: {'ACTIVÉES' if CV_PROCESSING['GENERATE_METADATA'] else 'DÉSACTIVÉES'}")
+    
+    # Configuration stockage
+    max_total_gb = CV_STORAGE_SETTINGS['MAX_TOTAL_SIZE_GB']
+    max_cvs = CV_STORAGE_SETTINGS['MAX_CVS_PER_CONSULTANT']
+    print(f"✅ Stockage CV: max {max_total_gb}GB, {max_cvs} CVs/consultant")
     
     # Mode debug
     mode = "DÉVELOPPEMENT" if DEBUG else "PRODUCTION"
@@ -521,14 +605,28 @@ def startup_checks():
     # Logs
     print(f"📝 Logs: {log_dir}")
     
-    print("=" * 60)
+    # Espace disque disponible
+    try:
+        import shutil
+        free_space_gb = shutil.disk_usage(CV_STANDARDISE_DIR).free / (1024**3)
+        print(f"💾 Espace libre: {free_space_gb:.1f} GB")
+    except:
+        print(f"💾 Espace libre: Non déterminé")
     
-    if cors_issues:
-        print("⚠️  ATTENTION: Problèmes CORS détectés - voir détails ci-dessus")
+    print("=" * 80)
+    
+    # Status final
+    critical_issues = len(failed_dirs) + len(cors_issues)
+    if critical_issues == 0:
+        print("🚀 SYSTÈME PRÊT - Configuration optimale pour sauvegarde automatique des CVs")
+        print("📁 Dossier standardized_cvs opérationnel")
+        print("💾 Sauvegarde automatique activée")
+        print("🔐 Sécurité CORS et CSRF configurée")
     else:
-        print("🚀 SERVEUR PRÊT - Configuration optimale pour CV processing")
+        print(f"⚠️  ATTENTION: {critical_issues} problèmes détectés - voir détails ci-dessus")
+        print("❗ La sauvegarde automatique pourrait ne pas fonctionner correctement")
     
-    print("=" * 60)
+    print("=" * 80)
 
 # Exécuter les vérifications au démarrage
 startup_checks()
@@ -543,7 +641,7 @@ if DEBUG:
     print(f"   • CSRF token: cookies + headers supportés")
     print(f"   • Upload max: {FILE_UPLOAD_MAX_MEMORY_SIZE / (1024*1024):.0f}MB")
     print(f"   • Logs niveau: DEBUG")
-    print(f"   • Email: Console backend actif")
+    print(f"   • Sauvegarde CV: {CV_STANDARDISE_DIR}")
     
     # Vérification spécifique Windows
     if sys.platform.startswith('win'):
@@ -553,7 +651,8 @@ if DEBUG:
     print("   • Frontend: http://localhost:8080")
     print("   • API Django: http://127.0.0.1:8000/api/")
     print("   • CSRF Token: http://127.0.0.1:8000/api/get-csrf-token/")
-    print("   • Upload CV: http://127.0.0.1:8000/api/consultant/process-cv/")
+    print("   • Upload CV: http://127.0.0.1:8000/api/consultant/process-cv-complete/")
+    print("   • Liste CVs: http://127.0.0.1:8000/api/cv-standardise/list/")
 
 # ==========================================
 # CONFIGURATION SPÉCIFIQUE WINDOWS
@@ -572,27 +671,6 @@ if sys.platform.startswith('win'):
     
     # Variables d'environnement
     os.environ['PYTHONIOENCODING'] = 'utf-8'
-    
-    # Filtre anti-emoji pour les logs Windows
-    class WindowsSafeFilter:
-        """Filtre pour nettoyer les caractères problématiques sur Windows"""
-        def filter(self, record):
-            if hasattr(record, 'msg'):
-                msg = str(record.msg)
-                # Supprimer emojis et caractères spéciaux
-                import re
-                msg = re.sub(r'[^\x00-\x7F]+', '', msg)  # Garder seulement ASCII
-                record.msg = msg
-            return True
-    
-    # Ajouter le filtre à tous les handlers console sur Windows
-    if 'console' in LOGGING['handlers']:
-        LOGGING['handlers']['console']['filters'] = ['windows_safe']
-        LOGGING['filters'] = {
-            'windows_safe': {
-                '()': WindowsSafeFilter,
-            }
-        }
 
 # ==========================================
 # CONFIGURATION FINALE ET EXPORT
@@ -604,6 +682,8 @@ CV_UPLOAD_SETTINGS = {
     'allowed_types': CV_PROCESSING['ALLOWED_MIME_TYPES'],
     'temp_dir': CV_PROCESSING['TEMP_DIR'],
     'output_dir': CV_PROCESSING['OUTPUT_DIR'],
+    'auto_save': CV_PROCESSING['AUTO_SAVE_ENABLED'],
+    'metadata_enabled': CV_PROCESSING['GENERATE_METADATA'],
 }
 
 # Configuration des timeouts
@@ -615,6 +695,8 @@ IMPORTANT_SETTINGS = {
     'CORS_ALLOW_ALL_ORIGINS': CORS_ALLOW_ALL_ORIGINS,
     'CSRF_TRUSTED_ORIGINS_COUNT': len(CSRF_TRUSTED_ORIGINS),
     'MAX_UPLOAD_SIZE_MB': FILE_UPLOAD_MAX_MEMORY_SIZE / (1024 * 1024),
+    'CV_AUTO_SAVE_ENABLED': CV_PROCESSING['AUTO_SAVE_ENABLED'],
+    'CV_STORAGE_DIR': str(CV_STANDARDISE_DIR),
     'LOG_LEVEL': 'DEBUG' if DEBUG else 'INFO',
 }
 
@@ -622,38 +704,53 @@ if DEBUG:
     print(f"\n⚙️  Paramètres clés: {IMPORTANT_SETTINGS}")
 
 # ==========================================
-# AIDE AU DÉBOGAGE CSRF
+# TESTS DE CONFIGURATION FINALE
 # ==========================================
 
-def debug_csrf_error():
-    """Fonction d'aide pour déboguer les erreurs CSRF"""
-    print("\n" + "="*50)
-    print("🔍 GUIDE DE DÉBOGAGE CSRF")
-    print("="*50)
-    print("Si vous rencontrez l'erreur 'CSRF token missing or incorrect':")
-    print()
-    print("1. Vérifiez que le frontend envoie le token CSRF:")
-    print("   - Header: X-CSRFToken")
-    print("   - Cookie: csrftoken")
-    print("   - FormData: csrfmiddlewaretoken")
-    print()
-    print("2. Vérifiez les origins autorisés:")
-    for origin in CSRF_TRUSTED_ORIGINS:
-        print(f"   ✓ {origin}")
-    print()
-    print("3. Testez manuellement:")
-    print("   curl -H 'Origin: http://localhost:8080' http://127.0.0.1:8000/api/get-csrf-token/")
-    print()
-    print("4. Vérifiez les logs:")
-    print(f"   - CSRF: {log_dir}/csrf_debug.log")
-    print(f"   - CV Processing: {log_dir}/cv_processing.log")
-    print(f"   - Erreurs: {log_dir}/errors.log")
-    print("="*50)
+def test_cv_storage_configuration():
+    """Test final de la configuration de stockage CV"""
+    print("\n🧪 TEST CONFIGURATION STOCKAGE CV:")
+    
+    tests_results = {}
+    
+    # Test 1: Dossier principal
+    tests_results['main_dir'] = CV_STANDARDISE_DIR.exists() and CV_STANDARDISE_DIR.is_dir()
+    
+    # Test 2: Sous-dossiers
+    tests_results['metadata_dir'] = CV_STORAGE_SETTINGS['METADATA_DIR'].exists()
+    tests_results['archive_dir'] = CV_STORAGE_SETTINGS['ARCHIVE_DIR'].exists()
+    tests_results['temp_dir'] = CV_STORAGE_SETTINGS['TEMP_DIR'].exists()
+    
+    # Test 3: Permissions
+    tests_results['write_permission'] = os.access(CV_STANDARDISE_DIR, os.W_OK)
+    tests_results['read_permission'] = os.access(CV_STANDARDISE_DIR, os.R_OK)
+    
+    # Test 4: Configuration
+    tests_results['auto_save_config'] = CV_PROCESSING['AUTO_SAVE_ENABLED']
+    tests_results['metadata_config'] = CV_PROCESSING['GENERATE_METADATA']
+    
+    # Affichage des résultats
+    for test_name, result in tests_results.items():
+        status = "✅ PASS" if result else "❌ FAIL"
+        print(f"   {test_name}: {status}")
+    
+    # Résultat global
+    all_passed = all(tests_results.values())
+    print(f"\n📊 Résultat global: {'✅ TOUS LES TESTS PASSÉS' if all_passed else '❌ CERTAINS TESTS ÉCHOUÉS'}")
+    
+    if all_passed:
+        print("🎯 CONFIGURATION PARFAITE - La sauvegarde automatique fonctionnera correctement")
+    else:
+        print("⚠️  CONFIGURATION INCOMPLÈTE - Vérifiez les permissions et dossiers")
+    
+    return all_passed
 
-# Afficher l'aide si problème CSRF détecté
-if DEBUG and "http://localhost:8080" not in CSRF_TRUSTED_ORIGINS:
-    debug_csrf_error()
+# Exécuter le test final
+test_cv_storage_configuration()
 
 print(f"\n✅ Configuration Django chargée avec succès")
 print(f"📊 Résumé: {len(INSTALLED_APPS)} apps, {len(MIDDLEWARE)} middleware, {len(CSRF_TRUSTED_ORIGINS)} origins CSRF")
-print("🎯 Système prêt pour le processing des CVs au format Richat\n")
+print("🎯 Système prêt pour la sauvegarde automatique des CVs au format Richat")
+print(f"📁 Dossier de sauvegarde: {CV_STANDARDISE_DIR}")
+print(f"🔧 Auto-save activé: {CV_PROCESSING['AUTO_SAVE_ENABLED']}")
+print(f"📝 Métadonnées activées: {CV_PROCESSING['GENERATE_METADATA']}\n")

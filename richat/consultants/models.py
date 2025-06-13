@@ -2,85 +2,117 @@
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.conf import settings
-import logging
+from django.utils import timezone
 import os
 
-# Configurer le logging
-logger = logging.getLogger(__name__)
-
-
 class User(AbstractUser):
-    ROLES = (
+    ROLE_CHOICES = [
         ('ADMIN', 'Administrateur'),
         ('CONSULTANT', 'Consultant'),
-    )
-    role = models.CharField(max_length=20, choices=ROLES, default='CONSULTANT')
-    nom = models.CharField(max_length=100)
+    ]
+    
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='CONSULTANT')
+    nom = models.CharField(max_length=100, blank=True, null=True)
+    
+    # CORRECTION: Utiliser default au lieu de auto_now_add pour éviter les problèmes de migration
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.nom} ({self.role})"
-
+        return f"{self.username} ({self.role})"
 
 class Consultant(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="consultant_profile")
-    nom = models.CharField(max_length=50)
-    prenom = models.CharField(max_length=50)
-    email = models.EmailField(max_length=255)
-    telephone = models.CharField(max_length=20)
-    pays = models.CharField(max_length=50)
-    ville = models.CharField(max_length=50)
-    date_debut_dispo = models.DateField()
-    date_fin_dispo = models.DateField()
-    cv = models.FileField(upload_to="cv/", null=True, blank=True)
-    expertise = models.CharField(max_length=50, default="Débutant")
-    is_validated = models.BooleanField(default=False, verbose_name="Validé par l'admin")
-
-    # Choix pour le domaine principal
     SPECIALITES_CHOICES = [
         ('DIGITAL', 'Digital et Télécoms'),
         ('FINANCE', 'Secteur bancaire et financier'),
         ('ENERGIE', 'Transition énergétique'),
         ('INDUSTRIE', 'Industrie et Mines'),
     ]
+    
+    EXPERTISE_CHOICES = [
+        ('Débutant', 'Débutant'),
+        ('Intermédiaire', 'Intermédiaire'),
+        ('Expert', 'Expert'),
+    ]
+    
+    STATUS_CHOICES = [
+        ('Actif', 'Actif'),
+        ('Inactif', 'Inactif'),
+    ]
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='consultant_profile', null=True, blank=True)
+    nom = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=100)
+    
+    # CORRECTION: Limiter la longueur de l'email pour éviter l'erreur MySQL
+    email = models.EmailField(max_length=191, unique=True)  # 191 au lieu de 254 par défaut
+    
+    telephone = models.CharField(max_length=20)
+    pays = models.CharField(max_length=100)
+    ville = models.CharField(max_length=100, blank=True, null=True)
+    date_debut_dispo = models.DateField(null=True, blank=True)
+    date_fin_dispo = models.DateField(null=True, blank=True)
+    cv = models.FileField(upload_to='cvs/', null=True, blank=True)
+    photo = models.ImageField(upload_to='photos/', null=True, blank=True)
+    expertise = models.CharField(max_length=20, choices=EXPERTISE_CHOICES, default='Débutant')
+    domaine_principal = models.CharField(max_length=20, choices=SPECIALITES_CHOICES, default='DIGITAL')
+    specialite = models.CharField(max_length=200, blank=True, null=True)
+    statut = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Actif')
+    is_validated = models.BooleanField(default=False)
+    
+    # CORRECTION: Utiliser default au lieu de auto_now_add
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    domaine_principal = models.CharField(
-        max_length=20,
-        choices=SPECIALITES_CHOICES,
-        default='DIGITAL',
-        verbose_name="Domaine principal"
-    )
-
-    specialite = models.CharField(max_length=100, default="", verbose_name="Sous-domaine")
-    status = models.CharField(max_length=20, default="Actif")
-    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        verbose_name = "Consultant"
+        verbose_name_plural = "Consultants"
+        ordering = ['-created_at']
+        
+        # CORRECTION: Spécifier explicitement les contraintes d'index
+        indexes = [
+            models.Index(fields=['email'], name='consultant_email_idx'),
+            models.Index(fields=['statut'], name='consultant_statut_idx'),
+            models.Index(fields=['domaine_principal'], name='consultant_domaine_idx'),
+        ]
 
     def __str__(self):
-        return f"{self.nom} {self.prenom}"
+        return f"{self.prenom} {self.nom}"
 
     def save(self, *args, **kwargs):
-        if self.user and not self.email:
-            self.email = self.user.email
+        self.updated_at = timezone.now()
         super().save(*args, **kwargs)
 
-
 class AppelOffre(models.Model):
-    nom_projet = models.CharField(max_length=255)
-    client = models.CharField(max_length=255)
-    description = models.TextField()
-    budget = models.DecimalField(max_digits=12, decimal_places=2)
-    date_debut = models.DateField()
-    date_fin = models.DateField()
-
     STATUT_CHOICES = [
         ('A_venir', 'À venir'),
         ('En_cours', 'En cours'),
         ('Termine', 'Terminé'),
     ]
-    statut = models.CharField(max_length=20, choices=STATUT_CHOICES)
+    
+    nom_projet = models.CharField(max_length=200)
+    client = models.CharField(max_length=100)
+    description = models.TextField()
+    budget = models.DecimalField(max_digits=15, decimal_places=2)
+    date_debut = models.DateField()
+    date_fin = models.DateField()
+    statut = models.CharField(max_length=20, choices=STATUT_CHOICES, default='A_venir')
+    
+    # CORRECTION: Utiliser default au lieu de auto_now_add
+    created_at = models.DateTimeField(default=timezone.now)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Appel d'offre"
+        verbose_name_plural = "Appels d'offres"
+        ordering = ['-created_at']
 
     def __str__(self):
         return f"{self.nom_projet} - {self.client}"
+
+    def save(self, *args, **kwargs):
+        self.updated_at = timezone.now()
+        super().save(*args, **kwargs)
 
 
 class Competence(models.Model):

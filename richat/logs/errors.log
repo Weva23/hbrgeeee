@@ -1000,3 +1000,522 @@ FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\User
 [2025-06-10 02:36:45,457] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
 [2025-06-10 02:36:45,469] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
 [2025-06-10 02:36:45,469] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+[2025-06-11 14:15:01,280] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:15:05,049] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:19:45,209] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:46:58,526] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:47:21,195] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:48:15,656] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:15:47,903] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:34:14,211] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:43:49,525] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:44:09,185] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:44:52,190] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:45:03,078] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:45:12,253] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:45:33,181] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:45:53,654] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:47:55,942] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:48:17,930] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:56:12,971] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:57:03,082] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:58:02,505] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-13 09:56:10,593] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/39/
+[2025-06-13 12:15:35,335] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:15:35,343] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:25:35,339] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:25:35,347] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:11,423] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:11,424] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:22,862] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:22,862] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:22,876] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:22,877] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:22,883] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:22,888] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:23,207] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:23,212] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:45,008] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:45,015] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:45,022] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:45,034] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:45,035] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:45,043] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:46,025] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:46,031] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,332] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,332] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:49,349] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,356] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:49,362] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,369] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,655] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,660] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:56,005] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:56,005] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:27,849] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:27,862] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:28,148] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:28,156] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:28,305] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:29:28,324] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:28,346] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:28,424] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:29:28,487] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:28,494] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:31,753] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:31,754] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:31,772] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:31,773] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:31,778] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:31,788] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:32,060] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:32,067] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,088] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,095] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,105] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,114] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,408] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,422] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,081] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,103] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,335] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:29:40,350] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:40,368] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:40,412] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,420] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,470] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:29:40,484] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:40,490] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:41,611] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,612] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:41,625] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,625] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:41,634] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,640] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,933] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,943] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:42,685] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:35:42,848] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:42,869] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:35:42,887] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:42,904] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:42,931] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:43,099] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:43,115] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,063] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,066] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:35:47,099] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,102] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:35:47,134] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,146] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,444] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,470] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,617] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,648] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,662] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,681] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,845] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:47:48,906] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:48,920] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:49,056] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:47:49,176] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:49,192] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:50,749] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:50,754] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:50,796] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:50,801] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:50,821] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:50,847] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:51,135] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:51,173] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
