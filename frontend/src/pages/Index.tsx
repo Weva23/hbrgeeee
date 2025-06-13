@@ -1,8 +1,7 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { UserIcon, Users, BriefcaseIcon, BookOpenIcon, LineChartIcon } from "lucide-react";
+import { UserIcon, Users, BriefcaseIcon } from "lucide-react";
 
 const Index = () => {
   const navigate = useNavigate();
@@ -81,31 +80,7 @@ const Index = () => {
             </div>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <BookOpenIcon className="h-8 w-8 text-blue-600 mb-4" />
-              <h4 className="font-semibold mb-2">Gestion Documentaire</h4>
-              <p className="text-sm text-gray-600">
-                Centralisation des documents, réponses aux appels d'offres et rapports de mission.
-              </p>
-            </div>
-            
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <Users className="h-8 w-8 text-blue-600 mb-4" />
-              <h4 className="font-semibold mb-2">Matching Intelligent</h4>
-              <p className="text-sm text-gray-600">
-                Association automatique des consultants aux projets selon leurs compétences.
-              </p>
-            </div>
 
-            <div className="bg-blue-50 p-6 rounded-lg">
-              <LineChartIcon className="h-8 w-8 text-blue-600 mb-4" />
-              <h4 className="font-semibold mb-2">Suivi des Missions</h4>
-              <p className="text-sm text-gray-600">
-                Tableaux de bord interactifs pour le suivi des projets et l'évaluation.
-              </p>
-            </div>
-          </div>
         </div>
       </main>
 
