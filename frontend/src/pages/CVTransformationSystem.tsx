@@ -1,125 +1,101 @@
 import React, { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { 
-  Upload, 
-  FileText, 
-  Download, 
-  Check, 
-  Edit, 
-  RefreshCw,
-  User,
-  Mail,
-  Phone,
-  MapPin,
-  Calendar,
+  FileTextIcon, 
+  UploadIcon, 
+  CheckCircleIcon, 
+  XIcon, 
+  AlertCircleIcon,
+  RefreshCwIcon,
   Award,
-  Briefcase,
-  GraduationCap,
-  Languages,
-  CheckCircle,
-  AlertCircle,
-  Star,
-  Shield,
-  Eye,
-  Zap,
   TrendingUp,
-  Users,
-  Clock,
+  Star,
+  Eye,
+  Download,
+  Zap,
+  Shield,
   FileIcon,
-  Building,
-  Globe,
-  Target,
-  Settings
+  Clock,
+  Users,
+  InfoIcon
 } from 'lucide-react';
-import { toast } from 'sonner';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 // Configuration API
 const API_BASE_URL = "http://127.0.0.1:8000/api";
 
-// Interface pour les données extraites (format Richat complet)
-interface RichatExtractedData {
+// Interfaces
+interface ProcessingStats {
+  text_length?: number;
+  personal_info_found?: number;
+  experience_entries?: number;
+  education_entries?: number;
+  skills_found?: number;
+  languages_found?: number;
+  extraction_method?: string;
+}
+
+interface ExtractedData {
   personal_info: {
-    titre: string;
-    nom_expert: string;
-    date_naissance: string;
-    pays_residence: string;
-    titre_professionnel: string;
+    nom_expert?: string;
     email?: string;
     telephone?: string;
+    titre?: string;
+    pays_residence?: string;
   };
-  professional_title: string;
-  profile_summary: string;
-  education: Array<{
-    institution: string;
-    periode: string;
-    diplome: string;
-    description: string;
-  }>;
-  experience: Array<{
-    periode: string;
-    employeur: string;
-    pays: string;
-    poste: string;
-    description: string[] | string;
-    resume_activites: string;
-  }>;
+  professional_title?: string;
+  profile_summary?: string;
   skills: string[];
+  experience: string[];
+  education: any[];
   languages: Array<{
     language: string;
-    speaking: string;
-    reading: string;
-    writing: string;
     level: string;
   }>;
   certifications: string[];
-  mission_adequacy: {
-    projects: Array<{
-      nom_projet: string;
-      date: string;
-      societe: string;
-      poste: string;
-      lieu: string;
-      client: string;
-      description: string;
-      activites: string[];
-    }>;
-  };
+  confidence_scores?: Record<string, number>;
 }
 
-// Interface pour les scores de qualité
-interface QualityScores {
-  quality_score: number;
-  format_compliance_score: number;
-  sections_found: {
-    personal_info_fields: number;
-    education_entries: number;
-    experience_entries: number;
-    languages: number;
-    certifications: number;
-    projects: number;
-  };
-  missing_sections: string[];
-  richat_features: {
-    header_with_logo: boolean;
-    personal_info_table: boolean;
-    professional_title_centered: boolean;
-    profile_summary: boolean;
-    education_table: boolean;
-    experience_detailed_table: boolean;
-    languages_table: boolean;
-    mission_adequacy_section: boolean;
-    certifications_list: boolean;
-  };
+interface ProcessingResponse {
+  success: boolean;
+  extracted_data?: ExtractedData;
+  quality_score?: number;
+  format_compliance_score?: number;
+  cv_url?: string;
+  recommendations?: string[];
+  stats?: ProcessingStats;
+  error?: string;
+  warnings?: string[];
 }
 
-// Composant pour afficher les scores de qualité Richat
-const RichatQualityDisplay = ({ qualityScore, complianceScore }: { qualityScore: number; complianceScore: number }) => {
+interface CVTransformationSystemProps {
+  onSuccess?: (data: ProcessingResponse) => void;
+  onError?: (error: string) => void;
+  onFileSelected?: (file: File) => void; // Prop manquante ajoutée
+  disabled?: boolean;
+  showPreview?: boolean;
+}
+
+// Composant pour afficher le score de qualité
+const QualityScoreDisplay = ({ score }: { score: number }) => {
   const getScoreColor = (score: number) => {
     if (score >= 80) return "text-green-600 bg-green-100 border-green-300";
     if (score >= 60) return "text-yellow-600 bg-yellow-100 border-yellow-300";
@@ -129,736 +105,635 @@ const RichatQualityDisplay = ({ qualityScore, complianceScore }: { qualityScore:
   const getScoreIcon = (score: number) => {
     if (score >= 80) return <Award className="h-4 w-4" />;
     if (score >= 60) return <TrendingUp className="h-4 w-4" />;
-    return <AlertCircle className="h-4 w-4" />;
+    return <AlertCircleIcon className="h-4 w-4" />;
+  };
+
+  const getScoreLabel = (score: number) => {
+    if (score >= 80) return "Excellent";
+    if (score >= 60) return "Bon";
+    if (score >= 40) return "Moyen";
+    return "À améliorer";
   };
 
   return (
-    <div className="flex gap-4 mb-4">
-      <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium border ${getScoreColor(qualityScore)}`}>
-        {getScoreIcon(qualityScore)}
-        <span>Qualité: {qualityScore}%</span>
-      </div>
-      <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium border ${getScoreColor(complianceScore)}`}>
-        <Shield className="h-4 w-4" />
-        <span>Conformité Richat: {complianceScore}%</span>
-      </div>
+    <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium border ${getScoreColor(score)}`}>
+      {getScoreIcon(score)}
+      <span>Score: {score}% - {getScoreLabel(score)}</span>
     </div>
   );
 };
 
-// Composant pour afficher les fonctionnalités Richat détectées
-const RichatFeaturesDisplay = ({ features }: { features: any }) => {
-  const featureLabels = {
-    header_with_logo: "En-tête Richat Partners",
-    personal_info_table: "Tableau informations personnelles",
-    professional_title_centered: "Titre professionnel centré",
-    profile_summary: "Résumé du profil",
-    education_table: "Tableau éducation",
-    experience_detailed_table: "Tableau expérience détaillé",
-    languages_table: "Tableau langues",
-    mission_adequacy_section: "Section adéquation mission",
-    certifications_list: "Liste des certifications"
-  };
+// Composant pour afficher les recommandations
+const RecommendationsDisplay = ({ recommendations }: { recommendations: string[] }) => {
+  if (!recommendations || recommendations.length === 0) return null;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-      {Object.entries(features).map(([key, value]: [string, any]) => (
-        <div key={key} className={`flex items-center gap-2 p-2 rounded-md text-sm ${
-          value ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
-        }`}>
-          {value ? (
-            <CheckCircle className="h-4 w-4 text-green-600" />
-          ) : (
-            <AlertCircle className="h-4 w-4 text-red-600" />
-          )}
-          <span className="flex-1">{featureLabels[key as keyof typeof featureLabels] || key}</span>
-          <Badge variant={value ? "default" : "destructive"} className="text-xs">
-            {value ? "✓" : "✗"}
-          </Badge>
-        </div>
-      ))}
-    </div>
+    <Alert className="bg-amber-50 border-amber-200">
+      <InfoIcon className="h-4 w-4 text-amber-600" />
+      <AlertTitle className="text-amber-800">Recommandations d'amélioration</AlertTitle>
+      <AlertDescription>
+        <ul className="text-sm text-amber-700 space-y-1 mt-2">
+          {recommendations.map((rec, index) => (
+            <li key={index} className="flex items-start gap-2">
+              <span className="text-amber-500 mt-0.5">•</span>
+              <span>{rec}</span>
+            </li>
+          ))}
+        </ul>
+      </AlertDescription>
+    </Alert>
   );
 };
 
-const CVTransformationSystem = () => {
-  const [step, setStep] = useState(1);
-  const [uploadedCV, setUploadedCV] = useState<File | null>(null);
-  const [extractedData, setExtractedData] = useState<RichatExtractedData | null>(null);
-  const [qualityScores, setQualityScores] = useState<QualityScores | null>(null);
-  const [transformedCV, setTransformedCV] = useState<string | null>(null);
+// Composant principal
+const CVTransformationSystem: React.FC<CVTransformationSystemProps> = ({
+  onSuccess,
+  onError,
+  onFileSelected, // Prop ajoutée
+  disabled = false,
+  showPreview = true
+}) => {
+  const [cvFile, setCvFile] = useState<File | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [isValidated, setIsValidated] = useState(false);
-  const [processingProgress, setProcessingProgress] = useState(0);
-  const [diagnosticData, setDiagnosticData] = useState<any>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [extractedData, setExtractedData] = useState<ExtractedData | null>(null);
+  const [processingStats, setProcessingStats] = useState<ProcessingStats | null>(null);
+  const [qualityScore, setQualityScore] = useState<number | null>(null);
   const [recommendations, setRecommendations] = useState<string[]>([]);
-  const [formatDetected, setFormatDetected] = useState<string>('');
-  const [processingMethod, setProcessingMethod] = useState<string>('');
+  const [cvError, setCvError] = useState<string | null>(null);
+  const [standardizedCvUrl, setStandardizedCvUrl] = useState<string | null>(null);
+  const [transformationComplete, setTransformationComplete] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Fonction pour traiter le CV avec le nouveau système Richat
-  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setUploadedCV(file);
-      setStep(2);
-      setIsProcessing(true);
-      setProcessingProgress(0);
-
-      // Simuler la progression
-      const progressInterval = setInterval(() => {
-        setProcessingProgress(prev => {
-          if (prev >= 85) {
-            clearInterval(progressInterval);
-            return 85;
-          }
-          return prev + Math.random() * 15 + 5;
-        });
-      }, 800);
-
-      try {
-        // Étape 1: Diagnostic du CV
-        toast.info("Analyse de compatibilité Richat...");
-        await performDiagnostic(file);
-
-        // Étape 2: Traitement complet Richat
-        toast.info("Transformation au format Richat...");
-        await processWithRichatSystem(file);
-
-        clearInterval(progressInterval);
-        setProcessingProgress(100);
-        setIsProcessing(false);
-        setStep(3);
-
-      } catch (error) {
-        clearInterval(progressInterval);
-        setIsProcessing(false);
-        setStep(1);
-        console.error('Erreur traitement CV:', error);
-        toast.error('Erreur lors du traitement du CV');
-      }
-    }
-  };
-
-  // Diagnostic de compatibilité Richat
-  const performDiagnostic = async (file: File) => {
-    const formData = new FormData();
-    formData.append('cv', file);
-
-    const response = await fetch(`${API_BASE_URL}/consultant/diagnose-cv-richat/`, {
-      method: 'POST',
-      body: formData
-    });
-
-    const data = await response.json();
-    
-    if (data.success) {
-      setDiagnosticData(data);
-      setFormatDetected(data.format_detected || 'generic');
-      
-      toast.success(`Format détecté: ${data.format_detected || 'generic'} - Compatibilité: ${Math.round(data.richat_compatibility_score || 0)}%`);
-    } else {
-      throw new Error(data.error || 'Erreur diagnostic');
-    }
-  };
-
-  // Traitement avec le système Richat complet
-  const processWithRichatSystem = async (file: File) => {
-    const formData = new FormData();
-    formData.append('cv', file);
-    formData.append('consultant_id', `demo_${Date.now()}`);
-
-    const response = await fetch(`${API_BASE_URL}/consultant/process-cv-richat/`, {
-      method: 'POST',
-      body: formData
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      setExtractedData(data.extracted_data);
-      setQualityScores({
-        quality_score: data.quality_score,
-        format_compliance_score: data.format_compliance_score,
-        sections_found: data.sections_found,
-        missing_sections: data.missing_sections,
-        richat_features: data.richat_features
-      });
-      setTransformedCV(data.cv_url);
-      setRecommendations(data.recommendations || []);
-      setProcessingMethod(data.processing_method);
-
-      toast.success(`CV transformé avec succès ! Qualité: ${data.quality_score}%, Conformité Richat: ${data.format_compliance_score}%`);
-    } else {
-      throw new Error(data.error || 'Erreur transformation Richat');
-    }
-  };
-
-  const handleTransformToRichatFormat = () => {
+  // Fonction de traitement et transformation du CV
+  const processAndTransformCV = async (file: File) => {
     setIsProcessing(true);
-    setStep(4);
-    // Simulation - en réalité, la transformation est déjà faite
-    setTimeout(() => {
-      setIsProcessing(false);
-    }, 1500);
-  };
+    setCvError(null);
+    setUploadProgress(0);
+    setTransformationComplete(false);
+    setRecommendations([]);
+    
+    const progressInterval = setInterval(() => {
+      setUploadProgress(prev => {
+        if (prev >= 85) {
+          clearInterval(progressInterval);
+          return 85;
+        }
+        return prev + Math.random() * 15 + 5;
+      });
+    }, 800);
+    
+    try {
+      // Validation côté client
+      const maxSize = 25 * 1024 * 1024; // 25MB
+      if (file.size > maxSize) {
+        throw new Error("Le fichier est trop volumineux. La taille maximale autorisée est de 25MB.");
+      }
+      
+      const allowedTypes = [
+        'application/pdf', 
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+        'application/msword',
+        'text/plain'
+      ];
+      const fileExtension = file.name.toLowerCase().split('.').pop();
+      const allowedExtensions = ['pdf', 'docx', 'doc', 'txt'];
+      
+      if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExtension || '')) {
+        throw new Error("Format de fichier non supporté. Veuillez télécharger un fichier PDF, DOC, DOCX ou TXT.");
+      }
+      
+      if (file.size === 0) {
+        throw new Error("Le fichier sélectionné est vide. Veuillez choisir un autre fichier.");
+      }
 
-  const handleValidateCV = () => {
-    setIsValidated(true);
-    setStep(5);
-    toast.success("CV validé et signé électroniquement selon les standards Richat Partners");
-  };
-
-  const handleDownloadCV = () => {
-    if (transformedCV) {
-      // Créer un lien de téléchargement depuis l'URL base64
-      const link = document.createElement('a');
-      link.href = transformedCV;
-      link.download = `CV_Richat_${uploadedCV?.name.replace(/\.[^/.]+$/, "")}_${Date.now()}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      toast.success("CV Richat téléchargé avec succès");
+      console.log("Début traitement CV:", {
+        nom: file.name,
+        taille: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
+        type: file.type,
+        extension: fileExtension,
+        timestamp: new Date().toISOString()
+      });
+      
+      const formData = new FormData();
+      formData.append("cv", file);
+      formData.append("consultant_id", `temp_${Date.now()}`);
+      formData.append("frontend_version", "2.0");
+      
+      console.log("Envoi vers:", `${API_BASE_URL}/consultant/process-cv/`);
+      
+      const response = await fetch(`${API_BASE_URL}/consultant/process-cv/`, {
+        method: "POST",
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+        },
+        credentials: 'include',
+      });
+      
+      console.log("Statut de la réponse:", response.status);
+      
+      let responseData: ProcessingResponse;
+      try {
+        const responseText = await response.text();
+        console.log("Réponse brute (premiers 500 chars):", responseText.substring(0, 500));
+        
+        if (responseText.trim()) {
+          responseData = JSON.parse(responseText);
+        } else {
+          throw new Error("Réponse vide du serveur");
+        }
+      } catch (jsonError) {
+        console.error("Erreur parsing JSON:", jsonError);
+        throw new Error("Erreur de communication avec le serveur - réponse invalide");
+      }
+      
+      console.log("Données de réponse complètes:", responseData);
+      
+      if (!response.ok) {
+        if (response.status === 403) {
+          throw new Error("Erreur de sécurité. Veuillez rafraîchir la page et réessayer.");
+        } else if (response.status === 413) {
+          throw new Error("Fichier trop volumineux pour le serveur.");
+        } else if (response.status >= 500) {
+          throw new Error("Erreur du serveur. Veuillez réessayer plus tard.");
+        }
+        
+        const errorMessage = responseData?.error || `Erreur HTTP ${response.status}`;
+        throw new Error(errorMessage);
+      }
+      
+      if (responseData.success) {
+        // Stocker toutes les données extraites
+        setExtractedData(responseData.extracted_data || null);
+        setProcessingStats(responseData.stats || null);
+        setQualityScore(responseData.quality_score || null);
+        setRecommendations(responseData.recommendations || []);
+        
+        if (responseData.cv_url) {
+          setStandardizedCvUrl(responseData.cv_url);
+          setTransformationComplete(true);
+        }
+        
+        // Callback de succès
+        if (onSuccess) {
+          onSuccess(responseData);
+        }
+        
+        console.log("Traitement terminé avec succès");
+      } else {
+        throw new Error(responseData.error || "Erreur lors du traitement du CV");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la transformation:", error);
+      
+      let errorMessage = "Erreur lors de la transformation du CV au format Richat";
+      
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
+      }
+      
+      // Messages d'erreur contextuels
+      if (errorMessage.includes("NetworkError") || errorMessage.includes("Failed to fetch")) {
+        errorMessage = "Problème de connexion. Vérifiez votre connexion internet et réessayez.";
+      } else if (errorMessage.includes("timeout")) {
+        errorMessage = "Le traitement prend trop de temps. Essayez avec un fichier plus petit ou réessayez plus tard.";
+      }
+      
+      setCvError(errorMessage);
+      
+      // Callback d'erreur
+      if (onError) {
+        onError(errorMessage);
+      }
+    } finally {
+      clearInterval(progressInterval);
+      setUploadProgress(100);
+      setTimeout(() => {
+        setIsProcessing(false);
+      }, 1000);
     }
   };
 
-  const handlePreviewCV = () => {
-    if (transformedCV) {
-      window.open(transformedCV, '_blank', 'width=800,height=900,scrollbars=yes');
+  // Gestion du drag & drop
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = async (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    if (files.length > 0) {
+      const file = files[0];
+      await handleFileSelection(file);
     }
   };
 
-  const renderStep1 = () => (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Upload className="h-6 w-6 text-blue-600" />
-          Étape 1: Télécharger le CV pour transformation Richat
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div 
-          className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 transition-colors bg-gradient-to-br from-blue-50 to-green-50"
-          onClick={() => fileInputRef.current?.click()}
-        >
-          <div className="flex justify-center mb-4">
-            <div className="relative">
-              <FileText className="h-16 w-16 text-blue-600" />
-              <div className="absolute -top-2 -right-2 bg-green-500 rounded-full p-1">
-                <Shield className="h-4 w-4 text-white" />
-              </div>
-            </div>
-          </div>
-          <h3 className="text-lg font-semibold mb-2">Système de Transformation CV Richat</h3>
-          <p className="text-gray-600 mb-4">
-            Transformez automatiquement votre CV au format standardisé Richat Partners
-          </p>
-          <div className="bg-white p-4 rounded-lg border border-blue-200 mb-4">
-            <h4 className="font-medium text-blue-800 mb-2">Fonctionnalités avancées :</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-blue-700">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-3 w-3" />
-                <span>Détection automatique de format</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-3 w-3" />
-                <span>Extraction intelligente des tableaux</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-3 w-3" />
-                <span>Score de conformité Richat</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="h-3 w-3" />
-                <span>Format Mohamed Yehdhih</span>
-              </div>
-            </div>
-          </div>
-          <Button className="bg-blue-600 hover:bg-blue-700">
-            <Upload className="h-4 w-4 mr-2" />
-            Cliquez pour télécharger votre CV
-          </Button>
-          <p className="text-sm text-gray-500 mt-4">
-            Formats supportés: PDF, DOC, DOCX • Taille max: 25MB
-          </p>
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept=".pdf,.doc,.docx"
-            onChange={handleFileUpload}
-            className="hidden"
-          />
-        </div>
-      </CardContent>
-    </Card>
-  );
+  // Fonction unifiée pour la sélection de fichier
+  const handleFileSelection = async (file: File) => {
+    console.log("Fichier sélectionné:", {
+      name: file.name,
+      size: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
+      type: file.type,
+      lastModified: new Date(file.lastModified).toISOString()
+    });
+    
+    // Réinitialiser l'état
+    setCvError(null);
+    setUploadProgress(0);
+    setStandardizedCvUrl(null);
+    setExtractedData(null);
+    setProcessingStats(null);
+    setQualityScore(null);
+    setRecommendations([]);
+    setTransformationComplete(false);
+    
+    // Validation du fichier côté client
+    const extension = file.name.split('.').pop()?.toLowerCase();
+    const allowedExtensions = ['pdf', 'doc', 'docx', 'txt'];
+    
+    if (!extension || !allowedExtensions.includes(extension)) {
+      const errorMsg = "Format de fichier non supporté. Veuillez télécharger un fichier PDF, DOC, DOCX ou TXT.";
+      setCvError(errorMsg);
+      return;
+    }
+    
+    const maxSize = 25 * 1024 * 1024; // 25MB
+    if (file.size > maxSize) {
+      const errorMsg = "Le fichier est trop volumineux. La taille maximale autorisée est de 25MB.";
+      setCvError(errorMsg);
+      return;
+    }
+    
+    if (file.size === 0) {
+      const errorMsg = "Le fichier sélectionné est vide. Veuillez choisir un autre fichier.";
+      setCvError(errorMsg);
+      return;
+    }
+    
+    setCvFile(file);
+    
+    // Notifier le parent que le fichier a été sélectionné
+    if (onFileSelected) {
+      onFileSelected(file);
+    }
+    
+    // Traiter et transformer le CV automatiquement
+    if (!disabled) {
+      await processAndTransformCV(file);
+    }
+  };
 
-  const renderStep2 = () => (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <RefreshCw className={`h-6 w-6 text-blue-600 ${isProcessing ? 'animate-spin' : ''}`} />
-          Étape 2: Traitement avancé format Richat
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="text-center">
-          <div className="flex items-center justify-center mb-6">
-            <div className="relative">
-              <FileText className="h-20 w-20 text-blue-600" />
-              {isProcessing && (
-                <div className="absolute -inset-2 border-4 border-blue-400 rounded-full animate-pulse"></div>
-              )}
-              <div className="absolute -top-2 -right-2 bg-green-500 rounded-full p-2">
-                <Shield className="h-6 w-6 text-white" />
-              </div>
-            </div>
-          </div>
-          
-          <h3 className="text-lg font-semibold mb-2">
-            {uploadedCV?.name}
-          </h3>
-          
-          <div className="bg-blue-50 p-4 rounded-lg mb-4">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-blue-800">
-                {isProcessing ? "Traitement en cours..." : "Traitement terminé !"}
-              </span>
-              <span className="text-sm font-medium text-blue-600">{processingProgress}%</span>
-            </div>
-            <Progress value={processingProgress} className="h-3 bg-blue-200" />
-          </div>
+  // Gestion du changement de fichier
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      await handleFileSelection(e.target.files[0]);
+    }
+  };
 
-          {/* Étapes de traitement */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-            <div className="flex items-center gap-2 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="h-5 w-5 text-green-600" />
-              <span className="text-sm text-green-800">Extraction de texte</span>
-            </div>
-            <div className="flex items-center gap-2 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="h-5 w-5 text-green-600" />
-              <span className="text-sm text-green-800">Détection de format</span>
-            </div>
-            <div className="flex items-center gap-2 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="h-5 w-5 text-green-600" />
-              <span className="text-sm text-green-800">Diagnostic Richat</span>
-            </div>
-            <div className="flex items-center gap-2 p-3 bg-green-50 rounded-lg">
-              <CheckCircle className="h-5 w-5 text-green-600" />
-              <span className="text-sm text-green-800">Transformation complète</span>
-            </div>
-          </div>
+  // Suppression du CV
+  const handleRemoveCv = () => {
+    setCvFile(null);
+    setExtractedData(null);
+    setProcessingStats(null);
+    setQualityScore(null);
+    setRecommendations([]);
+    setCvError(null);
+    setStandardizedCvUrl(null);
+    setUploadProgress(0);
+    setTransformationComplete(false);
+    
+    // Réinitialiser l'input file
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
 
-          {/* Informations de diagnostic */}
-          {diagnosticData && (
-            <div className="bg-blue-50 p-4 rounded-lg mb-4 text-left">
-              <h4 className="font-medium text-blue-800 mb-2">Diagnostic Richat :</h4>
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <span className="text-blue-600">Format détecté:</span>
-                  <Badge className="ml-2">{formatDetected}</Badge>
-                </div>
-                <div>
-                  <span className="text-blue-600">Compatibilité:</span>
-                  <Badge className="ml-2">{Math.round(diagnosticData.richat_compatibility_score || 0)}%</Badge>
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </CardContent>
-    </Card>
-  );
+    // Notifier le parent que le fichier a été supprimé
+    if (onFileSelected) {
+      onFileSelected(null as any); // Type assertion temporaire pour null
+    }
+  };
 
-  const renderStep3 = () => (
-    <div className="w-full max-w-5xl mx-auto space-y-6">
-      <Card>
+  // Fonction pour prévisualiser le CV Richat
+  const previewRichatCV = () => {
+    if (standardizedCvUrl) {
+      window.open(standardizedCvUrl, '_blank', 'width=800,height=900,scrollbars=yes');
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <Card className="border-2 border-dashed border-blue-300 bg-gradient-to-br from-blue-50 to-green-50">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Edit className="h-6 w-6 text-blue-600" />
-            Étape 3: Données extraites et scores de qualité Richat
+            <Zap className="h-5 w-5 text-blue-600" />
+            Système de Transformation CV Richat
           </CardTitle>
+          <CardDescription>
+            Transformez automatiquement votre CV au format professionnel Richat Partners
+          </CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
-          
-          {/* Scores de qualité */}
-          {qualityScores && (
-            <div className="bg-gradient-to-r from-blue-50 to-green-50 p-6 rounded-lg border border-blue-200">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                <Award className="h-5 w-5 text-blue-600" />
-                Scores de Qualité Richat
-              </h3>
-              <RichatQualityDisplay 
-                qualityScore={qualityScores.quality_score} 
-                complianceScore={qualityScores.format_compliance_score} 
-              />
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <h4 className="font-medium mb-2">Sections trouvées :</h4>
-                  <div className="space-y-1 text-sm">
-                    <div>Infos personnelles: {qualityScores.sections_found.personal_info_fields}/4</div>
-                    <div>Éducation: {qualityScores.sections_found.education_entries} entrées</div>
-                    <div>Expérience: {qualityScores.sections_found.experience_entries} entrées</div>
-                    <div>Langues: {qualityScores.sections_found.languages} langues</div>
-                    <div>Certifications: {qualityScores.sections_found.certifications} certifs</div>
-                    <div>Projets: {qualityScores.sections_found.projects} projets</div>
-                  </div>
+        
+        <CardContent>
+          {!cvFile ? (
+            <div 
+              className={`text-center py-8 transition-all duration-200 rounded-lg ${
+                isDragging ? 'bg-blue-100 border-blue-400 border-2 border-dashed' : 'hover:bg-blue-50'
+              }`}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
+              <div className="flex flex-col items-center gap-4">
+                <div className="relative">
+                  <UploadIcon className={`h-12 w-12 ${isDragging ? 'text-blue-600' : 'text-blue-500'} transition-colors`} />
+                  {isDragging && (
+                    <div className="absolute -inset-2 border-2 border-blue-400 rounded-full animate-pulse"></div>
+                  )}
                 </div>
                 
                 <div>
-                  <h4 className="font-medium mb-2">Conformité Richat :</h4>
-                  <RichatFeaturesDisplay features={qualityScores.richat_features} />
+                  <h4 className="text-lg font-medium text-gray-900 mb-2">
+                    {isDragging ? 'Déposez votre CV ici' : 'Téléchargez votre CV'}
+                  </h4>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Glissez-déposez votre fichier ou cliquez pour sélectionner
+                  </p>
+                  
+                  <Button 
+                    type="button" 
+                    variant="outline" 
+                    onClick={() => fileInputRef.current?.click()}
+                    className="bg-white border-blue-300 text-blue-600 hover:bg-blue-50"
+                    disabled={isProcessing || disabled}
+                  >
+                    <UploadIcon className="h-4 w-4 mr-2" />
+                    {isProcessing ? "Traitement en cours..." : "Choisir un fichier"}
+                  </Button>
                 </div>
               </div>
-            </div>
-          )}
-
-          {/* Informations personnelles extraites */}
-          {extractedData?.personal_info && (
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-medium mb-3 flex items-center gap-2">
-                <User className="h-4 w-4" />
-                Informations personnelles (Format Richat)
-              </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-1">Titre</label>
-                  <Input value={extractedData.personal_info.titre} readOnly />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Nom de l'expert</label>
-                  <Input value={extractedData.personal_info.nom_expert} readOnly />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Date de naissance</label>
-                  <Input value={extractedData.personal_info.date_naissance} readOnly />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-1">Pays de résidence</label>
-                  <Input value={extractedData.personal_info.pays_residence} readOnly />
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Titre professionnel */}
-          {extractedData?.professional_title && (
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <h4 className="font-medium mb-2 flex items-center gap-2">
-                <Briefcase className="h-4 w-4" />
-                Titre professionnel
-              </h4>
-              <Input value={extractedData.professional_title} readOnly className="font-medium" />
-            </div>
-          )}
-
-          {/* Expérience professionnelle */}
-          {extractedData?.experience && extractedData.experience.length > 0 && (
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <h4 className="font-medium mb-3 flex items-center gap-2">
-                <Building className="h-4 w-4" />
-                Expérience professionnelle ({extractedData.experience.length} postes)
-              </h4>
-              <div className="space-y-3">
-                {extractedData.experience.slice(0, 3).map((exp, index) => (
-                  <div key={index} className="p-3 bg-white rounded border">
-                    <div className="flex justify-between items-start mb-2">
-                      <div>
-                        <div className="font-medium">{exp.employeur}</div>
-                        <div className="text-sm text-gray-600">{exp.poste}</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-sm font-medium">{exp.periode}</div>
-                        <div className="text-sm text-gray-600">{exp.pays}</div>
-                      </div>
-                    </div>
-                    <div className="text-sm text-gray-700">
-                      {exp.resume_activites.substring(0, 150)}...
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Compétences */}
-          {extractedData?.skills && extractedData.skills.length > 0 && (
-            <div className="bg-green-50 p-4 rounded-lg">
-              <h4 className="font-medium mb-3 flex items-center gap-2">
-                <Star className="h-4 w-4" />
-                Compétences extraites ({extractedData.skills.length})
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {extractedData.skills.slice(0, 10).map((skill, index) => (
-                  <Badge key={index} variant="secondary" className="bg-white">
-                    {skill}
-                  </Badge>
-                ))}
-                {extractedData.skills.length > 10 && (
-                  <Badge variant="outline">+{extractedData.skills.length - 10} autres</Badge>
-                )}
-              </div>
-            </div>
-          )}
-
-          {/* Langues */}
-          {extractedData?.languages && extractedData.languages.length > 0 && (
-            <div className="bg-yellow-50 p-4 rounded-lg">
-              <h4 className="font-medium mb-3 flex items-center gap-2">
-                <Languages className="h-4 w-4" />
-                Langues parlées (Format tableau Richat)
-              </h4>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="text-left p-2">Langue</th>
-                      <th className="text-left p-2">Parler</th>
-                      <th className="text-left p-2">Lecture</th>
-                      <th className="text-left p-2">Éditorial</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {extractedData.languages.map((lang, index) => (
-                      <tr key={index} className="border-b">
-                        <td className="p-2 font-medium">{lang.language}</td>
-                        <td className="p-2">{lang.speaking}</td>
-                        <td className="p-2">{lang.reading}</td>
-                        <td className="p-2">{lang.writing}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-
-          {/* Recommandations */}
-          {recommendations.length > 0 && (
-            <Alert className="border-amber-200 bg-amber-50">
-              <AlertCircle className="h-4 w-4 text-amber-600" />
-              <AlertTitle className="text-amber-800">Recommandations d'amélioration</AlertTitle>
-              <AlertDescription className="text-amber-700">
-                <ul className="list-disc list-inside space-y-1">
-                  {recommendations.map((rec, index) => (
-                    <li key={index}>{rec}</li>
-                  ))}
-                </ul>
-              </AlertDescription>
-            </Alert>
-          )}
-
-          <div className="flex justify-end pt-4">
-            <Button onClick={handleTransformToRichatFormat} className="bg-blue-600 hover:bg-blue-700">
-              Générer CV au format Richat Partners
-              <Shield className="h-4 w-4 ml-2" />
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
-    </div>
-  );
-
-  const renderStep4 = () => (
-    <div className="w-full max-w-4xl mx-auto space-y-6">
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <FileText className="h-6 w-6 text-green-600" />
-            Étape 4: CV transformé au format Richat Partners
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {isProcessing ? (
-            <div className="text-center py-12">
-              <RefreshCw className="h-12 w-12 text-blue-600 animate-spin mx-auto mb-4" />
-              <p className="text-lg">Génération du CV format Richat en cours...</p>
-              <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 max-w-md mx-auto">
-                <div className="text-sm text-blue-600">✓ En-tête Richat Partners</div>
-                <div className="text-sm text-blue-600">✓ Tableau informations personnelles</div>
-                <div className="text-sm text-blue-600">✓ Sections standardisées</div>
-                <div className="text-sm text-blue-600">✓ Signature électronique</div>
+              
+              <Input 
+                type="file" 
+                accept=".pdf,.doc,.docx,.txt" 
+                onChange={handleFileChange}
+                ref={fileInputRef}
+                className="hidden"
+                disabled={disabled}
+              />
+              
+              <div className="mt-4 text-xs text-gray-500">
+                <p>Formats supportés: PDF, DOC, DOCX, TXT</p>
+                <p>Taille maximale: 25MB</p>
               </div>
             </div>
           ) : (
-            <div className="space-y-6">
-              {/* Aperçu du CV Richat */}
-              <div className="bg-gradient-to-br from-blue-50 to-green-50 p-6 rounded-lg border-2 border-blue-200">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-blue-600 p-3 rounded-full">
-                      <Shield className="h-8 w-8 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-blue-800">RICHAT PARTNERS</h3>
-                      <p className="text-blue-600">CURRICULUM VITAE (CV)</p>
+            <div className="space-y-4">
+              {/* Fichier sélectionné */}
+              <div className="flex items-center justify-between bg-white p-4 rounded-lg border border-blue-200 shadow-sm">
+                <div className="flex items-center gap-3">
+                  <FileTextIcon className="h-8 w-8 text-blue-600" />
+                  <div>
+                    <p className="font-medium text-gray-900">{cvFile.name}</p>
+                    <div className="flex items-center gap-4 text-sm text-gray-500">
+                      <span>{(cvFile.size / 1024 / 1024).toFixed(2)} MB</span>
+                      {qualityScore !== null && (
+                        <QualityScoreDisplay score={qualityScore} />
+                      )}
                     </div>
                   </div>
-                  <div className="flex gap-2">
-                    {qualityScores && (
-                      <>
-                        <Badge className="bg-green-100 text-green-800 border-green-300">
-                          Qualité: {qualityScores.quality_score}%
-                        </Badge>
-                        <Badge className="bg-blue-100 text-blue-800 border-blue-300">
-                          Conformité: {qualityScores.format_compliance_score}%
-                        </Badge>
-                      </>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  {transformationComplete && (
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Badge variant="secondary" className="bg-green-100 text-green-800 border-green-300">
+                            <CheckCircleIcon className="h-3 w-3 mr-1" />
+                            Transformé
+                          </Badge>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>CV transformé au format Richat avec succès</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  )}
+                  
+                  <Button 
+                    type="button" 
+                    variant="ghost" 
+                    size="sm" 
+                    onClick={handleRemoveCv}
+                    className="h-8 w-8 p-0 hover:bg-red-50 text-red-500"
+                    disabled={disabled}
+                  >
+                    <XIcon className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+
+              {/* Progression du traitement */}
+              {isProcessing && (
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <RefreshCwIcon className="h-4 w-4 animate-spin text-blue-600" />
+                      <span className="text-sm text-blue-800 font-medium">
+                        Transformation au format Richat en cours...
+                      </span>
+                    </div>
+                    <span className="text-sm font-medium text-gray-600">{uploadProgress}%</span>
+                  </div>
+                  
+                  <Progress value={uploadProgress} className="h-3 bg-gray-200" />
+                  
+                  <div className="grid grid-cols-2 gap-2 text-xs text-blue-700">
+                    <div className="flex items-center gap-1">
+                      <CheckCircleIcon className="h-3 w-3" />
+                      <span>Extraction des données</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <CheckCircleIcon className="h-3 w-3" />
+                      <span>Analyse des compétences</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <CheckCircleIcon className="h-3 w-3" />
+                      <span>Calcul du score qualité</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <CheckCircleIcon className="h-3 w-3" />
+                      <span>Génération format Richat</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Erreur de traitement */}
+              {cvError && (
+                <Alert variant="destructive">
+                  <AlertCircleIcon className="h-4 w-4" />
+                  <AlertTitle>Erreur de transformation</AlertTitle>
+                  <AlertDescription>
+                    {cvError}
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => processAndTransformCV(cvFile)}
+                      className="mt-2 ml-0"
+                      disabled={isProcessing || disabled}
+                    >
+                      <RefreshCwIcon className="h-3 w-3 mr-1" />
+                      Réessayer
+                    </Button>
+                  </AlertDescription>
+                </Alert>
+              )}
+
+              {/* Aperçu des données extraites */}
+              {extractedData && showPreview && (
+                <div className="bg-green-50 p-4 rounded-lg border border-green-200">
+                  <div className="flex justify-between items-center mb-3">
+                    <h4 className="font-medium text-green-800 flex items-center gap-2">
+                      <CheckCircleIcon className="h-4 w-4" />
+                      Données extraites automatiquement
+                    </h4>
+                    {qualityScore !== null && (
+                      <QualityScoreDisplay score={qualityScore} />
                     )}
                   </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-green-700">
+                    {extractedData.personal_info?.nom_expert && (
+                      <div className="flex items-center gap-2">
+                        <Users className="h-3 w-3" />
+                        <span>Nom: {extractedData.personal_info.nom_expert}</span>
+                      </div>
+                    )}
+                    {extractedData.personal_info?.email && (
+                      <div className="flex items-center gap-2">
+                        <InfoIcon className="h-3 w-3" />
+                        <span>Email: {extractedData.personal_info.email}</span>
+                      </div>
+                    )}
+                    {extractedData.personal_info?.telephone && (
+                      <div className="flex items-center gap-2">
+                        <InfoIcon className="h-3 w-3" />
+                        <span>Téléphone: {extractedData.personal_info.telephone}</span>
+                      </div>
+                    )}
+                    {extractedData.skills?.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        <Star className="h-3 w-3" />
+                        <span>Compétences: {extractedData.skills.length} identifiées</span>
+                      </div>
+                    )}
+                    {extractedData.experience?.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        <TrendingUp className="h-3 w-3" />
+                        <span>Expériences: {extractedData.experience.length} identifiées</span>
+                      </div>
+                    )}
+                    {extractedData.education?.length > 0 && (
+                      <div className="flex items-center gap-2">
+                        <Award className="h-3 w-3" />
+                        <span>Formation: {extractedData.education.length} entrées</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Compétences détaillées */}
+                  {extractedData.skills?.length > 0 && (
+                    <div className="mt-3 pt-3 border-t border-green-200">
+                      <p className="text-xs font-medium text-green-800 mb-2">Compétences détectées:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {extractedData.skills.slice(0, 8).map((skill, index) => (
+                          <Badge key={index} variant="outline" className="text-xs bg-white border-green-300 text-green-700">
+                            {skill}
+                          </Badge>
+                        ))}
+                        {extractedData.skills.length > 8 && (
+                          <Badge variant="outline" className="text-xs bg-white border-green-300 text-green-700">
+                            +{extractedData.skills.length - 8} autres
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* Statistiques détaillées */}
+                  {processingStats && (
+                    <div className="mt-3 pt-3 border-t border-green-200">
+                      <div className="text-xs text-green-600 grid grid-cols-2 gap-2">
+                        <span>Méthode: {processingStats.extraction_method}</span>
+                        <span>Texte: {processingStats.text_length} caractères</span>
+                        <span>Infos perso: {processingStats.personal_info_found}/5</span>
+                        <span>Sections: {processingStats.experience_entries}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
+              )}
 
-                {/* Aperçu des données selon format Mohamed Yehdhih */}
-                <div className="bg-white p-6 rounded-lg border border-blue-200 shadow-sm">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      {/* Tableau informations personnelles */}
-                      <div className="mb-4">
-                        <h4 className="font-semibold text-gray-800 mb-3">Informations personnelles</h4>
-                        <div className="space-y-2 text-sm">
-                          <div className="flex">
-                            <span className="font-medium w-20 bg-blue-50 p-1 rounded text-blue-800">Titre</span>
-                            <span className="ml-2">{extractedData?.personal_info?.titre || "Mr."}</span>
-                          </div>
-                          <div className="flex">
-                            <span className="font-medium w-20 bg-blue-50 p-1 rounded text-blue-800">Nom</span>
-                            <span className="ml-2">{extractedData?.personal_info?.nom_expert || "Expert"}</span>
-                          </div>
-                          <div className="flex">
-                            <span className="font-medium w-20 bg-blue-50 p-1 rounded text-blue-800">Naissance</span>
-                            <span className="ml-2">{extractedData?.personal_info?.date_naissance || "À compléter"}</span>
-                          </div>
-                          <div className="flex">
-                            <span className="font-medium w-20 bg-blue-50 p-1 rounded text-blue-800">Résidence</span>
-                            <span className="ml-2">{extractedData?.personal_info?.pays_residence || "Mauritanie"}</span>
-                          </div>
+              {/* Recommandations */}
+              {recommendations.length > 0 && (
+                <RecommendationsDisplay recommendations={recommendations} />
+              )}
+
+              {/* CV Richat généré */}
+              {standardizedCvUrl && transformationComplete && (
+                <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="relative">
+                        <FileIcon className="h-8 w-8 text-blue-600" />
+                        <div className="absolute -top-1 -right-1 bg-green-500 rounded-full p-0.5">
+                          <CheckCircleIcon className="h-3 w-3 text-white" />
                         </div>
                       </div>
-
-                      {/* Titre professionnel centré */}
-                      <div className="text-center bg-blue-50 p-3 rounded-lg mb-4">
-                        <h3 className="text-lg font-bold text-blue-800">
-                          {extractedData?.professional_title || "Expert Consultant"}
-                        </h3>
+                      <div>
+                        <p className="font-medium text-blue-800">CV Richat Partners généré</p>
+                        <p className="text-sm text-blue-600">
+                          Format standardisé prêt pour candidatures
+                          {qualityScore !== null && (
+                            <span className="ml-2">• Qualité: {qualityScore}%</span>
+                          )}
+                        </p>
                       </div>
-
-                      {/* Contact */}
-                      {(extractedData?.personal_info?.email || extractedData?.personal_info?.telephone) && (
-                        <div className="space-y-2 text-sm">
-                          {extractedData.personal_info.email && (
-                            <div className="flex items-center gap-2">
-                              <Mail className="h-4 w-4 text-gray-500" />
-                              <span>{extractedData.personal_info.email}</span>
-                            </div>
-                          )}
-                          {extractedData.personal_info.telephone && (
-                            <div className="flex items-center gap-2">
-                              <Phone className="h-4 w-4 text-gray-500" />
-                              <span>{extractedData.personal_info.telephone}</span>
-                            </div>
-                          )}
-                        </div>
-                      )}
                     </div>
-
-                    <div>
-                      {/* Résumé du profil */}
-                      {extractedData?.profile_summary && (
-                        <div className="mb-4">
-                          <h4 className="font-semibold text-gray-800 mb-2">Résumé du Profil</h4>
-                          <p className="text-sm text-gray-700 leading-relaxed">
-                            {extractedData.profile_summary.substring(0, 200)}...
-                          </p>
-                        </div>
-                      )}
-
-                      {/* Compétences clés */}
-                      {extractedData?.skills && extractedData.skills.length > 0 && (
-                        <div className="mb-4">
-                          <h4 className="font-semibold text-gray-800 mb-2">Compétences clés</h4>
-                          <div className="flex flex-wrap gap-1">
-                            {extractedData.skills.slice(0, 6).map((skill, index) => (
-                              <Badge key={index} variant="outline" className="text-xs bg-blue-50 text-blue-700 border-blue-300">
-                                {skill}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      {/* Langues */}
-                      {extractedData?.languages && extractedData.languages.length > 0 && (
-                        <div>
-                          <h4 className="font-semibold text-gray-800 mb-2">Langues</h4>
-                          <div className="space-y-1 text-xs">
-                            {extractedData.languages.slice(0, 3).map((lang, index) => (
-                              <div key={index} className="flex justify-between bg-gray-50 p-2 rounded">
-                                <span className="font-medium">{lang.language}</span>
-                                <span className="text-gray-600">{lang.level}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Pied de page Richat */}
-                  <div className="mt-6 pt-4 border-t text-xs text-gray-500 text-center">
-                    <div className="flex justify-between items-center">
-                      <span>Généré par Richat Partners - Format standardisé</span>
-                      <span>ID: RICHAT-{new Date().getTime()}</span>
-                    </div>
-                    <div className="mt-1">
-                      <span>Référence: CV Mohamed Yehdhih Sidatt - {processingMethod}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Actions */}
-              <div className="flex justify-between items-center">
-                <Button variant="outline" onClick={() => setStep(3)}>
-                  <Edit className="h-4 w-4 mr-2" />
-                  Retour pour édition
-                </Button>
-                <div className="space-x-4">
-                  <Button variant="outline" onClick={handlePreviewCV} disabled={!transformedCV}>
-                    <Eye className="h-4 w-4 mr-2" />
-                    Aperçu CV Richat
-                  </Button>
-                  <Button variant="outline" onClick={handleDownloadCV} disabled={!transformedCV}>
-                    <Download className="h-4 w-4 mr-2" />
-                    Télécharger PDF
-                  </Button>
-                  <Button onClick={handleValidateCV} className="bg-green-600 hover:bg-green-700">
-                    Valider et Signer
-                    <CheckCircle className="h-4 w-4 ml-2" />
-                  </Button>
-                </div>
-              </div>
-
-              {/* Métriques détaillées */}
-              {qualityScores && (
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <h4 className="font-medium mb-3">Métriques de transformation</h4>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-600">{qualityScores.quality_score}%</div>
-                      <div className="text-gray-600">Score Qualité</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-green-600">{qualityScores.format_compliance_score}%</div>
-                      <div className="text-gray-600">Conformité Richat</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-purple-600">{qualityScores.sections_found.experience_entries}</div>
-                      <div className="text-gray-600">Expériences</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-orange-600">{qualityScores.sections_found.certifications}</div>
-                      <div className="text-gray-600">Certifications</div>
+                    
+                    <div className="flex gap-2">
+                      <TooltipProvider>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <Button 
+                              type="button" 
+                              variant="outline" 
+                              size="sm"
+                              onClick={previewRichatCV}
+                              className="text-blue-600 border-blue-300 hover:bg-blue-50"
+                            >
+                              <Eye className="h-4 w-4 mr-1" />
+                              Aperçu
+                            </Button>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Prévisualiser le CV au format Richat</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </TooltipProvider>
                     </div>
                   </div>
                 </div>
@@ -867,272 +742,43 @@ const CVTransformationSystem = () => {
           )}
         </CardContent>
       </Card>
-    </div>
-  );
 
-  const renderStep5 = () => (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <CheckCircle className="h-6 w-6 text-green-600" />
-          Étape 5: CV Richat validé et signé
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="text-center">
-        <div className="bg-green-50 p-8 rounded-lg mb-6 border border-green-200">
-          <div className="flex justify-center mb-4">
-            <div className="relative">
-              <CheckCircle className="h-20 w-20 text-green-600" />
-              <div className="absolute -top-2 -right-2 bg-blue-600 rounded-full p-1">
-                <Shield className="h-4 w-4 text-white" />
+      {/* Informations sur le système */}
+      <Alert className="border-blue-200 bg-blue-50">
+        <Shield className="h-4 w-4 text-blue-600" />
+        <AlertTitle className="text-blue-900">Système de transformation CV avancé</AlertTitle>
+        <AlertDescription className="text-blue-800">
+          <div className="space-y-2">
+            <p>Votre CV sera automatiquement analysé par notre IA avancée :</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm">
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="h-3 w-3 text-green-600" />
+                <span>Extraction intelligente des informations</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="h-3 w-3 text-green-600" />
+                <span>Reconnaissance des compétences techniques</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="h-3 w-3 text-green-600" />
+                <span>Structuration de l'expérience</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="h-3 w-3 text-green-600" />
+                <span>Score de qualité personnalisé</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="h-3 w-3 text-green-600" />
+                <span>Format professionnel Richat</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="h-3 w-3 text-green-600" />
+                <span>Recommandations d'amélioration</span>
               </div>
             </div>
           </div>
-          <h3 className="text-xl font-semibold text-green-800 mb-2">
-            CV Richat validé avec succès !
-          </h3>
-          <p className="text-green-600 mb-4">
-            Le CV a été transformé au format standardisé Richat Partners et signé électroniquement.
-          </p>
-          
-          {/* Résumé de la transformation */}
-          <div className="bg-white p-4 rounded-lg border border-green-200 mb-4">
-            <h4 className="font-medium text-green-800 mb-3">Résumé de la transformation</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-              <div className="text-left">
-                <div className="flex justify-between">
-                  <span>Format original:</span>
-                  <Badge variant="outline">{formatDetected}</Badge>
-                </div>
-                <div className="flex justify-between mt-1">
-                  <span>Format final:</span>
-                  <Badge className="bg-blue-100 text-blue-800">Richat Standard</Badge>
-                </div>
-                <div className="flex justify-between mt-1">
-                  <span>Méthode:</span>
-                  <Badge variant="secondary">Mohamed Yehdhih</Badge>
-                </div>
-              </div>
-              <div className="text-left">
-                {qualityScores && (
-                  <>
-                    <div className="flex justify-between">
-                      <span>Score qualité:</span>
-                      <Badge className="bg-green-100 text-green-800">{qualityScores.quality_score}%</Badge>
-                    </div>
-                    <div className="flex justify-between mt-1">
-                      <span>Conformité Richat:</span>
-                      <Badge className="bg-blue-100 text-blue-800">{qualityScores.format_compliance_score}%</Badge>
-                    </div>
-                    <div className="flex justify-between mt-1">
-                      <span>Sections complètes:</span>
-                      <Badge variant="outline">{Object.values(qualityScores.richat_features).filter(Boolean).length}/9</Badge>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Informations du CV validé */}
-        <div className="flex items-center justify-center gap-4 p-4 bg-blue-50 rounded-lg mb-6">
-          <FileText className="h-10 w-10 text-blue-600" />
-          <div className="text-left">
-            <p className="font-medium text-blue-800">CV Richat Partners validé</p>
-            <p className="text-sm text-blue-600">
-              Signature électronique: RICHAT-{new Date().getTime()}
-            </p>
-            <p className="text-sm text-blue-600">
-              Date de validation: {new Date().toLocaleDateString('fr-FR')}
-            </p>
-            <p className="text-sm text-blue-600">
-              Référence: Format Mohamed Yehdhih Sidatt
-            </p>
-          </div>
-        </div>
-
-        {/* Fonctionnalités Richat confirmées */}
-        {qualityScores && (
-          <div className="bg-gray-50 p-4 rounded-lg mb-6">
-            <h4 className="font-medium mb-3">Fonctionnalités Richat confirmées</h4>
-            <RichatFeaturesDisplay features={qualityScores.richat_features} />
-          </div>
-        )}
-
-        {/* Actions finales */}
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button variant="outline" onClick={handleDownloadCV} disabled={!transformedCV}>
-            <Download className="h-4 w-4 mr-2" />
-            Télécharger CV final
-          </Button>
-          <Button variant="outline" onClick={handlePreviewCV} disabled={!transformedCV}>
-            <Eye className="h-4 w-4 mr-2" />
-            Aperçu PDF
-          </Button>
-          <Button onClick={() => {
-            setStep(1);
-            setUploadedCV(null);
-            setExtractedData(null);
-            setQualityScores(null);
-            setTransformedCV(null);
-            setIsValidated(false);
-            setDiagnosticData(null);
-            setRecommendations([]);
-            setFormatDetected('');
-            setProcessingMethod('');
-          }} className="bg-blue-600 hover:bg-blue-700">
-            <Upload className="h-4 w-4 mr-2" />
-            Traiter un nouveau CV
-          </Button>
-        </div>
-
-        {/* Statistiques du système */}
-        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-          <h4 className="font-medium text-blue-800 mb-2">Système de Transformation CV Richat</h4>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
-            <div className="text-center">
-              <div className="text-lg font-bold text-blue-600">100%</div>
-              <div className="text-blue-700">Extraction réussie</div>
-            </div>
-            <div className="text-center">
-              <div className="text-lg font-bold text-green-600">9/9</div>
-              <div className="text-green-700">Sections Richat</div>
-            </div>
-            <div className="text-center">
-              <div className="text-lg font-bold text-purple-600">PDF</div>
-              <div className="text-purple-700">Format final</div>
-            </div>
-            <div className="text-center">
-              <div className="text-lg font-bold text-orange-600">✓</div>
-              <div className="text-orange-700">Signé électroniquement</div>
-            </div>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8">
-      <div className="container mx-auto px-4">
-        
-        {/* En-tête du système */}
-        <div className="text-center mb-8">
-          <div className="flex justify-center items-center gap-3 mb-4">
-            <div className="bg-blue-600 p-3 rounded-full">
-              <Shield className="h-8 w-8 text-white" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">
-                Système de Transformation CV Richat
-              </h1>
-              <p className="text-blue-600 font-medium">Format standardisé Mohamed Yehdhih Sidatt</p>
-            </div>
-          </div>
-          <p className="text-gray-600 max-w-3xl mx-auto">
-            Transformez automatiquement les CV des consultants au format standardisé Richat Partners 
-            avec extraction intelligente, validation et signature électronique conforme aux standards internationaux.
-          </p>
-        </div>
-
-        {/* Indicateur de progression amélioré */}
-        <div className="max-w-4xl mx-auto mb-8">
-          <div className="flex items-center justify-between">
-            {[
-              { num: 1, label: "Upload", icon: Upload },
-              { num: 2, label: "Analyse Richat", icon: Settings },
-              { num: 3, label: "Extraction", icon: Edit },
-              { num: 4, label: "Transformation", icon: Shield },
-              { num: 5, label: "Validation", icon: CheckCircle }
-            ].map(({ num, label, icon: Icon }, index) => (
-              <div key={num} className="flex items-center">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 ${
-                  step >= num 
-                    ? 'bg-blue-600 text-white border-blue-600' 
-                    : 'bg-gray-200 text-gray-500 border-gray-300'
-                }`}>
-                  {step > num ? (
-                    <Check className="h-6 w-6" />
-                  ) : (
-                    <Icon className="h-6 w-6" />
-                  )}
-                </div>
-                {index < 4 && (
-                  <div className={`w-16 h-1 mx-2 ${
-                    step > num ? 'bg-blue-600' : 'bg-gray-200'
-                  }`} />
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-between mt-2 text-sm">
-            <span className={step >= 1 ? 'text-blue-600 font-medium' : 'text-gray-500'}>Upload</span>
-            <span className={step >= 2 ? 'text-blue-600 font-medium' : 'text-gray-500'}>Analyse</span>
-            <span className={step >= 3 ? 'text-blue-600 font-medium' : 'text-gray-500'}>Extraction</span>
-            <span className={step >= 4 ? 'text-blue-600 font-medium' : 'text-gray-500'}>Transformation</span>
-            <span className={step >= 5 ? 'text-blue-600 font-medium' : 'text-gray-500'}>Validation</span>
-          </div>
-        </div>
-
-        {/* Informations système */}
-        <div className="max-w-4xl mx-auto mb-6">
-          <Alert className="border-blue-200 bg-blue-50">
-            <Shield className="h-4 w-4 text-blue-600" />
-            <AlertTitle className="text-blue-900">Système Richat Partners - Version Avancée</AlertTitle>
-            <AlertDescription className="text-blue-800">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-                <div>
-                  <p className="font-medium mb-1">Fonctionnalités :</p>
-                  <ul className="text-sm space-y-1">
-                    <li>• Détection automatique de format CV</li>
-                    <li>• Extraction intelligente avec tableaux</li>
-                    <li>• Score de conformité Richat en temps réel</li>
-                    <li>• Génération PDF selon modèle Mohamed Yehdhih</li>
-                  </ul>
-                </div>
-                <div>
-                  <p className="font-medium mb-1">Standards supportés :</p>
-                  <ul className="text-sm space-y-1">
-                    <li>• Format Richat standardisé (référence)</li>
-                    <li>• CVs professionnels modernes</li>
-                    <li>• Documents académiques</li>
-                    <li>• Formats traditionnels français/anglais</li>
-                  </ul>
-                </div>
-              </div>
-            </AlertDescription>
-          </Alert>
-        </div>
-
-        {/* Rendu des étapes */}
-        {step === 1 && renderStep1()}
-        {step === 2 && renderStep2()}
-        {step === 3 && renderStep3()}
-        {step === 4 && renderStep4()}
-        {step === 5 && renderStep5()}
-        
-        {/* Footer système */}
-        <div className="text-center mt-12 pt-8 border-t border-gray-200">
-          <div className="flex justify-center items-center gap-6 text-sm text-gray-600">
-            <div className="flex items-center gap-1">
-              <Shield className="h-4 w-4 text-blue-600" />
-              <span>Sécurisé & Confidentiel</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <CheckCircle className="h-4 w-4 text-green-600" />
-              <span>Conforme Standards Internationaux</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Award className="h-4 w-4 text-purple-600" />
-              <span>Format Richat Certifié</span>
-            </div>
-          </div>
-          <p className="text-xs text-gray-500 mt-2">
-            Richat Partners © 2024 - Système de transformation CV automatisé
-          </p>
-        </div>
-      </div>
+        </AlertDescription>
+      </Alert>
     </div>
   );
 };

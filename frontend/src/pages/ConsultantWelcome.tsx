@@ -26,7 +26,14 @@ import {
   Menu,
   X,
   Save,
-  Plus
+  Plus,
+  GraduationCap,
+  Languages,
+  Zap,
+  Globe,
+  Trash2,
+  UserCircle,
+  ChevronDown
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -47,9 +54,22 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface ConsultantData {
   firstName: string;
@@ -98,6 +118,63 @@ interface Notification {
   type: string;
 }
 
+// Interface pour le CV Richat complet
+interface RichatCVFormData {
+  // Informations personnelles
+  titre: string;
+  nom_expert: string;
+  date_naissance: string;
+  pays_residence: string;
+  titre_professionnel: string;
+  
+  // Résumé du profil
+  resume_profil: string;
+  
+  // Éducation
+  formations: Array<{
+    nom_ecole: string;
+    periode_etude: string;
+    diplome_obtenu: string;
+    specialisation: string;
+  }>;
+  
+  // Expérience professionnelle
+  experiences: Array<{
+    periode: string;
+    nom_employeur: string;
+    titre_professionnel: string;
+    pays: string;
+    activites: string;
+  }>;
+  
+  // Langues
+  langues: Array<{
+    langue: string;
+    parler: string;
+    lecture: string;
+    editorial: string;
+  }>;
+  
+  // Missions de référence
+  missions_reference: Array<{
+    nom_projet: string;
+    date: string;
+    societe: string;
+    poste_occupe: string;
+    lieu: string;
+    client_bailleur: string;
+    description_projet: string;
+    type_secteur: string;
+    activites_responsabilites: string;
+  }>;
+  
+  // Certifications
+  certifications: string[];
+  
+  // Adhésions professionnelles
+  adhesions_professionnelles: string;
+}
+
 const ConsultantWelcome = () => {
   const [consultantData, setConsultantData] = useState<ConsultantData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -114,6 +191,64 @@ const ConsultantWelcome = () => {
   const [editFormData, setEditFormData] = useState<Partial<ConsultantData>>({});
   const [messages, setMessages] = useState<{type: 'success' | 'error' | 'info', text: string, id: number}[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
+  
+  // Nouveaux états pour le CV Richat complet
+  const [isCompletingCV, setIsCompletingCV] = useState(false);
+  const [richatCVData, setRichatCVData] = useState<RichatCVFormData>({
+    titre: "Mr.",
+    nom_expert: "",
+    date_naissance: "",
+    pays_residence: "Mauritanie",
+    titre_professionnel: "",
+    resume_profil: "",
+    formations: [{
+      nom_ecole: "",
+      periode_etude: "",
+      diplome_obtenu: "",
+      specialisation: ""
+    }],
+    experiences: [{
+      periode: "",
+      nom_employeur: "",
+      titre_professionnel: "",
+      pays: "",
+      activites: ""
+    }],
+    langues: [
+      {
+        langue: "Français",
+        parler: "",
+        lecture: "",
+        editorial: ""
+      },
+      {
+        langue: "Anglais",
+        parler: "",
+        lecture: "",
+        editorial: ""
+      },
+      {
+        langue: "Arabe",
+        parler: "Native speaker",
+        lecture: "Native speaker",
+        editorial: "Native speaker"
+      }
+    ],
+    missions_reference: [{
+      nom_projet: "",
+      date: "",
+      societe: "",
+      poste_occupe: "",
+      lieu: "",
+      client_bailleur: "",
+      description_projet: "",
+      type_secteur: "",
+      activites_responsabilites: ""
+    }],
+    certifications: [],
+    adhesions_professionnelles: "N/A"
+  });
+  const [generatingCV, setGeneratingCV] = useState(false);
 
   // Fonction pour afficher les messages
   const showMessage = (type: 'success' | 'error' | 'info', text: string) => {
@@ -122,6 +257,21 @@ const ConsultantWelcome = () => {
     setTimeout(() => {
       setMessages(prev => prev.filter(msg => msg.id !== newMessage.id));
     }, 4000);
+  };
+
+  // Fonction pour pré-remplir le CV Richat avec les données existantes
+  const prefillRichatCV = () => {
+    if (!consultantData) return;
+    
+    setRichatCVData(prev => ({
+      ...prev,
+      nom_expert: `${consultantData.firstName} ${consultantData.lastName}`,
+      pays_residence: `${consultantData.country} - ${consultantData.city}`,
+      titre_professionnel: consultantData.specialite || "Consultant",
+      resume_profil: `Expert en ${consultantData.domaine_principal} avec spécialisation en ${consultantData.specialite}. ` +
+                    `Consultant expérimenté avec un niveau d'expertise ${consultantData.expertise}. ` +
+                    `Compétences principales: ${consultantData.skills || 'Non spécifiées'}.`,
+    }));
   };
 
   const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -533,46 +683,79 @@ const ConsultantWelcome = () => {
                   )}
                 </DropdownMenuContent>
               </DropdownMenu>
-              
-              {/* Menu utilisateur */}
+
+              {/* Menu Profil Connecté */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="relative h-10 w-10 rounded-full">
-                    <Avatar className="h-10 w-10">
+                  <Button variant="ghost" className="flex items-center gap-2 hover:bg-gray-100">
+                    <Avatar className="h-8 w-8">
                       <AvatarImage 
                         src={profileImageUrl || undefined} 
                         alt={`${consultantData.firstName} ${consultantData.lastName}`} 
                       />
-                      <AvatarFallback className="bg-blue-600 text-white">
+                      <AvatarFallback className="bg-blue-600 text-white text-sm font-medium">
                         {getInitials(consultantData.firstName, consultantData.lastName)}
                       </AvatarFallback>
                     </Avatar>
+                    <div className="hidden md:flex flex-col items-start">
+                      <span className="text-sm font-medium text-gray-900">
+                        {consultantData.firstName} {consultantData.lastName}
+                      </span>
+                      <span className="text-xs text-gray-500">
+                        {consultantData.specialite || "Consultant"}
+                      </span>
+                    </div>
+                    <ChevronDown className="h-4 w-4 text-gray-500" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end">
+                <DropdownMenuContent className="w-60" align="end">
                   <DropdownMenuLabel>
-                    <div className="flex flex-col space-y-1">
-                      <p className="text-sm font-medium">
-                        {consultantData.firstName} {consultantData.lastName}
-                      </p>
-                      <p className="text-xs text-gray-500">
-                        {consultantData.email}
-                      </p>
+                    <div className="flex items-center gap-3">
+                      <Avatar className="h-10 w-10">
+                        <AvatarImage 
+                          src={profileImageUrl || undefined} 
+                          alt={`${consultantData.firstName} ${consultantData.lastName}`} 
+                        />
+                        <AvatarFallback className="bg-blue-600 text-white">
+                          {getInitials(consultantData.firstName, consultantData.lastName)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-medium">{consultantData.firstName} {consultantData.lastName}</p>
+                        <p className="text-xs text-gray-500">{consultantData.email}</p>
+                      </div>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => setIsEditingProfile(true)}>
-                    <Edit className="mr-2 h-4 w-4" />
-                    Modifier le profil
+                  
+                  <DropdownMenuItem onClick={() => setIsEditingProfile(true)} className="cursor-pointer">
+                    <User className="h-4 w-4 mr-2" />
+                    Mon Profil
                   </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Settings className="mr-2 h-4 w-4" />
+                  
+                  <DropdownMenuItem className="cursor-pointer">
+                    <Settings className="h-4 w-4 mr-2" />
                     Paramètres
                   </DropdownMenuItem>
+                  
+                  <DropdownMenuItem className="cursor-pointer">
+                    <Briefcase className="h-4 w-4 mr-2" />
+                    Mes Missions
+                  </DropdownMenuItem>
+                  
+                  <DropdownMenuItem className="cursor-pointer">
+                    <FileText className="h-4 w-4 mr-2" />
+                    Mes CV
+                  </DropdownMenuItem>
+                  
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleLogout} className="text-red-600">
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Déconnexion
+                  
+                  <DropdownMenuItem 
+                    onClick={handleLogout} 
+                    className="cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Se déconnecter
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -924,20 +1107,49 @@ const ConsultantWelcome = () => {
                           <RefreshCw className="h-4 w-4" />
                         </Button>
                       </div>
+
+                      {/* Bouton pour compléter le CV */}
+                      <Button 
+                        onClick={() => {
+                          prefillRichatCV();
+                          setIsCompletingCV(true);
+                        }}
+                        variant="outline"
+                        className="w-full border-blue-300 text-blue-600 hover:bg-blue-50"
+                      >
+                        <Edit className="h-4 w-4 mr-2" />
+                        Compléter le CV Richat
+                      </Button>
                     </div>
                   ) : (
                     <div className="text-center py-4">
                       <FileIcon className="h-8 w-8 text-gray-400 mx-auto mb-2" />
                       <p className="text-sm text-gray-600 mb-3">CV Richat non disponible</p>
-                      <Button 
-                        variant="outline"
-                        onClick={handleRegenerateRichatCV}
-                        disabled={loadingCv}
-                        size="sm"
-                      >
-                        <RefreshCw className="h-4 w-4 mr-2" />
-                        Vérifier
-                      </Button>
+                      
+                      <div className="space-y-2">
+                        <Button 
+                          variant="outline"
+                          onClick={handleRegenerateRichatCV}
+                          disabled={loadingCv}
+                          size="sm"
+                          className="w-full"
+                        >
+                          <RefreshCw className="h-4 w-4 mr-2" />
+                          Vérifier
+                        </Button>
+                        
+                        <Button 
+                          onClick={() => {
+                            prefillRichatCV();
+                            setIsCompletingCV(true);
+                          }}
+                          className="w-full bg-blue-600 hover:bg-blue-700"
+                          size="sm"
+                        >
+                          <Zap className="h-4 w-4 mr-2" />
+                          Créer CV Richat
+                        </Button>
+                      </div>
                     </div>
                   )}
                 </CardContent>

@@ -11,7 +11,7 @@ import {
   CheckCircleIcon,
   FileIcon,
   AlertCircleIcon,
-  ChevronRightIcon
+  ChevronRightIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -96,6 +96,9 @@ const AdminSidebar = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("userRole");
+    localStorage.removeItem("adminId");
+    localStorage.removeItem("adminUsername");
+    localStorage.removeItem("adminAuthToken");
     window.location.href = "/login";
   };
 
@@ -103,23 +106,60 @@ const AdminSidebar = () => {
     <div
       className={cn(
         "bg-gradient-to-b from-slate-50 to-white h-screen shadow-lg transition-all duration-300 flex flex-col border-r border-slate-200",
-        expanded ? "w-64" : "w-20"
+        expanded ? "w-72" : "w-20"
       )}
     >
-      {/* En-tête */}
+      {/* En-tête avec Logo Richat */}
       <div className={cn(
         "flex items-center px-4 h-16 border-b border-slate-200",
         expanded ? "justify-between" : "justify-center"
       )}>
         {expanded ? (
-          <Link to="/admin/dashboard" className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700">
-            Admin Portal
+          <Link to="/admin/dashboard" className="flex items-center space-x-3">
+            {/* Logo Richat */}
+            <div className="w-10 h-10 rounded-lg overflow-hidden shadow-md">
+              <img 
+                src="/lovable-uploads/c66ee083-bf5b-456a-b3a6-368225f4b25e.png" 
+                alt="Richat Logo" 
+                className="w-full h-full object-contain bg-white"
+                onError={(e) => {
+                  // Fallback en cas d'erreur de chargement
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  (e.target as HTMLImageElement).nextElementSibling!.classList.remove('hidden');
+                }}
+              />
+              {/* Fallback logo */}
+              <div className="hidden w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
+                <span className="text-white font-bold text-lg">R</span>
+              </div>
+            </div>
+            <div>
+              <div className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-700">
+                Admin Portal
+              </div>
+              <div className="text-xs text-slate-500">Richat Platform</div>
+            </div>
           </Link>
         ) : (
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-md flex items-center justify-center">
-            <span className="text-white font-bold text-sm">AP</span>
-          </div>
+          <Link to="/admin/dashboard" className="block">
+            <div className="w-10 h-10 rounded-lg overflow-hidden shadow-md">
+              <img 
+                src="/lovable-uploads/c66ee083-bf5b-456a-b3a6-368225f4b25e.png" 
+                alt="Richat Logo" 
+                className="w-full h-full object-contain bg-white"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).style.display = 'none';
+                  (e.target as HTMLImageElement).nextElementSibling!.classList.remove('hidden');
+                }}
+              />
+              {/* Fallback logo */}
+              <div className="hidden w-full h-full bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center">
+                <span className="text-white font-bold text-lg">R</span>
+              </div>
+            </div>
+          </Link>
         )}
+        
         <Button
           variant="ghost"
           size="icon"
@@ -142,7 +182,7 @@ const AdminSidebar = () => {
                 className={cn(
                   "flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200",
                   isActive
-                    ? "bg-blue-50 text-blue-700"
+                    ? "bg-blue-50 text-blue-700 shadow-sm border border-blue-100"
                     : "text-slate-600 hover:bg-slate-100",
                   !expanded && "justify-center"
                 )}
@@ -168,14 +208,24 @@ const AdminSidebar = () => {
               </Link>
             );
           })}
+        </nav>
+
+        {/* Section Consultants en attente - Après les paramètres */}
+        <div className="mt-6 pt-4 border-t border-slate-200">
+          {expanded && (
+            <div className="px-3 mb-3">
+              <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                Actions Requises
+              </h3>
+            </div>
+          )}
           
-          {/* Lien pour Consultants en attente avec badge */}
           <Link
             to="/admin/pending-consultants"
             className={cn(
-              "flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200",
+              "relative flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-all duration-200",
               location.pathname === "/admin/pending-consultants"
-                ? "bg-orange-50 text-orange-700"
+                ? "bg-orange-50 text-orange-700 shadow-sm border border-orange-100"
                 : "text-orange-600 hover:bg-orange-50",
               !expanded && "justify-center"
             )}
@@ -190,7 +240,7 @@ const AdminSidebar = () => {
                   <div className="flex items-center justify-between">
                     <span>Consultants en attente</span>
                     {pendingCount > 0 && (
-                      <Badge className="bg-orange-100 text-orange-800 border-none">
+                      <Badge className="bg-orange-100 text-orange-800 border-orange-200 text-xs px-2 py-0.5">
                         {pendingCount}
                       </Badge>
                     )}
@@ -199,27 +249,26 @@ const AdminSidebar = () => {
                 </div>
               )}
               {!expanded && pendingCount > 0 && (
-                <Badge className="absolute -top-1 -right-1 bg-orange-500 text-white border-none h-5 w-5 flex items-center justify-center p-0 rounded-full">
+                <div className="absolute -top-1 -right-1 bg-orange-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs font-bold">
                   {pendingCount}
-                </Badge>
+                </div>
               )}
             </div>
           </Link>
-        </nav>
+        </div>
       </div>
 
-      {/* Pied de page avec déconnexion */}
-      <div className="p-4 border-t border-slate-200">
+      {/* Bouton déconnexion en bas */}
+      <div className="border-t border-slate-200 p-4">
         <Button
           variant="ghost"
           className={cn(
-            "flex w-full py-2.5 rounded-lg transition-all duration-200",
-            expanded ? "justify-start" : "justify-center",
-            "text-slate-600 hover:bg-red-50 hover:text-red-600"
+            "w-full text-slate-600 hover:bg-red-50 hover:text-red-600 transition-all duration-200",
+            expanded ? "justify-start py-3" : "justify-center p-3"
           )}
           onClick={handleLogout}
         >
-          <LogOutIcon className={cn("h-5 w-5", !expanded ? "" : "mr-3")} />
+          <LogOutIcon className={cn("h-5 w-5", expanded ? "mr-3" : "")} />
           {expanded && <span>Déconnexion</span>}
         </Button>
       </div>

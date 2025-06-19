@@ -430,7 +430,7 @@ const Consultants: React.FC = () => {
       case "DIGITAL": return "bg-blue-100 text-blue-800 border-blue-300";
       case "FINANCE": return "bg-green-100 text-green-800 border-green-300";
       case "ENERGIE": return "bg-yellow-100 text-yellow-800 border-yellow-300";
-      case "INDUSTRIE": return "bg-purple-100 text-purple-800 border-purple-300";
+      case "INDUSTRIE": return "bg-cyan-100 text-cyan-800 border-cyan-300";
       default: return "bg-gray-100 text-gray-800 border-gray-300";
     }
   };
@@ -439,7 +439,7 @@ const Consultants: React.FC = () => {
     switch (expertise) {
       case "Débutant": return "bg-sky-50 text-sky-700 border-sky-200";
       case "Intermédiaire": return "bg-amber-50 text-amber-700 border-amber-200";
-      case "Expert": return "bg-rose-50 text-rose-700 border-rose-200";
+      case "Expert": return "bg-blue-50 text-blue-700 border-blue-200";
       default: return "bg-gray-100 text-gray-800 border-gray-300";
     }
   };
@@ -548,13 +548,13 @@ const Consultants: React.FC = () => {
                 </CardContent>
               </Card>
               
-              <Card className="border-purple-200 bg-purple-50">
+              <Card className="border-blue-200 bg-blue-50">
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-2">
-                    <AwardIcon className="h-5 w-5 text-purple-600" />
+                    <AwardIcon className="h-5 w-5 text-blue-600" />
                     <div>
-                      <p className="text-sm text-purple-600">Experts</p>
-                      <p className="text-xl font-bold text-purple-800">{stats.expert}</p>
+                      <p className="text-sm text-blue-600">Experts</p>
+                      <p className="text-xl font-bold text-blue-800">{stats.expert}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -596,7 +596,7 @@ const Consultants: React.FC = () => {
                 <span className="text-gray-600">Actualiser</span>
               </Button>
               <Button 
-                className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 text-white shadow-lg" 
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 transition-all duration-200 text-white shadow-lg" 
                 onClick={() => openDialog()}
               >
                 <PlusIcon className="h-4 w-4 mr-2" /> Ajouter un consultant
@@ -610,7 +610,7 @@ const Consultants: React.FC = () => {
                   placeholder="Rechercher un consultant..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 border-gray-200 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-lg"
+                  className="pl-10 border-gray-200 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 rounded-lg"
                 />
               </div>
               
@@ -618,7 +618,7 @@ const Consultants: React.FC = () => {
                 <Button 
                   variant={activeFilter === "all" ? "default" : "outline"}
                   onClick={() => setActiveFilter("all")}
-                  className={activeFilter === "all" ? "bg-indigo-600 text-white" : "border-gray-200"}
+                  className={activeFilter === "all" ? "bg-blue-600 text-white" : "border-gray-200"}
                 >
                   Tous
                 </Button>
@@ -645,7 +645,7 @@ const Consultants: React.FC = () => {
         <Card className="shadow-lg border-none bg-white rounded-2xl overflow-hidden">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-20">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mb-4"></div>
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
               <p className="text-gray-500 text-lg">Chargement des consultants...</p>
             </div>
           ) : (
@@ -668,7 +668,7 @@ const Consultants: React.FC = () => {
                       <TableRow key={consultant.id} className="hover:bg-gradient-to-r hover:from-gray-50 hover:to-blue-50 transition-all duration-200">
                         <TableCell>
                           <div className="flex items-center gap-4">
-                            <Avatar className="h-12 w-12 ring-2 ring-indigo-100">
+                            <Avatar className="h-12 w-12 ring-2 ring-blue-100">
                               <AvatarImage 
                                 src={getImageUrl(consultant.photo) || undefined} 
                                 alt={`${consultant.prenom} ${consultant.nom}`}
@@ -676,7 +676,7 @@ const Consultants: React.FC = () => {
                                   (e.target as HTMLImageElement).style.display = 'none';
                                 }}
                               />
-                              <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white font-semibold">
+                              <AvatarFallback className="bg-gradient-to-br from-blue-500 to-blue-600 text-white font-semibold">
                                 {consultant.prenom.charAt(0)}{consultant.nom.charAt(0)}
                               </AvatarFallback>
                             </Avatar>
@@ -787,7 +787,7 @@ const Consultants: React.FC = () => {
                               <Button 
                                 onClick={() => setSearchTerm("")}
                                 variant="outline"
-                                className="border-indigo-200 text-indigo-600 hover:bg-indigo-50"
+                                className="border-blue-200 text-blue-600 hover:bg-blue-50"
                               >
                                 Effacer la recherche
                               </Button>
@@ -797,7 +797,7 @@ const Consultants: React.FC = () => {
                               <p className="text-gray-500 mb-3 text-lg">Aucun consultant disponible</p>
                               <Button 
                                 onClick={() => openDialog()}
-                                className="bg-indigo-600 hover:bg-indigo-700 text-white"
+                                className="bg-blue-600 hover:bg-blue-700 text-white"
                               >
                                 <PlusIcon className="h-4 w-4 mr-2" />
                                 Ajouter un consultant
@@ -836,7 +836,7 @@ const Consultants: React.FC = () => {
           <form onSubmit={handleSubmit} className="space-y-6 pt-2">
             {/* Photo de profil avec prévisualisation */}
             <div className="flex flex-col items-center gap-4 p-4 bg-gray-50 rounded-lg">
-              <Avatar className="h-32 w-32 ring-4 ring-indigo-100">
+              <Avatar className="h-32 w-32 ring-4 ring-blue-100">
                 <AvatarImage 
                   src={previewImage || getImageUrl(formData.photo) || undefined} 
                   alt="Photo de profil"
@@ -844,7 +844,7 @@ const Consultants: React.FC = () => {
                     (e.target as HTMLImageElement).style.display = 'none';
                   }}
                 />
-                <AvatarFallback className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white text-2xl">
+                <AvatarFallback className="bg-gradient-to-br from-blue-500 to-blue-600 text-white text-2xl">
                   {formData.prenom?.charAt(0) || ''}{formData.nom?.charAt(0) || ''}
                 </AvatarFallback>
               </Avatar>
@@ -899,7 +899,7 @@ const Consultants: React.FC = () => {
                   value={formData.prenom || ''} 
                   onChange={(e) => setFormData({ ...formData, prenom: e.target.value })} 
                   required 
-                  className={`border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                  className={`border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
                     validationErrors.prenom ? 'border-red-500' : ''
                   }`}
                 />
@@ -916,7 +916,7 @@ const Consultants: React.FC = () => {
                   value={formData.nom || ''} 
                   onChange={(e) => setFormData({ ...formData, nom: e.target.value })} 
                   required 
-                  className={`border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                  className={`border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
                     validationErrors.nom ? 'border-red-500' : ''
                   }`}
                 />
@@ -940,7 +940,7 @@ const Consultants: React.FC = () => {
                     value={formData.email || ''} 
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })} 
                     required 
-                    className={`pl-10 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                    className={`pl-10 border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
                       validationErrors.email ? 'border-red-500' : ''
                     }`}
                   />
@@ -961,7 +961,7 @@ const Consultants: React.FC = () => {
                     value={formData.telephone || ''} 
                     onChange={(e) => setFormData({ ...formData, telephone: e.target.value })} 
                     required 
-                    className={`pl-10 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                    className={`pl-10 border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
                       validationErrors.telephone ? 'border-red-500' : ''
                     }`}
                   />
@@ -985,7 +985,7 @@ const Consultants: React.FC = () => {
                     value={formData.pays || ''} 
                     onChange={(e) => setFormData({ ...formData, pays: e.target.value })} 
                     required 
-                    className={`pl-10 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                    className={`pl-10 border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
                       validationErrors.pays ? 'border-red-500' : ''
                     }`}
                   />
@@ -1000,7 +1000,7 @@ const Consultants: React.FC = () => {
                   placeholder="Nouakchott" 
                   value={formData.ville || ''} 
                   onChange={(e) => setFormData({ ...formData, ville: e.target.value })} 
-                  className="border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                  className="border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                 />
               </div>
             </div>
@@ -1018,7 +1018,7 @@ const Consultants: React.FC = () => {
                     value={formData.date_debut_dispo || ''} 
                     onChange={(e) => setFormData({ ...formData, date_debut_dispo: e.target.value })} 
                     required 
-                    className={`pl-10 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                    className={`pl-10 border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
                       validationErrors.disponibilite ? 'border-red-500' : ''
                     }`}
                   />
@@ -1035,7 +1035,7 @@ const Consultants: React.FC = () => {
                     value={formData.date_fin_dispo || ''} 
                     onChange={(e) => setFormData({ ...formData, date_fin_dispo: e.target.value })} 
                     required 
-                    className={`pl-10 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                    className={`pl-10 border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
                       validationErrors.disponibilite ? 'border-red-500' : ''
                     }`}
                   />
@@ -1059,7 +1059,7 @@ const Consultants: React.FC = () => {
                   <select 
                     value={formData.domaine_principal || 'DIGITAL'} 
                     onChange={(e) => setFormData({ ...formData, domaine_principal: e.target.value })} 
-                    className="w-full pl-10 p-2 border rounded-lg border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    className="w-full pl-10 p-2 border rounded-lg border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                   >
                     {DOMAINS.map(domain => (
                       <option key={domain.value} value={domain.value}>{domain.label}</option>
@@ -1076,7 +1076,7 @@ const Consultants: React.FC = () => {
                   <select 
                     value={formData.expertise || 'Débutant'} 
                     onChange={(e) => setFormData({ ...formData, expertise: e.target.value })} 
-                    className="w-full pl-10 p-2 border rounded-lg border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                    className="w-full pl-10 p-2 border rounded-lg border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
                   >
                     {EXPERTISE_LEVELS.map(level => (
                       <option key={level.value} value={level.value}>{level.label}</option>
@@ -1095,7 +1095,7 @@ const Consultants: React.FC = () => {
                 value={formData.specialite || ''} 
                 onChange={(e) => setFormData({ ...formData, specialite: e.target.value })} 
                 required 
-                className={`border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                className={`border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
                   validationErrors.specialite ? 'border-red-500' : ''
                 }`}
               />
@@ -1116,7 +1116,7 @@ const Consultants: React.FC = () => {
                   value={formData.password || ''}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })} 
                   required={!editing}
-                  className={`border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                  className={`border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
                     validationErrors.password ? 'border-red-500' : ''
                   }`}
                 />
@@ -1140,7 +1140,7 @@ const Consultants: React.FC = () => {
                     className="hidden"
                     required={!editing}
                   />
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-indigo-300 transition-colors">
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 hover:border-blue-300 transition-colors">
                     <div className="flex items-center justify-center gap-2">
                       <FileTextIcon className="h-5 w-5 text-gray-400" />
                       <span className="text-sm text-gray-600">
@@ -1183,7 +1183,7 @@ const Consultants: React.FC = () => {
               </Button>
               <Button 
                 type="submit"
-                className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white"
+                className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
                 disabled={loading}
               >
                 {loading ? (
