@@ -8,6 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import default_storage
 from django.db import transaction
 from django.db.models import Q
+from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
+
+
+
 from django.http import FileResponse
 import mimetypes
 from functools import lru_cache
@@ -23,7 +27,7 @@ from .models import DocumentGED, DocumentCategory, DocumentVersion, DocumentAcce
 from .serializers import ConsultantSerializer, CompetenceSerializer, AppelOffreSerializer, CriteresEvaluationSerializer
 from .serializers import DocumentGEDSerializer, DocumentCategorySerializer
 from .email_service import send_registration_email, send_validation_email
-from .competences_data import ALL_SKILLS, DIGITAL_TELECOM_SKILLS, FINANCE_BANKING_SKILLS, ENERGY_TRANSITION_SKILLS, \
+from .competences_data import ALL_SKILLS,FINANCE_BANKING_SKILLS, ENERGY_TRANSITION_SKILLS, \
     INDUSTRY_MINING_SKILLS
 import fitz  # PyMuPDF
 from PIL import Image, ImageEnhance
@@ -4035,4 +4039,835 @@ def log_request(func):
             raise
     
     return wrapper
+
+# views.py - Ajout des endpoints pour le CV Richat complet
+
+from reportlab.lib.pagesizes import letter, A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import inch
+from reportlab.lib import colors
+from reportlab.pdfgen import canvas
+from reportlab.lib.enums import TA_JUSTIFY, TA_LEFT, TA_CENTER
+from io import BytesIO
+import json
+from datetime import datetime
+
+# Modèle de données pour le CV Richat complet
+class RichatCVData:
+    def __init__(self, data):
+        self.titre = data.get('titre', 'Mr.')
+        self.nom_expert = data.get('nom_expert', '')
+        self.date_naissance = data.get('date_naissance', '')
+        self.pays_residence = data.get('pays_residence', '')
+        self.titre_professionnel = data.get('titre_professionnel', '')
+        self.resume_profil = data.get('resume_profil', '')
+        self.formations = data.get('formations', [])
+        self.experiences = data.get('experiences', [])
+        self.langues = data.get('langues', [])
+        self.missions_reference = data.get('missions_reference', [])
+        self.certifications = data.get('certifications', [])
+        self.adhesions_professionnelles = data.get('adhesions_professionnelles', 'N/A')
+
+def generate_richat_cv_pdf(cv_data, consultant_info):
+    """
+    Génère un PDF au format CV Richat standardisé
+    """
+    buffer = BytesIO()
+    doc = SimpleDocTemplate(buffer, pagesize=A4, 
+                          topMargin=0.5*inch, bottomMargin=0.5*inch,
+                          leftMargin=0.5*inch, rightMargin=0.5*inch)
+    
+    # Styles
+    styles = getSampleStyleSheet()
+    
+    # Styles personnalisés Richat
+    title_style = ParagraphStyle(
+        'RichatTitle',
+        parent=styles['Title'],
+        fontSize=16,
+        textColor=colors.HexColor('#1e40af'),
+        spaceAfter=20,
+        alignment=TA_CENTER,
+        fontName='Helvetica-Bold'
+    )
+    
+    header_style = ParagraphStyle(
+        'RichatHeader',
+        parent=styles['Heading1'],
+        fontSize=14,
+        textColor=colors.HexColor('#1e40af'),
+        spaceAfter=12,
+        spaceBefore=20,
+        fontName='Helvetica-Bold'
+    )
+    
+    subheader_style = ParagraphStyle(
+        'RichatSubHeader',
+        parent=styles['Heading2'],
+        fontSize=12,
+        textColor=colors.HexColor('#374151'),
+        spaceAfter=8,
+        spaceBefore=10,
+        fontName='Helvetica-Bold'
+    )
+    
+    body_style = ParagraphStyle(
+        'RichatBody',
+        parent=styles['Normal'],
+        fontSize=10,
+        textColor=colors.black,
+        spaceAfter=6,
+        alignment=TA_JUSTIFY,
+        leftIndent=0,
+        fontName='Helvetica'
+    )
+    
+    table_style = ParagraphStyle(
+        'RichatTable',
+        parent=styles['Normal'],
+        fontSize=9,
+        textColor=colors.black,
+        fontName='Helvetica'
+    )
+    
+    story = []
+    
+    # En-tête avec nom et pagination
+    story.append(Paragraph(f"{cv_data.nom_expert} - {cv_data.titre_professionnel}", title_style))
+    story.append(Paragraph("1/12", ParagraphStyle('PageNum', fontSize=8, alignment=TA_RIGHT)))
+    story.append(Spacer(1, 0.2*inch))
+    
+    # Titre principal
+    story.append(Paragraph("CURRICULUM VITAE (CV)", header_style))
+    story.append(Spacer(1, 0.1*inch))
+    
+    # Tableau des informations personnelles
+    personal_data = [
+        ['Titre', cv_data.titre],
+        ['Nom de l\'expert', cv_data.nom_expert],
+        ['Date de naissance :', cv_data.date_naissance or '02-01-1978'],
+        ['Pays de citoyenneté/résidence', cv_data.pays_residence]
+    ]
+    
+    personal_table = Table(personal_data, colWidths=[2*inch, 4*inch])
+    personal_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, -1), colors.white),
+        ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
+        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+        ('FONTNAME', (0, 0), (-1, -1), 'Helvetica'),
+        ('FONTSIZE', (0, 0), (-1, -1), 10),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    ]))
+    
+    story.append(personal_table)
+    story.append(Spacer(1, 0.2*inch))
+    
+    # Titre professionnel centré
+    story.append(Paragraph(cv_data.titre_professionnel, 
+                          ParagraphStyle('ProfTitle', fontSize=14, alignment=TA_CENTER, 
+                                       fontName='Helvetica-Bold', spaceAfter=15)))
+    
+    # Résumé du Profil
+    story.append(Paragraph("Résumé du Profil", subheader_style))
+    story.append(Paragraph(cv_data.resume_profil, body_style))
+    story.append(Spacer(1, 0.15*inch))
+    
+    # Éducation
+    if cv_data.formations:
+        story.append(Paragraph("Éducation :", subheader_style))
+        
+        # Tableau des formations
+        formation_data = [['Nom École/Université', 'Période d\'étude', 'Diplôme obtenu | Spécialisation']]
+        
+        for formation in cv_data.formations:
+            if formation.get('nom_ecole'):
+                formation_data.append([
+                    formation.get('nom_ecole', ''),
+                    formation.get('periode_etude', ''),
+                    f"{formation.get('diplome_obtenu', '')} ({formation.get('specialisation', '')})"
+                ])
+        
+        if len(formation_data) > 1:
+            formation_table = Table(formation_data, colWidths=[2.5*inch, 1.5*inch, 2.5*inch])
+            formation_table.setStyle(TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f3f4f6')),
+                ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
+                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                ('FONTNAME', (0, 0), (2, 0), 'Helvetica-Bold'),
+                ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+                ('FONTSIZE', (0, 0), (-1, -1), 9),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+            ]))
+            
+            story.append(formation_table)
+            story.append(Spacer(1, 0.15*inch))
+    
+    # Expérience professionnelle
+    if cv_data.experiences:
+        story.append(Paragraph("Expérience professionnelle :", subheader_style))
+        
+        # Tableau d'expérience
+        exp_data = [['Période', 'Nom de l\'employeur, Titre professionnel', 'Pays', 'Résumé des activités menées dans le cadre de cette mission']]
+        
+        for exp in cv_data.experiences:
+            if exp.get('nom_employeur'):
+                exp_data.append([
+                    exp.get('periode', ''),
+                    f"{exp.get('nom_employeur', '')}\n{exp.get('titre_professionnel', '')}",
+                    exp.get('pays', ''),
+                    exp.get('activites', '')
+                ])
+        
+        if len(exp_data) > 1:
+            exp_table = Table(exp_data, colWidths=[1*inch, 2*inch, 1*inch, 2.5*inch])
+            exp_table.setStyle(TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f3f4f6')),
+                ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
+                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+                ('FONTSIZE', (0, 0), (-1, -1), 8),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+            ]))
+            
+            story.append(exp_table)
+            story.append(Spacer(1, 0.15*inch))
+    
+    # Adhésions professionnelles
+    story.append(Paragraph("Adhésion à des associations professionnelles et à des publications :", subheader_style))
+    story.append(Paragraph(cv_data.adhesions_professionnelles, body_style))
+    story.append(Spacer(1, 0.1*inch))
+    
+    # Langues
+    if cv_data.langues:
+        story.append(Paragraph("Langues parlées (n'indiquez que les langues dans lesquelles vous pouvez travailler) :", subheader_style))
+        
+        # Tableau des langues
+        langue_data = [['', 'Parler', 'Lecture', 'Éditorial']]
+        
+        for langue in cv_data.langues:
+            if langue.get('langue'):
+                langue_data.append([
+                    langue.get('langue', ''),
+                    langue.get('parler', ''),
+                    langue.get('lecture', ''),
+                    langue.get('editorial', '')
+                ])
+        
+        if len(langue_data) > 1:
+            langue_table = Table(langue_data, colWidths=[1.5*inch, 1.5*inch, 1.5*inch, 1.5*inch])
+            langue_table.setStyle(TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f3f4f6')),
+                ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
+                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                ('FONTNAME', (0, 1), (-1, -1), 'Helvetica'),
+                ('FONTSIZE', (0, 0), (-1, -1), 10),
+                ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+            ]))
+            
+            story.append(langue_table)
+            story.append(Spacer(1, 0.15*inch))
+    
+    # Adéquation à la mission (Missions de référence)
+    if cv_data.missions_reference:
+        story.append(Paragraph("Adéquation à la mission :", subheader_style))
+        story.append(Paragraph("Référence à des travaux ou missions antérieurs illustrant la capacité de l'expert à mener à bien les tâches qui lui sont confiées.", body_style))
+        
+        for mission in cv_data.missions_reference:
+            if mission.get('nom_projet'):
+                # Tableau pour chaque mission
+                mission_data = [
+                    ['Nom du projet :', mission.get('nom_projet', '')],
+                    ['Date :', mission.get('date', '')],
+                    ['Société :', mission.get('societe', '')],
+                    ['Poste occupé :', mission.get('poste_occupe', '')],
+                    ['Lieu :', mission.get('lieu', '')],
+                    ['Client / Bailleur :', mission.get('client_bailleur', '')],
+                    ['Brève description du projet – Objectifs du projet :', mission.get('description_projet', '')],
+                    ['Type ou secteur d\'activité :', mission.get('type_secteur', '')],
+                    ['Activités et responsabilités sur le projet :', mission.get('activites_responsabilites', '')]
+                ]
                 
+                mission_table = Table(mission_data, colWidths=[2*inch, 4*inch])
+                mission_table.setStyle(TableStyle([
+                    ('BACKGROUND', (0, 0), (-1, -1), colors.white),
+                    ('TEXTCOLOR', (0, 0), (-1, -1), colors.black),
+                    ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                    ('FONTNAME', (0, 0), (0, -1), 'Helvetica-Bold'),
+                    ('FONTNAME', (1, 0), (1, -1), 'Helvetica'),
+                    ('FONTSIZE', (0, 0), (-1, -1), 9),
+                    ('GRID', (0, 0), (-1, -1), 1, colors.black),
+                    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                ]))
+                
+                story.append(mission_table)
+                story.append(Spacer(1, 0.1*inch))
+    
+    # Certifications
+    if cv_data.certifications:
+        story.append(Paragraph("Certifications:", subheader_style))
+        
+        for cert in cv_data.certifications:
+            story.append(Paragraph(f"• {cert}", body_style))
+        
+        story.append(Spacer(1, 0.1*inch))
+    
+    # Construction du PDF
+    doc.build(story)
+    buffer.seek(0)
+    return buffer
+
+@api_view(['POST'])
+@parser_classes([JSONParser])
+def generate_richat_cv_complete(request, consultant_id):
+    """
+    Génère un CV complet au format Richat à partir des données saisies
+    """
+    try:
+        # Vérifier que le consultant existe et appartient à l'utilisateur
+        consultant = get_object_or_404(Consultant, id=consultant_id)
+        
+        # Récupérer les données JSON du CV
+        cv_data_json = request.data
+        
+        if not cv_data_json:
+            return Response({
+                'success': False,
+                'error': 'Aucune donnée CV fournie'
+            }, status=400)
+        
+        # Créer l'objet de données CV
+        cv_data = RichatCVData(cv_data_json)
+        
+        # Valider les données essentielles
+        if not cv_data.nom_expert:
+            return Response({
+                'success': False,
+                'error': 'Le nom de l\'expert est requis'
+            }, status=400)
+        
+        # Informations du consultant pour le contexte
+        consultant_info = {
+            'id': consultant.id,
+            'email': consultant.email,
+            'phone': consultant.telephone,
+            'domaine_principal': consultant.domaine_principal
+        }
+        
+        # Générer le PDF
+        pdf_buffer = generate_richat_cv_pdf(cv_data, consultant_info)
+        
+        # Créer le nom de fichier
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        filename = f"CV_Richat_{cv_data.nom_expert.replace(' ', '_')}_{timestamp}.pdf"
+        
+        # Sauvegarder le fichier
+        try:
+            # Créer le répertoire s'il n'existe pas
+            cv_dir = os.path.join(settings.MEDIA_ROOT, 'standardized_cvs')
+            os.makedirs(cv_dir, exist_ok=True)
+            
+            # Chemin complet du fichier
+            file_path = os.path.join(cv_dir, filename)
+            
+            # Écrire le PDF
+            with open(file_path, 'wb') as f:
+                f.write(pdf_buffer.getvalue())
+            
+            # Construire l'URL de téléchargement
+            file_url = f"{settings.MEDIA_URL}standardized_cvs/{filename}"
+            
+            # Optionnel: Sauvegarder les métadonnées du CV en base
+            try:
+                # Créer un enregistrement de CV généré si vous avez un modèle pour cela
+                # CVRichatGenerated.objects.create(
+                #     consultant=consultant,
+                #     filename=filename,
+                #     cv_data=json.dumps(cv_data_json),
+                #     generated_at=datetime.now()
+                # )
+                pass
+            except Exception as e:
+                logger.warning(f"Impossible de sauvegarder les métadonnées CV: {e}")
+            
+            logger.info(f"CV Richat généré avec succès pour {consultant.nom}: {filename}")
+            
+            return Response({
+                'success': True,
+                'message': 'CV Richat généré avec succès',
+                'cv_url': file_url,
+                'filename': filename,
+                'file_size': len(pdf_buffer.getvalue()),
+                'generated_at': datetime.now().isoformat(),
+                'consultant_name': cv_data.nom_expert,
+                'format': 'richat_professional_standard'
+            }, status=200)
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la sauvegarde du CV: {str(e)}")
+            return Response({
+                'success': False,
+                'error': f'Erreur lors de la sauvegarde: {str(e)}'
+            }, status=500)
+    
+    except Exception as e:
+        logger.error(f"Erreur lors de la génération du CV Richat: {str(e)}")
+        return Response({
+            'success': False,
+            'error': f'Erreur lors de la génération du CV: {str(e)}'
+        }, status=500)
+
+@api_view(['GET'])
+def get_richat_cv_template(request, consultant_id):
+    """
+    Retourne un template pré-rempli pour le CV Richat - VERSION CORRIGÉE
+    """
+    try:
+        consultant = get_object_or_404(Consultant, id=consultant_id)
+        
+        # Récupérer les compétences du consultant
+        competences = Competence.objects.filter(consultant=consultant)
+        skills_list = [comp.nom_competence for comp in competences]
+        skills_string = ', '.join(skills_list) if skills_list else 'Non spécifiées'
+        
+        # Construire le template avec les données existantes
+        template_data = {
+            'titre': 'Mr.' if consultant.nom else 'Mme.',
+            'nom_expert': f"{consultant.prenom or ''} {consultant.nom or ''}".strip(),
+            'date_naissance': '',
+            'pays_residence': f"{consultant.pays or 'Mauritanie'} - {consultant.ville or 'Nouakchott'}",
+            'titre_professionnel': consultant.specialite or "Consultant",
+            'resume_profil': f"Expert en {consultant.domaine_principal or 'Digital'} avec spécialisation en {consultant.specialite or 'consulting'}. " +
+                           f"Consultant expérimenté avec un niveau d'expertise {consultant.expertise or 'Intermédiaire'}. " +
+                           f"Compétences principales: {skills_string}.",
+            'formations': [{
+                'nom_ecole': '',
+                'periode_etude': '',
+                'diplome_obtenu': '',
+                'specialisation': consultant.domaine_principal or ''
+            }],
+            'experiences': [{
+                'periode': '',
+                'nom_employeur': '',
+                'titre_professionnel': consultant.specialite or '',
+                'pays': consultant.pays or 'Mauritanie',
+                'activites': ''
+            }],
+            'langues': [
+                {
+                    'langue': 'Français',
+                    'parler': '',
+                    'lecture': '',
+                    'editorial': ''
+                },
+                {
+                    'langue': 'Anglais',
+                    'parler': '',
+                    'lecture': '',
+                    'editorial': ''
+                },
+                {
+                    'langue': 'Arabe',
+                    'parler': 'Native speaker',
+                    'lecture': 'Native speaker',
+                    'editorial': 'Native speaker'
+                }
+            ],
+            'missions_reference': [{
+                'nom_projet': '',
+                'date': '',
+                'societe': '',
+                'poste_occupe': '',
+                'lieu': consultant.pays or 'Mauritanie',
+                'client_bailleur': '',
+                'description_projet': '',
+                'type_secteur': consultant.domaine_principal or '',
+                'activites_responsabilites': ''
+            }],
+            'certifications': [],
+            'adhesions_professionnelles': 'N/A'
+        }
+        
+        return Response({
+            'success': True,
+            'template_data': template_data,
+            'consultant_info': {
+                'nom': consultant.nom,
+                'prenom': consultant.prenom,
+                'email': consultant.email,
+                'domaine_principal': consultant.domaine_principal,
+                'specialite': consultant.specialite
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Erreur lors de la récupération du template CV: {str(e)}")
+        return Response({
+            'success': False,
+            'error': str(e)
+        }, status=500)
+
+
+@api_view(['GET'])
+def list_richat_cvs(request, consultant_id):
+    """
+    Liste tous les CV Richat générés pour un consultant
+    """
+    try:
+        consultant = get_object_or_404(Consultant, id=consultant_id)
+        
+        # Chemin du répertoire des CV
+        cv_dir = os.path.join(settings.MEDIA_ROOT, 'standardized_cvs')
+        
+        if not os.path.exists(cv_dir):
+            return Response({
+                'success': True,
+                'cvs': [],
+                'total_count': 0
+            })
+        
+        # Rechercher tous les CV de ce consultant
+        cv_files = []
+        consultant_name_patterns = [
+            f"CV_Richat_{consultant.prenom}_{consultant.nom}",
+            f"CV_Richat_{consultant.nom}_{consultant.prenom}",
+            f"standardized_cv_{consultant.id}",
+            f"CV_Richat_{consultant.prenom or ''}{consultant.nom or ''}"
+        ]
+        
+        for filename in os.listdir(cv_dir):
+            if filename.endswith('.pdf'):
+                # Vérifier si le fichier correspond à ce consultant
+                matches_consultant = any(pattern.replace(' ', '_') in filename for pattern in consultant_name_patterns if pattern)
+                
+                if matches_consultant:
+                    file_path = os.path.join(cv_dir, filename)
+                    if os.path.exists(file_path):
+                        file_stats = os.stat(file_path)
+                        
+                        cv_files.append({
+                            'filename': filename,
+                            'file_size': file_stats.st_size,
+                            'created_at': datetime.fromtimestamp(file_stats.st_ctime).isoformat(),
+                            'modified_at': datetime.fromtimestamp(file_stats.st_mtime).isoformat(),
+                            'download_url': f"{settings.MEDIA_URL}standardized_cvs/{filename}",
+                            'file_type': 'richat_professional_cv'
+                        })
+        
+        # Trier par date de création (plus récent en premier)
+        cv_files.sort(key=lambda x: x['created_at'], reverse=True)
+        
+        return Response({
+            'success': True,
+            'cvs': cv_files,
+            'total_count': len(cv_files),
+            'consultant_name': f"{consultant.prenom} {consultant.nom}"
+        })
+        
+    except Exception as e:
+        logger.error(f"Erreur lors de la liste des CV Richat: {str(e)}")
+        return Response({
+            'success': False,
+            'error': str(e)
+        }, status=500)
+
+# Modèle optionnel pour sauvegarder les métadonnées des CV générés
+# À ajouter dans models.py si souhaité
+
+# views.py - Fonctions supplémentaires pour le CV Richat complet
+@api_view(['POST'])
+@parser_classes([JSONParser])
+def validate_richat_cv(request, consultant_id):
+    """
+    Valide les données du CV Richat avant génération
+    """
+    try:
+        consultant = get_object_or_404(Consultant, id=consultant_id)
+        cv_data = request.data
+        
+        # Validation basique
+        errors = []
+        warnings = []
+        score = 100
+        
+        # Vérifications essentielles
+        if not cv_data.get('nom_expert'):
+            errors.append('Nom de l\'expert manquant')
+            score -= 20
+        
+        if not cv_data.get('titre_professionnel'):
+            errors.append('Titre professionnel manquant')
+            score -= 20
+            
+        if not cv_data.get('resume_profil') or len(cv_data.get('resume_profil', '')) < 50:
+            warnings.append('Résumé du profil trop court')
+            score -= 10
+            
+        # Vérifier les formations
+        formations = cv_data.get('formations', [])
+        if not any(f.get('nom_ecole') for f in formations):
+            warnings.append('Aucune formation renseignée')
+            score -= 10
+            
+        # Vérifier les expériences
+        experiences = cv_data.get('experiences', [])
+        if not any(e.get('nom_employeur') for e in experiences):
+            warnings.append('Aucune expérience renseignée')
+            score -= 15
+        
+        validation_result = {
+            'valid': len(errors) == 0,
+            'errors': errors,
+            'warnings': warnings,
+            'score': max(0, score),
+            'recommendations': []
+        }
+        
+        if score < 70:
+            validation_result['recommendations'].append('Compléter les informations manquantes')
+        if len(experiences) < 2:
+            validation_result['recommendations'].append('Ajouter plus d\'expériences professionnelles')
+            
+        return Response({
+            'success': True,
+            'validation': validation_result
+        })
+        
+    except Exception as e:
+        logger.error(f"Erreur validation CV: {str(e)}")
+        return Response({
+            'success': False,
+            'error': str(e),
+            'validation': {
+                'valid': False,
+                'errors': [f'Erreur système: {str(e)}'],
+                'score': 0
+            }
+        }, status=500)
+
+@api_view(['GET'])
+def download_specific_richat_cv(request, consultant_id, filename):
+    """
+    Télécharge un CV Richat spécifique par nom de fichier
+    """
+    try:
+        consultant = get_object_or_404(Consultant, id=consultant_id)
+
+        # Chemin du fichier
+        cv_dir = os.path.join(settings.MEDIA_ROOT, 'standardized_cvs')
+        file_path = os.path.join(cv_dir, filename)
+
+        # Vérifier existence du fichier
+        if not os.path.exists(file_path):
+            return Response({'success': False, 'error': 'Fichier CV introuvable.'}, status=404)
+
+        # Vérifier appartenance au consultant
+        identifiers = [
+            str(consultant.id),
+            consultant.nom.lower() if consultant.nom else '',
+            consultant.prenom.lower() if consultant.prenom else ''
+        ]
+        filename_lower = filename.lower()
+        if not any(identifier in filename_lower for identifier in identifiers if identifier):
+            return Response({'success': False, 'error': 'Accès non autorisé à ce fichier.'}, status=403)
+
+        # Renvoyer le fichier
+        response = FileResponse(open(file_path, 'rb'), content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{filename}"'
+        return response
+
+    except Exception as e:
+        logger.error(f"Erreur lors du téléchargement: {str(e)}")
+        return Response({'success': False, 'error': 'Erreur serveur.'}, status=500)  
+ 
+@api_view(['GET'])
+def check_richat_cv_status(request, consultant_id):
+    """
+    Vérifie si un CV Richat existe pour un consultant - FONCTION CORRIGÉE
+    """
+    try:
+        consultant = get_object_or_404(Consultant, id=consultant_id)
+        
+        # Chemin du répertoire des CV standardisés
+        cv_dir = os.path.join(settings.MEDIA_ROOT, 'standardized_cvs')
+        
+        # Créer le répertoire s'il n'existe pas
+        os.makedirs(cv_dir, exist_ok=True)
+        
+        # Patterns de recherche pour les fichiers CV de ce consultant
+        search_patterns = [
+            f"CV_Richat_{consultant.prenom}_{consultant.nom}",
+            f"CV_Richat_{consultant.nom}_{consultant.prenom}",
+            f"standardized_cv_{consultant_id}",
+            f"CV_Richat"  # Pattern plus général
+        ]
+        
+        # Chercher les fichiers CV
+        found_files = []
+        
+        if os.path.exists(cv_dir):
+            try:
+                all_files = os.listdir(cv_dir)
+                for filename in all_files:
+                    if filename.endswith('.pdf'):
+                        # Vérifier si le fichier correspond à ce consultant
+                        filename_lower = filename.lower()
+                        consultant_match = False
+                        
+                        # Vérification par ID de consultant (plus fiable)
+                        if f"_{consultant_id}_" in filename or f"standardized_cv_{consultant_id}" in filename:
+                            consultant_match = True
+                        
+                        # Vérification par nom si présent
+                        elif consultant.nom and consultant.prenom:
+                            name_variants = [
+                                f"{consultant.prenom}_{consultant.nom}".lower(),
+                                f"{consultant.nom}_{consultant.prenom}".lower(),
+                                f"{consultant.prenom}{consultant.nom}".lower()
+                            ]
+                            if any(variant in filename_lower for variant in name_variants):
+                                consultant_match = True
+                        
+                        if consultant_match:
+                            file_path = os.path.join(cv_dir, filename)
+                            if os.path.exists(file_path):
+                                file_stats = os.stat(file_path)
+                                found_files.append({
+                                    'filename': filename,
+                                    'file_size': file_stats.st_size,
+                                    'created_at': datetime.fromtimestamp(file_stats.st_ctime).isoformat(),
+                                    'file_path': file_path
+                                })
+                
+            except Exception as list_error:
+                logger.error(f"Erreur lors de la lecture du répertoire CV: {str(list_error)}")
+        
+        # Trier les fichiers par date de création (plus récent en premier)
+        found_files.sort(key=lambda x: x['created_at'], reverse=True)
+        
+        if found_files:
+            latest_cv = found_files[0]
+            return Response({
+                'available': True,
+                'filename': latest_cv['filename'],
+                'created_at': latest_cv['created_at'],
+                'file_size': latest_cv['file_size'],
+                'download_url': f"/api/consultant/{consultant_id}/download-cv/"
+            })
+        else:
+            return Response({
+                'available': False,
+                'message': 'Aucun CV Richat trouvé pour ce consultant'
+            })
+            
+    except Exception as e:
+        logger.error(f"Erreur lors de la vérification du CV Richat pour consultant {consultant_id}: {str(e)}")
+        return Response({
+            'available': False,
+            'error': str(e)
+        }, status=500)
+
+
+@api_view(['GET'])
+def download_richat_cv(request, consultant_id):
+    """
+    Télécharge le CV Richat le plus récent d'un consultant - FONCTION CORRIGÉE
+    """
+    try:
+        consultant = get_object_or_404(Consultant, id=consultant_id)
+        
+        # Chemin du répertoire des CV
+        cv_dir = os.path.join(settings.MEDIA_ROOT, 'standardized_cvs')
+        
+        if not os.path.exists(cv_dir):
+            return Response({
+                'success': False,
+                'error': 'Répertoire CV introuvable'
+            }, status=404)
+        
+        # Chercher le CV le plus récent pour ce consultant
+        found_files = []
+        
+        try:
+            all_files = os.listdir(cv_dir)
+            for filename in all_files:
+                if filename.endswith('.pdf'):
+                    # Vérifier si le fichier correspond à ce consultant
+                    filename_lower = filename.lower()
+                    consultant_match = False
+                    
+                    # Vérification par ID (plus fiable)
+                    if f"_{consultant_id}_" in filename or f"standardized_cv_{consultant_id}" in filename:
+                        consultant_match = True
+                    
+                    # Vérification par nom
+                    elif consultant.nom and consultant.prenom:
+                        name_variants = [
+                            f"{consultant.prenom}_{consultant.nom}".lower(),
+                            f"{consultant.nom}_{consultant.prenom}".lower()
+                        ]
+                        if any(variant in filename_lower for variant in name_variants):
+                            consultant_match = True
+                    
+                    if consultant_match:
+                        file_path = os.path.join(cv_dir, filename)
+                        if os.path.exists(file_path):
+                            file_stats = os.stat(file_path)
+                            found_files.append({
+                                'filename': filename,
+                                'created_at': file_stats.st_ctime,
+                                'file_path': file_path
+                            })
+        
+        except Exception as e:
+            logger.error(f"Erreur lors de la recherche de fichiers CV: {str(e)}")
+            return Response({
+                'success': False,
+                'error': 'Erreur lors de la recherche des fichiers CV'
+            }, status=500)
+        
+        if not found_files:
+            return Response({
+                'success': False,
+                'error': 'Aucun CV Richat trouvé pour ce consultant'
+            }, status=404)
+        
+        # Trier par date de création (plus récent en premier)
+        found_files.sort(key=lambda x: x['created_at'], reverse=True)
+        latest_cv = found_files[0]
+        
+        # Vérifier que le fichier existe toujours
+        if not os.path.exists(latest_cv['file_path']):
+            return Response({
+                'success': False,
+                'error': 'Fichier CV introuvable sur le serveur'
+            }, status=404)
+        
+        # Retourner le fichier
+        try:
+            response = FileResponse(
+                open(latest_cv['file_path'], 'rb'),
+                content_type='application/pdf'
+            )
+            response['Content-Disposition'] = f'attachment; filename="CV_Richat_{consultant.prenom}_{consultant.nom}.pdf"'
+            return response
+            
+        except Exception as e:
+            logger.error(f"Erreur lors du téléchargement: {str(e)}")
+            return Response({
+                'success': False,
+                'error': 'Erreur lors du téléchargement du fichier'
+            }, status=500)
+            
+    except Exception as e:
+        logger.error(f"Erreur générale lors du téléchargement du CV Richat: {str(e)}")
+        return Response({
+            'success': False,
+            'error': str(e)
+        }, status=500)

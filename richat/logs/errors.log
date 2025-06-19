@@ -1519,3 +1519,17 @@ django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' 
 [2025-06-13 12:47:50,847] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
 [2025-06-13 12:47:51,135] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
 [2025-06-13 12:47:51,173] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-16 08:12:42,901] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 08:16:27,912] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 08:16:41,068] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 19:15:11,482] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 19:15:34,704] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 19:39:49,884] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-17 02:31:17,507] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-17 19:23:51,922] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-17 20:09:28,690] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-17 20:10:11,423] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-18 13:18:50,379] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/32/richat-cv-template/
+[2025-06-18 14:31:28,505] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/4/richat-cv-template/
+[2025-06-18 14:31:29,420] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/4/richat-cv-template/
+[2025-06-18 14:53:47,516] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/4/generate-richat-cv/

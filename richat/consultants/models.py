@@ -473,3 +473,141 @@ class DocumentAccess(models.Model):
 
     def __str__(self):
         return f"{self.user.username} - {self.action} - {self.document.title}"
+    
+    
+# models.py - Modèles optionnels pour le CV Richat (à ajouter si souhaité)
+
+from django.db import models
+from django.utils import timezone
+import json
+
+class CVRichatGenerated(models.Model):
+    """
+    Modèle pour sauvegarder les métadonnées des CV Richat générés
+    """
+    consultant = models.ForeignKey(
+        'Consultant', 
+        on_delete=models.CASCADE, 
+        related_name='richat_cvs',
+        verbose_name="Consultant"
+    )
+    
+    filename = models.CharField(
+        max_length=255,
+        verbose_name="Nom du fichier"
+    )
+    
+    cv_data = models.TextField(
+        help_text="Données JSON utilisées pour générer le CV",
+        verbose_name="Données CV"
+    )
+    
+    generated_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name="Date de génération"
+    )
+    
+    file_size = models.IntegerField(
+        null=True, 
+        blank=True,
+        verbose_name="Taille du fichier (bytes)"
+    )
+    
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name="Actif"
+    )
+    
+    quality_score = models.IntegerField(
+        null=True,
+        blank=True,
+        help_text="Score de qualité du CV (0-100)",
+        verbose_name="Score de qualité"
+    )
+    
+    sections_completed = models.JSONField(
+        default=dict,
+        help_text="Sections complétées dans le CV",
+        verbose_name="Sections complétées"
+    )
+    
+    download_count = models.IntegerField(
+        default=0,
+        verbose_name="Nombre de téléchargements"
+    )
+    
+    last_downloaded = models.DateTimeField(
+        null=True,
+        blank=True,
+        verbose_name="Dernier téléchargement"
+    )
+    
+    class Meta:
+        ordering = ['-generated_at']
+        verbose_name = "CV Richat Généré"
+        verbose_name_plural = "CV Richat Générés"
+        indexes = [
+            models.Index(fields=['consultant', 'generated_at']),
+            models.Index(fields=['filename']),
+            models.Index(fields=['is_active']),
+        ]
+    
+    def __str__(self):
+        return f"CV Richat - {self.consultant.nom} {self.consultant.prenom} - {self.generated_at.strftime('%Y-%m-%d %H:%M')}"
+
+    @property
+    def file_size_mb(self):
+        """Retourne la taille du fichier en MB"""
+        if self.file_size:
+            return round(self.file_size / (1024 * 1024), 2)
+        return 0
+    
+    @property
+    def cv_data_parsed(self):
+        """Retourne les données CV parsées"""
+        try:
+            return json.loads(self.cv_data)
+        except:
+            return {}
+
+    def increment_download(self):
+        """Incrémente le compteur de téléchargements"""
+        self.download_count += 1
+        self.last_downloaded = timezone.now()
+        self.save(update_fields=['download_count', 'last_downloaded'])
+
+
+class CVRichatTemplate(models.Model):
+    """
+    Modèle pour sauvegarder des templates de CV personnalisés
+    """
+    name = models.CharField(
+        max_length=100,
+        verbose_name="Nom du template"
+    )
+    
+    description = models.TextField(
+        blank=True,
+        verbose_name="Description"
+    )
+    
+    template_data = models.JSONField(
+        default=dict,
+        verbose_name="Données du template"
+    )
+    
+    is_default = models.BooleanField(
+        default=False,
+        verbose_name="Template par défaut"
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Template CV Richat"
+        verbose_name_plural = "Templates CV Richat"
+        ordering = ['name']
+    
+    def __str__(self):
+        return self.name
