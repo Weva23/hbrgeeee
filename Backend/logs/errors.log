@@ -1,0 +1,1727 @@
+[2025-06-09 05:16:26,226] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 05:16:40,880] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 16:45:20,662] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 16:45:32,712] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 16:45:43,205] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 19:53:28,390] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 19:54:35,797] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 19:55:56,408] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-09 19:56:20,036] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-10 01:35:07,818] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 01:35:07,820] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:35:09,313] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:35:09,503] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 01:35:09,719] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:35:09,941] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:39,012] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:39,580] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:39,633] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 01:39:39,932] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:40,021] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 01:39:40,163] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 01:39:41,416] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:22,281] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 02:03:22,293] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:22,445] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:22,480] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2971, in document_stats
+    recent_docs_data = DocumentGEDSerializer(recent_documents, many=True).data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\general\\83485252_dossier_administratif__KbdJtcU.docx'
+[2025-06-10 02:03:22,539] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:22,607] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:25,080] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:58,873] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:03:58,934] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 2736, in documents_list
+    return Response(serializer.data)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 768, in data
+    ret = super().data
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 253, in data
+    self._data = self.to_representation(self.instance)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 686, in to_representation
+    return [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 687, in <listcomp>
+    self.child.to_representation(item) for item in iterable
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\serializers.py", line 522, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\fields.py", line 1838, in to_representation
+    return method(value)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\serializers.py", line 122, in get_file_size_display
+    return obj.file_size() if hasattr(obj, 'file_size') else None
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\models.py", line 299, in file_size
+    size_bytes = self.file.size
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\fields\files.py", line 74, in size
+    return self.storage.size(self.name)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\files\storage\filesystem.py", line 182, in size
+    return os.path.getsize(self.path(name))
+  File "C:\Program Files\Python310\lib\genericpath.py", line 50, in getsize
+    return os.stat(filename).st_size
+FileNotFoundError: [WinError 2] Le fichier spécifié est introuvable: 'C:\\Users\\HP\\Desktop\\5alih 3ala ellah\\richat\\media\\ged\\documents\\appels_offres\\1\\finance\\GPAO1.pptx'
+[2025-06-10 02:36:45,457] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+[2025-06-10 02:36:45,469] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+[2025-06-10 02:36:45,469] ERROR django.request log log_response:241 - Internal Server Error: /api/documents/
+[2025-06-11 14:15:01,280] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:15:05,049] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:19:45,209] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:46:58,526] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:47:21,195] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-11 14:48:15,656] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:15:47,903] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:34:14,211] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:43:49,525] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:44:09,185] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:44:52,190] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:45:03,078] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:45:12,253] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:45:33,181] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:45:53,654] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:47:55,942] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:48:17,930] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:56:12,971] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:57:03,082] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-12 12:58:02,505] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-13 09:56:10,593] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/39/
+[2025-06-13 12:15:35,335] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:15:35,343] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:25:35,339] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:25:35,347] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:11,423] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:11,424] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:22,862] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:22,862] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:22,876] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:22,877] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:22,883] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:22,888] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:23,207] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:23,212] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:45,008] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:45,015] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:45,022] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:45,034] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:45,035] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:45,043] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:46,025] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:46,031] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,332] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,332] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:49,349] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,356] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:49,362] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,369] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,655] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:49,660] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:28:56,005] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:28:56,005] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:27,849] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:27,862] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:28,148] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:28,156] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:28,305] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:29:28,324] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:28,346] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:28,424] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:29:28,487] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:28,494] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:31,753] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:31,754] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:31,772] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:31,773] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:31,778] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:31,788] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:32,060] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:32,067] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,088] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,095] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,105] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,114] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,408] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:38,422] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,081] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,103] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,335] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:29:40,350] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:40,368] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:40,412] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,420] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:40,470] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:29:40,484] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:40,490] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:41,611] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,612] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:41,625] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,625] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:29:41,634] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,640] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,933] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:29:41,943] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:42,685] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:35:42,848] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:42,869] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:35:42,887] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:42,904] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:42,931] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:43,099] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:43,115] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,063] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,066] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:35:47,099] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,102] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:35:47,134] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,146] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,444] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:35:47,470] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,617] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,648] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,662] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,681] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:48,845] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:47:48,906] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:48,920] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:49,056] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+MySQLdb.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\5alih 3ala ellah\richat\consultants\views.py", line 510, in dashboard_stats
+    "derniers_consultants": [
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\backends\mysql\base.py", line 75, in execute
+    return self.cursor.execute(query, args)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 179, in execute
+    res = self._query(mogrified_query)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\cursors.py", line 330, in _query
+    db.query(q)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\MySQLdb\connections.py", line 255, in query
+    _mysql.connection.query(self, query)
+django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' inconnu dans field list")
+[2025-06-13 12:47:49,176] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:49,192] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:50,749] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:50,754] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:50,796] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:50,801] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-13 12:47:50,821] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:50,847] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:51,135] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-13 12:47:51,173] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-16 08:12:42,901] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 08:16:27,912] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 08:16:41,068] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 19:15:11,482] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 19:15:34,704] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-16 19:39:49,884] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-17 02:31:17,507] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-17 19:23:51,922] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-17 20:09:28,690] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-17 20:10:11,423] ERROR django.request log log_response:241 - Service Unavailable: /api/consultant/process-cv/
+[2025-06-18 13:18:50,379] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/32/richat-cv-template/
+[2025-06-18 14:31:28,505] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/4/richat-cv-template/
+[2025-06-18 14:31:29,420] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/4/richat-cv-template/
+[2025-06-18 14:53:47,516] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/4/generate-richat-cv/
+[2025-06-21 13:37:58,738] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/60/
+[2025-06-21 21:18:17,331] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:18:18,006] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:23:17,002] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:23:18,001] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:05,844] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:05,880] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:05,896] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:05,907] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:06,452] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 21:41:06,544] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 21:41:06,641] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-06-21 21:41:06,677] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-06-21 21:41:09,914] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:09,916] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 21:41:09,937] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:09,942] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 21:41:09,955] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:09,969] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:10,243] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 21:41:10,253] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:00:04,755] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:00:04,758] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:00:04,767] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:00:04,771] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:00:04,779] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:00:04,786] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:00:04,798] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:00:04,805] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:08:08,710] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:08:08,716] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:08:08,722] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:08:08,730] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:08:08,737] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:08:08,747] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:08:08,760] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:08:08,770] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:14:15,867] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:14:15,869] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:14:15,885] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:14:15,886] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:14:15,901] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:14:15,913] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:14:15,921] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:14:15,930] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:15:54,523] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:15:54,526] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:15:54,530] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:15:54,538] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:15:54,547] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:15:54,555] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:15:54,565] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:15:54,570] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:16:28,998] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:16:29,004] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:21:22,234] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:21:22,236] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:21:22,247] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:21:22,249] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:21:22,280] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:21:22,288] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:21:22,296] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:21:22,303] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:21:29,022] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:21:29,034] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:23:59,109] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:23:59,115] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:23:59,117] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:23:59,123] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:23:59,129] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:23:59,135] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:23:59,145] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:23:59,152] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:06,624] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:06,632] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:06,944] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:24:06,953] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:06,968] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:06,968] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:24:06,993] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-06-21 22:24:07,006] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-06-21 22:24:09,766] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:09,780] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:10,099] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:10,104] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:13,022] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:13,022] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:24:13,033] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:24:13,034] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:13,041] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:13,045] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:13,333] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:24:13,340] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:26:29,014] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:26:29,023] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:28:44,955] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/register/
+[2025-06-21 22:28:55,971] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:28:55,972] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:28:56,015] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:28:56,021] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:28:56,031] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:28:56,043] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:28:56,314] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:28:56,321] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:31:29,012] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:31:29,020] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:39:34,078] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:39:34,090] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:39:50,672] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:39:50,687] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:40:20,609] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:40:20,625] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:45:19,433] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/register/
+[2025-06-21 22:45:28,203] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/register/
+[2025-06-21 22:48:03,685] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/register/
+[2025-06-21 22:48:30,660] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/login/
+[2025-06-21 22:48:38,230] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/login/
+[2025-06-21 22:49:01,082] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/login/
+[2025-06-21 22:56:13,925] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:13,939] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:13,968] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:13,979] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:56:13,999] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:14,008] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:56:14,032] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-06-21 22:56:14,042] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-06-21 22:56:16,975] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:56:16,980] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:16,985] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 22:56:17,156] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:17,176] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:17,192] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:17,288] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:17,297] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:29,005] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:56:29,014] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:57:01,734] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:57:01,743] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 22:57:01,754] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:01:29,002] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:01:29,012] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:06:29,325] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:06:29,334] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:06:54,482] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:06:54,484] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:06:54,491] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:06:54,498] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:06:54,508] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:06:54,524] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:06:54,539] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:06:54,551] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:11:01,778] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:11:01,779] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:11:01,798] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:11:01,799] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:11:01,816] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:11:01,829] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:11:01,840] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:11:01,852] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:11:29,008] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:11:29,017] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:19:36,924] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:19:36,930] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:19:36,943] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:19:36,960] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:19:36,975] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:19:36,989] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:19:37,004] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:19:37,020] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:21:29,007] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:21:29,019] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:23:56,333] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:23:56,345] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:46:31,641] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:46:43,275] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:46:43,278] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:46:43,299] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:46:43,301] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:46:43,326] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:46:43,352] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:46:43,609] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:46:43,619] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:54:47,885] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:54:47,887] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:54:47,901] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-06-21 23:54:47,906] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:54:47,920] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:54:47,935] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:54:47,944] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:54:47,957] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:56:29,014] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-06-21 23:56:29,025] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/

@@ -1,0 +1,74 @@
+/* Styles de base */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Styles pour la page de réinitialisation de mot de passe */
+.reset-password-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.reset-password-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.reset-password-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reset-password-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reset-password-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.reset-password-button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.reset-password-button:hover {
+    background-color: #1e40af;
+}
+
+.reset-password-error {
+    color: #ef4444;
+    margin-top: 10px;
+}
+
+.reset-password-success {
+    color: #10b981;
+    margin-top: 10px;
+}
