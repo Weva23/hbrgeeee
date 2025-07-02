@@ -7,12 +7,15 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import AdminLayout from "@/components/admin/AdminLayout";
 import {
   PlusIcon, SearchIcon, Edit2Icon, Trash2Icon, RefreshCwIcon, UserCogIcon,
   FileTextIcon, ListIcon, CalendarIcon, MapPinIcon, PhoneIcon, MailIcon, 
   BriefcaseIcon, ImageIcon, StarIcon, AwardIcon, TrendingUpIcon, UsersIcon,
-  XIcon
+  XIcon, GraduationCapIcon, Users2Icon
 } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
@@ -36,6 +39,14 @@ interface Consultant {
   specialite: string;
   statut?: string;
   is_validated: boolean;
+  // Nouveaux champs pour l'expertise
+  annees_experience?: number;
+  formation_niveau?: string;
+  certifications_count?: number;
+  projets_realises?: number;
+  leadership_experience?: boolean;
+  international_experience?: boolean;
+  expertise_score?: number;
 }
 
 interface Competence {
@@ -48,6 +59,7 @@ interface Stats {
   total: number;
   active: number;
   expert: number;
+  senior: number;
   domains: { [key: string]: number };
 }
 
@@ -62,9 +74,19 @@ const DOMAINS = [
 ];
 
 const EXPERTISE_LEVELS = [
-  { value: 'Débutant', label: 'Débutant' },
-  { value: 'Intermédiaire', label: 'Intermédiaire' },
-  { value: 'Expert', label: 'Expert' }
+  { value: 'Débutant', label: 'Débutant (0-2 ans)' },
+  { value: 'Intermédiaire', label: 'Intermédiaire (3-7 ans)' },
+  { value: 'Expert', label: 'Expert (8+ ans)' },
+  { value: 'Senior', label: 'Senior Expert (15+ ans)' }
+];
+
+const FORMATION_LEVELS = [
+  { value: 'BAC', label: 'Baccalauréat' },
+  { value: 'BAC+2', label: 'BTS/DUT/DEUG' },
+  { value: 'BAC+3', label: 'Licence/Bachelor' },
+  { value: 'BAC+4', label: 'Maîtrise' },
+  { value: 'BAC+5', label: 'Master/Ingénieur' },
+  { value: 'BAC+8', label: 'Doctorat/PhD' }
 ];
 
 // Règles de validation
@@ -119,23 +141,25 @@ const Consultants: React.FC = () => {
   const [consultantToDelete, setConsultantToDelete] = useState<Consultant | null>(null);
   const [pendingCount, setPendingCount] = useState(0);
   const [activeFilter, setActiveFilter] = useState("all");
-  const [stats, setStats] = useState<Stats>({ total: 0, active: 0, expert: 0, domains: {} });
+  const [stats, setStats] = useState<Stats>({ total: 0, active: 0, expert: 0, senior: 0, domains: {} });
   const [isDeleting, setIsDeleting] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [validationErrors, setValidationErrors] = useState<{ [key: string]: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Calcul des statistiques
   const calculateStats = useCallback((consultants: Consultant[]) => {
     const total = consultants.length;
     const active = consultants.filter(c => c.statut === "Actif").length;
     const expert = consultants.filter(c => c.expertise === "Expert").length;
+    const senior = consultants.filter(c => c.expertise === "Senior").length;
     
     const domains: { [key: string]: number } = {};
     consultants.forEach(c => {
       domains[c.domaine_principal] = (domains[c.domaine_principal] || 0) + 1;
     });
 
-    setStats({ total, active, expert, domains });
+    setStats({ total, active, expert, senior, domains });
   }, []);
 
   // Récupération des consultants
@@ -197,9 +221,13 @@ const Consultants: React.FC = () => {
     fetchPendingCount();
   }, [fetchConsultants, fetchPendingCount]);
 
-  // Gestion du formulaire
+  // CORRECTION: Gestion du formulaire améliorée
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (isSubmitting) {
+      return; // Éviter les soumissions multiples
+    }
     
     // Validation côté client
     const validation = validateConsultantForm(formData);
@@ -217,6 +245,7 @@ const Consultants: React.FC = () => {
     }
     
     setValidationErrors({});
+    setIsSubmitting(true);
     const loadingToast = toast.loading(editing ? "Modification en cours..." : "Création en cours...");
     
     try {
@@ -226,11 +255,18 @@ const Consultants: React.FC = () => {
       // Ajouter tous les champs texte
       Object.entries(formData).forEach(([key, value]) => {
         if (value !== null && value !== undefined && value !== '') {
-          if (key === 'photo' && value instanceof File) {
-            payload.append(key, value);
-          } else if (key === 'cv' && value instanceof File) {
-            payload.append(key, value);
-          } else if (typeof value === 'string' || typeof value === 'number') {
+          // CORRECTION: Gestion spéciale des fichiers
+          if (key === 'photo') {
+            if (value instanceof File) {
+              payload.append(key, value);
+            }
+            // Ne pas ajouter si c'est juste une URL existante
+          } else if (key === 'cv') {
+            if (value instanceof File) {
+              payload.append(key, value);
+            }
+            // Ne pas ajouter si c'est juste une URL existante
+          } else if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') {
             payload.append(key, String(value));
           }
         }
@@ -250,14 +286,12 @@ const Consultants: React.FC = () => {
       }
       
       // Gérer la réponse
-      if (response.data.success) {
-        const consultantData = response.data.data;
+      if (response.data.success || response.status === 200) {
+        const consultantData = response.data.data || response.data;
         
         if (editing) {
-          // Mise à jour de la liste
-          setConsultants(prev => prev.map(c => 
-            c.id === editing.id ? consultantData : c
-          ));
+          // CORRECTION: Actualiser la liste après modification
+          await fetchConsultants();
           toast.dismiss(loadingToast);
           toast.success("Consultant modifié avec succès");
         } else {
@@ -306,19 +340,23 @@ const Consultants: React.FC = () => {
       }
       
       toast.error(errorMessage);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
-  // Ouverture du dialogue
+  // CORRECTION: Ouverture du dialogue améliorée
   const openDialog = (consultant?: Consultant) => {
     setValidationErrors({});
     
     if (consultant) {
       setEditing(consultant);
       setFormData({ ...consultant });
-      // Gestion de l'image existante
+      // CORRECTION: Gérer l'image existante sans la définir comme File
       if (consultant.photo) {
         setPreviewImage(getImageUrl(consultant.photo));
+      } else {
+        setPreviewImage(null);
       }
     } else {
       setEditing(null);
@@ -334,6 +372,13 @@ const Consultants: React.FC = () => {
         domaine_principal: "DIGITAL",
         specialite: "",
         expertise: "Débutant",
+        // Nouveaux champs d'expertise
+        annees_experience: 0,
+        formation_niveau: "BAC+3",
+        certifications_count: 0,
+        projets_realises: 0,
+        leadership_experience: false,
+        international_experience: false,
         cv: null,
         photo: null,
         password: ""
@@ -437,9 +482,10 @@ const Consultants: React.FC = () => {
 
   const getExpertiseBadgeColor = (expertise: string) => {
     switch (expertise) {
-      case "Débutant": return "bg-sky-50 text-sky-700 border-sky-200";
-      case "Intermédiaire": return "bg-amber-50 text-amber-700 border-amber-200";
-      case "Expert": return "bg-blue-50 text-blue-700 border-blue-200";
+      case "Senior": return "bg-purple-50 text-purple-700 border-purple-200";
+      case "Expert": return "bg-green-50 text-green-700 border-green-200";
+      case "Intermédiaire": return "bg-blue-50 text-blue-700 border-blue-200";
+      case "Débutant": return "bg-orange-50 text-orange-700 border-orange-200";
       default: return "bg-gray-100 text-gray-800 border-gray-300";
     }
   };
@@ -457,29 +503,34 @@ const Consultants: React.FC = () => {
     return new Intl.DateTimeFormat('fr-FR').format(date);
   };
 
-  // Gestion des fichiers avec prévisualisation
+  // CORRECTION: Gestion des fichiers avec prévisualisation améliorée
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>, type: 'photo' | 'cv') => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       
       // Validation de la taille
-      const maxSize = type === 'photo' ? 5 * 1024 * 1024 : 10 * 1024 * 1024; // 5MB pour photo, 10MB pour CV
+      const maxSize = type === 'photo' ? 5 * 1024 * 1024 : 10 * 1024 * 1024;
       if (file.size > maxSize) {
         toast.error(`Le fichier est trop volumineux. Taille maximum: ${maxSize / (1024 * 1024)}MB`);
+        // CORRECTION: Reset de l'input
+        e.target.value = '';
         return;
       }
       
       // Validation du type de fichier
       if (type === 'photo' && !file.type.startsWith('image/')) {
         toast.error("Veuillez sélectionner un fichier image valide");
+        e.target.value = '';
         return;
       }
       
       if (type === 'cv' && !['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'].includes(file.type)) {
         toast.error("Veuillez sélectionner un fichier PDF ou Word");
+        e.target.value = '';
         return;
       }
       
+      // CORRECTION: Mise à jour correcte du formData
       setFormData(prev => ({ ...prev, [type]: file }));
       
       // Prévisualisation pour les images
@@ -490,12 +541,20 @@ const Consultants: React.FC = () => {
         };
         reader.readAsDataURL(file);
       }
+      
+      // CORRECTION: Message de confirmation
+      toast.success(`${type === 'photo' ? 'Photo' : 'CV'} sélectionné avec succès`);
     }
   };
 
-  // Fonction pour obtenir l'URL de l'image avec fallback
+  // CORRECTION: Fonction pour obtenir l'URL de l'image avec fallback amélioré
   const getImageUrl = (photo: string | undefined) => {
     if (!photo) return null;
+    
+    // Si c'est déjà une URL data (prévisualisation)
+    if (photo.startsWith('data:')) {
+      return photo;
+    }
     
     // Si c'est une URL complète
     if (photo.startsWith('http')) {
@@ -511,6 +570,13 @@ const Consultants: React.FC = () => {
     return `http://localhost:8000/media/${photo}`;
   };
 
+  // CORRECTION: Fonction pour supprimer l'image
+  const removeImage = () => {
+    setFormData(prev => ({ ...prev, photo: null }));
+    setPreviewImage(null);
+    toast.success("Image supprimée");
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-6 p-6 bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
@@ -523,7 +589,7 @@ const Consultants: React.FC = () => {
             </div>
             
             {/* Statistiques rapides */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full lg:w-auto">
+            <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 w-full lg:w-auto">
               <Card className="border-blue-200 bg-blue-50">
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-2">
@@ -548,13 +614,25 @@ const Consultants: React.FC = () => {
                 </CardContent>
               </Card>
               
-              <Card className="border-blue-200 bg-blue-50">
+              <Card className="border-emerald-200 bg-emerald-50">
                 <CardContent className="p-4">
                   <div className="flex items-center space-x-2">
-                    <AwardIcon className="h-5 w-5 text-blue-600" />
+                    <AwardIcon className="h-5 w-5 text-emerald-600" />
                     <div>
-                      <p className="text-sm text-blue-600">Experts</p>
-                      <p className="text-xl font-bold text-blue-800">{stats.expert}</p>
+                      <p className="text-sm text-emerald-600">Experts</p>
+                      <p className="text-xl font-bold text-emerald-800">{stats.expert}</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border-purple-200 bg-purple-50">
+                <CardContent className="p-4">
+                  <div className="flex items-center space-x-2">
+                    <StarIcon className="h-5 w-5 text-purple-600" />
+                    <div>
+                      <p className="text-sm text-purple-600">Senior</p>
+                      <p className="text-xl font-bold text-purple-800">{stats.senior}</p>
                     </div>
                   </div>
                 </CardContent>
@@ -714,12 +792,28 @@ const Consultants: React.FC = () => {
                           </div>
                         </TableCell>
                         <TableCell>
-                          <Badge 
-                            className={`px-3 py-1 rounded-full border ${getExpertiseBadgeColor(consultant.expertise)}`}
-                          >
-                            <StarIcon className="h-3 w-3 mr-1" />
-                            {consultant.expertise}
-                          </Badge>
+                          <div className="space-y-2">
+                            <Badge 
+                              className={`px-3 py-1 rounded-full border ${getExpertiseBadgeColor(consultant.expertise)}`}
+                            >
+                              <StarIcon className="h-3 w-3 mr-1" />
+                              {consultant.expertise}
+                            </Badge>
+                            
+                            {/* Affichage du score si disponible */}
+                            {consultant.expertise_score && (
+                              <div className="text-xs text-gray-500">
+                                Score: {consultant.expertise_score}/100
+                              </div>
+                            )}
+                            
+                            {/* Indicateur des années d'expérience */}
+                            {consultant.annees_experience && (
+                              <div className="text-xs text-gray-500">
+                                {consultant.annees_experience} ans d'exp.
+                              </div>
+                            )}
+                          </div>
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center">
@@ -825,7 +919,7 @@ const Consultants: React.FC = () => {
           setValidationErrors({});
         }
       }}>
-        <DialogContent className="max-w-4xl bg-white max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-5xl bg-white max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
               {editing ? <Edit2Icon className="h-6 w-6" /> : <PlusIcon className="h-6 w-6" />}
@@ -834,11 +928,11 @@ const Consultants: React.FC = () => {
           </DialogHeader>
           
           <form onSubmit={handleSubmit} className="space-y-6 pt-2">
-            {/* Photo de profil avec prévisualisation */}
+            {/* CORRECTION: Photo de profil avec prévisualisation améliorée */}
             <div className="flex flex-col items-center gap-4 p-4 bg-gray-50 rounded-lg">
               <Avatar className="h-32 w-32 ring-4 ring-blue-100">
                 <AvatarImage 
-                  src={previewImage || getImageUrl(formData.photo) || undefined} 
+                  src={previewImage || getImageUrl(editing?.photo) || undefined} 
                   alt="Photo de profil"
                   onError={(e) => {
                     (e.target as HTMLImageElement).style.display = 'none';
@@ -861,24 +955,26 @@ const Consultants: React.FC = () => {
                     <Button type="button" variant="outline" className="flex items-center gap-2" asChild>
                       <span>
                         <ImageIcon className="h-4 w-4" />
-                        Choisir une photo
+                        {formData.photo instanceof File ? 'Changer la photo' : 'Choisir une photo'}
                       </span>
                     </Button>
                   </label>
-                  {(formData.photo || previewImage) && (
+                  {(formData.photo || previewImage || (editing?.photo)) && (
                     <Button
                       type="button"
                       variant="ghost"
-                      onClick={() => {
-                        setFormData({ ...formData, photo: null });
-                        setPreviewImage(null);
-                      }}
+                      onClick={removeImage}
                       className="text-red-500 hover:text-red-700"
                     >
                       <XIcon className="h-4 w-4" />
                     </Button>
                   )}
                 </div>
+                {formData.photo instanceof File && (
+                  <p className="text-xs text-green-600 mt-1">
+                    ✓ Nouvelle image sélectionnée: {formData.photo.name}
+                  </p>
+                )}
                 <p className="text-xs text-gray-500 mt-1">
                   Formats acceptés: JPG, PNG, GIF (max 5MB)
                 </p>
@@ -1048,60 +1144,167 @@ const Consultants: React.FC = () => {
               )}
             </div>
 
-            {/* Expertise */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Domaine principal <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <BriefcaseIcon className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                  <select 
-                    value={formData.domaine_principal || 'DIGITAL'} 
-                    onChange={(e) => setFormData({ ...formData, domaine_principal: e.target.value })} 
-                    className="w-full pl-10 p-2 border rounded-lg border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                  >
-                    {DOMAINS.map(domain => (
-                      <option key={domain.value} value={domain.value}>{domain.label}</option>
-                    ))}
-                  </select>
+            {/* Expertise professionelle */}
+            <div className="space-y-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <h3 className="text-lg font-semibold text-blue-900 flex items-center gap-2">
+                <TrendingUpIcon className="h-5 w-5" />
+                Évaluation d'Expertise
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Domaine principal <span className="text-red-500">*</span>
+                  </label>
+                  <div className="relative">
+                    <BriefcaseIcon className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Select 
+                      value={formData.domaine_principal || 'DIGITAL'} 
+                      onValueChange={(value) => setFormData({ ...formData, domaine_principal: value })}
+                    >
+                      <SelectTrigger className="pl-10 border-gray-300 focus:border-blue-300">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {DOMAINS.map(domain => (
+                          <SelectItem key={domain.value} value={domain.value}>{domain.label}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Niveau d'expertise <span className="text-red-500">*</span>
-                </label>
-                <div className="relative">
-                  <StarIcon className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                  <select 
-                    value={formData.expertise || 'Débutant'} 
-                    onChange={(e) => setFormData({ ...formData, expertise: e.target.value })} 
-                    className="w-full pl-10 p-2 border rounded-lg border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-                  >
-                    {EXPERTISE_LEVELS.map(level => (
-                      <option key={level.value} value={level.value}>{level.label}</option>
-                    ))}
-                  </select>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Années d'expérience
+                  </label>
+                  <div className="relative">
+                    <BriefcaseIcon className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Input 
+                      type="number"
+                      min="0"
+                      max="50"
+                      placeholder="Années d'expérience" 
+                      value={formData.annees_experience || ''} 
+                      onChange={(e) => setFormData({ ...formData, annees_experience: parseInt(e.target.value) || 0 })} 
+                      className="pl-10 border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    />
+                  </div>
                 </div>
-              </div>
-            </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Sous-domaine / Spécialité <span className="text-red-500">*</span>
-              </label>
-              <Input 
-                placeholder="Ex: Cybersécurité, Finance Islamique, Énergies renouvelables..." 
-                value={formData.specialite || ''} 
-                onChange={(e) => setFormData({ ...formData, specialite: e.target.value })} 
-                required 
-                className={`border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
-                  validationErrors.specialite ? 'border-red-500' : ''
-                }`}
-              />
-              {validationErrors.specialite && (
-                <p className="text-red-500 text-xs mt-1">{validationErrors.specialite}</p>
-              )}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Niveau de formation
+                  </label>
+                  <div className="relative">
+                    <GraduationCapIcon className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Select 
+                      value={formData.formation_niveau || 'BAC+3'} 
+                      onValueChange={(value) => setFormData({ ...formData, formation_niveau: value })}
+                    >
+                      <SelectTrigger className="pl-10 border-gray-300 focus:border-blue-300">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {FORMATION_LEVELS.map(level => (
+                          <SelectItem key={level.value} value={level.value}>{level.label}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Certifications professionnelles
+                  </label>
+                  <div className="relative">
+                    <AwardIcon className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Input 
+                      type="number"
+                      min="0"
+                      max="20"
+                      placeholder="Nombre de certifications" 
+                      value={formData.certifications_count || ''} 
+                      onChange={(e) => setFormData({ ...formData, certifications_count: parseInt(e.target.value) || 0 })} 
+                      className="pl-10 border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Projets significatifs réalisés
+                  </label>
+                  <div className="relative">
+                    <BriefcaseIcon className="h-4 w-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                    <Input 
+                      type="number"
+                      min="0"
+                      max="100"
+                      placeholder="Nombre de projets" 
+                      value={formData.projets_realises || ''} 
+                      onChange={(e) => setFormData({ ...formData, projets_realises: parseInt(e.target.value) || 0 })} 
+                      className="pl-10 border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Sous-domaine / Spécialité <span className="text-red-500">*</span>
+                  </label>
+                  <Input 
+                    placeholder="Ex: Cybersécurité, Finance Islamique, Énergies renouvelables..." 
+                    value={formData.specialite || ''} 
+                    onChange={(e) => setFormData({ ...formData, specialite: e.target.value })} 
+                    required 
+                    className={`border-gray-300 focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 ${
+                      validationErrors.specialite ? 'border-red-500' : ''
+                    }`}
+                  />
+                  {validationErrors.specialite && (
+                    <p className="text-red-500 text-xs mt-1">{validationErrors.specialite}</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Expériences spécialisées */}
+              <div className="space-y-3">
+                <label className="block text-sm font-medium text-gray-700">
+                  Expériences spécialisées
+                </label>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="leadership"
+                      checked={formData.leadership_experience || false}
+                      onCheckedChange={(checked) => setFormData({
+                        ...formData, 
+                        leadership_experience: checked as boolean
+                      })}
+                    />
+                    <Label htmlFor="leadership" className="text-sm">
+                      Expérience en leadership/management d'équipe
+                    </Label>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="international"
+                      checked={formData.international_experience || false}
+                      onCheckedChange={(checked) => setFormData({
+                        ...formData, 
+                        international_experience: checked as boolean
+                      })}
+                    />
+                    <Label htmlFor="international" className="text-sm">
+                      Expérience internationale ou multiculturelle
+                    </Label>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Mot de passe pour nouveaux consultants */}
@@ -1178,15 +1381,16 @@ const Consultants: React.FC = () => {
                 variant="outline" 
                 onClick={() => setDialogOpen(false)}
                 className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                disabled={isSubmitting}
               >
                 Annuler
               </Button>
               <Button 
                 type="submit"
                 className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white"
-                disabled={loading}
+                disabled={isSubmitting}
               >
-                {loading ? (
+                {isSubmitting ? (
                   <div className="flex items-center gap-2">
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                     {editing ? "Modification..." : "Création..."}
