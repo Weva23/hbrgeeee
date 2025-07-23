@@ -244,7 +244,7 @@ CV_STORAGE_SETTINGS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'finaly',
+        'NAME': 'bdd',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',
@@ -539,12 +539,7 @@ def startup_checks():
             print(f"   ✗ {directory}")
     
     # Vérification spécifique du dossier CV standardisé
-    print(f"\n📂 Vérification dossier CV standardisé:")
-    print(f"   📍 Chemin: {CV_STANDARDISE_DIR}")
-    print(f"   📊 Existence: {'✅ OUI' if CV_STANDARDISE_DIR.exists() else '❌ NON'}")
-    print(f"   📝 Écriture: {'✅ OUI' if os.access(CV_STANDARDISE_DIR, os.W_OK) else '❌ NON'}")
-    print(f"   📖 Lecture: {'✅ OUI' if os.access(CV_STANDARDISE_DIR, os.R_OK) else '❌ NON'}")
-    
+  
     # Test de création d'un fichier test
     try:
         test_file = CV_STANDARDISE_DIR / 'test_write.tmp'
@@ -573,7 +568,7 @@ def startup_checks():
     
     # Vérification CSRF
     csrf_origins_count = len(CSRF_TRUSTED_ORIGINS)
-    print(f"✅ CSRF configuré pour {csrf_origins_count} domaines de confiance")
+
     
     if "http://localhost:8080" in CSRF_TRUSTED_ORIGINS:
         print("✅ Port 8080 autorisé pour CSRF")
@@ -589,21 +584,18 @@ def startup_checks():
     
     # Configuration CV Processing
     max_size_mb = CV_PROCESSING['MAX_FILE_SIZE'] / (1024 * 1024)
-    print(f"✅ Upload CV: max {max_size_mb}MB, {len(CV_PROCESSING['ALLOWED_EXTENSIONS'])} formats")
-    print(f"✅ Sauvegarde auto: {'ACTIVÉE' if CV_PROCESSING['AUTO_SAVE_ENABLED'] else 'DÉSACTIVÉE'}")
-    print(f"✅ Métadonnées: {'ACTIVÉES' if CV_PROCESSING['GENERATE_METADATA'] else 'DÉSACTIVÉES'}")
-    
+   
     # Configuration stockage
     max_total_gb = CV_STORAGE_SETTINGS['MAX_TOTAL_SIZE_GB']
     max_cvs = CV_STORAGE_SETTINGS['MAX_CVS_PER_CONSULTANT']
-    print(f"✅ Stockage CV: max {max_total_gb}GB, {max_cvs} CVs/consultant")
+
     
     # Mode debug
     mode = "DÉVELOPPEMENT" if DEBUG else "PRODUCTION"
-    print(f"🔧 Mode: {mode}")
+  
     
     # Logs
-    print(f"📝 Logs: {log_dir}")
+ 
     
     # Espace disque disponible
     try:
@@ -613,20 +605,16 @@ def startup_checks():
     except:
         print(f"💾 Espace libre: Non déterminé")
     
-    print("=" * 80)
-    
+ 
     # Status final
-    critical_issues = len(failed_dirs) + len(cors_issues)
-    if critical_issues == 0:
-        print("🚀 SYSTÈME PRÊT - Configuration optimale pour sauvegarde automatique des CVs")
-        print("📁 Dossier standardized_cvs opérationnel")
-        print("💾 Sauvegarde automatique activée")
-        print("🔐 Sécurité CORS et CSRF configurée")
-    else:
-        print(f"⚠️  ATTENTION: {critical_issues} problèmes détectés - voir détails ci-dessus")
-        print("❗ La sauvegarde automatique pourrait ne pas fonctionner correctement")
+    # critical_issues = len(failed_dirs) + len(cors_issues)
+    # if critical_issues == 0:
+        
+    # else:
+    #     print(f"⚠️  ATTENTION: {critical_issues} problèmes détectés - voir détails ci-dessus")
+    #     print("❗ La sauvegarde automatique pourrait ne pas fonctionner correctement")
     
-    print("=" * 80)
+    # print("=" * 80)
 
 # Exécuter les vérifications au démarrage
 startup_checks()
@@ -635,26 +623,26 @@ startup_checks()
 # MESSAGES DE DÉMARRAGE CONDITIONNELS
 # ==========================================
 
-if DEBUG:
-    print("\n📋 INFORMATIONS DE DÉVELOPPEMENT:")
-    print(f"   • CORS autorisé pour: {len(CORS_ALLOWED_ORIGINS)} origins")
-    print(f"   • CSRF token: cookies + headers supportés")
-    print(f"   • Upload max: {FILE_UPLOAD_MAX_MEMORY_SIZE / (1024*1024):.0f}MB")
-    print(f"   • Logs niveau: DEBUG")
-    print(f"   • Sauvegarde CV: {CV_STANDARDISE_DIR}")
+# if DEBUG:
+#     print("\n📋 INFORMATIONS DE DÉVELOPPEMENT:")
+#     print(f"   • CORS autorisé pour: {len(CORS_ALLOWED_ORIGINS)} origins")
+#     print(f"   • CSRF token: cookies + headers supportés")
+#     print(f"   • Upload max: {FILE_UPLOAD_MAX_MEMORY_SIZE / (1024*1024):.0f}MB")
+#     print(f"   • Logs niveau: DEBUG")
+#     print(f"   • Sauvegarde CV: {CV_STANDARDISE_DIR}")
     
-    # Vérification spécifique Windows
-    if sys.platform.startswith('win'):
-        print(f"   • Plateforme: Windows (encodage UTF-8 forcé)")
+#     # Vérification spécifique Windows
+#     if sys.platform.startswith('win'):
+#         print(f"   • Plateforme: Windows (encodage UTF-8 forcé)")
     
-    print("\n🔗 URLs de test:")
-    print("   • Frontend: http://localhost:8080")
-    print("   • API Django: http://127.0.0.1:8000/api/")
-    print("   • CSRF Token: http://127.0.0.1:8000/api/get-csrf-token/")
-    print("   • Upload CV: http://127.0.0.1:8000/api/consultant/process-cv-complete/")
-    print("   • Liste CVs: http://127.0.0.1:8000/api/cv-standardise/list/")
+#     print("\n🔗 URLs de test:")
+#     print("   • Frontend: http://localhost:8080")
+#     print("   • API Django: http://127.0.0.1:8000/api/")
+#     print("   • CSRF Token: http://127.0.0.1:8000/api/get-csrf-token/")
+#     print("   • Upload CV: http://127.0.0.1:8000/api/consultant/process-cv-complete/")
+#     print("   • Liste CVs: http://127.0.0.1:8000/api/cv-standardise/list/")
 
-# ==========================================
+# # ==========================================
 # CONFIGURATION SPÉCIFIQUE WINDOWS
 # ==========================================
 
@@ -748,9 +736,9 @@ def test_cv_storage_configuration():
 # Exécuter le test final
 test_cv_storage_configuration()
 
-print(f"\n✅ Configuration Django chargée avec succès")
-print(f"📊 Résumé: {len(INSTALLED_APPS)} apps, {len(MIDDLEWARE)} middleware, {len(CSRF_TRUSTED_ORIGINS)} origins CSRF")
-print("🎯 Système prêt pour la sauvegarde automatique des CVs au format Richat")
-print(f"📁 Dossier de sauvegarde: {CV_STANDARDISE_DIR}")
-print(f"🔧 Auto-save activé: {CV_PROCESSING['AUTO_SAVE_ENABLED']}")
-print(f"📝 Métadonnées activées: {CV_PROCESSING['GENERATE_METADATA']}\n")
+# print(f"\n✅ Configuration Django chargée avec succès")
+# print(f"📊 Résumé: {len(INSTALLED_APPS)} apps, {len(MIDDLEWARE)} middleware, {len(CSRF_TRUSTED_ORIGINS)} origins CSRF")
+# print("🎯 Système prêt pour la sauvegarde automatique des CVs au format Richat")
+# print(f"📁 Dossier de sauvegarde: {CV_STANDARDISE_DIR}")
+# print(f"🔧 Auto-save activé: {CV_PROCESSING['AUTO_SAVE_ENABLED']}")
+# print(f"📝 Métadonnées activées: {CV_PROCESSING['GENERATE_METADATA']}\n")

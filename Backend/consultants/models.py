@@ -72,7 +72,7 @@ class Consultant(models.Model):
     
     # Expertises et compétences
     domaine_principal = models.CharField(max_length=20, choices=SPECIALITES_CHOICES, default='DIGITAL')
-    specialite = models.CharField(max_length=255, blank=True, null=True)
+    specialite = models.CharField(max_length=191, blank=True, null=True)
     expertise = models.CharField(max_length=20, choices=EXPERTISE_CHOICES, default='Débutant')
     skills = models.TextField(blank=True, null=True, help_text="Compétences séparées par des virgules")
     
@@ -99,8 +99,8 @@ class Consultant(models.Model):
     
     # Fichiers
     cv = models.FileField(upload_to='consultants/cvs/', null=True, blank=True)
-    cvFilename = models.CharField(max_length=255, blank=True, null=True)  # Nom original du CV
-    standardizedCvFilename = models.CharField(max_length=255, blank=True, null=True)  # CV Richat
+    cvFilename = models.CharField(max_length=191, blank=True, null=True)  # Nom original du CV
+    standardizedCvFilename = models.CharField(max_length=191, blank=True, null=True)  # CV Richat
     photo = models.ImageField(upload_to='consultants/photos/', null=True, blank=True)
     profileImage = models.CharField(max_length=500, blank=True, null=True)  # URL de l'image de profil
     
@@ -392,21 +392,24 @@ class Consultant(models.Model):
                 self.is_validated)
 
 
+
+from django.utils import timezone
+
 class AppelOffre(models.Model):
     STATUT_CHOICES = [
         ('A_venir', 'À venir'),
         ('En_cours', 'En cours'),
         ('Termine', 'Terminé'),
     ]
-    
-    nom_projet = models.CharField(max_length=200)
-    client = models.CharField(max_length=100)
-    description = models.TextField()
-    budget = models.DecimalField(max_digits=15, decimal_places=2)
-    date_debut = models.DateField()
-    date_fin = models.DateField()
+
+    nom_projet = models.CharField(max_length=191, default="Projet sans nom")
+    client = models.CharField(max_length=191, default="Client inconnu")
+    description = models.TextField(default="Aucune description fournie")
+    budget = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    date_debut = models.DateField(default=timezone.now)
+    date_fin = models.DateField(default=timezone.now)
     statut = models.CharField(max_length=20, choices=STATUT_CHOICES, default='A_venir')
-    
+
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -452,7 +455,7 @@ class Mission(models.Model):
     nom_projet = models.CharField(max_length=200, blank=True, null=True)  # Ajouté pour compatibilité
     client = models.CharField(max_length=100, blank=True, null=True)      # Ajouté pour compatibilité
     description = models.TextField(blank=True, null=True)                 # Ajouté pour compatibilité
-    titre = models.CharField(max_length=255)
+    titre = models.CharField(max_length=191)
     date_debut = models.DateField()
     date_fin = models.DateField()
     statut = models.CharField(max_length=20)
@@ -485,7 +488,7 @@ class Notification(models.Model):
     
     consultant = models.ForeignKey(Consultant, on_delete=models.CASCADE, related_name="notifications")
     type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES, default='SYSTEM')
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=191)
     content = models.TextField()
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -513,7 +516,7 @@ class Document(models.Model):
 class CriteresEvaluation(models.Model):
     """Modèle pour les critères d'évaluation des appels d'offres"""
     appel_offre = models.ForeignKey(AppelOffre, on_delete=models.CASCADE, related_name="criteres")
-    nom_critere = models.CharField(max_length=255)
+    nom_critere = models.CharField(max_length=191)
     poids = models.DecimalField(max_digits=5, decimal_places=2)
     description = models.TextField(blank=True, null=True)
     
@@ -528,7 +531,7 @@ class CriteresEvaluation(models.Model):
 
 class Projet(models.Model):
     """Modèle pour les projets"""
-    nom = models.CharField(max_length=255)
+    nom = models.CharField(max_length=191)
     description = models.TextField(blank=True, null=True)
     responsable = models.CharField(max_length=100)
     date_debut = models.DateField(null=True, blank=True)
@@ -656,7 +659,7 @@ class DocumentGED(models.Model):
         # Fallback - documents généraux
         return f"{base_path}general/{filename}"
 
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=191)
     description = models.TextField(blank=True, null=True)
     file = models.FileField(upload_to=get_upload_path)
     file_type = models.CharField(max_length=10, blank=True, null=True)
@@ -673,7 +676,7 @@ class DocumentGED(models.Model):
     projet = models.ForeignKey(Projet, on_delete=models.SET_NULL, null=True, blank=True, related_name="ged_documents")
 
     version = models.CharField(max_length=20, blank=True, null=True)
-    tags = models.CharField(max_length=255, blank=True, null=True)
+    tags = models.CharField(max_length=191, blank=True, null=True)
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name="created_documents")
     upload_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
@@ -818,7 +821,7 @@ class CVRichatGenerated(models.Model):
     )
     
     filename = models.CharField(
-        max_length=255,
+        max_length=191,
         verbose_name="Nom du fichier"
     )
     
