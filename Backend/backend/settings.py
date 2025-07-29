@@ -244,7 +244,7 @@ CV_STORAGE_SETTINGS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bdd',
+        'NAME': 'db',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': 'localhost',

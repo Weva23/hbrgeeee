@@ -12058,3 +12058,1228 @@
 [2025-07-22 17:53:04,956] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
 [2025-07-22 17:53:04,958] CV-PROCESS INFO -    ✅ Prêt pour la production
 [2025-07-22 17:53:04,960] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:05,634] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:06:05,635] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:06:05,635] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:05,636] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:06:05,636] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:05,637] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:06:05,638] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:06:05,638] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:06:05,638] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:06:05,639] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:06:05,639] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:06:05,640] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:06:05,640] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:06:05,641] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:06:05,641] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:06:05,642] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:06:05,642] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:06:05,642] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:06:05,643] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:06:05,643] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:06:05,643] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:06:05,644] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:06:05,644] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:06:05,645] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:06:05,645] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:06:05,646] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:06:05,646] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:06:05,647] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:05,648] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:06:05,648] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:06:05,649] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:06:05,649] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:06:05,649] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:06:05,650] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:06:05,650] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:37,199] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:06:37,200] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:06:37,201] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:37,202] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:06:37,202] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:37,202] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:06:37,203] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:06:37,203] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:06:37,204] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:06:37,205] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:06:37,207] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:06:37,208] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:06:37,208] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:06:37,209] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:06:37,209] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:06:37,211] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:06:37,212] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:06:37,212] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:06:37,214] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:06:37,215] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:06:37,216] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:06:37,216] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:06:37,217] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:06:37,218] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:06:37,218] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:06:37,219] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:06:37,219] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:06:37,219] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:37,220] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:06:37,220] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:06:37,221] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:06:37,222] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:06:37,222] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:06:37,222] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:06:37,223] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:48,167] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:06:48,167] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:06:48,168] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:48,168] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:06:48,169] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:48,169] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:06:48,170] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:06:48,170] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:06:48,170] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:06:48,171] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:06:48,172] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:06:48,173] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:06:48,173] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:06:48,175] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:06:48,175] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:06:48,176] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:06:48,177] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:06:48,178] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:06:48,179] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:06:48,180] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:06:48,180] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:06:48,183] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:06:48,184] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:06:48,184] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:06:48,185] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:06:48,185] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:06:48,186] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:06:48,187] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:06:48,187] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:06:48,189] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:06:48,189] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:06:48,190] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:06:48,190] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:06:48,192] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:06:48,192] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:07:04,370] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:07:04,371] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:07:04,372] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:07:04,374] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:07:04,375] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:07:04,375] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:07:04,376] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:07:04,377] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:07:04,378] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:07:04,379] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:07:04,380] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:07:04,380] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:07:04,381] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:07:04,382] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:07:04,383] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:07:04,384] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:07:04,385] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:07:04,385] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:07:04,386] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:07:04,387] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:07:04,388] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:07:04,388] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:07:04,390] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:07:04,391] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:07:04,392] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:07:04,392] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:07:04,394] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:07:04,395] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:07:04,396] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:07:04,397] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:07:04,398] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:07:04,398] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:07:04,399] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:07:04,401] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:07:04,402] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:46:23,571] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:46:23,573] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:46:23,574] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:46:23,574] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:46:23,575] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:46:23,576] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:46:23,576] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:46:23,577] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:46:23,577] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:46:23,578] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:46:23,579] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:46:23,579] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:46:23,580] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:46:23,580] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:46:23,580] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:46:23,581] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:46:23,581] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:46:23,582] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:46:23,582] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:46:23,583] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:46:23,583] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:46:23,584] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:46:23,586] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:46:23,586] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:46:23,587] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:46:23,588] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:46:23,588] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:46:23,589] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:46:23,589] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:46:23,590] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:46:23,590] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:46:23,592] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:46:23,593] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:46:23,593] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:46:23,594] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:46:29,934] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:46:29,935] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:46:29,936] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:46:29,937] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:46:29,937] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:46:29,938] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:46:29,938] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:46:29,938] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:46:29,939] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:46:29,939] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:46:29,940] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:46:29,940] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:46:29,940] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:46:29,941] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:46:29,941] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:46:29,941] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:46:29,942] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:46:29,942] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:46:29,943] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:46:29,943] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:46:29,943] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:46:29,944] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:46:29,944] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:46:29,945] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:46:29,945] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:46:29,946] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:46:29,946] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:46:29,946] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:46:29,947] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:46:29,947] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:46:29,948] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:46:29,948] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:46:29,948] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:46:29,949] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:46:29,949] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:49:48,932] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:49:48,933] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:49:48,934] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:49:48,935] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:49:48,935] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:49:48,936] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:49:48,937] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:49:48,937] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:49:48,938] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:49:48,938] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:49:48,939] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:49:48,939] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:49:48,939] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:49:48,939] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:49:48,940] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:49:48,940] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:49:48,940] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:49:48,941] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:49:48,942] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:49:48,943] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:49:48,944] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:49:48,945] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:49:48,945] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:49:48,946] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:49:48,947] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:49:48,947] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:49:48,948] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:49:48,948] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:49:48,949] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:49:48,950] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:49:48,950] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:49:48,951] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:49:48,952] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:49:48,952] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:49:48,953] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:50:06,606] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:50:06,607] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:50:06,607] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:50:06,608] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:50:06,609] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:50:06,609] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:50:06,609] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:50:06,610] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:50:06,611] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:50:06,611] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:50:06,612] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:50:06,612] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:50:06,613] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:50:06,613] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:50:06,613] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:50:06,614] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:50:06,614] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:50:06,614] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:50:06,615] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:50:06,616] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:50:06,617] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:50:06,617] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:50:06,618] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:50:06,618] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:50:06,619] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:50:06,619] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:50:06,619] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:50:06,619] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:50:06,620] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:50:06,621] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:50:06,621] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:50:06,621] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:50:06,622] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:50:06,622] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:50:06,623] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:50:55,694] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:50:55,695] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:50:55,695] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:50:55,696] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:50:55,696] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:50:55,697] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:50:55,697] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:50:55,697] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:50:55,697] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:50:55,698] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:50:55,699] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:50:55,699] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:50:55,700] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:50:55,700] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:50:55,701] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:50:55,701] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:50:55,701] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:50:55,702] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:50:55,702] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:50:55,703] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:50:55,703] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:50:55,704] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:50:55,704] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:50:55,705] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:50:55,705] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:50:55,706] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:50:55,706] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:50:55,707] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:50:55,707] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:50:55,707] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:50:55,709] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:50:55,709] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:50:55,710] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:50:55,710] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:50:55,710] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:51:06,097] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:51:06,098] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:51:06,099] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:51:06,099] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:51:06,100] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:51:06,101] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:51:06,101] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:51:06,102] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:51:06,102] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:51:06,103] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:51:06,103] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:51:06,104] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:51:06,104] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:51:06,105] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:51:06,105] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:51:06,106] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:51:06,106] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:51:06,107] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:51:06,107] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:51:06,108] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:51:06,109] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:51:06,109] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:51:06,110] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:51:06,110] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:51:06,110] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:51:06,111] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:51:06,111] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:51:06,111] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:51:06,112] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:51:06,112] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:51:06,112] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:51:06,113] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:51:06,113] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:51:06,114] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:51:06,114] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:56:25,663] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:56:25,664] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:56:25,665] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:56:25,666] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:56:25,667] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:56:25,667] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:56:25,668] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:56:25,669] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:56:25,670] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:56:25,670] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:56:25,671] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:56:25,671] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:56:25,672] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:56:25,672] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:56:25,672] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:56:25,673] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:56:25,673] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:56:25,673] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:56:25,673] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:56:25,673] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:56:25,673] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:56:25,674] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:56:25,674] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:56:25,674] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:56:25,674] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:56:25,674] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:56:25,675] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:56:25,675] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:56:25,675] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:56:25,675] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:56:25,675] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:56:25,676] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:56:25,676] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:56:25,676] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:56:25,677] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:58:00,078] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:58:00,079] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:58:00,080] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:58:00,081] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:58:00,081] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:58:00,082] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:58:00,082] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:58:00,083] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:58:00,083] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:58:00,084] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:58:00,084] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:58:00,085] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:58:00,085] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:58:00,086] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:58:00,086] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:58:00,087] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:58:00,088] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:58:00,088] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:58:00,089] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:58:00,089] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:58:00,089] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:58:00,090] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:58:00,090] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:58:00,091] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:58:00,091] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:58:00,091] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:58:00,092] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:58:00,092] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:58:00,092] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:58:00,093] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:58:00,093] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:58:00,094] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:58:00,094] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:58:00,095] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:58:00,095] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:58:05,646] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:58:05,647] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:58:05,648] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:58:05,649] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:58:05,649] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:58:05,650] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:58:05,651] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:58:05,651] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:58:05,652] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:58:05,653] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:58:05,653] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:58:05,654] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:58:05,654] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:58:05,655] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:58:05,656] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:58:05,656] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:58:05,656] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:58:05,657] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:58:05,657] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:58:05,657] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:58:05,658] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:58:05,658] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:58:05,658] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:58:05,659] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:58:05,659] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:58:05,660] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:58:05,660] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:58:05,661] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:58:05,661] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:58:05,662] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:58:05,662] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:58:05,662] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:58:05,663] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:58:05,663] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:58:05,663] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:59:05,511] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 15:59:05,512] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 15:59:05,513] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:59:05,514] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 15:59:05,514] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:59:05,515] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 15:59:05,516] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 15:59:05,517] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 15:59:05,518] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 15:59:05,518] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 15:59:05,519] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 15:59:05,520] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 15:59:05,520] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 15:59:05,521] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 15:59:05,522] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 15:59:05,522] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 15:59:05,523] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 15:59:05,523] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 15:59:05,523] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 15:59:05,524] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 15:59:05,524] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 15:59:05,524] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 15:59:05,524] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 15:59:05,525] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 15:59:05,525] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 15:59:05,526] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 15:59:05,526] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 15:59:05,527] CV-PROCESS INFO - ================================================================================
+[2025-07-29 15:59:05,527] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 15:59:05,528] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 15:59:05,528] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 15:59:05,528] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 15:59:05,529] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 15:59:05,529] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 15:59:05,529] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:02:16,306] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:02:16,307] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:02:16,308] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:02:16,308] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:02:16,309] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:02:16,309] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:02:16,309] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:02:16,310] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:02:16,310] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:02:16,310] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:02:16,311] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:02:16,311] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:02:16,311] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:02:16,312] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:02:16,312] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:02:16,313] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:02:16,313] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:02:16,314] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:02:16,314] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:02:16,314] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:02:16,315] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:02:16,315] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:02:16,315] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:02:16,316] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:02:16,316] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:02:16,316] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:02:16,316] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:02:16,317] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:02:16,317] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:02:16,317] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:02:16,317] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:02:16,318] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:02:16,318] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:02:16,318] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:02:16,319] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:03:43,615] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:03:43,616] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:03:43,617] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:03:43,618] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:03:43,618] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:03:43,619] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:03:43,619] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:03:43,620] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:03:43,620] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:03:43,620] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:03:43,621] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:03:43,621] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:03:43,622] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:03:43,622] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:03:43,622] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:03:43,623] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:03:43,623] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:03:43,624] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:03:43,624] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:03:43,624] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:03:43,625] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:03:43,625] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:03:43,625] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:03:43,626] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:03:43,626] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:03:43,626] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:03:43,626] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:03:43,627] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:03:43,627] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:03:43,627] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:03:43,627] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:03:43,628] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:03:43,628] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:03:43,628] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:03:43,629] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:03:47,974] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:03:47,976] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:03:47,977] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:03:47,977] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:03:47,978] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:03:47,978] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:03:47,979] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:03:47,980] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:03:47,980] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:03:47,981] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:03:47,981] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:03:47,981] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:03:47,983] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:03:47,983] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:03:47,984] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:03:47,985] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:03:47,985] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:03:47,986] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:03:47,986] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:03:47,987] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:03:47,987] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:03:47,987] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:03:47,987] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:03:47,988] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:03:47,988] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:03:47,989] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:03:47,989] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:03:47,990] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:03:47,990] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:03:47,990] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:03:47,990] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:03:47,991] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:03:47,991] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:03:47,991] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:03:47,991] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:06:54,192] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:06:54,193] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:06:54,195] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:06:54,195] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:06:54,196] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:06:54,197] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:06:54,197] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:06:54,198] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:06:54,198] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:06:54,198] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:06:54,199] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:06:54,199] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:06:54,199] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:06:54,200] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:06:54,200] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:06:54,201] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:06:54,201] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:06:54,202] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:06:54,202] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:06:54,203] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:06:54,203] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:06:54,203] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:06:54,204] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:06:54,204] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:06:54,204] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:06:54,205] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:06:54,205] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:06:54,206] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:06:54,206] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:06:54,206] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:06:54,207] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:06:54,207] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:06:54,208] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:06:54,208] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:06:54,209] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:07:40,695] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:07:40,696] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:07:40,697] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:07:40,698] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:07:40,698] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:07:40,699] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:07:40,699] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:07:40,700] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:07:40,701] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:07:40,701] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:07:40,702] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:07:40,703] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:07:40,703] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:07:40,704] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:07:40,704] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:07:40,705] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:07:40,706] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:07:40,706] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:07:40,707] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:07:40,707] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:07:40,708] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:07:40,709] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:07:40,709] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:07:40,710] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:07:40,710] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:07:40,710] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:07:40,711] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:07:40,711] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:07:40,711] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:07:40,712] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:07:40,712] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:07:40,712] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:07:40,712] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:07:40,713] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:07:40,713] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:01,490] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:08:01,491] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:08:01,492] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:01,493] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:08:01,493] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:01,494] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:08:01,494] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:08:01,495] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:08:01,495] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:08:01,496] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:08:01,496] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:08:01,497] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:08:01,498] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:08:01,498] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:08:01,498] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:08:01,499] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:08:01,499] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:08:01,499] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:08:01,500] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:08:01,500] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:08:01,501] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:08:01,501] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:08:01,502] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:08:01,502] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:08:01,502] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:08:01,503] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:08:01,503] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:08:01,503] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:01,504] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:08:01,504] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:08:01,504] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:08:01,504] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:08:01,505] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:08:01,505] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:08:01,505] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:17,572] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:08:17,573] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:08:17,574] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:17,575] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:08:17,575] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:17,576] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:08:17,577] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:08:17,577] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:08:17,578] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:08:17,579] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:08:17,579] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:08:17,580] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:08:17,580] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:08:17,581] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:08:17,581] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:08:17,582] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:08:17,583] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:08:17,583] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:08:17,584] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:08:17,585] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:08:17,585] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:08:17,586] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:08:17,587] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:08:17,588] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:08:17,588] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:08:17,589] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:08:17,590] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:08:17,590] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:17,590] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:08:17,591] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:08:17,591] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:08:17,591] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:08:17,591] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:08:17,592] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:08:17,592] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:59,202] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:08:59,203] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:08:59,204] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:59,205] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:08:59,206] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:59,207] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:08:59,207] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:08:59,207] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:08:59,208] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:08:59,208] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:08:59,209] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:08:59,210] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:08:59,210] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:08:59,211] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:08:59,211] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:08:59,212] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:08:59,212] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:08:59,213] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:08:59,213] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:08:59,213] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:08:59,214] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:08:59,214] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:08:59,214] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:08:59,214] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:08:59,215] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:08:59,216] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:08:59,216] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:08:59,217] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:08:59,217] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:08:59,217] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:08:59,218] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:08:59,218] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:08:59,218] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:08:59,219] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:08:59,219] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:09:41,387] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:09:41,388] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:09:41,389] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:09:41,390] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:09:41,391] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:09:41,391] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:09:41,392] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:09:41,393] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:09:41,393] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:09:41,394] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:09:41,394] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:09:41,394] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:09:41,395] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:09:41,395] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:09:41,396] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:09:41,396] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:09:41,397] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:09:41,397] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:09:41,398] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:09:41,399] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:09:41,400] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:09:41,401] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:09:41,401] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:09:41,402] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:09:41,402] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:09:41,402] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:09:41,403] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:09:41,403] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:09:41,403] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:09:41,404] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:09:41,404] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:09:41,404] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:09:41,405] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:09:41,405] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:09:41,405] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:09:50,118] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:09:50,119] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:09:50,120] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:09:50,121] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:09:50,122] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:09:50,122] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:09:50,122] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:09:50,123] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:09:50,124] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:09:50,124] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:09:50,125] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:09:50,125] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:09:50,126] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:09:50,126] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:09:50,126] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:09:50,127] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:09:50,128] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:09:50,128] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:09:50,128] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:09:50,129] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:09:50,129] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:09:50,129] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:09:50,130] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:09:50,130] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:09:50,130] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:09:50,131] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:09:50,132] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:09:50,132] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:09:50,133] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:09:50,133] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:09:50,133] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:09:50,134] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:09:50,134] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:09:50,135] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:09:50,135] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:10:12,150] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:10:12,151] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:10:12,152] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:10:12,152] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:10:12,152] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:10:12,153] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:10:12,153] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:10:12,153] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:10:12,153] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:10:12,154] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:10:12,154] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:10:12,154] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:10:12,155] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:10:12,155] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:10:12,155] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:10:12,156] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:10:12,157] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:10:12,157] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:10:12,157] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:10:12,157] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:10:12,158] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:10:12,158] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:10:12,158] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:10:12,159] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:10:12,159] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:10:12,160] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:10:12,160] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:10:12,160] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:10:12,160] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:10:12,161] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:10:12,161] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:10:12,161] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:10:12,161] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:10:12,162] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:10:12,162] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:10:18,116] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:10:18,119] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:10:18,119] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:10:18,120] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:10:18,120] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:10:18,121] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:10:18,122] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:10:18,122] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:10:18,123] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:10:18,124] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:10:18,124] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:10:18,125] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:10:18,125] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:10:18,126] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:10:18,126] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:10:18,127] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:10:18,127] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:10:18,128] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:10:18,128] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:10:18,128] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:10:18,129] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:10:18,129] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:10:18,129] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:10:18,130] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:10:18,130] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:10:18,131] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:10:18,131] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:10:18,131] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:10:18,132] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:10:18,132] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:10:18,133] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:10:18,133] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:10:18,133] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:10:18,133] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:10:18,134] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:11:51,712] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:11:51,713] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:11:51,714] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:11:51,714] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:11:51,715] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:11:51,715] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:11:51,716] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:11:51,716] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:11:51,717] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:11:51,717] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:11:51,718] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:11:51,718] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:11:51,718] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:11:51,719] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:11:51,719] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:11:51,719] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:11:51,720] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:11:51,720] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:11:51,721] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:11:51,721] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:11:51,722] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:11:51,723] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:11:51,723] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:11:51,723] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:11:51,723] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:11:51,724] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:11:51,724] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:11:51,724] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:11:51,725] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:11:51,725] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:11:51,725] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:11:51,726] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:11:51,726] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:11:51,726] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:11:51,727] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:12:20,647] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:12:20,647] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:12:20,648] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:12:20,648] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:12:20,649] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:12:20,649] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:12:20,649] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:12:20,649] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:12:20,650] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:12:20,650] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:12:20,650] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:12:20,650] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:12:20,650] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:12:20,651] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:12:20,651] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:12:20,651] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:12:20,652] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:12:20,652] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:12:20,652] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:12:20,653] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:12:20,653] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:12:20,653] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:12:20,654] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:12:20,654] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:12:20,654] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:12:20,655] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:12:20,655] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:12:20,655] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:12:20,656] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:12:20,656] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:12:20,657] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:12:20,657] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:12:20,657] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:12:20,658] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:12:20,658] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:12:59,842] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:12:59,844] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:12:59,845] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:12:59,846] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:12:59,846] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:12:59,847] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:12:59,848] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:12:59,848] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:12:59,848] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:12:59,849] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:12:59,850] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:12:59,851] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:12:59,851] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:12:59,852] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:12:59,852] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:12:59,853] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:12:59,853] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:12:59,854] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:12:59,855] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:12:59,855] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:12:59,856] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:12:59,857] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:12:59,857] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:12:59,858] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:12:59,859] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:12:59,859] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:12:59,861] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:12:59,861] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:12:59,862] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:12:59,862] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:12:59,863] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:12:59,864] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:12:59,864] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:12:59,865] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:12:59,866] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:13:07,059] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:13:07,060] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:13:07,061] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:13:07,061] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:13:07,062] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:13:07,062] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:13:07,063] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:13:07,063] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:13:07,064] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:13:07,064] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:13:07,065] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:13:07,066] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:13:07,066] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:13:07,067] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:13:07,067] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:13:07,067] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:13:07,068] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:13:07,069] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:13:07,069] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:13:07,069] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:13:07,069] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:13:07,070] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:13:07,070] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:13:07,070] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:13:07,071] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:13:07,071] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:13:07,071] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:13:07,071] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:13:07,072] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:13:07,072] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:13:07,072] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:13:07,072] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:13:07,073] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:13:07,073] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:13:07,073] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:38:13,908] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:38:13,910] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:38:13,911] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:38:13,911] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:38:13,912] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:38:13,912] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:38:13,913] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:38:13,913] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:38:13,913] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:38:13,914] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:38:13,915] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:38:13,915] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:38:13,916] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:38:13,916] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:38:13,916] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:38:13,917] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:38:13,918] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:38:13,918] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:38:13,919] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:38:13,919] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:38:13,920] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:38:13,920] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:38:13,921] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:38:13,921] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:38:13,922] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:38:13,923] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:38:13,923] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:38:13,924] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:38:13,924] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:38:13,925] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:38:13,925] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:38:13,926] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:38:13,926] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:38:13,927] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:38:13,927] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:38:49,567] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:38:49,568] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:38:49,569] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:38:49,570] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:38:49,571] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:38:49,571] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:38:49,572] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:38:49,573] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:38:49,574] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:38:49,575] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:38:49,575] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:38:49,576] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:38:49,577] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:38:49,578] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:38:49,579] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:38:49,580] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:38:49,581] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:38:49,581] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:38:49,582] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:38:49,583] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:38:49,584] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:38:49,585] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:38:49,585] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:38:49,586] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:38:49,587] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:38:49,588] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:38:49,588] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:38:49,589] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:38:49,589] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:38:49,589] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:38:49,591] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:38:49,591] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:38:49,592] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:38:49,592] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:38:49,593] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:39:23,283] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:39:23,285] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:39:23,286] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:39:23,287] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:39:23,287] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:39:23,288] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:39:23,288] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:39:23,289] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:39:23,290] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:39:23,290] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:39:23,291] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:39:23,291] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:39:23,291] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:39:23,292] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:39:23,292] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:39:23,293] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:39:23,293] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:39:23,294] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:39:23,294] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:39:23,295] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:39:23,295] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:39:23,295] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:39:23,296] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:39:23,296] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:39:23,296] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:39:23,296] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:39:23,297] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:39:23,297] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:39:23,297] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:39:23,298] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:39:23,298] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:39:23,298] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:39:23,299] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:39:23,299] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:39:23,299] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:40:03,060] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:40:03,061] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:40:03,062] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:40:03,063] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:40:03,064] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:40:03,064] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:40:03,064] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:40:03,065] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:40:03,065] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:40:03,066] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:40:03,066] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:40:03,067] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:40:03,067] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:40:03,067] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:40:03,068] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:40:03,068] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:40:03,069] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:40:03,069] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:40:03,070] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:40:03,070] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:40:03,070] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:40:03,071] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:40:03,071] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:40:03,073] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:40:03,073] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:40:03,073] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:40:03,073] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:40:03,074] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:40:03,074] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:40:03,074] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:40:03,075] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:40:03,075] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:40:03,075] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:40:03,076] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:40:03,076] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:41:55,026] CV-PROCESS INFO - ✅ Base de compétences chargée depuis competences_data.py
+[2025-07-29 16:41:55,027] CV-PROCESS INFO - ✅ 1596 compétences chargées dans 4 domaines
+[2025-07-29 16:41:55,027] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:41:55,028] CV-PROCESS INFO - 🧠 SYSTÈME CV ENTIÈREMENT CORRIGÉ - ENHANCED CV EXTRACTOR v2.0
+[2025-07-29 16:41:55,029] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:41:55,029] CV-PROCESS INFO - ✅ TOUTES LES CORRECTIONS APPLIQUÉES:
+[2025-07-29 16:41:55,030] CV-PROCESS INFO -    🔧 Pattern regex _extract_name_by_patterns: CORRIGÉ
+[2025-07-29 16:41:55,030] CV-PROCESS INFO -    📝 Méthode _is_valid_name_word: CORRIGÉE
+[2025-07-29 16:41:55,031] CV-PROCESS INFO -    ➕ TOUTES les méthodes manquantes: AJOUTÉES
+[2025-07-29 16:41:55,032] CV-PROCESS INFO -    🚀 Fonctions principales: COMPLÈTES ET FONCTIONNELLES
+[2025-07-29 16:41:55,032] CV-PROCESS INFO -    📄 Génération PDF: OPÉRATIONNELLE
+[2025-07-29 16:41:55,033] CV-PROCESS INFO - ✅ FONCTIONNALITÉS 100% OPÉRATIONNELLES:
+[2025-07-29 16:41:55,033] CV-PROCESS INFO -    🎯 Extraction email/nom/téléphone ultra-précise
+[2025-07-29 16:41:55,033] CV-PROCESS INFO -    💼 Analyse expériences et compétences
+[2025-07-29 16:41:55,033] CV-PROCESS INFO -    📝 Génération résumé personnalisé
+[2025-07-29 16:41:55,034] CV-PROCESS INFO -    🏆 Scores de confiance et qualité
+[2025-07-29 16:41:55,034] CV-PROCESS INFO -    🇲🇷 Adaptation contexte mauritanien
+[2025-07-29 16:41:55,034] CV-PROCESS INFO -    📄 Génération PDF Richat professionnel
+[2025-07-29 16:41:55,035] CV-PROCESS INFO -    🔍 Diagnostic complet et recommandations
+[2025-07-29 16:41:55,035] CV-PROCESS INFO - ✅ BASE DE COMPÉTENCES:
+[2025-07-29 16:41:55,035] CV-PROCESS INFO -    📊 competences_data.py: ✅ Chargé (1596 compétences)
+[2025-07-29 16:41:55,036] CV-PROCESS INFO - ✅ ENDPOINTS 100% FONCTIONNELS:
+[2025-07-29 16:41:55,036] CV-PROCESS INFO -    🚀 process_cv_complete_enhanced → Traitement complet
+[2025-07-29 16:41:55,036] CV-PROCESS INFO -    🔍 diagnose_cv_enhanced → Diagnostic rapide
+[2025-07-29 16:41:55,037] CV-PROCESS INFO -    📁 list_saved_cvs → Liste CVs sauvegardés
+[2025-07-29 16:41:55,037] CV-PROCESS INFO -    🧪 test_cv_storage_write → Test stockage
+[2025-07-29 16:41:55,038] CV-PROCESS INFO -    📊 system_status_enhanced → Statut système
+[2025-07-29 16:41:55,038] CV-PROCESS INFO - ================================================================================
+[2025-07-29 16:41:55,038] CV-PROCESS INFO - 🎉 SYSTÈME 100% CORRIGÉ ET OPÉRATIONNEL !
+[2025-07-29 16:41:55,039] CV-PROCESS INFO -    ✅ Tous les patterns regex sont corrigés
+[2025-07-29 16:41:55,039] CV-PROCESS INFO -    ✅ Toutes les méthodes manquantes sont ajoutées
+[2025-07-29 16:41:55,039] CV-PROCESS INFO -    ✅ Extraction, traitement et génération PDF fonctionnels
+[2025-07-29 16:41:55,039] CV-PROCESS INFO -    ✅ CSRF exempt et CORS configurés
+[2025-07-29 16:41:55,040] CV-PROCESS INFO -    ✅ Prêt pour la production
+[2025-07-29 16:41:55,040] CV-PROCESS INFO - ================================================================================

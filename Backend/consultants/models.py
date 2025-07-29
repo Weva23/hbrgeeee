@@ -395,31 +395,111 @@ class Consultant(models.Model):
 
 from django.utils import timezone
 
+from django.db import models
+from django.utils import timezone
+
+
 class AppelOffre(models.Model):
-    STATUT_CHOICES = [
-        ('A_venir', 'À venir'),
-        ('En_cours', 'En cours'),
-        ('Termine', 'Terminé'),
-    ]
-
-    nom_projet = models.CharField(max_length=191, default="Projet sans nom")
-    client = models.CharField(max_length=191, default="Client inconnu")
-    description = models.TextField(default="Aucune description fournie")
-    budget = models.DecimalField(max_digits=15, decimal_places=2, default=0)
-    date_debut = models.DateField(default=timezone.now)
-    date_fin = models.DateField(default=timezone.now)
-    statut = models.CharField(max_length=20, choices=STATUT_CHOICES, default='A_venir')
-
+    # Champ principal
+    titre = models.CharField(max_length=500, help_text="Titre de l'appel d'offre")
+    
+    # Dates
+    date_de_publication = models.DateField(
+        null=True, 
+        blank=True, 
+        help_text="Date de publication de l'appel d'offre"
+    )
+    date_limite = models.DateField(
+        null=True, 
+        blank=True, 
+        help_text="Date limite de soumission"
+    )
+    
+    # Informations sur le client et type
+    client = models.CharField(
+        max_length=300, 
+        null=True, 
+        blank=True, 
+        help_text="Nom du client ou organisme"
+    )
+    type_d_appel_d_offre = models.CharField(
+        max_length=200, 
+        null=True, 
+        blank=True, 
+        help_text="Type d'appel d'offre (consultation, appel d'offres ouvert, etc.)"
+    )
+    
+    # Contenu détaillé
+    description = models.TextField(
+        null=True, 
+        blank=True, 
+        help_text="Description détaillée de l'appel d'offre"
+    )
+    critere_evaluation = models.TextField(
+        null=True, 
+        blank=True, 
+        help_text="Critères d'évaluation des offres"
+    )
+    
+    # Liens et documents
+    documents = models.TextField(
+        null=True, 
+        blank=True, 
+        help_text="Liens vers les documents ou fichiers joints"
+    )
+    lien_site = models.URLField(
+        max_length=500, 
+        null=True, 
+        blank=True, 
+        help_text="Lien vers la page source de l'appel d'offre"
+    )
+    
+    # Métadonnées
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "Appel d'offre"
         verbose_name_plural = "Appels d'offres"
-        ordering = ['-created_at']
+        ordering = ['-date_de_publication', '-created_at']
+        indexes = [
+            models.Index(fields=['date_de_publication']),
+            models.Index(fields=['date_limite']),
+            models.Index(fields=['client']),
+            models.Index(fields=['type_d_appel_d_offre']),
+        ]
 
     def __str__(self):
-        return f"{self.nom_projet} - {self.client}"
+        return f"{self.titre} - {self.client or 'Client non spécifié'}"
+    
+    @property
+    def is_expired(self):
+        """Vérifie si la date limite est dépassée"""
+        if self.date_limite:
+            return self.date_limite < timezone.now().date()
+        return False
+    
+    @property
+    def days_remaining(self):
+        """Retourne le nombre de jours restants avant la date limite"""
+        if self.date_limite:
+            delta = self.date_limite - timezone.now().date()
+            return delta.days if delta.days >= 0 else 0
+        return None
+    
+    def clean(self):
+        """Validation personnalisée"""
+        from django.core.exceptions import ValidationError
+        
+        if self.date_de_publication and self.date_limite:
+            if self.date_limite < self.date_de_publication:
+                raise ValidationError(
+                    "La date limite ne peut pas être antérieure à la date de publication."
+                )
+    
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
 
 class Competence(models.Model):

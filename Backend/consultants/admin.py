@@ -160,23 +160,48 @@ class ConsultantAdmin(admin.ModelAdmin):
     calculer_expertise.short_description = "Recalculer l'expertise"
 
 # Configuration pour le modèle AppelOffre
+# Configuration pour le modèle AppelOffre - VERSION MISE À JOUR
 @admin.register(AppelOffre)
 class AppelOffreAdmin(admin.ModelAdmin):
-    list_display = ['nom_projet', 'client', 'budget', 'date_debut', 'date_fin', 'statut_badge', 'created_at']
-    list_filter = ['statut', 'date_debut', 'date_fin']
-    search_fields = ['nom_projet', 'client', 'description']
-    date_hierarchy = 'created_at'
-    readonly_fields = ['created_at', 'updated_at']
+    list_display = [
+        'titre', 'client', 'type_d_appel_d_offre', 'date_de_publication', 
+        'date_limite', 'jours_restants_badge', 'statut_expiration', 'created_at'
+    ]
+    list_filter = [
+        'type_d_appel_d_offre', 'date_de_publication', 'date_limite', 
+        'client', 'created_at'
+    ]
+    search_fields = [
+        'titre', 'client', 'description', 'critere_evaluation', 'type_d_appel_d_offre'
+    ]
+    date_hierarchy = 'date_de_publication'
+    readonly_fields = ['created_at', 'updated_at', 'days_remaining', 'is_expired']
     
     fieldsets = (
-        ('Informations du projet', {
-            'fields': ('nom_projet', 'client', 'description')
+        ('Informations principales', {
+            'fields': (
+                'titre',
+                'client', 
+                'type_d_appel_d_offre'
+            )
         }),
-        ('Aspects financiers', {
-            'fields': ('budget',)
+        ('Dates importantes', {
+            'fields': (
+                ('date_de_publication', 'date_limite'),
+                ('days_remaining', 'is_expired')
+            )
         }),
-        ('Planning', {
-            'fields': (('date_debut', 'date_fin'), 'statut')
+        ('Contenu détaillé', {
+            'fields': (
+                'description',
+                'critere_evaluation'
+            )
+        }),
+        ('Liens et documents', {
+            'fields': (
+                'lien_site',
+                'documents'
+            )
         }),
         ('Métadonnées', {
             'fields': ('created_at', 'updated_at'),
@@ -184,20 +209,183 @@ class AppelOffreAdmin(admin.ModelAdmin):
         })
     )
     
-    def statut_badge(self, obj):
-        colors = {
-            'A_venir': 'info',
-            'En_cours': 'primary',
-            'Termine': 'success'
-        }
-        color = colors.get(obj.statut, 'secondary')
-        return format_html(
-            '<span class="badge badge-{}">{}</span>',
-            color, obj.get_statut_display()
+    actions = [
+        'marquer_expires', 'exporter_appels_offres', 
+        'envoyer_rappel_date_limite', 'dupliquer_appels_offres'
+    ]
+    
+    def jours_restants_badge(self, obj):
+        """Affiche le nombre de jours restants avec un badge coloré"""
+        if not obj.date_limite:
+            return format_html('<span class="badge badge-secondary">Pas de limite</span>')
+        
+        jours = obj.days_remaining
+        if jours is None:
+            return format_html('<span class="badge badge-secondary">-</span>')
+        
+        if jours < 0:
+            return format_html('<span class="badge badge-danger">Expiré</span>')
+        elif jours == 0:
+            return format_html('<span class="badge badge-warning">Aujourd\'hui</span>')
+        elif jours <= 3:
+            return format_html('<span class="badge badge-warning">{} jour(s)</span>', jours)
+        elif jours <= 7:
+            return format_html('<span class="badge badge-info">{} jours</span>', jours)
+        else:
+            return format_html('<span class="badge badge-success">{} jours</span>', jours)
+    
+    jours_restants_badge.short_description = "Jours restants"
+    jours_restants_badge.admin_order_field = 'date_limite'
+    
+    def statut_expiration(self, obj):
+        """Affiche le statut d'expiration"""
+        if obj.is_expired:
+            return format_html('<span class="badge badge-danger">❌ Expiré</span>')
+        elif obj.days_remaining is not None and obj.days_remaining <= 7:
+            return format_html('<span class="badge badge-warning">⚠️ Bientôt expiré</span>')
+        else:
+            return format_html('<span class="badge badge-success">✅ Actif</span>')
+    
+    statut_expiration.short_description = "Statut"
+    
+    def get_queryset(self, request):
+        """Optimise les requêtes avec des annotations"""
+        from django.db.models import Case, When, IntegerField
+        from django.utils import timezone
+        
+        qs = super().get_queryset(request)
+        # Ajouter des annotations pour optimiser l'affichage
+        today = timezone.now().date()
+        
+        return qs.extra(
+            select={
+                'jours_restants': 'CASE WHEN date_limite IS NULL THEN NULL ELSE DATEDIFF(date_limite, %s) END'
+            },
+            select_params=[today]
         )
-    statut_badge.short_description = "Statut"
+    
+    def changelist_view(self, request, extra_context=None):
+        """Ajoute des statistiques au changelist"""
+        from django.db.models import Count, Q
+        from django.utils import timezone
+        
+        extra_context = extra_context or {}
+        
+        # Statistiques générales
+        today = timezone.now().date()
+        queryset = self.get_queryset(request)
+        
+        stats = {
+            'total': queryset.count(),
+            'expires_bientot': queryset.filter(
+                date_limite__isnull=False,
+                date_limite__lte=today + timezone.timedelta(days=7),
+                date_limite__gte=today
+            ).count(),
+            'expires': queryset.filter(
+                date_limite__isnull=False,
+                date_limite__lt=today
+            ).count(),
+            'sans_limite': queryset.filter(date_limite__isnull=True).count(),
+        }
+        
+        extra_context['appel_offre_stats'] = stats
+        
+        return super().changelist_view(request, extra_context=extra_context)
+    
+    # Actions personnalisées
+    def marquer_expires(self, request, queryset):
+        """Marque les appels d'offres expirés"""
+        from django.utils import timezone
+        today = timezone.now().date()
+        
+        expires = queryset.filter(date_limite__lt=today).count()
+        self.message_user(
+            request, 
+            f"{expires} appel(s) d'offre(s) identifié(s) comme expiré(s)",
+            level='warning' if expires > 0 else 'info'
+        )
+    marquer_expires.short_description = "Identifier les appels d'offres expirés"
+    
+    def exporter_appels_offres(self, request, queryset):
+        """Exporte les appels d'offres sélectionnés"""
+        import csv
+        from django.http import HttpResponse
+        
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="appels_offres_export.csv"'
+        
+        writer = csv.writer(response)
+        writer.writerow([
+            'Titre', 'Client', 'Type', 'Date Publication', 'Date Limite', 
+            'Description', 'Critères Évaluation', 'Lien Site'
+        ])
+        
+        for ao in queryset:
+            writer.writerow([
+                ao.titre,
+                ao.client or '',
+                ao.type_d_appel_d_offre or '',
+                ao.date_de_publication.strftime('%Y-%m-%d') if ao.date_de_publication else '',
+                ao.date_limite.strftime('%Y-%m-%d') if ao.date_limite else '',
+                ao.description or '',
+                ao.critere_evaluation or '',
+                ao.lien_site or ''
+            ])
+        
+        self.message_user(request, f"{queryset.count()} appel(s) d'offre(s) exporté(s)")
+        return response
+    exporter_appels_offres.short_description = "Exporter les appels d'offres sélectionnés (CSV)"
+    
+    def envoyer_rappel_date_limite(self, request, queryset):
+        """Envoie un rappel pour les appels d'offres bientôt expirés"""
+        from django.utils import timezone
+        from django.core.mail import send_mail
+        from django.conf import settings
+        
+        today = timezone.now().date()
+        bientot_expires = queryset.filter(
+            date_limite__isnull=False,
+            date_limite__lte=today + timezone.timedelta(days=7),
+            date_limite__gte=today
+        )
+        
+        if bientot_expires.exists():
+            # Logique d'envoi de rappel (à adapter selon vos besoins)
+            count = bientot_expires.count()
+            self.message_user(
+                request, 
+                f"Rappel programmé pour {count} appel(s) d'offre(s) bientôt expiré(s)",
+                level='success'
+            )
+        else:
+            self.message_user(
+                request, 
+                "Aucun appel d'offre ne nécessite de rappel",
+                level='info'
+            )
+    envoyer_rappel_date_limite.short_description = "Envoyer rappel date limite"
+    
+    def dupliquer_appels_offres(self, request, queryset):
+        """Duplique les appels d'offres sélectionnés"""
+        duplicated = 0
+        for ao in queryset:
+            # Créer une copie
+            ao.pk = None
+            ao.titre = f"[COPIE] {ao.titre}"
+            ao.date_de_publication = None
+            ao.date_limite = None
+            ao.save()
+            duplicated += 1
+        
+        self.message_user(
+            request, 
+            f"{duplicated} appel(s) d'offre(s) dupliqué(s)",
+            level='success'
+        )
+    dupliquer_appels_offres.short_description = "Dupliquer les appels d'offres sélectionnés"
 
-# Configuration pour le modèle Competence
+
 @admin.register(Competence)
 class CompetenceAdmin(admin.ModelAdmin):
     list_display = ['consultant', 'nom_competence', 'niveau_badge', 'consultant_domaine']
