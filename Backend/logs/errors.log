@@ -1767,3 +1767,1130 @@ django.db.utils.OperationalError: (1054, "Champ 'consultants_consultant.statut' 
 [2025-07-15 13:05:19,077] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
 [2025-07-15 13:05:20,695] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
 [2025-07-15 13:05:20,704] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 03:07:50,105] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:07:50,146] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:11:49,756] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:11:49,810] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:11:49,853] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:11:49,874] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:12:49,753] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:12:49,786] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:16:50,087] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:16:50,100] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:16:50,107] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:16:50,117] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:17:50,065] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:17:50,094] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:37,703] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:37,723] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:37,745] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:37,751] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:37,795] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 03:39:37,824] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 03:39:37,839] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 03:39:37,873] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 03:39:37,889] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 03:39:37,897] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 03:39:38,009] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 03:39:38,155] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 03:39:41,154] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:41,187] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:41,274] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 03:39:41,307] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 03:39:41,336] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 03:39:41,390] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 03:39:41,411] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 03:39:41,425] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 03:39:41,503] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:41,525] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:41,576] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 03:39:41,685] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 03:39:44,039] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:44,061] ERROR django.request log log_response:241 - Service Unavailable: /api/matching/validated/
+[2025-07-30 03:39:44,121] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:44,133] ERROR django.request log log_response:241 - Service Unavailable: /api/matching/validated/
+[2025-07-30 03:39:44,375] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:44,390] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:46,131] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:46,133] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 03:39:46,142] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:46,154] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 03:39:46,488] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:39:46,503] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:41:49,761] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:41:49,798] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:41:49,833] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:41:49,887] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:42:49,735] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:42:49,755] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:46:49,761] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:46:49,787] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:46:49,807] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:46:49,814] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:47:49,747] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:47:49,765] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:51:49,749] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:51:49,760] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:51:49,771] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:51:49,788] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:52:49,747] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 03:52:49,765] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:35:02,494] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:35:04,941] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:35:05,056] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:35:05,081] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:35:05,125] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:35:05,177] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:36:49,710] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:36:49,738] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:36:49,751] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:36:49,762] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:37:49,723] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:37:49,750] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:41:49,742] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:41:49,777] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:41:49,814] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:41:49,834] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:42:49,733] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:42:49,781] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:46:49,730] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:46:49,792] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:46:49,837] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:46:49,850] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:47:49,742] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:47:49,781] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:51:49,718] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:51:49,742] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:51:49,757] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 11:51:49,770] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:46:56,478] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:46:59,652] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:46:59,818] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:46:59,959] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:47:00,181] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:47:00,308] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:47:50,035] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:47:50,055] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:51:49,718] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:51:49,735] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:51:49,746] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:51:49,753] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:52:50,016] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:52:50,027] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:56:49,710] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:56:49,719] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:56:49,744] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:56:49,761] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:56:50,675] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:56:50,826] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 13:56:50,847] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 13:56:50,871] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 13:56:51,016] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:56:51,078] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 13:56:57,256] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:56:57,263] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 13:56:57,320] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:56:57,578] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:57:39,754] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:57:39,769] ERROR django.request log log_response:241 - Service Unavailable: /api/matching/validated/
+[2025-07-30 13:57:40,027] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:57:50,028] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:57:50,036] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:03,555] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:03,564] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:03,706] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 13:58:03,734] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 13:58:03,745] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 13:58:03,784] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 13:58:03,813] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 13:58:03,825] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 13:58:03,907] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:03,938] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:03,974] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 13:58:04,099] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 13:58:07,031] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:07,058] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:07,221] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 13:58:07,234] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 13:58:07,237] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 13:58:07,251] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 13:58:07,254] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 13:58:07,274] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 13:58:07,382] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:07,404] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:07,452] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 13:58:07,541] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 13:58:09,785] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:09,791] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 13:58:09,807] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:09,816] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 13:58:10,144] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 13:58:10,153] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:01:49,712] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:01:49,760] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:01:49,780] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:01:49,805] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:02:40,708] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:02:40,717] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:02:49,730] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:02:49,742] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:06:49,713] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:06:49,733] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:06:49,751] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:06:49,756] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:07:40,705] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:07:40,709] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:07:49,726] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:07:49,744] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:11:49,713] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:11:49,729] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:11:49,740] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:11:49,746] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:12:40,709] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:12:40,714] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:12:49,717] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:12:49,750] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:16:49,723] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:16:49,744] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:16:49,754] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:16:49,766] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:17:41,029] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:17:41,039] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:17:49,720] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:17:49,731] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:21:49,716] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:21:49,743] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:21:49,760] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:21:49,766] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:42:46,175] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:42:46,199] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:42:46,232] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:42:46,253] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:42:46,272] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:42:46,301] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:42:46,440] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:42:48,968] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:46:45,710] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:46:45,751] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:46:45,797] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:46:45,805] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:47:40,694] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:47:40,700] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:47:49,695] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:47:49,718] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:51:49,694] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:51:49,715] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:51:49,733] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:51:49,741] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:52:49,700] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:52:49,710] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:52:49,718] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 14:52:49,792] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:33:36,259] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:33:36,283] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:33:36,321] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:33:36,336] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:33:36,411] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:33:36,446] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:33:36,472] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:33:36,483] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:36:36,701] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:36:36,729] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:36:36,756] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:36:36,762] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:37:49,708] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:37:49,794] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:37:49,821] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 15:37:49,834] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 16:22:11,690] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:22:11,705] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:22:11,732] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:22:11,854] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:22:11,861] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:22:11,870] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 16:22:11,872] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:22:11,880] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 16:22:16,881] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 16:22:16,888] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 16:22:16,891] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:22:16,901] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:22:16,903] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 16:22:16,911] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 16:26:16,718] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:26:16,775] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:26:16,787] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:26:16,807] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:26:16,809] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:26:16,823] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 16:26:16,832] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:26:16,852] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 16:31:17,025] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:31:17,042] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:31:17,052] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:31:17,058] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 16:36:17,346] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:36:17,362] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:36:17,372] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:36:17,478] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 16:41:17,019] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:41:17,033] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:41:17,042] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:41:17,048] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 16:46:17,012] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:46:17,031] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:46:17,040] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:46:17,048] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 16:51:17,026] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:51:17,055] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:51:17,075] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:51:17,085] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 16:56:17,352] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 16:56:17,375] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 16:56:17,388] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 16:56:17,511] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 17:02:15,335] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 17:02:15,353] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 17:02:15,361] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 17:02:15,366] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 17:20:25,398] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 17:20:25,414] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 17:20:25,437] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 17:20:25,449] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 17:20:25,449] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 17:20:25,460] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 17:20:25,464] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 17:20:25,472] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 17:20:27,962] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 17:20:27,975] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 17:20:27,977] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 17:20:27,990] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 17:20:27,992] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 17:20:28,001] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 20:17:26,428] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 20:17:26,482] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 20:17:27,158] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 20:17:27,178] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 20:17:27,261] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 20:17:27,304] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 20:17:32,875] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 20:17:32,914] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 20:17:32,974] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 20:17:33,056] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 21:20:26,375] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 21:20:26,530] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 21:20:27,288] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 21:20:29,391] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 21:26:55,466] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 21:26:55,488] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 21:26:55,575] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 21:26:55,632] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 22:01:17,505] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 22:01:17,560] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 22:01:17,589] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 22:01:17,609] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 22:03:30,811] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 22:03:30,851] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-30 22:03:30,890] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 22:03:30,919] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 22:03:30,921] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 22:03:30,957] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 22:03:30,961] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-30 22:03:30,995] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-30 22:04:59,470] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 22:04:59,646] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 22:05:06,249] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 22:05:06,299] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 22:05:06,305] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 22:05:06,363] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 22:05:06,367] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 22:05:06,391] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 22:22:20,330] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:20,360] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:20,369] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:20,387] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:20,477] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:22:20,491] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:22:20,509] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 22:22:20,532] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:22:20,562] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:22:20,574] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 22:22:20,697] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 22:22:20,794] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 22:22:22,867] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:22,873] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:22:22,878] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:22,885] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:22:22,888] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:22,900] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:22,911] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:22,917] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:24,529] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:24,551] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:24,656] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 22:22:24,810] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:22:24,824] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 22:22:24,955] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels-scraped/
+[2025-07-30 22:22:25,027] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:22:25,201] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:25,210] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:25,313] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels-scraped/
+[2025-07-30 22:22:33,774] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:33,795] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:33,838] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:33,867] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:33,924] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:22:33,937] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:22:33,957] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 22:22:33,980] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:22:34,002] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:22:34,020] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 22:22:34,220] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 22:22:34,304] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 22:22:36,526] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:36,531] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:22:36,558] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:36,567] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:22:36,585] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:36,601] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:36,907] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:22:36,927] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:23:17,750] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:23:17,760] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:23:17,792] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:23:17,798] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:23:17,817] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:23:17,827] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:23:17,846] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:23:17,852] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:26:21,258] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:26:21,267] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:26:21,312] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:26:21,320] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:26:21,327] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 22:26:21,411] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 22:26:22,268] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:26:22,284] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:16,530] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:16,535] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:27:16,547] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:16,553] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:27:16,565] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:16,578] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:16,640] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:16,652] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:18,510] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:18,519] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:18,530] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:18,542] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:18,614] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:27:18,712] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:27:18,717] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:27:18,728] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 22:27:18,732] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:27:18,744] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 22:27:18,900] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 22:27:19,050] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 22:27:21,276] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:21,312] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:21,437] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 22:27:21,475] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 22:27:21,508] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:27:21,597] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:27:21,815] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels-scraped/
+[2025-07-30 22:27:21,823] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels-scraped/
+[2025-07-30 22:27:21,898] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:27:21,907] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:28:49,446] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:28:49,497] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:28:49,530] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:28:49,540] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:28:49,589] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:28:49,605] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:28:49,613] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 22:28:49,646] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 22:28:49,660] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:28:49,672] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 22:28:49,844] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 22:28:50,008] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 22:28:52,748] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:28:52,765] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:28:52,810] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 22:28:52,837] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:28:52,840] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 22:28:52,879] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels-scraped/
+[2025-07-30 22:28:52,886] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 22:28:52,943] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels-scraped/
+[2025-07-30 22:28:53,184] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 22:28:53,189] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:01:28,827] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:01:28,864] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:01:28,894] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:01:28,916] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:01:29,027] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 23:01:29,063] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 23:01:29,079] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels-scraped/
+[2025-07-30 23:01:29,119] ERROR django.request log log_response:241 - Service Unavailable: /api/appels/
+[2025-07-30 23:01:29,147] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 23:01:29,169] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels-scraped/
+[2025-07-30 23:01:33,952] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:01:34,044] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:01:34,164] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 23:01:34,214] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 23:01:34,237] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 23:01:34,242] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 23:01:34,258] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 23:01:34,310] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 23:01:34,327] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:01:34,362] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:01:34,498] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 23:01:34,771] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 23:07:02,294] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:07:02,297] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 23:07:02,309] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 23:07:02,320] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 23:07:02,383] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 23:10:10,210] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:10:10,225] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:10:10,230] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:10:10,238] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/pending/
+[2025-07-30 23:10:10,260] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 23:10:10,270] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 23:10:10,274] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/consultants/
+[2025-07-30 23:10:10,276] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 23:10:10,279] ERROR django.request log log_response:241 - Service Unavailable: /api/admin/appels/
+[2025-07-30 23:10:10,287] ERROR django.request log log_response:241 - Service Unavailable: /api/debug/matchings/
+[2025-07-30 23:10:10,325] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 23:10:10,373] ERROR django.request log log_response:241 - Service Unavailable: /api/document-stats/
+[2025-07-30 23:14:02,737] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 23:14:02,774] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 23:14:02,859] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:14:02,870] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:14:02,937] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:14:02,953] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:14:02,997] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:14:03,050] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:14:06,779] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:14:06,802] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 23:14:06,872] ERROR django.request log log_response:241 - Internal Server Error: /api/appels/
+[2025-07-30 23:14:06,874] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 23:14:06,893] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:14:06,954] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 23:14:06,956] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 23:14:07,001] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels-scraped/
+[2025-07-30 23:14:07,100] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:14:07,130] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 220, in _get_response
+    response = response.render()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\template\response.py", line 114, in render
+    self.content = self.rendered_content
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\response.py", line 55, in rendered_content
+    assert renderer, ".accepted_renderer not set on Response"
+AssertionError: .accepted_renderer not set on Response
+[2025-07-30 23:21:30,193] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 23:21:30,239] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 23:26:30,308] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-30 23:31:30,295] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 00:10:41,067] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 00:11:30,380] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 00:42:47,058] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 00:45:44,918] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 00:45:45,049] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 00:50:45,231] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 00:50:45,242] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 00:50:45,245] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 00:50:45,272] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 00:50:45,300] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 00:50:45,311] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 00:50:45,326] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 00:50:45,340] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 12:53:20,054] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 12:53:23,053] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 12:53:23,076] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 12:53:27,464] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 12:53:28,099] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 12:53:28,175] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 12:53:28,401] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 12:53:28,560] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 12:55:45,195] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 12:55:45,198] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 12:55:45,209] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 12:55:45,218] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 12:55:45,236] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 12:55:45,251] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 12:55:45,264] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 12:55:45,279] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 13:00:44,890] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:00:44,892] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 13:00:44,910] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:00:44,912] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 13:00:44,929] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 13:00:44,943] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 13:00:44,963] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 13:00:44,982] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 13:05:45,205] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:05:45,217] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:05:45,223] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 13:05:45,237] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 13:05:45,250] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 13:05:45,259] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 13:05:45,273] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 13:05:45,284] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 13:10:44,910] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:10:44,913] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 13:10:44,968] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:10:44,979] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 13:10:45,020] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 13:10:45,054] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 13:10:45,090] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 13:10:45,134] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 13:16:15,296] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:16:15,299] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 13:16:15,319] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:16:15,323] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 13:16:15,343] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 13:16:15,354] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 13:16:15,370] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 13:16:15,384] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 13:21:15,051] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:21:15,053] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 13:21:15,073] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 13:21:15,077] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 13:21:15,108] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 13:21:15,118] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 13:21:15,136] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 13:21:15,150] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:13:13,418] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:13:13,452] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:13:13,473] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:13:14,153] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:13:14,249] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:13:14,438] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:13:14,480] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:13:14,565] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:16:15,441] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:16:15,445] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:16:15,470] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:16:15,478] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:16:15,510] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:16:15,544] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:16:15,575] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:16:15,608] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:21:15,109] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:21:15,110] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:21:15,118] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:21:15,119] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:21:15,126] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:21:15,132] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:21:15,139] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:21:15,146] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:26:15,113] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:26:15,114] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:26:15,127] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:26:15,128] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:26:15,135] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:26:15,141] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:26:15,147] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:26:15,153] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:31:15,427] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:31:15,430] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:31:15,437] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:31:15,440] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:31:15,452] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:31:15,458] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:31:15,467] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:31:15,474] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:36:15,120] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:36:15,121] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:36:15,131] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:36:15,133] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:36:15,142] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:36:15,148] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:36:15,156] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:36:15,163] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:41:15,106] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:41:15,106] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:41:15,114] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:41:15,115] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:41:15,123] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:41:15,128] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:41:15,135] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:41:15,141] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:46:15,157] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:46:15,172] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:46:15,180] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:46:15,186] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:46:15,195] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:46:15,200] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:46:15,209] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:46:15,215] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:51:15,115] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:51:15,122] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:51:15,130] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:51:15,134] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:51:15,141] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:51:15,146] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:51:15,153] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:51:15,159] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 14:56:15,108] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:56:15,117] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+[2025-07-31 14:56:15,137] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/pending/
+[2025-07-31 14:56:15,144] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/consultants/
+[2025-07-31 14:56:15,166] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/appels/
+[2025-07-31 14:56:15,173] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 14:56:15,185] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-07-31 14:56:15,192] ERROR django.request log log_response:241 - Internal Server Error: /api/admin/pending-consultants/
+[2025-07-31 15:01:21,624] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-07-31 15:01:21,874] ERROR django.request log log_response:241 - Internal Server Error: /api/document-stats/
+[2025-07-31 18:12:15,187] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\Richat_Platform\Backend\consultants\views.py", line 374, in dashboard_stats
+    offres_actives = AppelOffre.objects.filter(statut="En_cours").count()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1545, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1576, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1426, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1236, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'statut' into field. Choices are: client, created_at, critere_evaluation, criteres, date_de_publication, date_limite, description, documents, ged_documents, id, lien_site, matchings, missions, notifications, titre, type_d_appel_d_offre, updated_at
+[2025-07-31 18:12:16,177] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\Richat_Platform\Backend\consultants\views.py", line 374, in dashboard_stats
+    offres_actives = AppelOffre.objects.filter(statut="En_cours").count()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1545, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1576, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1426, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1236, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'statut' into field. Choices are: client, created_at, critere_evaluation, criteres, date_de_publication, date_limite, description, documents, ged_documents, id, lien_site, matchings, missions, notifications, titre, type_d_appel_d_offre, updated_at
+[2025-07-31 18:14:15,721] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\Richat_Platform\Backend\consultants\views.py", line 374, in dashboard_stats
+    offres_actives = AppelOffre.objects.filter(statut="En_cours").count()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1545, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1576, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1426, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1236, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'statut' into field. Choices are: client, created_at, critere_evaluation, criteres, date_de_publication, date_limite, description, documents, ged_documents, id, lien_site, matchings, missions, notifications, titre, type_d_appel_d_offre, updated_at
+[2025-07-31 18:16:15,327] ERROR django.request log log_response:241 - Internal Server Error: /api/dashboard-stats/
+Traceback (most recent call last):
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "C:\Users\HP\Desktop\Richat_Platform\Backend\consultants\views.py", line 374, in dashboard_stats
+    offres_actives = AppelOffre.objects.filter(statut="En_cours").count()
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1545, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1576, in _add_q
+    child_clause, needed_inner = self.build_filter(
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1426, in build_filter
+    lookups, parts, reffed_expression = self.solve_lookup_type(arg, summarize)
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1236, in solve_lookup_type
+    _, field, _, lookup_parts = self.names_to_path(lookup_splitted, self.get_meta())
+  File "C:\Users\HP\AppData\Roaming\Python\Python310\site-packages\django\db\models\sql\query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'statut' into field. Choices are: client, created_at, critere_evaluation, criteres, date_de_publication, date_limite, description, documents, ged_documents, id, lien_site, matchings, missions, notifications, titre, type_d_appel_d_offre, updated_at
+[2025-08-01 02:20:49,395] ERROR django.request log log_response:241 - Internal Server Error: /api/matching/offer/124/
+[2025-08-01 02:20:52,978] ERROR django.request log log_response:241 - Internal Server Error: /api/matching/offer/124/
+[2025-08-01 02:21:38,024] ERROR django.request log log_response:241 - Internal Server Error: /api/matching/offer/997/
+[2025-08-01 02:22:07,133] ERROR django.request log log_response:241 - Internal Server Error: /api/matching/offer/960/
+[2025-08-01 10:54:12,431] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 10:54:12,439] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 10:54:15,005] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 10:54:15,017] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 10:56:26,259] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 10:56:26,274] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 10:59:12,819] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 10:59:12,831] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:04:12,429] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:04:12,436] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:07:00,259] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:07:00,311] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:09:12,785] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:09:12,793] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:09:24,023] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:09:24,127] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:10:02,961] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:10:02,981] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:10:19,141] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:10:19,149] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:10:19,206] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:10:19,220] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:10:38,950] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:10:38,969] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:11:18,707] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-01 11:11:18,745] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-01 11:14:12,436] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:14:12,443] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:16:42,738] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:16:42,778] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:16:42,806] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:16:42,820] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:16:50,167] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:16:50,189] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:19:12,433] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:19:12,441] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:24:12,517] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:24:12,527] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 11:29:12,474] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 11:29:12,482] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-01 23:55:45,655] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-01 23:55:45,687] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 00:03:08,574] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 00:03:08,602] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 00:04:08,501] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 00:04:08,532] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 00:09:08,512] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 00:09:08,529] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 00:14:08,378] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 00:14:08,392] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:25:14,194] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:25:14,222] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:25:14,464] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:25:14,501] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:29:55,687] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:29:55,759] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:31:44,164] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:31:44,233] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:31:44,428] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:31:44,450] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:31:47,524] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:31:47,551] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:39:21,250] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:39:21,338] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:39:21,497] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:39:21,545] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:44:21,310] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:44:21,325] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:49:21,328] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:49:21,341] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:54:21,312] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:54:21,329] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 17:59:21,505] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 17:59:21,535] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 18:04:21,261] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 18:04:21,275] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 18:09:21,314] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 18:09:21,334] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 18:56:19,412] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 18:56:19,474] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 19:00:08,645] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 19:00:08,660] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 21:41:05,366] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 21:41:05,487] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 21:45:08,810] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 21:45:08,846] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 22:23:47,073] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 22:23:47,114] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 22:23:47,159] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-02 22:23:47,176] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-02 22:24:20,702] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-02 22:24:20,707] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-02 22:24:20,727] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-02 22:24:20,732] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 03:47:20,133] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 03:47:20,163] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 03:47:20,369] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 03:47:20,401] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 03:52:20,913] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 03:52:20,934] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 03:57:20,177] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 03:57:20,190] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 04:02:20,238] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 04:02:20,254] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 04:07:20,034] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 04:07:20,062] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 04:12:19,690] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 04:12:19,703] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 04:17:22,294] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 04:17:22,331] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 04:20:29,900] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 04:20:29,962] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 04:21:01,806] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:21:01,813] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:21:01,889] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:21:01,909] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:27:02,885] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:27:02,942] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:27:02,968] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:27:03,087] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:27:20,512] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:27:21,521] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:27:22,373] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:27:25,627] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:27:25,704] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:27:25,724] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:27:25,919] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:28:13,336] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 04:28:13,378] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 04:28:13,801] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-03 04:28:13,865] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-03 04:30:20,742] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:30:20,797] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:30:20,805] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:30:20,926] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:30:25,802] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:35:04,665] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:35:04,738] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-03 04:35:04,783] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:35:04,863] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-03 04:35:13,683] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 15:45:07,848] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 15:45:07,870] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 15:45:07,891] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 15:45:07,907] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 15:48:27,721] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 15:48:27,731] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 15:49:09,956] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 15:49:09,966] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 15:49:21,186] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 15:49:21,193] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 15:49:52,785] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/3/missions/
+[2025-08-04 15:49:52,789] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/3/notifications/
+[2025-08-04 16:10:52,642] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 16:10:52,685] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 16:10:52,712] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:10:52,738] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:18:31,824] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 16:18:31,843] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 16:18:31,858] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:18:31,874] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:18:35,967] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 16:18:40,936] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 16:18:40,964] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:18:40,970] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 16:18:41,034] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:23:04,332] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 16:23:04,366] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:23:04,367] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/missions/
+[2025-08-04 16:23:04,477] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:33:28,700] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 16:33:28,739] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 16:33:28,757] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 16:33:28,767] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 16:33:59,102] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 16:33:59,131] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 16:33:59,160] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 16:33:59,168] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 16:52:32,070] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:52:32,262] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:56:33,250] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:56:33,393] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 16:57:02,782] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 16:57:02,792] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 16:57:02,844] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 16:57:02,854] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 17:00:11,360] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 17:00:11,433] ERROR django.request log log_response:241 - Internal Server Error: /api/consultant/2/notifications/
+[2025-08-04 17:20:37,690] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 17:20:37,733] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-04 17:20:37,753] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-04 17:20:37,765] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/

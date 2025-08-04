@@ -19,14 +19,38 @@ import {
   FilterIcon,
   BarChart3Icon,
   ClipboardCheckIcon,
-  AlertCircleIcon
+  AlertCircleIcon,
+  ExternalLinkIcon,
+  FileTextIcon,
+  TagIcon,
+  MapPinIcon,
+  GlobeIcon,
+  ClockIcon,
+  TrendingUpIcon
 } from "lucide-react";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { motion } from "framer-motion";
-import { Separator } from "@/components/ui/separator";
 
-// Interface pour les données de matching
+// Interface pour les appels d'offres scrapés (modèle mis à jour)
+interface ScrapedOfferData {
+  id: number;
+  titre: string;
+  date_de_publication?: string;
+  date_limite?: string;
+  client?: string;
+  type_d_appel_d_offre?: string;
+  description?: string;
+  critere_evaluation?: string;
+  documents?: string;
+  lien_site?: string;
+  created_at: string;
+  updated_at: string;
+  is_expired: boolean;
+  days_remaining?: number;
+}
+
+// Interface pour les données de matching (adaptée)
 interface MatchData {
   id: number;
   consultant_id: number;
@@ -42,80 +66,121 @@ interface MatchData {
   is_validated: boolean;
 }
 
-interface OfferData {
-  id: number;
-  nom_projet: string;
-  client: string;
-  description: string;
-  budget: number;
-  date_debut: string;
-  date_fin: string;
-  statut: string;
-}
-
 interface CriterionData {
   id: number;
   nom_critere: string;
   poids: number;
+  description?: string;
 }
 
-const OffreMatching = () => {
+interface MatchingStats {
+  min: number;
+  max: number;
+  avg: number;
+  count: number;
+}
+
+interface AppelOffreInfo {
+  id: number;
+  titre: string;
+  client: string;
+  has_description: boolean;
+  has_criteria: boolean;
+}
+
+const OffreMatchingUpdated = () => {
   const { offerId } = useParams<{ offerId: string }>();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [generating, setGenerating] = useState(false);
   const [validating, setValidating] = useState<number | null>(null);
   const [matches, setMatches] = useState<MatchData[]>([]);
-  const [offer, setOffer] = useState<OfferData | null>(null);
+  const [offer, setOffer] = useState<ScrapedOfferData | null>(null);
   const [criteria, setCriteria] = useState<CriterionData[]>([]);
   const [domainFilter, setDomainFilter] = useState<string | null>(null);
   const [scoreFilter, setScoreFilter] = useState<number | null>(null);
   const [lastRefresh, setLastRefresh] = useState<Date | null>(null);
+  const [matchingStats, setMatchingStats] = useState<MatchingStats | null>(null);
 
-  // Récupération des matchings existants
+  // Récupération des matchings existants avec la nouvelle API
   const fetchMatches = async () => {
     setLoading(true);
     try {
+      console.log(`🔄 Récupération des matchings pour AO ${offerId}`);
       const res = await axios.get(`http://localhost:8000/api/matching/offer/${offerId}/`);
-      console.log("Données brutes du serveur:", res.data);
+      console.log("Données matchings pour AO scrapé:", res.data);
       
       if (res.data.success) {
-        // S'assurer que les scores sont bien des nombres
-        const cleanedMatches = res.data.matches.map(match => ({
+        const cleanedMatches = (res.data.matches || []).map(match => ({
           ...match,
-          score: parseFloat(match.score),
-          date_match_score: parseFloat(match.date_match_score),
-          skills_match_score: parseFloat(match.skills_match_score)
+          score: parseFloat(match.score) || 0,
+          date_match_score: parseFloat(match.date_match_score) || 0,
+          skills_match_score: parseFloat(match.skills_match_score) || 0,
+          top_skills: Array.isArray(match.top_skills) ? match.top_skills : []
         }));
         
-        console.log("Matchings nettoyés avec scores convertis:", cleanedMatches);
+        console.log("Matchings nettoyés:", cleanedMatches);
         setMatches(cleanedMatches);
         setLastRefresh(new Date());
         
+        // Calculer les statistiques des scores
+        if (cleanedMatches.length > 0) {
+          const scores = cleanedMatches.map(m => m.score);
+          setMatchingStats({
+            min: Math.min(...scores),
+            max: Math.max(...scores),
+            avg: scores.reduce((a, b) => a + b, 0) / scores.length,
+            count: cleanedMatches.length
+          });
+        } else {
+          setMatchingStats(null);
+        }
+        
         if (cleanedMatches.length === 0) {
-          toast.info("Aucun matching trouvé pour cet appel d'offre");
+          toast.info("Aucun matching trouvé pour cet appel d'offre scrapé");
         }
       } else {
+        console.error("❌ Erreur dans la réponse:", res.data);
         toast.error(res.data.error || "Erreur lors du chargement des matchings");
+        setMatches([]);
       }
     } catch (error) {
-      console.error("Erreur lors du chargement des matchings:", error);
-      toast.error("Erreur de connexion au serveur. Veuillez réessayer plus tard.");
+      console.error("❌ Erreur lors du chargement des matchings:", error);
+      
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 404) {
+          toast.error("Appel d'offre introuvable");
+        } else if (error.response?.status === 500) {
+          console.error("Détails erreur 500:", error.response.data);
+          toast.error("Erreur serveur lors du chargement des matchings");
+        } else {
+          toast.error(`Erreur de connexion: ${error.response?.status || 'Unknown'}`);
+        }
+      } else {
+        toast.error("Erreur de connexion au serveur");
+      }
+      setMatches([]);
     } finally {
       setLoading(false);
     }
   };
 
-  // Récupération des détails de l'appel d'offre
+  // Récupération des détails de l'appel d'offre scrapé
   const fetchOfferDetails = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/appels/${offerId}/`);
+      console.log(`🔄 Récupération détails AO ${offerId}`);
+      const res = await axios.get(`http://localhost:8000/api/admin/appels/${offerId}/`);
+      console.log("Détails AO scrapé:", res.data);
       setOffer(res.data);
       
-      // Charger les critères d'évaluation
+      // Charger les critères d'évaluation structurés
       try {
         const criteriaRes = await axios.get(`http://localhost:8000/api/appels/${offerId}/criteres/`);
-        setCriteria(criteriaRes.data);
+        if (criteriaRes.data.criteres) {
+          setCriteria(criteriaRes.data.criteres);
+        } else {
+          setCriteria([]);
+        }
       } catch (err) {
         console.error("Erreur lors du chargement des critères:", err);
         setCriteria([]);
@@ -126,55 +191,75 @@ const OffreMatching = () => {
     }
   };
 
-  // Génération de nouveaux matchings
+  // Génération de nouveaux matchings avec la nouvelle API
   const generateMatches = async () => {
     setGenerating(true);
     try {
-      toast.loading("Génération des matchings en cours...");
+      console.log(`🔄 Génération des matchings pour AO ${offerId}`);
+      toast.loading("Génération des matchings pour l'appel d'offre scrapé...");
+      
       const res = await axios.post(`http://localhost:8000/api/matching/offer/${offerId}/`);
       
-      toast.dismiss(); // Fermer le toast de chargement
+      toast.dismiss();
       
       if (res.data.success) {
-        // S'assurer que les scores sont bien des nombres
-        const cleanedMatches = res.data.matches.map(match => ({
+        const cleanedMatches = (res.data.matches || []).map(match => ({
           ...match,
-          score: parseFloat(match.score),
-          date_match_score: parseFloat(match.date_match_score),
-          skills_match_score: parseFloat(match.skills_match_score)
+          score: parseFloat(match.score) || 0,
+          date_match_score: parseFloat(match.date_match_score) || 0,
+          skills_match_score: parseFloat(match.skills_match_score) || 0,
+          top_skills: Array.isArray(match.top_skills) ? match.top_skills : []
         }));
         
-        // Debug - vérifier les scores convertis
-        console.log("Scores après génération et conversion:", 
-          cleanedMatches.map(m => ({
-            id: m.id,
-            consultant: m.consultant_name,
-            score: m.score,
-            type: typeof m.score
-          }))
-        );
+        console.log("Nouveaux matchings générés:", cleanedMatches);
         
         setMatches(cleanedMatches);
         setLastRefresh(new Date());
-        toast.success(`${cleanedMatches.length} matching(s) généré(s) avec succès`);
+        
+        // Afficher les statistiques de génération
+        if (res.data.stats) {
+          setMatchingStats(res.data.stats);
+          toast.success(
+            `${cleanedMatches.length} matching(s) généré(s) - Score moyen: ${Math.round(res.data.stats.avg)}%`
+          );
+        } else {
+          toast.success(`${cleanedMatches.length} matching(s) généré(s) avec succès`);
+        }
+        
+        // Afficher des informations sur l'enrichissement si disponibles
+        if (res.data.appel_offre_info && !res.data.appel_offre_info.has_description) {
+          toast.info("💡 Enrichir la description améliorerait la précision du matching");
+        }
       } else {
+        console.error("❌ Erreur dans la génération:", res.data);
         toast.error(res.data.error || "Erreur lors de la génération des matchings");
       }
     } catch (error) {
-      console.error("Erreur lors de la génération des matchings:", error);
-      toast.error("Erreur de connexion au serveur. Veuillez réessayer plus tard.");
+      console.error("❌ Erreur lors de la génération des matchings:", error);
+      
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 404) {
+          toast.error("Appel d'offre introuvable");
+        } else if (error.response?.status === 500) {
+          console.error("Détails erreur 500:", error.response.data);
+          toast.error("Erreur serveur lors de la génération. Vérifiez les logs serveur.");
+        } else {
+          toast.error(`Erreur de connexion: ${error.response?.status || 'Unknown'}`);
+        }
+      } else {
+        toast.error("Erreur de connexion au serveur");
+      }
     } finally {
       setGenerating(false);
     }
   };
 
-  // Validation/invalidation d'un matching
+  // Validation/invalidation d'un matching (inchangé)
   const toggleValidation = async (matchId: number) => {
     setValidating(matchId);
     try {
       const res = await axios.put(`http://localhost:8000/api/matching/validate/${matchId}/`);
       if (res.data.success) {
-        // Mettre à jour l'état local
         setMatches(matches.map(match => 
           match.id === matchId 
             ? { ...match, is_validated: res.data.is_validated } 
@@ -193,7 +278,7 @@ const OffreMatching = () => {
       }
     } catch (error) {
       console.error("Erreur lors de la validation:", error);
-      toast.error("Erreur de connexion au serveur. Veuillez réessayer.");
+      toast.error("Erreur de connexion au serveur");
     } finally {
       setValidating(null);
     }
@@ -206,26 +291,24 @@ const OffreMatching = () => {
     }
   }, [offerId]);
 
-  // Fonction pour obtenir la couleur du badge selon le score
+  // Fonctions utilitaires (mises à jour)
   const getScoreBadgeColor = (score: number) => {
-    if (score >= 75) return "bg-emerald-100 text-emerald-800";
-    if (score >= 50) return "bg-blue-100 text-blue-800";
-    if (score >= 25) return "bg-amber-100 text-amber-800";
-    return "bg-red-100 text-red-800";
+    if (score >= 75) return "bg-emerald-100 text-emerald-800 border-emerald-300";
+    if (score >= 50) return "bg-blue-100 text-blue-800 border-blue-300";
+    if (score >= 25) return "bg-amber-100 text-amber-800 border-amber-300";
+    return "bg-red-100 text-red-800 border-red-300";
   };
 
-  // Fonction pour obtenir la couleur du badge selon le domaine
   const getDomainBadgeColor = (domain: string) => {
     switch(domain) {
-      case 'DIGITAL': return 'bg-indigo-100 text-indigo-800';
-      case 'FINANCE': return 'bg-emerald-100 text-emerald-800';
-      case 'ENERGIE': return 'bg-amber-100 text-amber-800';
-      case 'INDUSTRIE': return 'bg-purple-100 text-purple-800';
-      default: return 'bg-gray-100 text-gray-800';
+      case 'DIGITAL': return 'bg-indigo-100 text-indigo-800 border-indigo-300';
+      case 'FINANCE': return 'bg-emerald-100 text-emerald-800 border-emerald-300';
+      case 'ENERGIE': return 'bg-amber-100 text-amber-800 border-amber-300';
+      case 'INDUSTRIE': return 'bg-purple-100 text-purple-800 border-purple-300';
+      default: return 'bg-gray-100 text-gray-800 border-gray-300';
     }
   };
 
-  // Fonction pour obtenir le nom complet du domaine
   const getDomainName = (code: string) => {
     switch(code) {
       case 'DIGITAL': return 'Digital et Télécoms';
@@ -234,6 +317,32 @@ const OffreMatching = () => {
       case 'INDUSTRIE': return 'Industrie et Mines';
       default: return code;
     }
+  };
+
+  const getStatusBadge = (offer: ScrapedOfferData) => {
+    if (!offer.date_limite) {
+      return <Badge className="bg-gray-100 text-gray-800 border-gray-300">Date limite non définie</Badge>;
+    }
+    
+    if (offer.is_expired) {
+      return <Badge className="bg-red-100 text-red-800 border-red-300">Expiré</Badge>;
+    } else if (offer.days_remaining !== undefined && offer.days_remaining <= 7) {
+      return <Badge className="bg-amber-100 text-amber-800 border-amber-300">Urgent ({offer.days_remaining}j)</Badge>;
+    } else {
+      return <Badge className="bg-green-100 text-green-800 border-green-300">Actif</Badge>;
+    }
+  };
+
+  const getEnrichmentLevel = (offer: ScrapedOfferData) => {
+    let level = 0;
+    let total = 4;
+    
+    if (offer.description && offer.description.length > 100) level++;
+    if (offer.critere_evaluation && offer.critere_evaluation.length > 50) level++;
+    if (offer.type_d_appel_d_offre) level++;
+    if (criteria.length > 0) level++;
+    
+    return { level, total, percentage: (level / total) * 100 };
   };
 
   // Appliquer les filtres
@@ -247,76 +356,102 @@ const OffreMatching = () => {
   const uniqueDomains = Array.from(new Set(matches.map(match => match.domaine_principal)));
 
   // Formater la date
-  const formatDate = (dateString: string) => {
-    if (!dateString) return "N/A";
-    const date = new Date(dateString);
-    return new Intl.DateTimeFormat('fr-FR').format(date);
-  };
-
-  // Formater le statut pour l'affichage
-  const formatStatus = (status: string) => {
-    if (!status) return "N/A";
-    return status.replace("_", " ");
-  };
-
-  // Afficher le budget en format monétaire
-  const formatBudget = (budget: number) => {
-    return new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'MRU' }).format(budget);
+  const formatDate = (dateString: string | undefined) => {
+    if (!dateString) return "Non définie";
+    try {
+      const date = new Date(dateString);
+      return new Intl.DateTimeFormat('fr-FR').format(date);
+    } catch {
+      return "Non définie";
+    }
   };
 
   return (
     <AdminLayout>
-      <div className="space-y-6 p-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="flex items-center gap-3">
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button 
-                      variant="ghost" 
-                      size="sm" 
-                      onClick={() => navigate("/admin/appels-offres")}
-                      className="p-0 h-10 w-10 rounded-full bg-white shadow-sm hover:bg-gray-100 transition-colors"
-                    >
-                      <ArrowLeftIcon className="h-5 w-5 text-gray-700" />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Retour à la liste des appels d'offres</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-              <div>
-                <h1 className="text-2xl font-bold text-gray-800">Matching pour l'appel d'offre</h1>
-                {offer ? (
-                  <p className="text-gray-500 mt-1 flex items-center">
-                    <BriefcaseIcon className="h-4 w-4 mr-2 text-blue-500" />
-                    <span className="font-medium text-blue-600">{offer.nom_projet}</span>
-                    <span className="mx-2">•</span>
-                    <span className="text-gray-600">{offer.client}</span>
-                  </p>
-                ) : loading ? (
-                  <Skeleton className="h-4 w-48 mt-1" />
-                ) : null}
+      <div className="space-y-6 p-6 bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+        {/* En-tête amélioré */}
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+          <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-6 text-white">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        variant="secondary" 
+                        size="sm" 
+                        onClick={() => navigate("/admin/appels-offres")}
+                        className="h-10 w-10 rounded-full bg-white/20 hover:bg-white/30 border-0"
+                      >
+                        <ArrowLeftIcon className="h-5 w-5" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Retour aux appels d'offres</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                <div>
+                  <h1 className="text-2xl font-bold flex items-center gap-3">
+                    <GlobeIcon className="h-7 w-7" />
+                    Matching - Appel d'offre scrapé
+                  </h1>
+                  {offer ? (
+                    <div className="text-blue-100 mt-1 flex items-center">
+                      <BriefcaseIcon className="h-4 w-4 mr-2" />
+                      <span className="font-medium">{offer.titre}</span>
+                      <span className="mx-2">•</span>
+                      <span>{offer.client || "Client non spécifié"}</span>
+                    </div>
+                  ) : loading ? (
+                    <Skeleton className="h-4 w-48 mt-1 bg-white/20" />
+                  ) : null}
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <Button 
+                  onClick={generateMatches} 
+                  disabled={generating || loading}
+                  className="bg-white/20 hover:bg-white/30 border border-white/30 text-white backdrop-blur-sm"
+                >
+                  <RefreshCwIcon className={`h-4 w-4 mr-2 ${generating ? 'animate-spin' : ''}`} />
+                  {generating ? "Génération..." : "Générer Matchings"}
+                </Button>
               </div>
             </div>
           </div>
-          <div className="flex gap-3">
-            <Button 
-              onClick={generateMatches} 
-              disabled={generating || loading}
-              className="bg-blue-600 hover:bg-blue-700 shadow-md hover:shadow-lg transition-all duration-200"
-            >
-              <RefreshCwIcon className={`h-4 w-4 mr-2 ${generating ? 'animate-spin' : ''}`} />
-              {generating ? "Génération..." : "Générer Matchings"}
-            </Button>
-          </div>
+
+          {/* Métriques de matching */}
+          {matchingStats && (
+            <div className="p-6 bg-gray-50 border-b">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="bg-white rounded-lg p-4 text-center border">
+                  <div className="text-2xl font-bold text-blue-600">{matchingStats.count}</div>
+                  <div className="text-sm text-gray-600">Consultants évalués</div>
+                </div>
+                <div className="bg-white rounded-lg p-4 text-center border">
+                  <div className="text-2xl font-bold text-emerald-600">{Math.round(matchingStats.avg)}%</div>
+                  <div className="text-sm text-gray-600">Score moyen</div>
+                </div>
+                <div className="bg-white rounded-lg p-4 text-center border">
+                  <div className="text-2xl font-bold text-purple-600">{Math.round(matchingStats.max)}%</div>
+                  <div className="text-sm text-gray-600">Meilleur score</div>
+                </div>
+                <div className="bg-white rounded-lg p-4 text-center border">
+                  <div className="text-2xl font-bold text-orange-600">
+                    {matches.filter(m => m.is_validated).length}
+                  </div>
+                  <div className="text-sm text-gray-600">Validés</div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Détails de l'offre scrapée */}
           {loading && !offer ? (
-            <Card className="col-span-3 md:col-span-3">
+            <Card className="lg:col-span-2">
               <CardHeader>
                 <Skeleton className="h-6 w-48" />
               </CardHeader>
@@ -324,130 +459,249 @@ const OffreMatching = () => {
                 <div className="space-y-2">
                   <Skeleton className="h-4 w-full" />
                   <Skeleton className="h-4 w-3/4" />
-                  <Skeleton className="h-4 w-1/2" />
                 </div>
               </CardContent>
             </Card>
           ) : offer ? (
-            <>
-              <Card className="col-span-3 md:col-span-2 shadow-md hover:shadow-lg transition-all duration-200">
-                <CardHeader className="pb-3 border-b">
+            <Card className="lg:col-span-2 shadow-md hover:shadow-lg transition-all duration-200">
+              <CardHeader className="pb-3 border-b">
+                <div className="flex items-center justify-between">
                   <CardTitle className="flex items-center gap-2 text-blue-700">
-                    <BriefcaseIcon className="h-5 w-5" />
-                    Détails de la mission
+                    <FileTextIcon className="h-5 w-5" />
+                    Appel d'offre scrapé
                   </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="flex items-center gap-2">
+                    {getStatusBadge(offer)}
+                    {offer.type_d_appel_d_offre && (
+                      <Badge variant="outline" className="rounded-full">
+                        {offer.type_d_appel_d_offre}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Niveau d'enrichissement */}
+                {(() => {
+                  const enrichment = getEnrichmentLevel(offer);
+                  return (
+                    <div className="mt-3">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-600">Niveau d'enrichissement</span>
+                        <span className="font-medium">{enrichment.level}/{enrichment.total}</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
+                        <div 
+                          className={`h-2 rounded-full transition-all duration-300 ${
+                            enrichment.percentage >= 75 ? 'bg-emerald-500' :
+                            enrichment.percentage >= 50 ? 'bg-blue-500' :
+                            enrichment.percentage >= 25 ? 'bg-amber-500' : 'bg-red-500'
+                          }`}
+                          style={{ width: `${enrichment.percentage}%` }}
+                        ></div>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </CardHeader>
+              <CardContent className="pt-4">
+                <div className="space-y-4">
+                  {/* Informations de base */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm font-medium text-gray-500 mb-1">Projet</p>
-                      <p className="font-semibold text-gray-800">{offer.nom_projet}</p>
+                      <p className="text-sm font-medium text-gray-500 mb-1">Titre</p>
+                      <p className="font-semibold text-gray-800">{offer.titre}</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
                       <p className="text-sm font-medium text-gray-500 mb-1">Client</p>
-                      <p className="font-semibold text-gray-800">{offer.client}</p>
+                      <p className="font-semibold text-gray-800">{offer.client || "Non spécifié"}</p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm font-medium text-gray-500 mb-1">Budget</p>
-                      <p className="font-semibold text-gray-800">{formatBudget(offer.budget)}</p>
+                      <p className="text-sm font-medium text-gray-500 mb-1">Date de publication</p>
+                      <p className="font-semibold text-gray-800 flex items-center">
+                        <CalendarIcon className="h-4 w-4 mr-2 text-blue-500" />
+                        {formatDate(offer.date_de_publication)}
+                      </p>
                     </div>
                     <div className="bg-gray-50 p-4 rounded-lg">
-                      <p className="text-sm font-medium text-gray-500 mb-1">Statut</p>
-                      <Badge className={
-                        offer.statut === "En_cours" ? "bg-blue-100 text-blue-800 px-3 py-1" :
-                        offer.statut === "A_venir" ? "bg-amber-100 text-amber-800 px-3 py-1" :
-                        "bg-emerald-100 text-emerald-800 px-3 py-1"
-                      }>
-                        {formatStatus(offer.statut)}
-                      </Badge>
-                    </div>
-                    <div className="bg-gray-50 p-4 rounded-lg col-span-2">
-                      <p className="text-sm font-medium text-gray-500 mb-1">Période</p>
-                      <p className="flex items-center gap-2 font-semibold text-gray-800">
-                        <CalendarIcon className="h-4 w-4 text-blue-500" />
-                        Du {formatDate(offer.date_debut)} au {formatDate(offer.date_fin)}
+                      <p className="text-sm font-medium text-gray-500 mb-1">Date limite</p>
+                      <p className="font-semibold text-gray-800 flex items-center">
+                        <ClockIcon className="h-4 w-4 mr-2 text-red-500" />
+                        {formatDate(offer.date_limite)}
                       </p>
                     </div>
                   </div>
-                  <div className="mt-5 bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm font-medium text-gray-500 mb-2">Description</p>
-                    <p className="text-gray-800 leading-relaxed">{offer.description}</p>
-                  </div>
-                  
+
+                  {/* Description */}
+                  {offer.description ? (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-sm font-medium text-gray-500 mb-2">Description</p>
+                      <p className="text-gray-800 leading-relaxed">{offer.description}</p>
+                    </div>
+                  ) : (
+                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                      <div className="flex items-center">
+                        <AlertCircleIcon className="h-5 w-5 text-amber-600 mr-2" />
+                        <div>
+                          <p className="text-amber-800 font-medium">Description manquante</p>
+                          <p className="text-amber-700 text-sm mt-1">
+                            Enrichir la description améliorerait la précision du matching automatique.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Critères d'évaluation textuels */}
+                  {offer.critere_evaluation && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-sm font-medium text-gray-500 mb-2">Critères d'évaluation</p>
+                      <p className="text-gray-800 leading-relaxed">{offer.critere_evaluation}</p>
+                    </div>
+                  )}
+
+                  {/* Critères structurés */}
                   {criteria.length > 0 && (
-                    <div className="mt-5">
+                    <div>
                       <p className="text-sm font-medium text-gray-500 mb-3 flex items-center">
                         <BarChart3Icon className="h-4 w-4 mr-2 text-blue-500" />
-                        Critères d'évaluation
+                        Critères d'évaluation structurés ({criteria.length})
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {criteria.map(criterion => (
-                          <Badge key={criterion.id} variant="outline" className="flex gap-2 items-center bg-white border-2 border-gray-200 px-3 py-1.5 rounded-full shadow-sm">
+                          <Badge 
+                            key={criterion.id} 
+                            variant="outline" 
+                            className="flex gap-2 items-center bg-white border-2 border-blue-200 px-3 py-1.5 rounded-full"
+                          >
                             {criterion.nom_critere}
                             <span className="bg-blue-100 text-blue-800 text-xs px-2 py-0.5 rounded-full font-bold">
-                              {criterion.poids}
+                              {criterion.poids}%
                             </span>
                           </Badge>
                         ))}
                       </div>
                     </div>
                   )}
-                </CardContent>
-              </Card>
-              
-              <Card className="col-span-3 md:col-span-1 shadow-md hover:shadow-lg transition-all duration-200 bg-gradient-to-br from-blue-50 to-white">
-                <CardHeader className="pb-3 border-b">
-                  <CardTitle className="flex items-center gap-2 text-blue-700">
-                    <ClipboardCheckIcon className="h-5 w-5" />
-                    Suivi du matching
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="pt-4 space-y-4">
-                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-gray-500">Matchings</p>
-                      <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-xs font-bold">
-                        {matches.length}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-gray-500">Consultants validés</p>
-                      <span className="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full text-xs font-bold">
-                        {matches.filter(m => m.is_validated).length}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                    <div className="flex items-center justify-between">
-                      <p className="text-sm font-medium text-gray-500">Score moyen</p>
-                      <span className="bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full text-xs font-bold">
-                        {matches.length ? 
-                          Math.round(matches.reduce((sum, m) => sum + m.score, 0) / matches.length) + '%' : 
-                          'N/A'}
-                      </span>
-                    </div>
-                  </div>
 
-                  {lastRefresh && (
-                    <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-                      <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium text-gray-500">Dernière mise à jour</p>
-                        <span className="text-gray-600 text-xs">
-                          {lastRefresh.toLocaleTimeString()}
-                        </span>
-                      </div>
+                  {/* Documents */}
+                  {offer.documents && (
+                    <div className="bg-gray-50 p-4 rounded-lg">
+                      <p className="text-sm font-medium text-gray-500 mb-2">Documents</p>
+                      <p className="text-gray-800 leading-relaxed">{offer.documents}</p>
                     </div>
                   )}
-                </CardContent>
-              </Card>
-            </>
+
+                  {/* Lien vers la source */}
+                  {offer.lien_site && (
+                    <div>
+                      <Button
+                        onClick={() => window.open(offer.lien_site, '_blank')}
+                        variant="outline"
+                        className="w-full border-blue-200 text-blue-600 hover:bg-blue-50"
+                      >
+                        <ExternalLinkIcon className="h-4 w-4 mr-2" />
+                        Voir l'annonce originale
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           ) : null}
+
+          {/* Tableau de bord du matching */}
+          <Card className="shadow-md hover:shadow-lg transition-all duration-200 bg-gradient-to-br from-blue-50 to-white">
+            <CardHeader className="pb-3 border-b">
+              <CardTitle className="flex items-center gap-2 text-blue-700">
+                <TrendingUpIcon className="h-5 w-5" />
+                Tableau de bord
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-4 space-y-4">
+              <div className="bg-white rounded-lg p-4 shadow-sm border">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-gray-500">Matchings totaux</p>
+                  <span className="bg-blue-100 text-blue-800 px-2 py-0.5 rounded-full text-xs font-bold">
+                    {matches.length}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="bg-white rounded-lg p-4 shadow-sm border">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-gray-500">Consultants validés</p>
+                  <span className="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full text-xs font-bold">
+                    {matches.filter(m => m.is_validated).length}
+                  </span>
+                </div>
+              </div>
+              
+              {matchingStats && (
+                <>
+                  <div className="bg-white rounded-lg p-4 shadow-sm border">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-medium text-gray-500">Score moyen</p>
+                      <span className="bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full text-xs font-bold">
+                        {Math.round(matchingStats.avg)}%
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-white rounded-lg p-4 shadow-sm border">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-medium text-gray-500">Meilleur score</p>
+                      <span className="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full text-xs font-bold">
+                        {Math.round(matchingStats.max)}%
+                      </span>
+                    </div>
+                  </div>
+                </>
+              )}
+
+              {lastRefresh && (
+                <div className="bg-white rounded-lg p-4 shadow-sm border">
+                  <div className="flex items-center justify-between">
+                    <p className="text-sm font-medium text-gray-500">Dernière mise à jour</p>
+                    <span className="text-gray-600 text-xs">
+                      {lastRefresh.toLocaleTimeString()}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Recommandations d'amélioration */}
+              {offer && !offer.description && (
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4">
+                  <div className="flex items-start">
+                    <AlertCircleIcon className="h-4 w-4 text-amber-600 mr-2 mt-0.5" />
+                    <div>
+                      <p className="text-amber-800 text-xs font-medium">Amélioration suggérée</p>
+                      <p className="text-amber-700 text-xs mt-1">
+                        Enrichir la description pour un matching plus précis
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {criteria.length === 0 && (
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="flex items-start">
+                    <BarChart3Icon className="h-4 w-4 text-blue-600 mr-2 mt-0.5" />
+                    <div>
+                      <p className="text-blue-800 text-xs font-medium">Suggestion</p>
+                      <p className="text-blue-700 text-xs mt-1">
+                        Ajouter des critères structurés améliorerait la précision
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
         </div>
 
+        {/* Table des matchings */}
         <Card className="shadow-md hover:shadow-lg transition-all duration-200">
           <CardHeader className="flex flex-row items-center justify-between pb-3 border-b">
             <div>
@@ -459,6 +713,7 @@ const OffreMatching = () => {
                 <CardDescription className="mt-1">
                   {filteredMatches.length} consultant(s) sur {matches.length} 
                   {domainFilter || scoreFilter ? " (filtrés)" : ""}
+                  {matchingStats && ` • Score moyen: ${Math.round(matchingStats.avg)}%`}
                 </CardDescription>
               )}
             </div>
@@ -496,7 +751,10 @@ const OffreMatching = () => {
           <CardContent className="p-0">
             {loading ? (
               <div className="flex justify-center py-12">
-                <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600"></div>
+                <div className="flex flex-col items-center">
+                  <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-600 mb-4"></div>
+                  <p className="text-gray-500">Analyse des matchings...</p>
+                </div>
               </div>
             ) : filteredMatches.length > 0 ? (
               <Table>
@@ -506,14 +764,13 @@ const OffreMatching = () => {
                     <TableHead className="font-semibold text-gray-700">Domaine</TableHead>
                     <TableHead className="font-semibold text-gray-700">Expertise</TableHead>
                     <TableHead className="font-semibold text-gray-700">Contact</TableHead>
-                    <TableHead className="font-semibold text-gray-700">Score</TableHead>
+                    <TableHead className="font-semibold text-gray-700">Score de matching</TableHead>
                     <TableHead className="font-semibold text-gray-700">Statut</TableHead>
                     <TableHead className="text-right font-semibold text-gray-700">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredMatches.map((match, index) => {
-                    // Log de débogage
                     console.log(`Match ${match.id}, consultant: ${match.consultant_name}, score: ${match.score}, type: ${typeof match.score}`);
                     
                     return (
@@ -533,11 +790,19 @@ const OffreMatching = () => {
                             <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
                               <UserIcon className="h-4 w-4 text-blue-600" />
                             </div>
-                            <span className="font-semibold text-gray-800">{match.consultant_name}</span>
+                            <div>
+                              <span className="font-semibold text-gray-800">{match.consultant_name}</span>
+                              {match.top_skills && match.top_skills.length > 0 && (
+                                <div className="text-xs text-gray-500 mt-1">
+                                  {match.top_skills.slice(0, 2).join(', ')}
+                                  {match.top_skills.length > 2 && '...'}
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </TableCell>
                         <TableCell>
-                          <Badge className={`${getDomainBadgeColor(match.domaine_principal)} px-2 py-1`}>
+                          <Badge className={`${getDomainBadgeColor(match.domaine_principal)} px-2 py-1 border`}>
                             {getDomainName(match.domaine_principal)}
                           </Badge>
                           {match.specialite && (
@@ -555,7 +820,7 @@ const OffreMatching = () => {
                         </TableCell>
                         <TableCell>
                           <div className="flex flex-col items-center">
-                            {/* Graphique circulaire du score global - CORRIGÉ */}
+                            {/* Graphique circulaire du score global */}
                             <div className="w-16 h-16 relative flex items-center justify-center">
                               <svg className="w-full h-full" viewBox="0 0 36 36">
                                 <path
@@ -584,27 +849,17 @@ const OffreMatching = () => {
                               </svg>
                             </div>
                             
-                            {/* Affichage des scores détaillés */}
+                            {/* Affichage des scores détaillés adapté au nouveau modèle */}
                             <div className="mt-2 w-full text-xs">
                               <div className="flex items-center justify-between px-1 mb-1">
                                 <span className="text-gray-600">Disponibilité:</span>
-                                <Badge className={
-                                  match.date_match_score >= 75 ? "bg-emerald-100 text-emerald-800" :
-                                  match.date_match_score >= 50 ? "bg-blue-100 text-blue-800" :
-                                  match.date_match_score >= 25 ? "bg-amber-100 text-amber-800" :
-                                  "bg-red-100 text-red-800"
-                                }>
+                                <Badge className={getScoreBadgeColor(match.date_match_score)}>
                                   {Math.round(match.date_match_score)}%
                                 </Badge>
                               </div>
                               <div className="flex items-center justify-between px-1">
                                 <span className="text-gray-600">Compétences:</span>
-                                <Badge className={
-                                  match.skills_match_score >= 75 ? "bg-emerald-100 text-emerald-800" :
-                                  match.skills_match_score >= 50 ? "bg-blue-100 text-blue-800" :
-                                  match.skills_match_score >= 25 ? "bg-amber-100 text-amber-800" :
-                                  "bg-red-100 text-red-800"
-                                }>
+                                <Badge className={getScoreBadgeColor(match.skills_match_score)}>
                                   {Math.round(match.skills_match_score)}%
                                 </Badge>
                               </div>
@@ -613,7 +868,7 @@ const OffreMatching = () => {
                         </TableCell>
                         <TableCell>
                           {match.is_validated ? (
-                            <Badge className="bg-emerald-100 text-emerald-800 px-3 py-1 flex items-center gap-1.5">
+                            <Badge className="bg-emerald-100 text-emerald-800 px-3 py-1 flex items-center gap-1.5 border border-emerald-300">
                               <CheckIcon className="h-3 w-3" /> Validé
                             </Badge>
                           ) : (
@@ -686,22 +941,88 @@ const OffreMatching = () => {
                 <div className="inline-flex rounded-full bg-blue-100 p-4 mb-4">
                   <UserIcon className="h-6 w-6 text-blue-600" />
                 </div>
-                <p className="text-gray-600 mb-4">Aucun matching trouvé pour cette offre.</p>
-                <Button 
-                  onClick={generateMatches} 
-                  className="bg-blue-600 hover:bg-blue-700 shadow-md"
-                  disabled={generating}
-                >
-                  <RefreshCwIcon className={`h-4 w-4 mr-2 ${generating ? 'animate-spin' : ''}`} />
-                  Générer des matchings
-                </Button>
+                <p className="text-gray-600 mb-4">Aucun matching trouvé pour cette offre scrapée.</p>
+                <div className="space-y-2 mb-4">
+                  <p className="text-sm text-gray-500">
+                    Cet appel d'offre provient du scraping automatique.
+                  </p>
+                  {offer && !offer.description && (
+                    <p className="text-sm text-amber-600">
+                      💡 Enrichir la description améliorerait significativement la qualité du matching.
+                    </p>
+                  )}
+                  {criteria.length === 0 && (
+                    <p className="text-sm text-blue-600">
+                      ℹ️ Ajouter des critères structurés optimiserait l'algorithme de matching.
+                    </p>
+                  )}
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Button 
+                    onClick={generateMatches} 
+                    className="bg-blue-600 hover:bg-blue-700 shadow-md"
+                    disabled={generating}
+                  >
+                    <RefreshCwIcon className={`h-4 w-4 mr-2 ${generating ? 'animate-spin' : ''}`} />
+                    Générer des matchings
+                  </Button>
+                  {offer && (!offer.description || criteria.length === 0) && (
+                    <Button 
+                      onClick={() => navigate(`/admin/appels-offres`)} 
+                      variant="outline"
+                      className="border-blue-200 text-blue-600 hover:bg-blue-50"
+                    >
+                      <FileTextIcon className="h-4 w-4 mr-2" />
+                      Enrichir l'offre
+                    </Button>
+                  )}
+                </div>
               </div>
             )}
           </CardContent>
         </Card>
+
+        {/* Notification d'information sur les appels d'offres scrapés */}
+        {offer && (
+          <div className="fixed bottom-4 right-4 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 shadow-lg max-w-sm backdrop-blur-sm">
+            <div className="flex items-start">
+              <GlobeIcon className="h-5 w-5 text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
+              <div>
+                {/* CORRECTION: Changer <p> en <div> pour contenir Badge */}
+                <div className="text-sm text-blue-800 font-medium flex items-center gap-1">
+                  <span>Appel d'offre scrapé</span>
+                  {(() => {
+                    const enrichment = getEnrichmentLevel(offer);
+                    return (
+                      <Badge 
+                        className={`ml-2 text-xs ${
+                          enrichment.percentage >= 75 ? 'bg-emerald-100 text-emerald-800' :
+                          enrichment.percentage >= 50 ? 'bg-blue-100 text-blue-800' :
+                          enrichment.percentage >= 25 ? 'bg-amber-100 text-amber-800' : 'bg-red-100 text-red-800'
+                        }`}
+                      >
+                        {Math.round(enrichment.percentage)}% enrichi
+                      </Badge>
+                    );
+                  })()}
+                </div>
+                <p className="text-xs text-blue-700 mt-1">
+                  Source: {offer.lien_site ? "Externe" : "Scraping automatique"}
+                  {(() => {
+                    const enrichment = getEnrichmentLevel(offer);
+                    if (enrichment.percentage < 75) {
+                      return " • Enrichissement recommandé pour améliorer le matching";
+                    }
+                    return " • Données optimisées pour le matching";
+                  })()}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );
 };
 
-export default OffreMatching;
+export default OffreMatchingUpdated;

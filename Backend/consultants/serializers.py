@@ -71,33 +71,118 @@ class ConsultantSerializer(serializers.ModelSerializer):
 
 
 class AppelOffreSerializer(serializers.ModelSerializer):
+    """
+    Serializer pour le nouveau modèle AppelOffre (données scrapées)
+    Compatible avec AppelsOffres.tsx
+    """
+    
+    # Propriétés calculées ajoutées au serializer
+    is_expired = serializers.ReadOnlyField()
+    days_remaining = serializers.ReadOnlyField()
+    
+    # Champs optionnels pour les statistiques (ajoutés dynamiquement dans les vues)
+    enrichment_status = serializers.DictField(read_only=True, required=False)
+    matching_stats = serializers.DictField(read_only=True, required=False)
+    structured_criteria_count = serializers.IntegerField(read_only=True, required=False)
+    
     class Meta:
         model = AppelOffre
-        fields = '__all__'
-
-    def validate_budget(self, value):
-        if value <= 0:
-            raise serializers.ValidationError("Le budget doit être supérieur à 0.")
-        return value
-
-    def validate(self, data):
-        # Validation des dates
-        if 'date_debut' in data and 'date_fin' in data:
-            if data['date_debut'] and data['date_fin']:
-                if data['date_debut'] >= data['date_fin']:
-                    raise serializers.ValidationError({
-                        'date_fin': 'La date de fin doit être postérieure à la date de début.'
-                    })
-        return data
-
-    def update(self, instance, validated_data):
-        # Mettre à jour tous les champs
-        for attr, value in validated_data.items():
-            setattr(instance, attr, value)
+        fields = [
+            # Champs de base du nouveau modèle
+            'id',
+            'titre',                    # Nouveau champ principal
+            'date_de_publication',      # Nouveau 
+            'date_limite',             # Nouveau
+            'client',                  # Existant
+            'type_d_appel_d_offre',    # Nouveau
+            'description',             # Existant mais maintenant optionnel
+            'critere_evaluation',      # Nouveau
+            'documents',               # Nouveau
+            'lien_site',              # Nouveau
+            'created_at',             # Existant
+            'updated_at',             # Existant
+            
+            # Propriétés calculées
+            'is_expired',
+            'days_remaining',
+            
+            # Données enrichies (optionnelles)
+            'enrichment_status',
+            'matching_stats', 
+            'structured_criteria_count'
+        ]
         
-        instance.save()
-        return instance
-
+        # Champs en lecture seule (données scrapées non modifiables)
+        read_only_fields = [
+            'id',
+            'titre',                   # Vient du scraping
+            'date_de_publication',     # Vient du scraping  
+            'date_limite',            # Vient du scraping
+            'client',                 # Vient du scraping
+            'documents',              # Vient du scraping
+            'lien_site',             # Vient du scraping
+            'created_at',
+            'updated_at',
+            'is_expired',
+            'days_remaining',
+            'enrichment_status',
+            'matching_stats',
+            'structured_criteria_count'
+        ]
+    
+    def validate(self, data):
+        """
+        Validation personnalisée pour les champs modifiables
+        """
+        # Validation des dates si présentes (même si en lecture seule)
+        if 'date_de_publication' in data and 'date_limite' in data:
+            if data['date_de_publication'] and data['date_limite']:
+                if data['date_limite'] < data['date_de_publication']:
+                    raise serializers.ValidationError(
+                        "La date limite ne peut pas être antérieure à la date de publication."
+                    )
+        
+        # Validation du type d'appel d'offres (liste contrôlée)
+        if 'type_d_appel_d_offre' in data and data['type_d_appel_d_offre']:
+            types_valides = [
+                'Appel d\'offres ouvert',
+                'Appel d\'offres restreint', 
+                'Consultation',
+                'Manifestation d\'intérêt',
+                'Concours',
+                'Autre'
+            ]
+            if data['type_d_appel_d_offre'] not in types_valides:
+                raise serializers.ValidationError({
+                    'type_d_appel_d_offre': f'Type non valide. Choisissez parmi: {", ".join(types_valides)}'
+                })
+        
+        return data
+    
+    def to_representation(self, instance):
+        """
+        Personnalisation de la représentation pour le frontend
+        """
+        representation = super().to_representation(instance)
+        
+        # S'assurer que les dates sont bien formatées
+        if representation.get('date_de_publication'):
+            try:
+                # Garder le format ISO pour le frontend
+                representation['date_de_publication'] = instance.date_de_publication.isoformat()
+            except:
+                representation['date_de_publication'] = None
+                
+        if representation.get('date_limite'):
+            try:
+                representation['date_limite'] = instance.date_limite.isoformat()
+            except:
+                representation['date_limite'] = None
+        
+        # Ajouter des informations contextuelles si nécessaire
+        representation['source_type'] = 'scraped'
+        
+        return representation
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

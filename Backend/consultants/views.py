@@ -9,7 +9,9 @@ from django.core.files.storage import default_storage
 from django.db import transaction
 from django.db.models import Q
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
-
+from django.middleware.csrf import get_token
+from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.http import require_http_methods
 
 
 from django.http import FileResponse
@@ -71,7 +73,29 @@ def cleanup_orphaned_users(request):
         return Response({"message": f"{count} utilisateurs orphelins supprimés avec succès"})
     except Exception as e:
         return Response({"error": f"Erreur lors du nettoyage des utilisateurs: {str(e)}"}, status=500)
-
+@ensure_csrf_cookie
+@require_http_methods(["GET"])
+@api_view(['GET'])
+def get_csrf_token(request):
+    """
+    Endpoint pour récupérer le token CSRF nécessaire pour les formulaires
+    """
+    try:
+        csrf_token = get_token(request)
+        logger.info("Token CSRF généré avec succès")
+        
+        return Response({
+            'success': True,
+            'csrf_token': csrf_token,
+            'message': 'Token CSRF récupéré avec succès'
+        })
+        
+    except Exception as e:
+        logger.error(f"Erreur lors de la génération du token CSRF: {str(e)}")
+        return Response({
+            'success': False,
+            'error': 'Erreur lors de la génération du token CSRF'
+        }, status=500)
 
 @api_view(['GET'])
 def api_public_consultants(request):
@@ -102,76 +126,458 @@ def api_public_consultants(request):
 
 
 # Remplacez la fonction admin_consultant_detail dans votre fichier views.py
+@api_view(['GET'])
+def consultant_matches(request, consultant_id):
+    """
+    Endpoint pour récupérer les meilleurs matchings pour un consultant
+    """
+    limit = int(request.query_params.get('limit', 5))
 
+    try:
+        # Vérifier que le consultant existe
+        consultant = get_object_or_404(Consultant, id=consultant_id)
+        
+        # Récupérer les matchings pour ce consultant
+        matchings = MatchingResult.objects.filter(
+            consultant_id=consultant_id
+        ).select_related('appel_offre').order_by('-score')[:limit]
+
+        results = []
+        for matching in matchings:
+            appel_offre = matching.appel_offre
+            
+            results.append({
+                'id': matching.id,
+                'appel_offre_id': appel_offre.id,
+                'appel_offre_name': getattr(appel_offre, 'titre', getattr(appel_offre, 'nom_projet', 'Titre non défini')),
+                'client': getattr(appel_offre, 'client', 'Client non spécifié'),
+                'date_debut': getattr(appel_offre, 'date_debut', getattr(appel_offre, 'date_de_publication', None)),
+                'date_fin': getattr(appel_offre, 'date_fin', getattr(appel_offre, 'date_limite', None)),
+                'score': float(matching.score),
+                'is_validated': matching.is_validated
+            })
+
+        return Response({
+            'success': True,
+            'matches': results
+        })
+
+    except Exception as e:
+        logger.error(f"Erreur lors de la récupération des matchings pour le consultant {consultant_id}: {str(e)}")
+        return Response({
+            'success': False,
+            'error': str(e)
+        }, status=500)
+@api_view(['GET'])
+def admin_pending_consultants_fixed(request):
+    """
+    Version corrigée de la récupération des consultants en attente
+    Compatible avec AdminLayout.tsx et AdminSidebar.tsx
+    """
+    try:
+        logger.info("Récupération des consultants en attente - version corrigée")
+        
+        # Récupérer les consultants en attente
+        consultants = Consultant.objects.filter(is_validated=False)
+        
+        logger.info(f"Nombre de consultants en attente trouvés: {consultants.count()}")
+        
+        consultants_data = []
+        for consultant in consultants:
+            try:
+                # Construction sécurisée des données
+                consultant_data = {
+                    'id': consultant.id,
+                    'nom': getattr(consultant, 'nom', ''),
+                    'prenom': getattr(consultant, 'prenom', ''),
+                    'firstName': getattr(consultant, 'prenom', ''),
+                    'lastName': getattr(consultant, 'nom', ''),
+                    'email': getattr(consultant, 'email', ''),
+                    'telephone': getattr(consultant, 'telephone', ''),
+                    'phone': getattr(consultant, 'telephone', ''),
+                    'pays': getattr(consultant, 'pays', ''),
+                    'country': getattr(consultant, 'pays', ''),
+                    'ville': getattr(consultant, 'ville', ''),
+                    'city': getattr(consultant, 'ville', ''),
+                    
+                    # Gestion sécurisée des dates
+                    'date_debut_dispo': consultant.date_debut_dispo.isoformat() if consultant.date_debut_dispo else None,
+                    'date_fin_dispo': consultant.date_fin_dispo.isoformat() if consultant.date_fin_dispo else None,
+                    'startAvailability': consultant.date_debut_dispo.isoformat() if consultant.date_debut_dispo else None,
+                    'endAvailability': consultant.date_fin_dispo.isoformat() if consultant.date_fin_dispo else None,
+                    
+                    # Autres champs avec valeurs par défaut
+                    'domaine_principal': getattr(consultant, 'domaine_principal', 'DIGITAL'),
+                    'specialite': getattr(consultant, 'specialite', ''),
+                    'expertise': getattr(consultant, 'expertise', 'Débutant'),
+                    'statut': getattr(consultant, 'statut', 'En_attente'),
+                    'is_validated': getattr(consultant, 'is_validated', False),
+                    
+                    # Fichiers (gestion sécurisée)
+                    'cv': consultant.cv.url if getattr(consultant, 'cv', None) else None,
+                    'photo': consultant.photo.url if getattr(consultant, 'photo', None) else None,
+                    
+                    # Compétences
+                    'skills': '',
+                    
+                    # Métadonnées
+                    'created_at': consultant.created_at.isoformat() if consultant.created_at else None,
+                    'updated_at': consultant.updated_at.isoformat() if consultant.updated_at else None,
+                }
+                
+                # Récupérer les compétences si possible
+                try:
+                    competences = Competence.objects.filter(consultant=consultant)
+                    skills_list = [comp.nom_competence for comp in competences]
+                    consultant_data['skills'] = ', '.join(skills_list)
+                except Exception:
+                    consultant_data['skills'] = ''
+                
+                consultants_data.append(consultant_data)
+                
+            except Exception as e:
+                logger.error(f"Erreur traitement consultant {consultant.id}: {str(e)}")
+                continue
+        
+        logger.info(f"Données finales préparées: {len(consultants_data)} consultants")
+        
+        return Response({
+            "success": True,
+            "data": consultants_data,
+            "count": len(consultants_data)
+        })
+        
+    except Exception as e:
+        logger.error(f"Erreur critique dans admin_pending_consultants_fixed: {str(e)}")
+        return Response({
+            "success": False,
+            "error": str(e),
+            "message": "Erreur lors de la récupération des consultants en attente"
+        }, status=500)
+        
+# Ajoutez cette fonction corrigée dans views.py pour remplacer matching_for_offer_updated
+
+@api_view(['GET', 'POST'])
+def matching_for_offer_updated(request, appel_offre_id):
+    """
+    Endpoint pour générer ou récupérer des matchings pour un appel d'offre scrapé
+    VERSION CORRIGÉE avec gestion d'erreur robuste
+    """
+    logger.info(f"Requête {request.method} reçue pour appel d'offre scrapé ID {appel_offre_id}")
+    
+    try:
+        appel_offre_id = int(appel_offre_id)
+    except ValueError:
+        return Response({
+            'success': False,
+            'error': f"ID d'appel d'offre invalide: {appel_offre_id}"
+        }, status=400)
+
+    # Vérifier que l'appel d'offre existe
+    try:
+        appel_offre = AppelOffre.objects.get(id=appel_offre_id)
+        logger.info(f"Appel d'offre trouvé: {appel_offre.titre}")
+    except AppelOffre.DoesNotExist:
+        logger.error(f"Appel d'offre avec ID {appel_offre_id} introuvable")
+        return Response({
+            'success': False,
+            'error': f"Appel d'offre avec ID {appel_offre_id} introuvable"
+        }, status=404)
+    except Exception as e:
+        logger.error(f"Erreur lors de la récupération de l'AO {appel_offre_id}: {str(e)}")
+        return Response({
+            'success': False,
+            'error': f"Erreur lors de la récupération de l'appel d'offre: {str(e)}"
+        }, status=500)
+
+    if request.method == 'GET':
+        try:
+            # Récupérer tous les matchings pour cet appel d'offre
+            matches = MatchingResult.objects.filter(
+                appel_offre_id=appel_offre_id
+            ).order_by('-score')
+
+            logger.info(f"{matches.count()} matchings trouvés pour l'AO scrapé {appel_offre_id}")
+
+            if not matches.exists():
+                return Response({
+                    'success': True,
+                    'matches': []
+                })
+
+            result = []
+            for match in matches:
+                consultant = match.consultant
+
+                try:
+                    # Recalculer les scores si nécessaire avec gestion d'erreur
+                    try:
+                        date_score = calculate_date_match_score_updated(consultant, match.appel_offre)
+                        skills_score = calculate_skills_match_score_updated(consultant, match.appel_offre)
+                        calculated_score = (date_score * 0.3) + (skills_score * 0.7)
+                        stored_score = float(match.score)
+                        
+                        # Vérifier la cohérence
+                        if abs(calculated_score - stored_score) > 5:
+                            match.score = Decimal(str(calculated_score))
+                            match.save(update_fields=['score'])
+                            stored_score = calculated_score
+                            
+                    except Exception as score_error:
+                        logger.warning(f"Erreur lors du recalcul des scores: {str(score_error)}")
+                        date_score = 0
+                        skills_score = 0
+                        stored_score = float(match.score)
+
+                    stored_score = max(0, min(100, float(stored_score)))
+
+                    # Récupérer les compétences de manière sécurisée
+                    try:
+                        top_skills = get_top_skills_updated(consultant)
+                    except Exception as skills_error:
+                        logger.warning(f"Erreur récupération compétences: {str(skills_error)}")
+                        top_skills = []
+
+                    result.append({
+                        'id': match.id,
+                        'consultant_id': consultant.id,
+                        'consultant_name': f"{consultant.prenom or ''} {consultant.nom or ''}".strip(),
+                        'consultant_expertise': consultant.expertise or "Débutant",
+                        'email': consultant.email or '',
+                        'domaine_principal': consultant.domaine_principal or 'DIGITAL',
+                        'specialite': consultant.specialite or "",
+                        'top_skills': top_skills,
+                        'date_match_score': round(date_score, 1),
+                        'skills_match_score': round(skills_score, 1),
+                        'score': stored_score,
+                        'is_validated': match.is_validated
+                    })
+
+                except Exception as match_error:
+                    logger.error(f"Erreur traitement match {match.id}: {str(match_error)}")
+                    continue
+
+            sorted_result = sorted(result, key=lambda x: x['score'], reverse=True)
+
+            return Response({
+                'success': True,
+                'matches': sorted_result
+            })
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la récupération des matchings: {str(e)}")
+            return Response({
+                'success': False,
+                'error': f"Erreur lors de la récupération des matchings: {str(e)}"
+            }, status=500)
+
+    elif request.method == 'POST':
+        try:
+            logger.info(f"Génération de nouveaux matchings pour l'AO scrapé {appel_offre_id}")
+            
+            # Vérifier qu'il y a des consultants disponibles
+            consultants = Consultant.objects.filter(
+                is_validated=True,
+                statut='Actif'
+            ).exclude(
+                date_debut_dispo=None
+            ).exclude(
+                date_fin_dispo=None
+            )
+            
+            if not consultants.exists():
+                logger.warning(f"Aucun consultant disponible pour le matching")
+                return Response({
+                    'success': False,
+                    'error': "Aucun consultant disponible pour le matching"
+                }, status=404)
+            
+            # Vider les anciens matchings
+            deleted_count, _ = MatchingResult.objects.filter(appel_offre=appel_offre).delete()
+            logger.info(f"{deleted_count} anciens matchings supprimés pour l'AO {appel_offre_id}")
+            
+            # Vider le cache
+            try:
+                clear_score_cache()
+            except Exception as cache_error:
+                logger.warning(f"Erreur nettoyage cache: {str(cache_error)}")
+            
+            results = []
+            score_stats = {"min": 100, "max": 0, "total": 0, "count": 0}
+            
+            # Calculer les scores pour chaque consultant
+            for consultant in consultants:
+                try:
+                    # Calculer les scores avec gestion d'erreur
+                    try:
+                        date_score = calculate_date_match_score_updated(consultant, appel_offre)
+                    except Exception as date_error:
+                        logger.warning(f"Erreur calcul date score pour consultant {consultant.id}: {str(date_error)}")
+                        date_score = 0
+                    
+                    try:
+                        skills_score = calculate_skills_match_score_updated(consultant, appel_offre)
+                    except Exception as skills_error:
+                        logger.warning(f"Erreur calcul skills score pour consultant {consultant.id}: {str(skills_error)}")
+                        skills_score = 0
+                    
+                    # Pondération: 30% date, 70% compétences
+                    final_score = (date_score * 0.3) + (skills_score * 0.7)
+                    final_score = min(100, max(0, final_score))
+                    
+                    # Mettre à jour les statistiques
+                    if score_stats["count"] == 0:
+                        score_stats["min"] = final_score
+                        score_stats["max"] = final_score
+                    else:
+                        score_stats["min"] = min(score_stats["min"], final_score)
+                        score_stats["max"] = max(score_stats["max"], final_score)
+                    
+                    score_stats["total"] += final_score
+                    score_stats["count"] += 1
+                    
+                    logger.debug(f"Score final pour {consultant.nom}: {final_score:.2f}%")
+                    
+                    # Enregistrer le résultat
+                    try:
+                        matching = MatchingResult.objects.create(
+                            consultant=consultant,
+                            appel_offre=appel_offre,
+                            score=Decimal(str(final_score)),
+                            is_validated=False
+                        )
+                        
+                        # Récupérer les compétences de manière sécurisée
+                        try:
+                            top_skills = get_top_skills_updated(consultant)
+                        except Exception:
+                            top_skills = []
+                        
+                        # Ajouter à la liste de résultats
+                        results.append({
+                            'id': matching.id,
+                            'consultant_id': consultant.id,
+                            'consultant_name': f"{consultant.prenom or ''} {consultant.nom or ''}".strip(),
+                            'consultant_expertise': consultant.expertise or "Débutant",
+                            'email': consultant.email or '',
+                            'domaine_principal': consultant.domaine_principal or 'DIGITAL',
+                            'specialite': consultant.specialite or "",
+                            'top_skills': top_skills,
+                            'date_match_score': float(date_score),
+                            'skills_match_score': float(skills_score),
+                            'score': float(final_score),
+                            'is_validated': False
+                        })
+                        
+                    except Exception as save_error:
+                        logger.error(f"Erreur sauvegarde matching pour consultant {consultant.id}: {str(save_error)}")
+                        continue
+                    
+                except Exception as e:
+                    logger.error(f"Erreur lors du calcul pour le consultant {consultant.id}: {str(e)}")
+                    continue
+            
+            # Calculer les statistiques finales
+            if results:
+                score_stats["avg"] = score_stats["total"] / score_stats["count"]
+                logger.info(f"Matchings générés: {len(results)}, score moyen: {score_stats['avg']:.2f}%")
+            else:
+                score_stats["avg"] = 0
+                logger.warning("Aucun matching généré")
+            
+            # Trier les résultats par score décroissant
+            sorted_results = sorted(results, key=lambda x: x['score'], reverse=True)
+            
+            return Response({
+                'success': True,
+                'matches': sorted_results,
+                'stats': score_stats,
+                'appel_offre_info': {
+                    'id': appel_offre.id,
+                    'titre': appel_offre.titre,
+                    'client': appel_offre.client,
+                    'has_description': bool(appel_offre.description),
+                    'has_criteria': CriteresEvaluation.objects.filter(appel_offre=appel_offre).exists()
+                }
+            })
+            
+        except Exception as e:
+            logger.error(f"Exception lors de la génération des matchings: {str(e)}")
+            return Response({
+                'success': False,
+                'error': f"Erreur lors de la génération des matchings: {str(e)}"
+            }, status=500)
+    else:
+        return Response({
+            'success': False,
+            'error': f"Méthode {request.method} non supportée"
+        }, status=405)
+
+
+# Fonction utilitaire pour nettoyer le cache
+def clear_score_cache():
+    """
+    Nettoie le cache des scores de matching
+    """
+    global _score_cache
+    try:
+        _score_cache.clear()
+        logger.info("Cache des scores nettoyé")
+    except Exception as e:
+        logger.warning(f"Erreur lors du nettoyage du cache: {str(e)}")
+
+
+# Fonction get_top_skills_updated sécurisée
+def get_top_skills_updated(consultant, limit=5):
+    """
+    Récupère les compétences principales d'un consultant de manière sécurisée
+    """
+    try:
+        top_skills = Competence.objects.filter(consultant=consultant).order_by('-niveau')[:limit]
+        return [skill.nom_competence for skill in top_skills if skill.nom_competence]
+    except Exception as e:
+        logger.error(f"Erreur lors de la récupération des compétences: {str(e)}")
+        return []
+    
 @api_view(['PUT', 'DELETE'])
 @parser_classes([MultiPartParser, FormParser, JSONParser])
 def admin_consultant_detail(request, pk):
     """
-    Modifie ou supprime un consultant spécifique (accès admin) - VERSION CORRIGÉE FINALE
+    Gère un consultant spécifique - ENDPOINT PRINCIPAL
     """
-    try:
-        consultant = get_object_or_404(Consultant, pk=pk)
-
-        if request.method == 'PUT':
-            logger.info(f"Début modification consultant {pk}")
-            logger.info(f"Données reçues: {request.data}")
+    if request.method == 'DELETE':
+        return admin_consultant_detail_delete(request, pk)
+    elif request.method == 'PUT':
+        # Logique de mise à jour existante
+        try:
+            consultant = get_object_or_404(Consultant, pk=pk)
             
-            # Créer une copie des données pour manipulation
-            data = {}
-            
-            # Traiter chaque champ individuellement
-            for key, value in request.data.items():
-                if key in ['cv', 'photo']:
-                    # Les fichiers sont traités séparément
-                    continue
-                elif value is not None and value != '':
-                    data[key] = value
-            
-            # Ajouter les fichiers s'ils sont présents
-            if 'cv' in request.FILES:
-                data['cv'] = request.FILES['cv']
-                logger.info(f"Fichier CV reçu: {request.FILES['cv'].name}")
-            
-            if 'photo' in request.FILES:
-                data['photo'] = request.FILES['photo']
-                logger.info(f"Fichier photo reçu: {request.FILES['photo'].name}")
-            
-            logger.info(f"Données finales pour serializer: {list(data.keys())}")
-            
-            # Utiliser le serializer avec partial=True
-            serializer = ConsultantSerializer(consultant, data=data, partial=True)
+            # Utiliser le serializer pour la mise à jour
+            serializer = ConsultantSerializer(consultant, data=request.data, partial=True)
             
             if serializer.is_valid():
-                try:
-                    # Sauvegarder avec gestion d'erreur
-                    updated_consultant = serializer.save()
-                    
-                    # Mettre à jour l'utilisateur associé si nécessaire
-                    if 'email' in data and consultant.user:
-                        try:
-                            consultant.user.email = data['email']
-                            consultant.user.username = data['email']
-                            consultant.user.save()
-                            logger.info(f"Utilisateur mis à jour pour consultant {pk}")
-                        except Exception as user_error:
-                            logger.error(f"Erreur mise à jour utilisateur: {user_error}")
-                    
-                    # Préparer la réponse
-                    response_serializer = ConsultantSerializer(updated_consultant)
-                    logger.info(f"Consultant {pk} modifié avec succès")
-                    
-                    return Response({
-                        'success': True,
-                        'data': response_serializer.data,
-                        'message': f'Consultant {updated_consultant.prenom} {updated_consultant.nom} modifié avec succès'
-                    }, status=200)
-                    
-                except Exception as save_error:
-                    logger.error(f"Erreur lors de la sauvegarde: {save_error}")
-                    return Response({
-                        'success': False,
-                        'error': f'Erreur lors de la sauvegarde: {str(save_error)}'
-                    }, status=500)
+                updated_consultant = serializer.save()
+                
+                # Mettre à jour l'utilisateur associé si nécessaire
+                if 'email' in request.data and consultant.user:
+                    try:
+                        consultant.user.email = request.data['email']
+                        consultant.user.username = request.data['email']
+                        consultant.user.save()
+                        logger.info(f"Utilisateur mis à jour pour consultant {pk}")
+                    except Exception as user_error:
+                        logger.error(f"Erreur mise à jour utilisateur: {user_error}")
+                
+                # Préparer la réponse
+                response_serializer = ConsultantSerializer(updated_consultant)
+                logger.info(f"Consultant {pk} modifié avec succès")
+                
+                return Response({
+                    'success': True,
+                    'data': response_serializer.data,
+                    'message': f'Consultant {updated_consultant.prenom} {updated_consultant.nom} modifié avec succès'
+                }, status=200)
+                
             else:
                 logger.error(f"Erreurs de validation: {serializer.errors}")
                 return Response({
@@ -179,104 +585,27 @@ def admin_consultant_detail(request, pk):
                     'errors': serializer.errors,
                     'message': 'Erreurs de validation'
                 }, status=400)
-
-        elif request.method == 'DELETE':
-            try:
-                user = consultant.user
-                consultant_name = f"{consultant.prenom} {consultant.nom}"
-                consultant_id = consultant.id
                 
-                logger.info(f"Début suppression consultant {pk}: {consultant_name}")
-
-                # Utiliser une transaction pour garantir la cohérence
-                with transaction.atomic():
-                    # 1. Supprimer les notifications
-                    try:
-                        notifications_deleted = Notification.objects.filter(consultant=consultant).delete()[0]
-                        logger.info(f"Notifications supprimées: {notifications_deleted}")
-                    except Exception as e:
-                        logger.warning(f"Erreur suppression notifications: {e}")
-
-                    # 2. Supprimer les matchings
-                    try:
-                        matchings_deleted = MatchingResult.objects.filter(consultant=consultant).delete()[0]
-                        logger.info(f"Matchings supprimés: {matchings_deleted}")
-                    except Exception as e:
-                        logger.warning(f"Erreur suppression matchings: {e}")
-
-                    # 3. Supprimer les compétences
-                    try:
-                        competences_deleted = Competence.objects.filter(consultant=consultant).delete()[0]
-                        logger.info(f"Compétences supprimées: {competences_deleted}")
-                    except Exception as e:
-                        logger.warning(f"Erreur suppression compétences: {e}")
-
-                    # 4. Mettre à jour les documents GED
-                    try:
-                        doc_ged_updated = DocumentGED.objects.filter(consultant=consultant).update(consultant=None)
-                        logger.info(f"Documents GED mis à jour: {doc_ged_updated}")
-                    except Exception as e:
-                        logger.warning(f"Erreur mise à jour documents GED: {e}")
-
-                    # 5. Supprimer autres documents si le modèle existe
-                    try:
-                        if hasattr(consultant, 'document_set'):
-                            documents_deleted = consultant.document_set.all().delete()[0]
-                            logger.info(f"Documents supprimés: {documents_deleted}")
-                    except Exception as e:
-                        logger.warning(f"Erreur suppression documents: {e}")
-
-                    # 6. Supprimer les fichiers physiques
-                    try:
-                        if consultant.cv and consultant.cv.name:
-                            if os.path.exists(consultant.cv.path):
-                                os.remove(consultant.cv.path)
-                                logger.info(f"Fichier CV supprimé: {consultant.cv.path}")
-                    except Exception as e:
-                        logger.warning(f"Erreur suppression fichier CV: {e}")
-                    
-                    try:
-                        if consultant.photo and consultant.photo.name:
-                            if os.path.exists(consultant.photo.path):
-                                os.remove(consultant.photo.path)
-                                logger.info(f"Fichier photo supprimé: {consultant.photo.path}")
-                    except Exception as e:
-                        logger.warning(f"Erreur suppression fichier photo: {e}")
-
-                    # 7. Supprimer le consultant
-                    consultant.delete()
-                    logger.info(f"Consultant {consultant_id} supprimé")
-
-                    # 8. Supprimer l'utilisateur associé
-                    if user:
-                        try:
-                            user_id = user.id
-                            user.delete()
-                            logger.info(f"Utilisateur {user_id} supprimé")
-                        except Exception as e:
-                            logger.error(f"Erreur suppression utilisateur: {e}")
-
-                return Response({
-                    'success': True,
-                    'message': f'Consultant {consultant_name} supprimé avec succès'
-                }, status=200)
-
-            except Exception as e:
-                logger.error(f"Erreur lors de la suppression du consultant {pk}: {str(e)}")
-                return Response({
-                    'success': False,
-                    'error': f'Erreur lors de la suppression: {str(e)}'
-                }, status=500)
-
-    except Exception as e:
-        logger.error(f"Erreur générale dans admin_consultant_detail pour consultant {pk}: {str(e)}")
-        return Response({
-            'success': False,
-            'error': f'Erreur: {str(e)}'
-        }, status=500)
-
-
-
+        except Exception as e:
+            logger.error(f"Erreur mise à jour consultant {pk}: {str(e)}")
+            return Response({
+                'success': False,
+                'error': str(e)
+            }, status=500)
+    else:  # GET
+        try:
+            consultant = get_object_or_404(Consultant, pk=pk)
+            serializer = ConsultantSerializer(consultant)
+            return Response({
+                'success': True,
+                'data': serializer.data
+            })
+        except Exception as e:
+            logger.error(f"Erreur récupération consultant {pk}: {str(e)}")
+            return Response({
+                'success': False,
+                'error': str(e)
+            }, status=500)
 
 @api_view(['GET'])
 def consultant_competences(request, consultant_id):
@@ -366,89 +695,266 @@ def get_all_domains(request):
 
 @api_view(['GET'])
 def dashboard_stats(request):
-    """Récupère les statistiques pour le tableau de bord admin"""
-    # Vérifier l'authentification admin (à implémenter)
-
-    consultants_count = Consultant.objects.count()
-    appels_total = AppelOffre.objects.count()
-    offres_actives = AppelOffre.objects.filter(statut="En_cours").count()
-    offres_expirees = AppelOffre.objects.filter(date_fin__lt=now().date()).count()
-
-    derniers_consultants = Consultant.objects.order_by('-created_at')[:3]
-    derniers_appels = AppelOffre.objects.order_by('-date_debut')[:3]
-
-    data = {
-        "consultants_count": consultants_count,
-        "appels_total": appels_total,
-        "offres_actives": offres_actives,
-        "offres_expirees": offres_expirees,
-        "derniers_consultants": [
-            {
-                "nom": f"{c.nom} {c.prenom}",
-                "specialite": c.specialite,
-                "date": c.created_at.strftime('%d/%m/%Y')
-            } for c in derniers_consultants
-        ],
-        "derniers_appels": [
-            {
-                "title": a.nom_projet,
-                "client": a.client,
-                "date": a.date_debut.strftime('%d/%m/%Y')
-            } for a in derniers_appels
-        ]
-    }
-    return Response(data)
-
-
-@api_view(['GET', 'POST'])
-def admin_appels_offres(request):
-    """Liste ou crée des appels d'offres (accès admin)"""
+    """
+    Récupère les statistiques pour le tableau de bord admin - VERSION CORRIGÉE
+    """
     try:
-        if request.method == 'GET':
-            appels = AppelOffre.objects.all().order_by('-id')
-            serializer = AppelOffreSerializer(appels, many=True)
-            return Response(serializer.data)
+        from django.utils import timezone
+        
+        consultants_count = Consultant.objects.count()
+        appels_total = AppelOffre.objects.count()
+        
+        # CORRECTION: Le nouveau modèle AppelOffre n'a pas de champ 'statut'
+        # Utiliser les dates pour déterminer les offres actives
+        now = timezone.now().date()
+        
+        # Offres actives = celles dont la date limite n'est pas dépassée
+        offres_actives = AppelOffre.objects.filter(
+            date_limite__gte=now
+        ).count()
+        
+        # Offres expirées = celles dont la date limite est dépassée
+        offres_expirees = AppelOffre.objects.filter(
+            date_limite__lt=now
+        ).count()
+        
+        # Offres sans date limite = considérées comme actives
+        offres_sans_date = AppelOffre.objects.filter(
+            date_limite__isnull=True
+        ).count()
+        
+        # Ajouter les offres sans date aux actives
+        offres_actives += offres_sans_date
 
-        if request.method == 'POST':
-            serializer = AppelOffreSerializer(data=request.data)
-            if serializer.is_valid():
-                appel_offre = serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # Derniers consultants
+        derniers_consultants = Consultant.objects.order_by('-created_at')[:3]
+        
+        # Derniers appels d'offres (utiliser date_de_publication ou created_at)
+        derniers_appels = AppelOffre.objects.order_by('-date_de_publication', '-created_at')[:3]
+
+        data = {
+            "consultants_count": consultants_count,
+            "appels_total": appels_total,
+            "offres_actives": offres_actives,
+            "offres_expirees": offres_expirees,
+            "derniers_consultants": [
+                {
+                    "nom": f"{c.prenom or ''} {c.nom or ''}".strip(),
+                    "specialite": c.specialite or c.domaine_principal or "Non spécifié",
+                    "date": c.created_at.strftime('%d/%m/%Y') if c.created_at else "Non défini"
+                } for c in derniers_consultants
+            ],
+            "derniers_appels": [
+                {
+                    "title": a.titre or "Titre non défini",
+                    "client": a.client or "Client non spécifié", 
+                    "date": a.date_de_publication.strftime('%d/%m/%Y') if a.date_de_publication else a.created_at.strftime('%d/%m/%Y') if a.created_at else "Non défini"
+                } for a in derniers_appels
+            ]
+        }
+        
+        return Response(data)
+        
+    except Exception as e:
+        logger.error(f"Erreur dans dashboard_stats: {str(e)}")
+        return Response({
+            "error": "Erreur lors de la récupération des statistiques",
+            "detail": str(e)
+        }, status=500)
+
+@api_view(['GET'])
+def admin_appels_offres(request):
+    """
+    Liste tous les appels d'offres - VERSION CORRIGÉE
+    """
+    try:
+        logger.info("Récupération des appels d'offres - DÉBUT")
+        
+        # Récupérer tous les appels d'offres
+        appels = AppelOffre.objects.all().order_by('-date_de_publication', '-created_at')
+        
+        logger.info(f"Nombre d'appels trouvés: {appels.count()}")
+        
+        # Sérialiser avec gestion des erreurs
+        appels_data = []
+        for appel in appels:
+            try:
+                appel_data = {
+                    'id': appel.id,
+                    'titre': appel.titre or '',
+                    'date_de_publication': appel.date_de_publication.isoformat() if appel.date_de_publication else None,
+                    'date_limite': appel.date_limite.isoformat() if appel.date_limite else None,
+                    'client': appel.client or '',
+                    'type_d_appel_d_offre': appel.type_d_appel_d_offre or '',
+                    'description': appel.description or '',
+                    'critere_evaluation': appel.critere_evaluation or '',
+                    'documents': appel.documents or '',
+                    'lien_site': appel.lien_site or '',
+                    'created_at': appel.created_at.isoformat() if appel.created_at else None,
+                    'updated_at': appel.updated_at.isoformat() if appel.updated_at else None,
+                    # Propriétés calculées
+                    'is_expired': appel.is_expired,
+                    'days_remaining': appel.days_remaining
+                }
+                appels_data.append(appel_data)
+            except Exception as e:
+                logger.error(f"Erreur sérialisation appel {appel.id}: {str(e)}")
+                continue
+        
+        logger.info(f"Données sérialisées: {len(appels_data)} appels")
+        return Response(appels_data)
+        
     except Exception as e:
         logger.error(f"Erreur dans admin_appels_offres: {str(e)}")
         return Response({
             'error': 'Erreur lors de la récupération des appels d\'offres',
             'detail': str(e)
         }, status=500)
-
+        
 @api_view(['GET', 'PUT', 'DELETE'])
+@parser_classes([JSONParser, MultiPartParser, FormParser])
 def admin_appel_offre_detail(request, pk):
-    """Récupère, modifie ou supprime un appel d'offre spécifique (accès admin)"""
+    """
+    Gère un appel d'offre spécifique - ADAPTÉ AU NOUVEAU MODÈLE
+    Compatible avec le dialog d'enrichissement d'AppelsOffres.tsx
+    """
     try:
         appel = get_object_or_404(AppelOffre, pk=pk)
 
         if request.method == 'GET':
-            serializer = AppelOffreSerializer(appel)
-            return Response(serializer.data)
+            # Récupérer les détails complets
+            appel_data = {
+                'id': appel.id,
+                'titre': appel.titre,
+                'date_de_publication': appel.date_de_publication.isoformat() if appel.date_de_publication else None,
+                'date_limite': appel.date_limite.isoformat() if appel.date_limite else None,
+                'client': appel.client,
+                'type_d_appel_d_offre': appel.type_d_appel_d_offre,
+                'description': appel.description,
+                'critere_evaluation': appel.critere_evaluation,
+                'documents': appel.documents,
+                'lien_site': appel.lien_site,
+                'created_at': appel.created_at.isoformat(),
+                'updated_at': appel.updated_at.isoformat(),
+                'is_expired': appel.is_expired,
+                'days_remaining': appel.days_remaining
+            }
+            
+            # Informations d'enrichissement pour le frontend
+            appel_data['enrichment_details'] = {
+                'has_description': bool(appel.description and len(appel.description) > 50),
+                'has_criteria': bool(appel.critere_evaluation and len(appel.critere_evaluation) > 20),
+                'has_type': bool(appel.type_d_appel_d_offre),
+                'structured_criteria': CriteresEvaluation.objects.filter(appel_offre=appel).count()
+            }
+            
+            # Stats de matching
+            matching_count = MatchingResult.objects.filter(appel_offre=appel).count()
+            validated_matching_count = MatchingResult.objects.filter(appel_offre=appel, is_validated=True).count()
+            
+            appel_data['matching_stats'] = {
+                'total_matches': matching_count,
+                'validated_matches': validated_matching_count,
+                'has_matches': matching_count > 0
+            }
+            
+            return Response(appel_data)
 
-        if request.method == 'PUT':
-            serializer = AppelOffreSerializer(appel, data=request.data, partial=True)
-            if serializer.is_valid():
-                appel_offre = serializer.save()
-                return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == 'PUT':
+            # Enrichissement des données - SEULS LES CHAMPS MODIFIABLES
+            logger.info(f"Enrichissement de l'appel d'offres {pk}")
+            
+            # Champs que le frontend peut modifier (pas les données scrapées de base)
+            modifiable_fields = ['description', 'critere_evaluation', 'type_d_appel_d_offre']
+            
+            # Extraire seulement les champs modifiables des données reçues
+            update_data = {}
+            for field in modifiable_fields:
+                if field in request.data:
+                    value = request.data[field]
+                    if value is not None:  # Permet les chaînes vides pour effacer un champ
+                        update_data[field] = value
+            
+            if not update_data:
+                return Response({
+                    'error': 'Aucun champ modifiable fourni',
+                    'modifiable_fields': modifiable_fields,
+                    'received_fields': list(request.data.keys())
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Sauvegarder les modifications
+            try:
+                with transaction.atomic():
+                    for field, value in update_data.items():
+                        setattr(appel, field, value)
+                    
+                    appel.save(update_fields=list(update_data.keys()) + ['updated_at'])
+                    
+                    logger.info(f"Appel d'offres {pk} enrichi avec succès: {list(update_data.keys())}")
+                    
+                    # Retourner les données mises à jour
+                    response_data = {
+                        'id': appel.id,
+                        'titre': appel.titre,
+                        'date_de_publication': appel.date_de_publication.isoformat() if appel.date_de_publication else None,
+                        'date_limite': appel.date_limite.isoformat() if appel.date_limite else None,
+                        'client': appel.client,
+                        'type_d_appel_d_offre': appel.type_d_appel_d_offre,
+                        'description': appel.description,
+                        'critere_evaluation': appel.critere_evaluation,
+                        'documents': appel.documents,
+                        'lien_site': appel.lien_site,
+                        'created_at': appel.created_at.isoformat(),
+                        'updated_at': appel.updated_at.isoformat(),
+                        'is_expired': appel.is_expired,
+                        'days_remaining': appel.days_remaining
+                    }
+                    
+                    response_data['message'] = 'Appel d\'offres enrichi avec succès'
+                    response_data['updated_fields'] = list(update_data.keys())
+                    
+                    return Response(response_data)
+                    
+            except Exception as save_error:
+                logger.error(f"Erreur sauvegarde AO {pk}: {str(save_error)}")
+                return Response({
+                    'error': f'Erreur lors de la sauvegarde: {str(save_error)}'
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        if request.method == 'DELETE':
-            # Supprimer les matchings associés d'abord
-            MatchingResult.objects.filter(appel_offre=appel).delete()
-            # Supprimer les critères associés
-            CriteresEvaluation.objects.filter(appel_offre=appel).delete()
-            # Supprimer l'appel d'offre
-            appel.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
+        elif request.method == 'DELETE':
+            # Suppression avec nettoyage des relations
+            logger.warning(f"Suppression de l'appel d'offres {pk}")
+            
+            try:
+                with transaction.atomic():
+                    # Supprimer les relations dépendantes
+                    matchings_deleted = MatchingResult.objects.filter(appel_offre=appel).delete()[0]
+                    criteria_deleted = CriteresEvaluation.objects.filter(appel_offre=appel).delete()[0]
+                    notifications_deleted = Notification.objects.filter(related_appel=appel).delete()[0]
+                    
+                    # Supprimer l'appel d'offres
+                    appel_title = appel.titre
+                    appel.delete()
+                    
+                    logger.info(f"Appel d'offres '{appel_title}' supprimé avec ses relations")
+                    
+                    return Response({
+                        'message': f'Appel d\'offres "{appel_title}" supprimé avec succès',
+                        'deleted_relations': {
+                            'matchings': matchings_deleted,
+                            'criteria': criteria_deleted,
+                            'notifications': notifications_deleted
+                        }
+                    }, status=status.HTTP_204_NO_CONTENT)
+                    
+            except Exception as delete_error:
+                logger.error(f"Erreur suppression AO {pk}: {str(delete_error)}")
+                return Response({
+                    'error': f'Erreur lors de la suppression: {str(delete_error)}'
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                
     except Exception as e:
-        logger.error(f"Erreur dans admin_appel_offre_detail: {str(e)}")
+        logger.error(f"Erreur dans admin_appel_offre_detail pour AO {pk}: {str(e)}")
         return Response({
             'error': f'Erreur lors de la gestion de l\'appel d\'offre: {str(e)}'
         }, status=500)
@@ -1113,212 +1619,331 @@ def get_cache_key(consultant_id, appel_offre_id):
     """
     return f"{consultant_id}_{appel_offre_id}"
 
-def calculate_date_match_score(consultant, appel_offre):
+def calculate_date_match_score_updated(consultant, appel_offre):
     """
     Calcule un score basé sur la disponibilité du consultant par rapport aux dates du projet
-    Version améliorée avec prise en compte de la flexibilité des dates
+    ADAPTÉ pour le nouveau modèle AppelOffre scrapé
     """
     try:
-        # Vérifier si le résultat est en cache
         cache_key = f"date_{get_cache_key(consultant.id, appel_offre.id)}"
         if cache_key in _score_cache:
-            logger.info(f"Score de date trouvé en cache pour consultant {consultant.id} et AO {appel_offre.id}")
             return _score_cache[cache_key]
-            
-        # Vérifier que toutes les dates sont bien définies
-        if not consultant.date_debut_dispo or not consultant.date_fin_dispo or not appel_offre.date_debut or not appel_offre.date_fin:
-            logger.warning(f"Dates manquantes - consultant {consultant.id} ou appel d'offre {appel_offre.id}")
+        
+        # Pour les appels d'offres scrapés, nous n'avons que date_limite
+        # Nous devons estimer une durée de projet
+        if not appel_offre.date_limite:
+            logger.warning(f"Pas de date limite pour l'appel d'offre {appel_offre.id}")
+            return 50  # Score neutre si pas de date
+        
+        if not consultant.date_debut_dispo or not consultant.date_fin_dispo:
+            logger.warning(f"Dates de disponibilité manquantes pour consultant {consultant.id}")
             return 0
-            
-        # Convertir les dates en objets datetime pour comparaison
+        
+        # Estimer la date de début du projet (30 jours avant la date limite)
+        date_limite = appel_offre.date_limite
+        estimated_project_start = date_limite - timedelta(days=30)
+        estimated_project_end = date_limite + timedelta(days=60)  # Estimer 60 jours après la date limite
+        
         consultant_start = consultant.date_debut_dispo
         consultant_end = consultant.date_fin_dispo
-        project_start = appel_offre.date_debut
-        project_end = appel_offre.date_fin
-
+        
         # Cas où il n'y a pas de chevauchement
-        if consultant_end < project_start or consultant_start > project_end:
+        if consultant_end < estimated_project_start or consultant_start > estimated_project_end:
             # Vérifier la proximité des dates (flexibilité)
-            # Si le consultant est disponible un peu avant ou après le projet, on donne un score partiel
-            buffer_days = 30  # Jours de tolérance
+            buffer_days = 15  # Jours de tolérance
             
-            if consultant_end < project_start:
-                days_gap = (project_start - consultant_end).days
+            if consultant_end < estimated_project_start:
+                days_gap = (estimated_project_start - consultant_end).days
                 if days_gap <= buffer_days:
-                    # Score partiel basé sur la proximité
-                    score = max(0, 30 * (1 - days_gap / buffer_days))
+                    score = max(0, 25 * (1 - days_gap / buffer_days))
                     _score_cache[cache_key] = score
                     return score
-            else:  # consultant_start > project_end
-                days_gap = (consultant_start - project_end).days
+            else:
+                days_gap = (consultant_start - estimated_project_end).days
                 if days_gap <= buffer_days:
-                    # Score partiel basé sur la proximité
-                    score = max(0, 30 * (1 - days_gap / buffer_days))
+                    score = max(0, 25 * (1 - days_gap / buffer_days))
                     _score_cache[cache_key] = score
                     return score
+            
             _score_cache[cache_key] = 0
             return 0
-
-        # Cas où la disponibilité du consultant couvre entièrement le projet
-        if consultant_start <= project_start and consultant_end >= project_end:
-            # Bonus pour disponibilité complète
-            buffer_days_before = (project_start - consultant_start).days
-            buffer_days_after = (consultant_end - project_end).days
-            
-            # Si le consultant a aussi une marge avant et après (plus de flexibilité), bonus supplémentaire
-            flexibility_bonus = min(10, (buffer_days_before + buffer_days_after) / 10)
-            score = min(100, 100 + flexibility_bonus)
+        
+        # Cas où la disponibilité du consultant couvre entièrement le projet estimé
+        if consultant_start <= estimated_project_start and consultant_end >= estimated_project_end:
+            score = 100
             _score_cache[cache_key] = score
             return score
-
+        
         # Calcul du chevauchement partiel
-        total_project_days = (project_end - project_start).days + 1
+        total_project_days = (estimated_project_end - estimated_project_start).days + 1
         if total_project_days <= 0:
-            _score_cache[cache_key] = 0
-            return 0  # Éviter division par zéro
-
-        overlap_start = max(consultant_start, project_start)
-        overlap_end = min(consultant_end, project_end)
+            _score_cache[cache_key] = 50
+            return 50
+        
+        overlap_start = max(consultant_start, estimated_project_start)
+        overlap_end = min(consultant_end, estimated_project_end)
         overlap_days = (overlap_end - overlap_start).days + 1
-
-        # Calculer le pourcentage de chevauchement avec une fonction non-linéaire
-        # Favorise fortement les correspondances de date élevées (>80%)
+        
         coverage_percentage = (overlap_days / total_project_days) * 100
         
         if coverage_percentage >= 80:
-            # Bonus pour une couverture presque complète
-            adjusted_score = 90 + (coverage_percentage - 80) / 2
+            adjusted_score = 85 + (coverage_percentage - 80) / 2
         else:
-            # Pénalisation plus forte pour les couvertures faibles
-            adjusted_score = coverage_percentage * (0.8 + 0.2 * (coverage_percentage / 100))
-
+            adjusted_score = coverage_percentage * 0.85
+        
         score = min(100, adjusted_score)
         _score_cache[cache_key] = score
         return score
+        
     except Exception as e:
         logger.error(f"Erreur lors du calcul du score de date: {str(e)}")
         return 0
 
-def get_competence_similarity(comp1, comp2):
+
+def detect_domain_from_description(description):
     """
-    Calcule la similarité entre deux compétences en utilisant une approche de similarité lexicale
-    Version améliorée avec meilleure correspondance des synonymes et acronymes
+    Détecte le domaine principal à partir de la description de l'appel d'offre
+    """
+    if not description:
+        return 'DIGITAL', 0
+    
+    description_lower = description.lower()
+    domain_scores = {
+        'DIGITAL': 0,
+        'FINANCE': 0,
+        'ENERGIE': 0,
+        'INDUSTRIE': 0
+    }
+    
+    # Compter les occurrences de compétences par domaine
+    for domain, skills_list in ALL_SKILLS.items():
+        for skill in skills_list:
+            skill_lower = skill.lower()
+            if skill_lower in description_lower:
+                domain_scores[domain] += 1
+    
+    # Ajouter des mots-clés spécifiques par domaine
+    domain_keywords = {
+        'DIGITAL': ['digital', 'numérique', 'informatique', 'web', 'mobile', 'logiciel', 'application', 'système', 'technologie', 'développement'],
+        'FINANCE': ['finance', 'financier', 'banque', 'bancaire', 'comptabilité', 'audit', 'budget', 'investissement', 'crédit'],
+        'ENERGIE': ['énergie', 'énergétique', 'électricité', 'solaire', 'éolien', 'pétrole', 'gaz', 'renouvelable', 'transition'],
+        'INDUSTRIE': ['industrie', 'industriel', 'usine', 'production', 'fabrication', 'manufacture', 'mécanique', 'mines']
+    }
+    
+    for domain, keywords in domain_keywords.items():
+        for keyword in keywords:
+            if keyword in description_lower:
+                domain_scores[domain] += 2  # Poids plus fort pour les mots-clés généraux
+    
+    # Retourner le domaine avec le score le plus élevé
+    best_domain = max(domain_scores.items(), key=lambda x: x[1])
+    return best_domain[0], best_domain[1]
+
+
+def calculate_skills_match_score_updated(consultant, appel_offre):
+    """
+    Calcule un score basé sur les compétences du consultant par rapport aux critères du projet
+    ADAPTÉ pour le nouveau modèle AppelOffre scrapé
     """
     try:
-        # Normalisation
-        comp1 = comp1.lower().strip()
-        comp2 = comp2.lower().strip()
+        cache_key = get_cache_key(consultant.id, appel_offre.id)
+        if cache_key in _score_cache:
+            return _score_cache[cache_key]
         
-        # Correspondance exacte
-        if comp1 == comp2:
-            return 1.0
+        # Récupérer les compétences du consultant
+        consultant_skills = list(
+            Competence.objects.filter(consultant=consultant).values_list('nom_competence', 'niveau')
+        )
         
-        # Dictionnaire d'acronymes et leur forme développée
-        acronyms = {
-            "js": "javascript",
-            "ts": "typescript",
-            "py": "python",
-            "react": "reactjs",
-            "vue": "vuejs",
-            "angular": "angularjs",
-            "node": "nodejs",
-            "aws": "amazon web services",
-            "gcp": "google cloud platform",
-            "azure": "microsoft azure",
-            "ml": "machine learning",
-            "ai": "artificial intelligence",
-            "oop": "object oriented programming",
-            "db": "database",
-            "ui": "user interface",
-            "ux": "user experience",
-            "spa": "single page application",
-        }
+        skills_dict = {skill_name.lower(): niveau for skill_name, niveau in consultant_skills}
         
-        # Développer les acronymes si présents
-        for acronym, expanded in acronyms.items():
-            if comp1 == acronym:
-                comp1 = expanded
-            if comp2 == acronym:
-                comp2 = expanded
+        if not consultant_skills:
+            logger.warning(f"Le consultant {consultant.id} n'a aucune compétence définie")
+            _score_cache[cache_key] = 10
+            return 10
         
-        # Si l'une contient l'autre entièrement
-        if comp1 in comp2 or comp2 in comp1:
-            # Plus le ratio de longueur est élevé, plus la similarité est élevée
-            ratio = min(len(comp1), len(comp2)) / max(len(comp1), len(comp2))
-            return 0.85 * ratio
+        # --- 1. SCORE DE DOMAINE (15% max) ---
+        detected_domain, domain_confidence = detect_domain_from_description(appel_offre.description)
         
-        # Pour les technos avec version (ex: "Java 8" et "Java")
-        base_comp1 = re.sub(r'\s+\d+(\.\d+)*', '', comp1)
-        base_comp2 = re.sub(r'\s+\d+(\.\d+)*', '', comp2)
+        domain_score = 0
+        if consultant.domaine_principal == detected_domain:
+            domain_score = 15  # Correspondance parfaite
+            logger.info(f"Correspondance parfaite de domaine: {detected_domain}")
+        elif domain_confidence > 0:
+            # Correspondance partielle basée sur la confiance
+            domain_score = min(12, 15 * (domain_confidence / 10))
+        else:
+            domain_score = 8  # Score de base pour domaines différents
         
-        if base_comp1 == base_comp2:
-            return 0.95
+        # --- 2. SCORE D'EXPERTISE (15% max) ---
+        expertise_score = 0
+        if consultant.expertise == "Expert" or consultant.expertise == "Senior":
+            expertise_score = 15
+        elif consultant.expertise == "Intermédiaire":
+            expertise_score = 10
+        else:  # Débutant
+            expertise_score = 5
         
-        # Tokens communs (amélioré pour gérer les mots composés)
-        tokens1 = set(re.findall(r'\b\w+\b', comp1))
-        tokens2 = set(re.findall(r'\b\w+\b', comp2))
+        # --- 3. SCORE DE COMPÉTENCES (70% max) ---
+        skills_score = 0
         
-        if not tokens1 or not tokens2:
-            return 0
+        # Utiliser les critères structurés s'ils existent
+        from .models import CriteresEvaluation
+        project_criteria = CriteresEvaluation.objects.filter(appel_offre=appel_offre)
+        
+        if project_criteria.exists():
+            logger.info(f"Utilisation des critères structurés pour l'AO {appel_offre.id}")
             
-        common_tokens = tokens1.intersection(tokens2)
-        
-        if common_tokens:
-            jaccard = len(common_tokens) / len(tokens1.union(tokens2))
-            return 0.7 * jaccard
-        
-        # Similarité de Levenshtein pour les petites différences d'orthographe
-        # Calculer la distance de Levenshtein
-        def levenshtein(s1, s2):
-            if len(s1) < len(s2):
-                return levenshtein(s2, s1)
-            if len(s2) == 0:
-                return len(s1)
+            total_weight = float(sum(float(criteria.poids) for criteria in project_criteria))
+            weighted_score = 0
             
-            previous_row = range(len(s2) + 1)
-            for i, c1 in enumerate(s1):
-                current_row = [i + 1]
-                for j, c2 in enumerate(s2):
-                    insertions = previous_row[j + 1] + 1
-                    deletions = current_row[j] + 1
-                    substitutions = previous_row[j] + (c1 != c2)
-                    current_row.append(min(insertions, deletions, substitutions))
-                previous_row = current_row
+            if total_weight > 0:
+                for criteria in project_criteria:
+                    normalized_weight = float(float(criteria.poids) / total_weight) * 70.0
+                    keyword = criteria.nom_critere.lower()
+                    
+                    best_match_score = 0
+                    for skill_name, niveau in skills_dict.items():
+                        match_score = get_competence_similarity(keyword, skill_name)
+                        if match_score > 0:
+                            match_score *= (0.7 + 0.3 * (niveau / 5))
+                            best_match_score = max(best_match_score, match_score)
+                    
+                    weighted_score += normalized_weight * best_match_score
+                
+                skills_score = min(70, weighted_score)
+        else:
+            # Analyse basée sur la description de l'appel d'offre
+            logger.info(f"Analyse basée sur la description pour l'AO {appel_offre.id}")
             
-            return previous_row[-1]
+            if appel_offre.description:
+                # Extraire des compétences de la description
+                mentioned_skills = extract_skills_from_description(appel_offre.description)
+                
+                if len(mentioned_skills) >= 3:
+                    try:
+                        # Utiliser une méthode de calcul de similarité simple
+                        skills_score = calculate_alternative_score_updated(mentioned_skills, skills_dict)
+                    except Exception as e:
+                        logger.error(f"Erreur calcul compétences: {str(e)}")
+                        skills_score = calculate_alternative_score_updated(mentioned_skills, skills_dict)
+                else:
+                    skills_score = calculate_alternative_score_updated(mentioned_skills, skills_dict)
+            else:
+                # Pas de description détaillée
+                skills_score = 25  # Score réduit sans description
         
-        # Si les chaînes sont proches
-        if min(len(comp1), len(comp2)) > 3:
-            distance = levenshtein(comp1, comp2)
-            max_length = max(len(comp1), len(comp2))
-            if distance <= 2 and max_length > 4:  # Tolérance plus forte pour les mots plus longs
-                return 0.7 * (1 - distance / max_length)
-            elif distance <= 1 and max_length <= 4:  # Tolérance plus faible pour les mots courts
-                return 0.6 * (1 - distance / max_length)
-            
-        return 0
+        # --- 4. CALCUL DU SCORE FINAL ---
+        final_score = domain_score + expertise_score + skills_score
+        
+        # Bonus pour les matchings très pertinents
+        if final_score > 70:
+            final_score = final_score * 1.1
+            final_score = min(100, final_score)
+        
+        # Ajustement pour éviter les scores trop bas
+        if final_score < 15:
+            final_score = 15
+        
+        _score_cache[cache_key] = final_score
+        
+        logger.info(f"Score final pour consultant {consultant.id}: {final_score:.2f}%")
+        return final_score
+        
     except Exception as e:
-        logger.error(f"Erreur dans get_competence_similarity: {str(e)}")
-        return 0
+        logger.error(f"Erreur lors du calcul du score de compétences: {str(e)}")
+        return 20
 
 
+def extract_skills_from_description(description):
     """
-    Calcule la similarité entre deux compétences en utilisant une approche de similarité lexicale
+    Extrait les compétences techniques de la description d'un appel d'offre
     """
+    if not description:
+        return []
+    
+    description_lower = description.lower()
+    found_skills = []
+    
+    # Rechercher toutes les compétences connues dans la description
+    for domain, skills_list in ALL_SKILLS.items():
+        for skill in skills_list:
+            skill_lower = skill.lower()
+            if skill_lower in description_lower:
+                found_skills.append(skill_lower)
+    
+    # Ajouter des mots techniques généraux
+    technical_terms = [
+        'gestion', 'analyse', 'conseil', 'audit', 'formation', 'expertise',
+        'développement', 'conception', 'mise en œuvre', 'optimisation',
+        'stratégie', 'planification', 'coordination', 'supervision'
+    ]
+    
+    for term in technical_terms:
+        if term in description_lower:
+            found_skills.append(term)
+    
+    return list(set(found_skills))  # Supprimer les doublons
+
+
+def calculate_alternative_score_updated(mentioned_skills, consultant_skills_dict):
+    """
+    Méthode alternative de calcul du score quand TF-IDF ne peut pas être utilisé
+    """
+    try:
+        if not mentioned_skills:
+            return 35  # Score neutre
+        
+        matched_count = 0
+        matched_skills = set()
+        
+        for keyword in mentioned_skills:
+            best_match_score = 0
+            
+            for skill_name, niveau in consultant_skills_dict.items():
+                if keyword == skill_name:
+                    match_score = 1.0
+                elif keyword in skill_name or skill_name in keyword:
+                    match_score = 0.8
+                else:
+                    match_score = get_competence_similarity(keyword, skill_name)
+                
+                if match_score > 0:
+                    match_score *= (0.6 + 0.4 * (niveau / 5))
+                    best_match_score = max(best_match_score, match_score)
+            
+            if best_match_score > 0:
+                matched_count += best_match_score
+                matched_skills.add(keyword)
+        
+        match_ratio = matched_count / len(mentioned_skills) if mentioned_skills else 0
+        skills_score = min(70, 70 * match_ratio)
+        
+        logger.info(f"Score par analyse alternative: {skills_score:.2f}%")
+        return skills_score
+        
+    except Exception as e:
+        logger.error(f"Erreur dans le calcul alternatif: {str(e)}")
+        return 35
+
+
+def get_competence_similarity(comp1, comp2):
+    """
+    Calcule la similarité entre deux compétences
+    """
+    import re
+    
     comp1 = comp1.lower()
     comp2 = comp2.lower()
     
-    # Correspondance exacte
     if comp1 == comp2:
         return 1.0
     
-    # Si l'une contient l'autre entièrement
     if comp1 in comp2 or comp2 in comp1:
-        # Plus le ratio de longueur est élevé, plus la similarité est élevée
         ratio = min(len(comp1), len(comp2)) / max(len(comp1), len(comp2))
         return 0.8 * ratio
     
-    # Pour les technos avec version (ex: "Java 8" et "Java")
+    # Pour les technos avec version
     base_comp1 = re.sub(r'\s+\d+(\.\d+)*', '', comp1)
     base_comp2 = re.sub(r'\s+\d+(\.\d+)*', '', comp2)
     
@@ -1341,523 +1966,63 @@ def get_competence_similarity(comp1, comp2):
     return 0
 
 
-def build_competence_mapping():
+def get_top_skills_updated(consultant, limit=5):
     """
-    Construit une table de correspondance entre compétences liées
-    pour les technologies similaires ou associées
-    """
-    # Définir des groupes de technologies reliées avec une valeur de similarité
-    related_technologies = {
-        # Langages frontend
-        "javascript": ["typescript", "ecmascript", "js", "react", "angular", "vue.js", "node.js", "jquery", "ajax"],
-        "html": ["html5", "css", "css3", "sass", "less", "bootstrap", "tailwind"],
-        "css": ["html", "html5", "sass", "less", "bootstrap", "tailwind"],
-        
-        # Langages backend
-        "python": ["django", "flask", "fastapi", "python3", "pandas", "numpy", "scikit-learn", "pytorch", "tensorflow"],
-        "java": ["spring", "spring boot", "j2ee", "java ee", "hibernate", "jsp", "servlet", "maven", "gradle"],
-        "c#": [".net", "asp.net", "mvc", "entity framework", "linq", "visual studio", "xamarin"],
-        "php": ["laravel", "symfony", "wordpress", "drupal", "magento", "php7", "php8"],
-        
-        # Bases de données
-        "sql": ["mysql", "postgresql", "oracle", "sql server", "sqlite", "mariadb", "transact-sql", "pl/sql"],
-        "nosql": ["mongodb", "couchdb", "redis", "cassandra", "firebase", "dynamodb", "elasticsearch"],
-        
-        # DevOps & Cloud
-        "devops": ["ci/cd", "jenkins", "gitlab ci", "github actions", "docker", "kubernetes", "ansible", "terraform"],
-        "aws": ["amazon web services", "ec2", "s3", "lambda", "cloud"],
-        "azure": ["microsoft azure", "cloud", "azure devops", "azure functions"],
-        "gcp": ["google cloud platform", "cloud", "google cloud"],
-        
-        # Domaines spécifiques - Finance
-        "finance": ["comptabilité", "audit", "contrôle de gestion", "trésorerie", "ifrs", "consolidation"],
-        "trading": ["marchés financiers", "forex", "bourse", "options", "futures", "dérivés"],
-        
-        # Domaines spécifiques - Énergie
-        "énergie": ["renouvelable", "solaire", "éolien", "hydrogène", "photovoltaïque", "transition énergétique"],
-        "pétrole": ["gaz", "hydrocarbures", "exploration", "production", "raffinage"],
-        
-        # Domaines spécifiques - Industrie
-        "industrie 4.0": ["automatisation", "iot industriel", "robotique", "smart factory", "usine intelligente"],
-        "métallurgie": ["sidérurgie", "aluminium", "acier", "fonderie", "forge"]
-    }
-    
-    # Construire la matrice de correspondance dans les deux sens
-    competence_map = {}
-    
-    for key, related in related_technologies.items():
-        if key not in competence_map:
-            competence_map[key] = {}
-            
-        for rel in related:
-            if rel not in competence_map:
-                competence_map[rel] = {}
-            
-            # Définir une valeur de similarité entre 0.5 et 0.8 selon la proximité
-            similarity = 0.7  # Valeur par défaut
-            
-            # Relations fortement liées (même famille de technologie)
-            if (key == "javascript" and rel in ["typescript", "ecmascript", "js"]) or \
-               (key == "html" and rel == "html5") or \
-               (key == "python" and rel == "python3") or \
-               (key == "sql" and rel in ["mysql", "postgresql", "oracle"]):
-                similarity = 0.9
-            # Relations moyennement liées (technologies utilisées ensemble)
-            elif (key == "javascript" and rel in ["react", "angular", "vue.js"]) or \
-                 (key == "html" and rel == "css") or \
-                 (key == "python" and rel in ["django", "flask", "pandas"]):
-                similarity = 0.7
-            # Relations faiblement liées (même écosystème mais différentes)
-            else:
-                similarity = 0.5
-                
-            competence_map[key][rel] = similarity
-            competence_map[rel][key] = similarity
-    
-    return competence_map
-
-
-# Construction anticipée de la matrice de correspondance
-COMPETENCE_SIMILARITY_MAP = build_competence_mapping()
-def calculate_skills_match_score(consultant, appel_offre):
-    """
-    Calcule un score basé sur les compétences du consultant par rapport aux critères du projet
-    Version améliorée avec:
-    1. Cache pour éviter les recalculs
-    2. Poids du domaine réduit (15%)
-    3. Score d'expertise ajouté (15%)
-    4. Analyse sémantique améliorée (70%)
+    Récupère les compétences principales d'un consultant
     """
     try:
-        # Vérifier si le résultat est en cache
-        cache_key = get_cache_key(consultant.id, appel_offre.id)
-        if cache_key in _score_cache:
-            logger.info(f"Score trouvé en cache pour consultant {consultant.id} et AO {appel_offre.id}")
-            return _score_cache[cache_key]
-        
-        # Récupérer les compétences du consultant avec leurs niveaux
-        consultant_skills = list(
-            Competence.objects.filter(consultant=consultant).values_list('nom_competence', 'niveau')
-        )
-        
-        # Créer un dictionnaire pour un accès plus facile
-        skills_dict = {skill_name.lower(): niveau for skill_name, niveau in consultant_skills}
-        
-        # Si le consultant n'a pas de compétences, retourner un score faible
-        if not consultant_skills:
-            logger.warning(f"Le consultant {consultant.id} n'a aucune compétence définie")
-            _score_cache[cache_key] = 10
-            return 10
-
-        # --- 1. SCORE DE DOMAINE (15% max) ---
-        domain_score = 0
-        description_lower = appel_offre.description.lower() if appel_offre.description else ""
-        
-        # Détecter le domaine principal de l'appel d'offre
-        # Utilisons une fonction simple, mais elle pourrait être remplacée par une détection plus complexe
-        def detect_main_domain(appel_offre):
-            domain_scores = {
-                'DIGITAL': 0,
-                'FINANCE': 0,
-                'ENERGIE': 0,
-                'INDUSTRIE': 0
-            }
-            
-            # Compter les occurrences de mots-clés par domaine
-            if appel_offre.description:
-                desc_lower = appel_offre.description.lower()
-                # Exemples de mots-clés par domaine (simplifiés)
-                domain_keywords = {
-                    'DIGITAL': ['digital', 'web', 'application', 'logiciel', 'site', 'mobile', 'développement', 'informatique'],
-                    'FINANCE': ['finance', 'banque', 'comptabilité', 'budget', 'investissement', 'audit', 'fiscal'],
-                    'ENERGIE': ['énergie', 'électricité', 'renouvelable', 'solaire', 'pétrole', 'gaz', 'transition'],
-                    'INDUSTRIE': ['industrie', 'usine', 'production', 'mécanique', 'fabrication', 'maintenance']
-                }
-                
-                for domain, keywords in domain_keywords.items():
-                    for keyword in keywords:
-                        if keyword in desc_lower:
-                            domain_scores[domain] += 1
-            
-            # Retourner le domaine avec le score le plus élevé
-            return max(domain_scores.items(), key=lambda x: x[1])[0] if any(domain_scores.values()) else 'DIGITAL'
-        
-        ao_domain = detect_main_domain(appel_offre)
-        
-        if consultant.domaine_principal == ao_domain:
-            domain_score = 15  # Correspondance parfaite (15% max)
-            logger.info(f"Correspondance parfaite de domaine: {ao_domain} pour consultant {consultant.id}")
-        else:
-            # Correspondance partielle, moins pénalisante qu'avant
-            domain_score = 10  # Score de base pour autres domaines (10%)
-            logger.info(f"Domaine différent: {consultant.domaine_principal} vs {ao_domain} pour consultant {consultant.id}")
-        
-        # --- 2. SCORE D'EXPERTISE (15% max) ---
-        expertise_score = 0
-        if consultant.expertise == "Expert":
-            expertise_score = 15
-        elif consultant.expertise == "Intermédiaire":
-            expertise_score = 10
-        else:  # Débutant
-            expertise_score = 5
-        
-        # --- 3. SCORE DE COMPÉTENCES (70% max) ---
-        skills_score = 0
-        
-        # Utilisation des critères explicites si disponibles
-        project_criteria = CriteresEvaluation.objects.filter(appel_offre=appel_offre)
-        
-        if project_criteria.exists():
-            logger.info(f"Utilisation des critères définis pour l'appel d'offre {appel_offre.id}")
-            
-            # Calcul du score avec pondération des critères
-            total_weight = float(sum(float(criteria.poids) for criteria in project_criteria))
-            weighted_score = 0
-            
-            if total_weight > 0:
-                for criteria in project_criteria:
-                    normalized_weight = float(float(criteria.poids) / total_weight) * 70.0  # 70% max
-                    keyword = criteria.nom_critere.lower()
-                    
-                    # Chercher la meilleure correspondance dans les compétences du consultant
-                    best_match_score = 0
-                    best_match_skill = None
-                    
-                    for skill_name, niveau in skills_dict.items():
-                        # Utiliser la fonction améliorée de similarité
-                        match_score = get_competence_similarity(keyword, skill_name)
-                        
-                        # Ajuster par le niveau d'expertise
-                        if match_score > 0:
-                            match_score *= (0.7 + 0.3 * (niveau / 5))  # Moins de pénalité pour niveau faible
-                            
-                            if match_score > best_match_score:
-                                best_match_score = match_score
-                                best_match_skill = skill_name
-                    
-                    weighted_score += normalized_weight * best_match_score
-                
-                skills_score = min(70, weighted_score)  # 70% max
-        else:
-            # Analyse basée sur les compétences extraites de la description
-            logger.info(f"Pas de critères définis, utilisation de l'analyse de description pour l'AO {appel_offre.id}")
-            
-            # Extraire des mots-clés significatifs de la description
-            if appel_offre.description:
-                # Utiliser TF-IDF pour extraire les termes importants
-                try:
-                    # Document 1: Description de l'appel d'offre
-                    # Document 2: Compétences du consultant
-                    doc1 = appel_offre.description.lower()
-                    doc2 = " ".join(skill_name.lower() for skill_name in skills_dict.keys())
-                    
-                    # Corpus pour TF-IDF
-                    corpus = [doc1, doc2]
-                    
-                    # Vectorisation TF-IDF
-                    vectorizer = TfidfVectorizer(
-                        max_features=50,
-                        stop_words=['le', 'la', 'les', 'un', 'une', 'des', 'et', 'ou', 'pour', 'dans', 'sur', 'avec'],
-                        ngram_range=(1, 2)  # Prise en compte des bi-grammes
-                    )
-                    tfidf_matrix = vectorizer.fit_transform(corpus)
-                    
-                    # Calcul de la similarité cosinus
-                    cosine_sim = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0]
-                    
-                    # Conversion en score sur 70 points max
-                    tfidf_score = min(70, cosine_sim * 100)
-                    
-                    logger.info(f"Score TF-IDF: {tfidf_score:.2f}% pour consultant {consultant.id}")
-                    skills_score = tfidf_score
-                except Exception as e:
-                    logger.error(f"Erreur lors du calcul TF-IDF: {str(e)}")
-                    # Utiliser une méthode alternative
-                    skills_score = 35  # Score moyen
-            else:
-                # Pas de description, score moyen
-                skills_score = 35
-        
-        # --- 4. CALCUL DU SCORE FINAL ---
-        # Combinaison des 3 composantes: domaine (15%), expertise (15%), compétences (70%)
-        final_score = domain_score + expertise_score + skills_score
-        
-        # Si le score est supérieur à 50, appliquer un bonus pour favoriser les bons matchs
-        if final_score > 50:
-            final_score = final_score * 1.15
-            final_score = min(100, final_score)  # Plafond à 100%
-        
-        # Ajustement pour favoriser les valeurs extrêmes
-        def sigmoid_adjustment(score):
-            if score <= 0:
-                return 0
-            return 100 / (1 + np.exp(-0.08 * (score - 50)))
-        
-        adjusted_score = sigmoid_adjustment(final_score)
-        
-        # Enregistrement dans le cache
-        _score_cache[cache_key] = adjusted_score
-        
-        logger.info(f"Score final ajusté: {final_score:.2f}% -> {adjusted_score:.2f}% pour consultant {consultant.id}")
-        return adjusted_score
-        
+        top_skills = Competence.objects.filter(consultant=consultant).order_by('-niveau')[:limit]
+        return [skill.nom_competence for skill in top_skills]
     except Exception as e:
-        logger.error(f"Erreur lors du calcul du score de compétences: {str(e)}")
-        return 20  # Score par défaut
-    
+        logger.error(f"Erreur lors de la récupération des compétences: {str(e)}")
+        return []
+@api_view(['GET'])
+def validated_matches_updated(request):
     """
-    Calcule un score basé sur les compétences du consultant par rapport aux critères du projet
-    Version améliorée avec priorité aux compétences techniques prédéfinies
+    Récupère la liste des matchings validés - COMPATIBLE NOUVEAU MODÈLE
     """
     try:
-        # Récupérer les compétences du consultant avec leurs niveaux
-        consultant_skills = list(
-            Competence.objects.filter(consultant=consultant).values_list('nom_competence', 'niveau')
-        )
-        
-        # Créer un dictionnaire pour un accès plus facile
-        skills_dict = {skill_name.lower(): niveau for skill_name, niveau in consultant_skills}
-        
-        # Si le consultant n'a pas de compétences, retourner un score faible
-        if not consultant_skills:
-            logger.warning(f"Le consultant {consultant.id} n'a aucune compétence définie")
-            return 10
+        matches = MatchingResult.objects.filter(is_validated=True).select_related('consultant', 'appel_offre')
 
-        # --- 1. ANALYSE DU DOMAINE ---
-        description_lower = appel_offre.description.lower() if appel_offre.description else ""
-        
-        # Détecter le domaine principal de l'appel d'offre en utilisant les compétences prédéfinies
-        domain_scores = {
-            'DIGITAL': 0,
-            'FINANCE': 0,
-            'ENERGIE': 0,
-            'INDUSTRIE': 0
-        }
-        
-        # Pour chaque domaine, compter les occurrences de compétences dans la description
-        domain_matches = {}
-        for domain, skills_list in ALL_SKILLS.items():
-            domain_matches[domain] = []
-            for skill in skills_list:
-                skill_lower = skill.lower()
-                if skill_lower in description_lower:
-                    domain_scores[domain] += 1
-                    domain_matches[domain].append(skill)
-        
-        # Pondérer les scores par le nombre total de compétences dans chaque domaine
-        weighted_domain_scores = {}
-        for domain, score in domain_scores.items():
-            total_skills = len(ALL_SKILLS[domain])
-            if total_skills > 0:
-                weighted_domain_scores[domain] = (score / total_skills) * 100
-            else:
-                weighted_domain_scores[domain] = 0
-        
-        # Déterminer le domaine principal
-        ao_domain = max(weighted_domain_scores.items(), key=lambda x: x[1])[0]
-        logger.info(f"Domaine principal de l'appel d'offre: {ao_domain}")
-        
-        # --- 2. SCORE DE CORRESPONDANCE DE DOMAINE (25%) ---
-        domain_match_score = 0
-        if consultant.domaine_principal == ao_domain:
-            domain_match_score = 25  # Correspondance parfaite
-            logger.info(f"Correspondance parfaite de domaine: {ao_domain} pour consultant {consultant.id}")
-        elif weighted_domain_scores[consultant.domaine_principal] > 0:
-            # Correspondance partielle basée sur le ratio des scores
-            relative_score = weighted_domain_scores[consultant.domaine_principal] / max(weighted_domain_scores.values())
-            domain_match_score = min(20, 25 * relative_score)
-            logger.info(f"Correspondance partielle de domaine: {consultant.domaine_principal} ({domain_match_score:.1f}%) pour consultant {consultant.id}")
-        
-        # --- 3. EXPLOITATION DES CRITÈRES EXPLICITES SI DISPONIBLES ---
-        project_criteria = CriteresEvaluation.objects.filter(appel_offre=appel_offre)
-        skill_match_score = 0
-        
-        if project_criteria.exists():
-            logger.info(f"Utilisation des critères définis pour l'appel d'offre {appel_offre.id}")
+        data = []
+        for match in matches:
+            # Adaptation pour le nouveau modèle AppelOffre
+            appel_offre = match.appel_offre
             
-            # Calcul du score avec pondération des critères (75% max)
-            total_weight = float(sum(float(criteria.poids) for criteria in project_criteria))
-            weighted_score = 0
-            
-            if total_weight > 0:
-                for criteria in project_criteria:
-                    normalized_weight = float(float(criteria.poids) / total_weight) * 75.0
-                    keyword = criteria.nom_critere.lower()
-                    
-                    # Chercher la meilleure correspondance dans les compétences du consultant
-                    best_match_score = 0
-                    best_match_skill = None
-                    
-                    for skill_name, niveau in skills_dict.items():
-                        # Correspondance exacte
-                        if keyword == skill_name:
-                            match_score = 1.0
-                        # Correspondance partielle
-                        elif keyword in skill_name or skill_name in keyword:
-                            match_score = 0.8
-                        # Utiliser la fonction de similarité
-                        else:
-                            match_score = get_competence_similarity(keyword, skill_name)
-                        
-                        # Ajuster par le niveau d'expertise
-                        if match_score > 0:
-                            match_score *= (0.6 + 0.4 * (niveau / 5))
-                            
-                            if match_score > best_match_score:
-                                best_match_score = match_score
-                                best_match_skill = skill_name
-                    
-                    weighted_score += normalized_weight * best_match_score
-                
-                skill_match_score = weighted_score
-        
-        # --- 4. ANALYSE BASÉE SUR LES COMPÉTENCES PRÉDÉFINIES ---
-        else:
-            logger.info(f"Pas de critères définis, utilisation de l'analyse de description pour l'appel d'offre {appel_offre.id}")
-            
-            # Récupérer les compétences spécifiques au domaine détecté
-            domain_specific_skills = [skill.lower() for skill in ALL_SKILLS.get(ao_domain, [])]
-            
-            # 1. Extraire les compétences techniques mentionnées dans la description
-            mentioned_skills = []
-            for skill in ALL_SKILLS[ao_domain]:
-                skill_lower = skill.lower()
-                if skill_lower in description_lower:
-                    mentioned_skills.append(skill_lower)
-            
-            # Si peu de compétences techniques identifiées, utiliser des termes plus généraux
-            if len(mentioned_skills) < 5:
-                # Extraire tous les mots significatifs (4+ caractères)
-                stop_words = {'dans', 'pour', 'avec', 'cette', 'votre', 'notre', 'leur', 'vous', 
-                              'nous', 'être', 'avoir', 'les', 'des', 'une', 'sur'}
-                
-                words = re.findall(r'\b(\w{4,})\b', description_lower)
-                general_terms = [word for word in words if word not in stop_words and not word.isdigit()]
-                mentioned_skills.extend(general_terms)
-            
-            # Dédupliquer la liste
-            mentioned_skills = list(set(mentioned_skills))
-            
-            # 2. Utiliser TF-IDF pour comparer les compétences du consultant avec celles mentionnées
-            if len(mentioned_skills) >= 3:
-                try:
-                    # Préparation des documents pour TF-IDF
-                    # Document 1: Compétences mentionnées dans l'appel d'offre
-                    # Document 2: Compétences du consultant
-                    doc1 = " ".join(mentioned_skills)
-                    doc2 = " ".join(skill_name.lower() for skill_name in skills_dict.keys())
-                    
-                    # Corpus pour TF-IDF
-                    corpus = [doc1, doc2]
-                    
-                    # Vectorisation TF-IDF
-                    vectorizer = TfidfVectorizer()
-                    tfidf_matrix = vectorizer.fit_transform(corpus)
-                    
-                    # Calcul de la similarité cosinus
-                    cosine_sim = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:2])[0][0]
-                    
-                    # Conversion en score sur 75 points max
-                    tfidf_score = min(75, cosine_sim * 100)
-                    
-                    logger.info(f"Score TF-IDF: {tfidf_score:.2f}% pour consultant {consultant.id}")
-                    skill_match_score = tfidf_score
-                    
-                except Exception as e:
-                    logger.error(f"Erreur lors du calcul TF-IDF: {str(e)}")
-                    # Utiliser une méthode alternative en cas d'échec
-                    skill_match_score = calculate_alternative_score(mentioned_skills, skills_dict)
-            else:
-                # Méthode alternative pour peu de compétences
-                skill_match_score = calculate_alternative_score(mentioned_skills, skills_dict)
-        
-        # --- 5. CALCUL DU SCORE FINAL ---
-        # Combiner score de domaine (25%) et score de compétences (75%)
-        final_score = min(100, domain_match_score + skill_match_score)
-        
-        # Appliquer une fonction sigmoïde pour favoriser les scores extrêmes
-        if final_score > 0:
-            # Utiliser numpy pour le calcul de la sigmoïde
-            sigmoid = lambda x: 100 / (1 + np.exp(-0.08 * (x - 50)))
-            adjusted_score = sigmoid(final_score)
-            logger.info(f"Score final ajusté: {final_score:.2f}% -> {adjusted_score:.2f}% pour consultant {consultant.id}")
-            return adjusted_score
-        
-        logger.info(f"Score final pour consultant {consultant.id}: {final_score}% (domaine: {domain_match_score}%, compétences: {skill_match_score}%)")
-        return final_score
-        
+            data.append({
+                'id': match.id,
+                'consultant_id': match.consultant.id,
+                'consultant_name': f"{match.consultant.prenom} {match.consultant.nom}",
+                'appel_offre_id': appel_offre.id,
+                'appel_offre_name': appel_offre.titre,  # Nouveau modèle utilise 'titre' au lieu de 'nom_projet'
+                'client': appel_offre.client or "Client non spécifié",
+                'score': float(match.score),
+                'date_validation': match.created_at,
+                'domaine_principal': match.consultant.domaine_principal,
+                'consultant_expertise': match.consultant.expertise,
+                'email': match.consultant.email,
+                # Nouveaux champs pour différencier les sources
+                'is_scraped_offer': True,  # Tous les appels d'offres du nouveau modèle sont scrapés
+                'source_type': 'scraped',
+                # Dates d'appel d'offre (nouveau modèle)
+                'date_de_publication': appel_offre.date_de_publication.isoformat() if appel_offre.date_de_publication else None,
+                'date_limite': appel_offre.date_limite.isoformat() if appel_offre.date_limite else None,
+                'is_expired': appel_offre.is_expired,
+                'days_remaining': appel_offre.days_remaining
+            })
+
+        return Response(data)
     except Exception as e:
-        logger.error(f"Erreur lors du calcul du score de compétences: {str(e)}")
-        return 20  # Score par défaut
-def clear_score_cache():
+        logger.error(f"Erreur dans validated_matches_updated: {str(e)}")
+        return Response({"error": str(e)}, status=500)
+ 
+def generate_matching_for_offer_updated(appel_offre_id):
     """
-    Vide le cache des scores calculés
-    À utiliser quand les données des consultants ou appels d'offre changent
-    """
-    global _score_cache
-    _score_cache = {}
-    logger.info("Cache des scores vidé")
-def calculate_alternative_score(mentioned_skills, consultant_skills_dict):
-    """
-    Méthode alternative de calcul du score quand TF-IDF ne peut pas être utilisé
-    Basée sur la correspondance directe des compétences
+    Génère des matchings pour un appel d'offre scrapé
+    Version adaptée pour le nouveau modèle AppelOffre
     """
     try:
-        if not mentioned_skills:
-            return 37.5  # Score neutre (50% de 75 points max)
-        
-        matched_count = 0
-        matched_skills = set()
-        
-        # Pour chaque compétence mentionnée, chercher une correspondance
-        for keyword in mentioned_skills:
-            best_match_score = 0
-            best_match_skill = None
-            
-            for skill_name, niveau in consultant_skills_dict.items():
-                # Correspondance exacte
-                if keyword == skill_name:
-                    match_score = 1.0
-                # Correspondance partielle
-                elif keyword in skill_name or skill_name in keyword:
-                    match_score = 0.8
-                # Utiliser la fonction de similarité
-                else:
-                    match_score = get_competence_similarity(keyword, skill_name)
-                
-                # Ajuster par le niveau d'expertise
-                if match_score > 0:
-                    match_score *= (0.6 + 0.4 * (niveau / 5))
-                    
-                    if match_score > best_match_score:
-                        best_match_score = match_score
-                        best_match_skill = skill_name
-            
-            # Si une correspondance a été trouvée
-            if best_match_score > 0:
-                matched_count += best_match_score
-                matched_skills.add(best_match_skill)
-        
-        # Calculer le score final (75 points max)
-        match_ratio = matched_count / len(mentioned_skills)
-        skill_match_score = min(75, 75 * match_ratio)
-        
-        # Log des compétences correspondantes
-        logger.info(f"Score par analyse de mots-clés: {skill_match_score:.2f}%")
-        logger.debug(f"Mots-clés correspondants: {matched_skills}")
-        
-        return skill_match_score
-        
-    except Exception as e:
-        logger.error(f"Erreur dans le calcul alternatif: {str(e)}")
-        return 37.5  # Score neutre
-def generate_matching_for_offer(appel_offre_id):
-    """
-    Génère des matchings pour un appel d'offre spécifique
-    Version révisée pour résoudre le problème des scores uniformes
-    """
-    try:
-        # Récupérer l'appel d'offre
+        # Récupérer l'appel d'offre scrapé
         try:
             appel_offre = AppelOffre.objects.get(id=appel_offre_id)
         except AppelOffre.DoesNotExist:
@@ -1867,17 +2032,12 @@ def generate_matching_for_offer(appel_offre_id):
                 'error': f"Appel d'offre avec ID {appel_offre_id} introuvable"
             }
 
-        # Vérifier dates et description
-        if appel_offre.date_debut is None or appel_offre.date_fin is None:
-            logger.error(f"Dates manquantes pour l'appel d'offre {appel_offre_id}")
-            return {
-                'success': False,
-                'error': "Les dates de début et/ou de fin de l'appel d'offre sont manquantes"
-            }
+        logger.info(f"Génération de matchings pour l'appel d'offre scrapé: {appel_offre.titre}")
         
-        # Récupérer les consultants validés
+        # Récupérer les consultants validés et disponibles
         consultants = Consultant.objects.filter(
-            is_validated=True
+            is_validated=True,
+            statut='Actif'
         ).exclude(
             date_debut_dispo=None
         ).exclude(
@@ -1885,19 +2045,18 @@ def generate_matching_for_offer(appel_offre_id):
         )
         
         if not consultants.exists():
-            logger.warning(f"Aucun consultant disponible pour le matching de l'appel d'offre {appel_offre_id}")
+            logger.warning(f"Aucun consultant disponible pour le matching")
             return {
                 'success': False,
                 'error': "Aucun consultant disponible pour le matching"
             }
         
-        # Vider les anciens matchings pour cet appel d'offre
+        # Vider les anciens matchings
         MatchingResult.objects.filter(appel_offre=appel_offre).delete()
-        logger.info(f"Anciens matchings supprimés pour l'appel d'offre {appel_offre_id}")
+        logger.info(f"Anciens matchings supprimés pour l'AO {appel_offre_id}")
         
-        # Vidage du cache pour garantir des calculs de score frais
+        # Vider le cache
         clear_score_cache()
-        logger.info("Cache des scores vidé")
         
         results = []
         score_stats = {"min": 100, "max": 0, "total": 0}
@@ -1905,139 +2064,20 @@ def generate_matching_for_offer(appel_offre_id):
         # Calculer les scores pour chaque consultant
         for consultant in consultants:
             try:
-                # Calculer les scores individuellement pour chaque consultant
-                date_score = calculate_date_match_score(consultant, appel_offre)
-                logger.info(f"Score de date pour {consultant.id} ({consultant.nom}): {date_score}")
+                # Calculer les scores avec les nouvelles méthodes
+                date_score = calculate_date_match_score_updated(consultant, appel_offre)
+                skills_score = calculate_skills_match_score_updated(consultant, appel_offre)
                 
-                skills_score = calculate_skills_match_score(consultant, appel_offre)
-                logger.info(f"Score de compétences pour {consultant.id} ({consultant.nom}): {skills_score}")
-                
-                # Pondération: 40% date, 60% compétences 
-                final_score = (date_score * 0.4) + (skills_score * 0.6)
-                final_score = min(100, final_score)  # Cap à 100%
+                # Pondération: 30% date, 70% compétences (plus d'importance aux compétences)
+                final_score = (date_score * 0.3) + (skills_score * 0.7)
+                final_score = min(100, final_score)
                 
                 # Mettre à jour les statistiques
                 score_stats["min"] = min(score_stats["min"], final_score)
                 score_stats["max"] = max(score_stats["max"], final_score)
                 score_stats["total"] += final_score
                 
-                logger.info(f"Score final pour {consultant.id} ({consultant.nom}): {final_score}")
-                
-                # Enregistrer le résultat avec précision décimale
-                matching = MatchingResult.objects.create(
-                    consultant=consultant,
-                    appel_offre=appel_offre,
-                    score=Decimal(str(final_score)),  # Conversion explicite en Decimal
-                    is_validated=False
-                )
-                
-                # Ajouter à la liste de résultats avec conversion explicite en float pour JSON
-                results.append({
-                    'id': matching.id,
-                    'consultant_id': consultant.id,
-                    'consultant_name': f"{consultant.prenom} {consultant.nom}",
-                    'consultant_expertise': consultant.expertise or "Débutant",
-                    'email': consultant.email,
-                    'domaine_principal': consultant.domaine_principal,
-                    'specialite': consultant.specialite or "",
-                    'top_skills': get_top_skills(consultant),
-                    'date_match_score': float(date_score),  # Conversion explicite en float
-                    'skills_match_score': float(skills_score),  # Conversion explicite en float
-                    'score': float(final_score),  # Conversion explicite en float
-                    'is_validated': False
-                })
-                
-            except Exception as e:
-                logger.error(f"Erreur lors du calcul pour le consultant {consultant.id}: {str(e)}")
-                continue
-        
-        # Calculer les statistiques finales
-        if results:
-            score_stats["avg"] = score_stats["total"] / len(results)
-            score_stats["count"] = len(results)
-            logger.info(f"Statistiques des scores: min={score_stats['min']:.2f}, "
-                       f"max={score_stats['max']:.2f}, avg={score_stats['avg']:.2f}, "
-                       f"count={score_stats['count']}")
-            
-            # Vérifier si tous les scores sont identiques (problème potentiel)
-            scores = [r['score'] for r in results]
-            unique_scores = set(scores)
-            if len(unique_scores) == 1:
-                logger.warning(f"ATTENTION: Tous les consultants ont le même score: {scores[0]}")
-                
-                # Réinitialiser le cache et recalculer manuellement un échantillon
-                clear_score_cache()
-                test_consultant = consultants.first()
-                if test_consultant:
-                    test_date_score = calculate_date_match_score(test_consultant, appel_offre)
-                    test_skills_score = calculate_skills_match_score(test_consultant, appel_offre)
-                    logger.info(f"Test recalcul après reset du cache - Consultant: {test_consultant.nom}, "
-                               f"Date: {test_date_score}, Skills: {test_skills_score}")
-        else:
-            logger.warning("Aucun matching généré!")
-        
-        # Trier les résultats par score décroissant
-        sorted_results = sorted(results, key=lambda x: x['score'], reverse=True)
-        
-        return {
-            'success': True,
-            'matches': sorted_results,
-            'stats': score_stats
-        }
-        
-    except Exception as e:
-        logger.error(f"Erreur lors de la génération des matchings: {str(e)}")
-        return {
-            'success': False,
-            'error': str(e)
-        }
-    """
-    Génère des matchings pour un appel d'offre spécifique
-    Version améliorée avec extraction intelligente des critères et mise en cache
-    """
-    try:
-        # Récupérer l'appel d'offre
-        try:
-            appel_offre = AppelOffre.objects.get(id=appel_offre_id)
-        except AppelOffre.DoesNotExist:
-            logger.error(f"Appel d'offre avec ID {appel_offre_id} introuvable")
-            return {
-                'success': False,
-                'error': f"Appel d'offre avec ID {appel_offre_id} introuvable"
-            }
-
-        # Vérifier dates et description
-        if appel_offre.date_debut is None or appel_offre.date_fin is None:
-            logger.error(f"Dates manquantes pour l'appel d'offre {appel_offre_id}")
-            return {
-                'success': False,
-                'error': "Les dates de début et/ou de fin de l'appel d'offre sont manquantes"
-            }
-        
-        # Récupérer les consultants validés
-        consultants = Consultant.objects.filter(
-            is_validated=True
-        ).exclude(
-            date_debut_dispo=None
-        ).exclude(
-            date_fin_dispo=None
-        )
-        
-        # Vider les anciens matchings pour cet appel d'offre
-        MatchingResult.objects.filter(appel_offre=appel_offre).delete()
-        
-        results = []
-        
-        # Calculer les scores pour chaque consultant
-        for consultant in consultants:
-            try:
-                # Calculer les scores (maintenant avec cache)
-                date_score = calculate_date_match_score(consultant, appel_offre)
-                skills_score = calculate_skills_match_score(consultant, appel_offre)
-                
-                # Pondération: 40% date, 60% compétences 
-                final_score = (date_score * 0.4) + (skills_score * 0.6)
-                final_score = min(100, final_score)  # Cap à 100%
+                logger.info(f"Score final pour {consultant.nom}: {final_score:.2f}%")
                 
                 # Enregistrer le résultat
                 matching = MatchingResult.objects.create(
@@ -2056,9 +2096,9 @@ def generate_matching_for_offer(appel_offre_id):
                     'email': consultant.email,
                     'domaine_principal': consultant.domaine_principal,
                     'specialite': consultant.specialite or "",
-                    'top_skills': get_top_skills(consultant),
-                    'date_match_score': date_score,
-                    'skills_match_score': skills_score,
+                    'top_skills': get_top_skills_updated(consultant),
+                    'date_match_score': float(date_score),
+                    'skills_match_score': float(skills_score),
                     'score': float(final_score),
                     'is_validated': False
                 })
@@ -2067,12 +2107,27 @@ def generate_matching_for_offer(appel_offre_id):
                 logger.error(f"Erreur lors du calcul pour le consultant {consultant.id}: {str(e)}")
                 continue
         
+        # Calculer les statistiques finales
+        if results:
+            score_stats["avg"] = score_stats["total"] / len(results)
+            score_stats["count"] = len(results)
+            
+            logger.info(f"Matchings générés: {len(results)}, score moyen: {score_stats['avg']:.2f}%")
+        
         # Trier les résultats par score décroissant
         sorted_results = sorted(results, key=lambda x: x['score'], reverse=True)
         
         return {
             'success': True,
-            'matches': sorted_results
+            'matches': sorted_results,
+            'stats': score_stats,
+            'appel_offre_info': {
+                'id': appel_offre.id,
+                'titre': appel_offre.titre,
+                'client': appel_offre.client,
+                'has_description': bool(appel_offre.description),
+                'has_criteria': CriteresEvaluation.objects.filter(appel_offre=appel_offre).exists()
+            }
         }
         
     except Exception as e:
@@ -2081,131 +2136,26 @@ def generate_matching_for_offer(appel_offre_id):
             'success': False,
             'error': str(e)
         }
+
+def get_top_skills_updated(consultant, limit=5):
     """
-    Génère des matchings pour un appel d'offre spécifique
-    Version améliorée avec extraction intelligente des critères
+    Récupère les compétences principales d'un consultant
     """
     try:
-        # Récupérer l'appel d'offre
-        try:
-            appel_offre = AppelOffre.objects.get(id=appel_offre_id)
-        except AppelOffre.DoesNotExist:
-            logger.error(f"Appel d'offre avec ID {appel_offre_id} introuvable")
-            return {
-                'success': False,
-                'error': f"Appel d'offre avec ID {appel_offre_id} introuvable"
-            }
-
-        # Vérifier dates et description
-        if appel_offre.date_debut is None or appel_offre.date_fin is None:
-            logger.error(f"Dates manquantes pour l'appel d'offre {appel_offre_id}")
-            return {
-                'success': False,
-                'error': "Les dates de début et/ou de fin de l'appel d'offre sont manquantes"
-            }
-        
-        # Déterminer le domaine principal de l'appel d'offre
-        description = appel_offre.description.lower() if appel_offre.description else ""
-        
-        if not description:
-            logger.warning(f"Description manquante pour l'appel d'offre {appel_offre_id}")
-            
-        # Compter les occurrences de compétences par domaine
-        domain_scores = {
-            'DIGITAL': 0,
-            'FINANCE': 0,
-            'ENERGIE': 0,
-            'INDUSTRIE': 0
-        }
-        
-        domain_matches = {}
-        for domain, skills_list in ALL_SKILLS.items():
-            domain_matches[domain] = []
-            for skill in skills_list:
-                skill_lower = skill.lower()
-                if description and skill_lower in description:
-                    domain_scores[domain] += 1
-                    domain_matches[domain].append(skill)
-                    
-        # Normaliser les scores par domaine
-        weighted_domain_scores = {}
-        for domain, score in domain_scores.items():
-            total_skills = len(ALL_SKILLS[domain])
-            if total_skills > 0:
-                weighted_domain_scores[domain] = float(score) / float(total_skills) * 100.0
-            else:
-                weighted_domain_scores[domain] = 0
-                
-        # Déterminer le domaine principal
-        if any(weighted_domain_scores.values()):
-            domain_items = sorted(weighted_domain_scores.items(), key=lambda x: x[1], reverse=True)
-            ao_domain = domain_items[0][0]
-            logger.info(f"Domaine principal détecté pour l'appel d'offre {appel_offre_id}: {ao_domain}")
-            
-            # Extraire les compétences mentionnées dans ce domaine pour créer des critères
-            if not CriteresEvaluation.objects.filter(appel_offre=appel_offre).exists():
-                # Récupérer les compétences détectées dans la description
-                detected_skills = domain_matches.get(ao_domain, [])
-                
-                # Si peu de compétences détectées, chercher dans les autres domaines
-                if len(detected_skills) < 3:
-                    for domain, matches in domain_matches.items():
-                        if domain != ao_domain:
-                            detected_skills.extend(matches)
-                            
-                    # Limiter à 10 compétences maximum
-                    detected_skills = detected_skills[:10]
-                
-                # S'il y a des compétences détectées, créer des critères d'évaluation
-                if detected_skills:
-                    # Distribuer les poids également
-                    weight_per_criteria = Decimal(100.0 / float(len(detected_skills)))
-                    
-                    # Créer les critères
-                    for skill in detected_skills:
-                        CriteresEvaluation.objects.create(
-                            appel_offre=appel_offre,
-                            nom_critere=skill,
-                            poids=weight_per_criteria
-                        )
-                    logger.info(f"Critères créés automatiquement pour l'appel d'offre {appel_offre_id}: {detected_skills}")
-        
-        # Suite du code pour le matching...
-        # (récupération des consultants, calcul des scores, etc.)
-        
-        # Récupérer les consultants validés
-        consultants = Consultant.objects.filter(
-            is_validated=True
-        ).exclude(
-            date_debut_dispo=None
-        ).exclude(
-            date_fin_dispo=None
-        )
-        
-        # Code existant pour le calcul des matchings...
-        
-        return {
-            'success': True,
-            'matches': sorted_results
-        }
-        
+        top_skills = Competence.objects.filter(consultant=consultant).order_by('-niveau')[:limit]
+        return [skill.nom_competence for skill in top_skills]
     except Exception as e:
-        logger.error(f"Erreur lors de la génération des matchings: {str(e)}")
-        return {
-            'success': False,
-            'error': str(e)
-        }
-@api_view(['GET', 'POST'])
+        logger.error(f"Erreur lors de la récupération des compétences: {str(e)}")
+        return []
 
-def matching_for_offer(request, appel_offre_id):
+@api_view(['GET', 'POST'])
+def matching_for_offer_updated(request, appel_offre_id):
     """
-    Endpoint pour générer ou récupérer des matchings pour un appel d'offre
-    Version révisée pour résoudre le problème d'affichage des scores
+    Endpoint pour générer ou récupérer des matchings pour un appel d'offre scrapé
+    Version adaptée pour le nouveau modèle AppelOffre
     """
-    # Journal d'activité pour le débogage
-    logger.info(f"Requête {request.method} reçue pour appel d'offre ID {appel_offre_id}")
+    logger.info(f"Requête {request.method} reçue pour appel d'offre scrapé ID {appel_offre_id}")
     
-    # Convertir appel_offre_id en entier pour s'assurer qu'il est du bon type
     try:
         appel_offre_id = int(appel_offre_id)
     except ValueError:
@@ -2215,14 +2165,10 @@ def matching_for_offer(request, appel_offre_id):
         }, status=400)
 
     if request.method == 'GET':
-        # Récupérer les matchings existants
         try:
-            # Journaliser l'appel
-            logger.info(f"Récupération des matchings pour l'appel d'offre {appel_offre_id}")
-
             # Vérifier que l'appel d'offre existe
             try:
-                AppelOffre.objects.get(id=appel_offre_id)
+                appel_offre = AppelOffre.objects.get(id=appel_offre_id)
             except AppelOffre.DoesNotExist:
                 return Response({
                     'success': False,
@@ -2234,10 +2180,8 @@ def matching_for_offer(request, appel_offre_id):
                 appel_offre_id=appel_offre_id
             ).order_by('-score')
 
-            # Log du nombre de matchings trouvés
-            logger.info(f"{matches.count()} matchings trouvés pour l'appel d'offre {appel_offre_id}")
+            logger.info(f"{matches.count()} matchings trouvés pour l'AO scrapé {appel_offre_id}")
 
-            # Si aucun matching n'existe, renvoyer un tableau vide mais avec succès
             if not matches.exists():
                 return Response({
                     'success': True,
@@ -2248,49 +2192,27 @@ def matching_for_offer(request, appel_offre_id):
             for match in matches:
                 consultant = match.consultant
 
-                # Récupérer les top compétences
-                top_skills = Competence.objects.filter(consultant=consultant).order_by('-niveau')[:5]
-                skills_list = [skill.nom_competence for skill in top_skills]
-
-                # Calculer les scores détaillés pour l'affichage
                 try:
-                    date_score = calculate_date_match_score(consultant, match.appel_offre)
-                    skills_score = calculate_skills_match_score(consultant, match.appel_offre)
-                    # Vérifier que le score stocké est cohérent avec le score calculé
-                    calculated_score = (date_score * 0.4) + (skills_score * 0.6)
+                    # Recalculer les scores si nécessaire
+                    date_score = calculate_date_match_score_updated(consultant, match.appel_offre)
+                    skills_score = calculate_skills_match_score_updated(consultant, match.appel_offre)
+                    calculated_score = (date_score * 0.3) + (skills_score * 0.7)
                     stored_score = float(match.score)
                     
-                    # Loguer les valeurs pour débogage
-                    logger.info(f"Consultant {consultant.id} - {consultant.nom}: Score stocké: {stored_score}, "
-                                f"Score calculé: {calculated_score}, Date score: {date_score}, Skills score: {skills_score}")
-                                
-                    # Si l'écart est important, mettre à jour le score stocké
+                    # Vérifier la cohérence
                     if abs(calculated_score - stored_score) > 5:
-                        logger.warning(f"Différence importante entre score stocké et calculé pour consultant {consultant.id}")
-                        # Optionnel: mettre à jour le score dans la base de données
                         match.score = Decimal(str(calculated_score))
                         match.save(update_fields=['score'])
                         stored_score = calculated_score
                         
                 except Exception as e:
-                    logger.error(f"Erreur lors du calcul des scores détaillés: {str(e)}")
+                    logger.error(f"Erreur lors du recalcul des scores: {str(e)}")
                     date_score = 0
                     skills_score = 0
                     stored_score = float(match.score)
 
-                # S'assurer que le score est bien un nombre flottant
-                if isinstance(stored_score, Decimal):
-                    stored_score = float(stored_score)
-                elif isinstance(stored_score, str):
-                    try:
-                        stored_score = float(stored_score)
-                    except ValueError:
-                        stored_score = 0
-                
-                # Vérifier que le score est dans la plage [0, 100]
-                stored_score = max(0, min(100, stored_score))
+                stored_score = max(0, min(100, float(stored_score)))
 
-                # Ajouter les informations du matching
                 result.append({
                     'id': match.id,
                     'consultant_id': consultant.id,
@@ -2299,25 +2221,20 @@ def matching_for_offer(request, appel_offre_id):
                     'email': consultant.email,
                     'domaine_principal': consultant.domaine_principal,
                     'specialite': consultant.specialite or "",
-                    'top_skills': skills_list,
+                    'top_skills': get_top_skills_updated(consultant),
                     'date_match_score': round(date_score, 1),
                     'skills_match_score': round(skills_score, 1),
-                    'score': stored_score,  # Utiliser le score vérifié
+                    'score': stored_score,
                     'is_validated': match.is_validated
                 })
 
-            # Trier les résultats par score décroissant
             sorted_result = sorted(result, key=lambda x: x['score'], reverse=True)
-            
-            # Log final pour vérifier les scores envoyés au frontend
-            for i, match_data in enumerate(sorted_result[:5]):  # Afficher les 5 premiers pour ne pas surcharger les logs
-                logger.info(f"Match {i+1}: Consultant {match_data['consultant_name']}, "
-                            f"Score: {match_data['score']}, Type: {type(match_data['score'])}")
 
             return Response({
                 'success': True,
                 'matches': sorted_result
             })
+            
         except Exception as e:
             logger.error(f"Erreur lors de la récupération des matchings: {str(e)}")
             return Response({
@@ -2326,48 +2243,37 @@ def matching_for_offer(request, appel_offre_id):
             }, status=500)
 
     elif request.method == 'POST':
-        # Générer de nouveaux matchings
         try:
-            logger.info(f"Génération de nouveaux matchings pour l'appel d'offre {appel_offre_id}")
+            logger.info(f"Génération de nouveaux matchings pour l'AO scrapé {appel_offre_id}")
             
-            # Vider le cache des scores avant de calculer de nouveaux matchings
             clear_score_cache()
-            logger.info("Cache des scores vidé avant génération de nouveaux matchings")
             
-            result = generate_matching_for_offer(appel_offre_id)
+            result = generate_matching_for_offer_updated(appel_offre_id)
 
-            # Vérifier si le résultat est valide
             if not isinstance(result, dict):
-                logger.error(f"La fonction generate_matching_for_offer a retourné un type inattendu: {type(result)}")
                 return Response({
                     'success': False,
                     'error': "Erreur interne: format de résultat invalide"
                 }, status=500)
 
-            # Si succès, mais pas de matchings, retourner un message plus clair
             if result.get('success') and not result.get('matches', []):
                 return Response({
                     'success': False,
                     'error': "Aucun consultant disponible pour le matching"
                 }, status=404)
                 
-            # Vérification et débogage des scores générés
+            # Vérification des scores générés
             if result.get('success') and result.get('matches'):
-                for i, match in enumerate(result['matches'][:5]):  # Afficher les 5 premiers
-                    logger.info(f"Match généré {i+1}: Consultant {match['consultant_name']}, "
-                                f"Score: {match['score']}, Date: {match['date_match_score']}, "
-                                f"Skills: {match['skills_match_score']}")
+                for i, match in enumerate(result['matches'][:5]):
+                    logger.info(f"Match généré {i+1}: {match['consultant_name']}, Score: {match['score']}")
                 
-                # Vérifier que les scores sont uniques
                 scores = [match['score'] for match in result['matches']]
                 unique_scores = set(scores)
                 if len(unique_scores) == 1:
                     logger.warning(f"ATTENTION: Tous les consultants ont le même score: {list(unique_scores)[0]}")
-                else:
-                    logger.info(f"Variété de scores générés: min={min(scores)}, max={max(scores)}, "
-                                f"unique_count={len(unique_scores)}")
 
             return Response(result)
+            
         except Exception as e:
             logger.error(f"Exception lors de la génération des matchings: {str(e)}")
             return Response({
@@ -2375,16 +2281,14 @@ def matching_for_offer(request, appel_offre_id):
                 'error': f"Erreur lors de la génération des matchings: {str(e)}"
             }, status=500)
     else:
-        # Cette partie ne devrait pas être atteinte grâce au décorateur @api_view
-        logger.warning(f"Méthode non autorisée: {request.method}")
         return Response({
             'success': False,
             'error': f"Méthode {request.method} non supportée"
         }, status=405)
 
-def create_notification(consultant, notification_type, title, content, appel_offre=None, match=None):
+def create_notification_for_consultant(consultant, notification_type, title, content, appel_offre=None, match=None):
     """
-    Crée une notification dans le système
+    Fonction helper pour créer des notifications de manière sécurisée
     """
     try:
         notification = Notification.objects.create(
@@ -2393,172 +2297,216 @@ def create_notification(consultant, notification_type, title, content, appel_off
             title=title,
             content=content,
             related_appel=appel_offre,
-            related_match=match
+            related_match=match,
+            is_read=False
         )
-        logger.info(f"Notification créée pour {consultant.nom} {consultant.prenom}: {title}")
+        
+        logger.info(f"✅ Notification créée: {title} pour {consultant.nom} {consultant.prenom}")
         return notification
+        
     except Exception as e:
-        logger.error(f"Erreur lors de la création de la notification: {str(e)}")
+        logger.error(f"❌ Erreur création notification: {str(e)}")
         return None
 
-
-@api_view(['GET'])
-def consultant_notifications(request, consultant_id):
     """
-    Récupère les notifications d'un consultant
+    Récupère les notifications d'un consultant - VERSION CORRIGÉE
     """
     try:
         consultant = get_object_or_404(Consultant, id=consultant_id)
+        
+        logger.info(f"🔔 Récupération des notifications pour consultant {consultant_id}")
 
-        # Récupérer toutes les notifications
-        notifications = Notification.objects.filter(consultant=consultant).order_by('-created_at')
+        # Récupérer toutes les notifications avec relations
+        notifications = Notification.objects.filter(
+            consultant=consultant
+        ).select_related('related_appel', 'related_match').order_by('-created_at')
+
+        logger.info(f"📊 Notifications trouvées: {notifications.count()}")
 
         # Formater pour l'API
         results = []
         for notif in notifications:
-            results.append({
-                'id': notif.id,
-                'type': notif.type,
-                'title': notif.title,
-                'content': notif.content,
-                'is_read': notif.is_read,
-                'created_at': notif.created_at,
-                'appel_offre_id': notif.related_appel.id if notif.related_appel else None,
-                'appel_offre_nom': notif.related_appel.nom_projet if notif.related_appel else None,
-                'match_id': notif.related_match.id if notif.related_match else None
-            })
+            try:
+                notification_data = {
+                    'id': notif.id,
+                    'type': notif.type,
+                    'title': notif.title,
+                    'content': notif.content,
+                    'is_read': notif.is_read,
+                    'created_at': notif.created_at.isoformat(),
+                    'appel_offre_id': notif.related_appel.id if notif.related_appel else None,
+                    'appel_offre_nom': notif.related_appel.titre if notif.related_appel else None,  # Nouveau modèle
+                    'match_id': notif.related_match.id if notif.related_match else None
+                }
+                
+                results.append(notification_data)
+                logger.debug(f"✅ Notification formatée: {notif.title}")
+                
+            except Exception as notif_error:
+                logger.error(f"❌ Erreur formatage notification {notif.id}: {str(notif_error)}")
+                continue
 
         # Compter les notifications non lues
         unread_count = notifications.filter(is_read=False).count()
+        
+        logger.info(f"✅ {len(results)} notifications formatées, {unread_count} non lues")
 
         return Response({
             'success': True,
             'notifications': results,
-            'unread_count': unread_count
+            'unread_count': unread_count,
+            'total_count': len(results)
         })
+        
     except Exception as e:
-        logger.error(f"Erreur lors de la récupération des notifications: {str(e)}")
+        logger.error(f"❌ Erreur lors de la récupération des notifications: {str(e)}")
         return Response({
             'success': False,
-            'error': str(e)
+            'error': str(e),
+            'notifications': [],
+            'unread_count': 0
         }, status=500)
-
-
 @api_view(['PUT'])
 def mark_notification_read(request, notification_id):
     """
-    Marque une notification comme lue
+    Marque une notification comme lue - VERSION CORRIGÉE
     """
     try:
         notification = get_object_or_404(Notification, id=notification_id)
-        notification.is_read = True
-        notification.save()
-
+        
+        # Marquer comme lue seulement si pas déjà lue
+        if not notification.is_read:
+            notification.is_read = True
+            notification.save(update_fields=['is_read'])
+            logger.info(f"✅ Notification {notification_id} marquée comme lue")
+        
         return Response({
             'success': True,
-            'message': 'Notification marquée comme lue'
+            'message': 'Notification marquée comme lue',
+            'notification_id': notification_id
         })
+        
     except Exception as e:
-        logger.error(f"Erreur lors du marquage de la notification: {str(e)}")
+        logger.error(f"❌ Erreur lors du marquage de la notification {notification_id}: {str(e)}")
         return Response({
             'success': False,
             'error': str(e)
         }, status=500)
-
 
 @api_view(['PUT'])
 def validate_match(request, match_id):
     """
-    Endpoint pour valider ou invalider un matching
-    Version corrigée avec meilleure gestion des erreurs
+    Endpoint pour valider un matching avec création automatique de notification
+    VERSION CORRIGÉE avec gestion complète des notifications
     """
     try:
-        # Récupérer le matching par son ID
-        try:
-            match = MatchingResult.objects.get(id=match_id)
-        except MatchingResult.DoesNotExist:
-            return Response({
-                'success': False,
-                'error': 'Matching non trouvé'
-            }, status=404)
-            
-        # Récupérer consultant et appel d'offre avec gestion d'erreur
-        try:
-            consultant = match.consultant
-            appel_offre = match.appel_offre
-        except Exception as e:
-            logger.error(f"Erreur lors de la récupération des relations: {str(e)}")
-            return Response({
-                'success': False,
-                'error': 'Erreur lors de la récupération des données associées'
-            }, status=500)
+        match = get_object_or_404(MatchingResult, id=match_id)
+        consultant = match.consultant
+        appel_offre = match.appel_offre
 
-        # Vérifier si on passe de non validé à validé pour envoyer une notification
         was_validated = match.is_validated
 
         # Inverser l'état de validation
         match.is_validated = not match.is_validated
         match.save()
 
-        notification_status = None
+        notification_created = False
+        mission_created = False
         
-        # Si le match vient d'être validé, envoyer une notification
+        # 🔥 Si le match vient d'être validé, créer notification ET mission
         if not was_validated and match.is_validated:
-            # Création de la notification avec bloc try/except séparé
+            logger.info(f"🎯 Validation d'un matching pour {consultant.nom} {consultant.prenom}")
+            
+            # 1. Créer la mission automatiquement
             try:
-                title = f"Mission confirmée : {appel_offre.nom_projet}"
-                content = f"Votre profil a été sélectionné pour la mission '{appel_offre.nom_projet}' chez {appel_offre.client}. Consultez les détails dans la section 'Mes Missions'."
-
-                # Utiliser create_notification avec gestion d'erreur
-                try:
-                    notification = create_notification(
-                        consultant=consultant,
-                        notification_type="MATCH_VALID",
-                        title=title,
-                        content=content,
-                        appel_offre=appel_offre,
-                        match=match
-                    )
-                    
-                    if notification:
-                        logger.info(f"Notification de validation créée pour {consultant.nom} {consultant.prenom}")
-                        notification_status = "Notification envoyée au consultant"
-                except Exception as notif_error:
-                    logger.error(f"Erreur lors de la création de la notification: {str(notif_error)}")
-                    notification_status = "Erreur lors de la création de la notification"
+                mission = create_mission_from_matching(match)
+                if mission:
+                    mission_created = True
+                    logger.info(f"✅ Mission créée automatiquement: ID {mission.id}")
                 
-                # Email dans un bloc séparé
-                try:
-                    # Import dans un bloc try pour éviter des erreurs d'import
-                    from .email_service import send_mission_notification
-                    
-                    # Lancer l'envoi d'email dans un thread
-                    thread = threading.Thread(
-                        target=send_mission_notification,
-                        args=(consultant, appel_offre)
-                    )
-                    thread.daemon = True
-                    thread.start()
-                    
-                    if not notification_status:
-                        notification_status = "Email de notification envoyé au consultant"
-                except Exception as email_error:
-                    logger.error(f"Erreur lors de l'envoi d'email: {str(email_error)}")
-                    if not notification_status:
-                        notification_status = "Notification enregistrée mais erreur lors de l'envoi d'email"
-            except Exception as global_notif_error:
-                logger.error(f"Erreur générale lors du processus de notification: {str(global_notif_error)}")
-                notification_status = "Erreur lors du processus de notification"
+            except Exception as mission_error:
+                logger.error(f"❌ Erreur création mission: {str(mission_error)}")
+            
+            # 2. CORRECTION - Créer la notification avec le nouveau modèle
+            try:
+                from .models import Notification
+                
+                title = f"🎉 Mission confirmée : {getattr(appel_offre, 'titre', 'Nouvelle mission')}"
+                content = (
+                    f"Félicitations ! Votre profil a été sélectionné pour la mission "
+                    f"'{getattr(appel_offre, 'titre', 'la mission')}' chez {getattr(appel_offre, 'client', 'le client')}. "
+                    f"Score de matching: {float(match.score):.1f}%. "
+                    f"Vous pouvez maintenant consulter les détails dans la section 'Mes Missions'."
+                )
+
+                notification = Notification.objects.create(
+                    consultant=consultant,
+                    type="MATCH_VALID",
+                    title=title,
+                    content=content,
+                    priority="HIGH",  # Priorité élevée pour les validations
+                    related_appel=appel_offre,
+                    related_match=match,
+                    related_mission=mission if mission_created else None,
+                    is_read=False,
+                    metadata={
+                        'match_score': float(match.score),
+                        'client': getattr(appel_offre, 'client', ''),
+                        'mission_auto_created': mission_created,
+                        'validation_date': timezone.now().isoformat()
+                    }
+                )
+                
+                notification_created = True
+                logger.info(f"✅ Notification créée: ID {notification.id}")
+                
+            except Exception as notif_error:
+                logger.error(f"❌ Erreur création notification: {str(notif_error)}")
+
+        # 🔥 Si le match est invalidé, créer une notification d'information
+        elif was_validated and not match.is_validated:
+            try:
+                from .models import Notification
+                
+                title = f"ℹ️ Statut de mission mis à jour"
+                content = (
+                    f"Le statut de votre candidature pour la mission "
+                    f"'{getattr(appel_offre, 'titre', 'la mission')}' a été mis à jour. "
+                    f"Contactez l'administrateur pour plus d'informations."
+                )
+
+                notification = Notification.objects.create(
+                    consultant=consultant,
+                    type="MISSION_UPDATE",
+                    title=title,
+                    content=content,
+                    priority="NORMAL",
+                    related_appel=appel_offre,
+                    related_match=match,
+                    is_read=False,
+                    metadata={
+                        'action': 'invalidation',
+                        'previous_score': float(match.score)
+                    }
+                )
+                
+                notification_created = True
+                logger.info(f"✅ Notification d'invalidation créée")
+                
+            except Exception as notif_error:
+                logger.error(f"❌ Erreur notification invalidation: {str(notif_error)}")
 
         return Response({
             'success': True,
             'is_validated': match.is_validated,
+            'mission_created': mission_created,
+            'notification_created': notification_created,
             'message': f"Statut de validation mis à jour avec succès: {'validé' if match.is_validated else 'non validé'}",
-            'notification': notification_status
+            'notification_status': 'Notification envoyée au consultant' if notification_created else 'Aucune notification créée'
         })
 
     except Exception as e:
-        logger.error(f"Erreur lors de la validation du matching {match_id}: {str(e)}")
+        logger.error(f"❌ Erreur lors de la validation du matching {match_id}: {str(e)}")
         return Response({
             'success': False,
             'error': f"Erreur lors de la validation: {str(e)}"
@@ -2634,56 +2582,307 @@ def admin_login(request):
         return Response({"error": "Une erreur s'est produite lors de la connexion"}, status=500)
 
 
+
 @api_view(['GET'])
 def appel_offre_detail(request, pk):
     """
-    Récupère les détails d'un appel d'offre spécifique
+    Vue publique pour récupérer les détails d'un appel d'offre
+    Compatible avec le nouveau modèle
     """
     try:
         appel = get_object_or_404(AppelOffre, id=pk)
-        serializer = AppelOffreSerializer(appel)
-        return Response(serializer.data)
+        
+        appel_data = {
+            'id': appel.id,
+            'titre': appel.titre,
+            'date_de_publication': appel.date_de_publication.isoformat() if appel.date_de_publication else None,
+            'date_limite': appel.date_limite.isoformat() if appel.date_limite else None,
+            'client': appel.client,
+            'type_d_appel_d_offre': appel.type_d_appel_d_offre,
+            'description': appel.description,
+            'critere_evaluation': appel.critere_evaluation,
+            'documents': appel.documents,
+            'lien_site': appel.lien_site,
+            'created_at': appel.created_at.isoformat(),
+            'updated_at': appel.updated_at.isoformat(),
+            'is_expired': appel.is_expired,
+            'days_remaining': appel.days_remaining
+        }
+        
+        # Informations contextuelles pour le frontend
+        appel_data['source_info'] = {
+            'is_scraped': True,
+            'has_external_link': bool(appel.lien_site),
+            'publication_date': appel.date_de_publication.isoformat() if appel.date_de_publication else None,
+            'deadline_date': appel.date_limite.isoformat() if appel.date_limite else None
+        }
+        
+        # Informations sur l'enrichissement
+        appel_data['enrichment_info'] = {
+            'description_length': len(appel.description) if appel.description else 0,
+            'has_evaluation_criteria': bool(appel.critere_evaluation),
+            'criteria_length': len(appel.critere_evaluation) if appel.critere_evaluation else 0,
+            'has_documents_info': bool(appel.documents),
+            'structured_criteria_count': CriteresEvaluation.objects.filter(appel_offre=appel).count()
+        }
+        
+        return Response(appel_data)
+        
     except Exception as e:
-        logger.error(f"Erreur lors de la récupération des détails de l'appel d'offre {pk}: {str(e)}")
+        logger.error(f"Erreur lors de la récupération des détails de l'AO {pk}: {str(e)}")
         return Response({"error": str(e)}, status=500)
-
-
-
-
-
 
 @api_view(['GET', 'POST', 'DELETE'])
 def appel_offre_criteres(request, appel_id):
-    """Gère les critères d'un appel d'offre"""
+    """
+    Gère les critères structurés d'un appel d'offre - ADAPTÉ AU NOUVEAU MODÈLE
+    Compatible avec le système de critères d'AppelsOffres.tsx
+    """
     try:
         appel = get_object_or_404(AppelOffre, id=appel_id)
 
         if request.method == 'GET':
-            criteres = CriteresEvaluation.objects.filter(appel_offre=appel)
-            serializer = CriteresEvaluationSerializer(criteres, many=True)
-            return Response(serializer.data)
+            # Récupérer tous les critères structurés
+            criteres = CriteresEvaluation.objects.filter(appel_offre=appel).order_by('-poids', 'nom_critere')
+            
+            # Format compatible avec le frontend
+            criteres_data = []
+            for critere in criteres:
+                criteres_data.append({
+                    'id': critere.id,
+                    'nom_critere': critere.nom_critere,
+                    'poids': float(critere.poids),
+                    'description': critere.description
+                })
+            
+            # Informations contextuelles
+            response_data = {
+                'criteres': criteres_data,
+                'total_count': len(criteres_data),
+                'appel_offre_info': {
+                    'id': appel.id,
+                    'titre': appel.titre,
+                    'has_text_criteria': bool(appel.critere_evaluation),
+                    'text_criteria_length': len(appel.critere_evaluation) if appel.critere_evaluation else 0
+                }
+            }
+            
+            return Response(response_data)
 
         elif request.method == 'POST':
-            data = request.data.copy()
-            data['appel_offre'] = appel_id
-            serializer = CriteresEvaluationSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=201)
-            return Response(serializer.errors, status=400)
+            # Ajouter un nouveau critère structuré
+            nom_critere = request.data.get('nom_critere', '').strip()
+            poids = request.data.get('poids', 1)
+            
+            # Validation
+            if not nom_critere:
+                return Response({
+                    'error': 'Le nom du critère est requis'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Vérifier les doublons
+            if CriteresEvaluation.objects.filter(
+                appel_offre=appel, 
+                nom_critere__iexact=nom_critere
+            ).exists():
+                return Response({
+                    'error': 'Un critère avec ce nom existe déjà'
+                }, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Créer le critère
+            try:
+                critere = CriteresEvaluation.objects.create(
+                    appel_offre=appel,
+                    nom_critere=nom_critere,
+                    poids=poids,
+                    description=request.data.get('description', '')
+                )
+                
+                logger.info(f"Critère '{critere.nom_critere}' ajouté à l'AO {appel_id}")
+                
+                return Response({
+                    'id': critere.id,
+                    'nom_critere': critere.nom_critere,
+                    'poids': float(critere.poids),
+                    'description': critere.description
+                }, status=201)
+                
+            except Exception as create_error:
+                logger.error(f"Erreur création critère: {str(create_error)}")
+                return Response({
+                    'error': f'Erreur lors de la création: {str(create_error)}'
+                }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         elif request.method == 'DELETE':
             # Supprimer tous les critères de cet appel d'offre
-            deleted_count = CriteresEvaluation.objects.filter(appel_offre=appel).delete()[0]
+            deleted_count, _ = CriteresEvaluation.objects.filter(appel_offre=appel).delete()
+            
+            logger.info(f"{deleted_count} critères supprimés pour l'AO {appel_id}")
+            
             return Response({
-                'message': f'{deleted_count} critères supprimés'
-            }, status=204)
+                'message': f'{deleted_count} critères supprimés',
+                'appel_offre_id': appel_id,
+                'deleted_count': deleted_count
+            }, status=200)
+            
     except Exception as e:
-        logger.error(f"Erreur dans appel_offre_criteres: {str(e)}")
+        logger.error(f"Erreur dans appel_offre_criteres pour AO {appel_id}: {str(e)}")
         return Response({
             'error': f'Erreur lors de la gestion des critères: {str(e)}'
         }, status=500)
 
+@api_view(['POST'])
+def bulk_enrich_appels_offres(request):
+    """
+    NOUVEAU: Enrichissement en lot des appels d'offres
+    """
+    try:
+        appel_ids = request.data.get('appel_ids', [])
+        enrichment_data = request.data.get('enrichment_data', {})
+        
+        if not appel_ids:
+            return Response({
+                'error': 'Liste des IDs d\'appels d\'offres requise'
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Champs autorisés pour l'enrichissement en lot
+        allowed_fields = ['type_d_appel_d_offre']
+        update_data = {k: v for k, v in enrichment_data.items() if k in allowed_fields}
+        
+        if not update_data:
+            return Response({
+                'error': 'Aucune donnée d\'enrichissement valide fournie',
+                'allowed_fields': allowed_fields
+            }, status=status.HTTP_400_BAD_REQUEST)
+        
+        # Mise à jour en lot
+        updated_count = AppelOffre.objects.filter(id__in=appel_ids).update(**update_data)
+        
+        logger.info(f"Enrichissement en lot: {updated_count} appels d'offres mis à jour")
+        
+        return Response({
+            'message': f'{updated_count} appels d\'offres enrichis avec succès',
+            'updated_count': updated_count,
+            'updated_fields': list(update_data.keys())
+        })
+        
+    except Exception as e:
+        logger.error(f"Erreur dans bulk_enrich_appels_offres: {str(e)}")
+        return Response({
+            'error': f'Erreur lors de l\'enrichissement en lot: {str(e)}'
+        }, status=500)
+@api_view(['GET'])
+def appels_offres_stats(request):
+    """
+    NOUVEAU: Statistiques sur les appels d'offres scrapés
+    """
+    try:
+        from django.db.models import Count, Q
+        from django.utils import timezone
+        
+        # Statistiques de base
+        total_appels = AppelOffre.objects.count()
+        
+        # Appels actifs (date limite non dépassée ou non définie)
+        now = timezone.now().date()
+        appels_actifs = AppelOffre.objects.filter(
+            Q(date_limite__gte=now) | Q(date_limite__isnull=True)
+        ).count()
+        
+        # Appels expirés
+        appels_expires = AppelOffre.objects.filter(date_limite__lt=now).count()
+        
+        # Appels enrichis (avec description et critères)
+        appels_enrichis = AppelOffre.objects.filter(
+            description__isnull=False,
+            critere_evaluation__isnull=False
+        ).exclude(description='').exclude(critere_evaluation='').count()
+        
+        # Appels avec critères structurés
+        appels_avec_criteres = AppelOffre.objects.annotate(
+            criteria_count=Count('criteres')
+        ).filter(criteria_count__gt=0).count()
+        
+        # Statistiques par type
+        stats_par_type = AppelOffre.objects.values('type_d_appel_d_offre').annotate(
+            count=Count('id')
+        ).order_by('-count')
+        
+        # Statistiques par client
+        stats_par_client = AppelOffre.objects.values('client').annotate(
+            count=Count('id')
+        ).order_by('-count')[:10]  # Top 10 clients
+        
+        # Appels récents (7 derniers jours)
+        week_ago = now - timedelta(days=7)
+        appels_recents = AppelOffre.objects.filter(created_at__gte=week_ago).count()
+        
+        response_data = {
+            'totals': {
+                'total_appels': total_appels,
+                'appels_actifs': appels_actifs,
+                'appels_expires': appels_expires,
+                'appels_enrichis': appels_enrichis,
+                'appels_avec_criteres': appels_avec_criteres,
+                'appels_recents': appels_recents
+            },
+            'percentages': {
+                'taux_enrichissement': (appels_enrichis / total_appels * 100) if total_appels > 0 else 0,
+                'taux_criteres_structures': (appels_avec_criteres / total_appels * 100) if total_appels > 0 else 0,
+                'taux_actifs': (appels_actifs / total_appels * 100) if total_appels > 0 else 0
+            },
+            'repartition_types': list(stats_par_type),
+            'top_clients': list(stats_par_client),
+            'periode_analyse': {
+                'date_analyse': now.isoformat(),
+                'periode_recente': f"{week_ago.isoformat()} - {now.isoformat()}"
+            }
+        }
+        
+        return Response(response_data)
+        
+    except Exception as e:
+        logger.error(f"Erreur dans appels_offres_stats: {str(e)}")
+        return Response({
+            'error': f'Erreur lors du calcul des statistiques: {str(e)}'
+        }, status=500)
+
+@api_view(['PUT', 'DELETE'])
+def critere_detail(request, critere_id):
+    """
+    Modifie ou supprime un critère spécifique
+    NOUVEAU: Gestion individuelle des critères structurés
+    """
+    try:
+        critere = get_object_or_404(CriteresEvaluation, id=critere_id)
+        
+        if request.method == 'PUT':
+            # Modification d'un critère
+            serializer = CriteresEvaluationSerializer(critere, data=request.data, partial=True)
+            if serializer.is_valid():
+                updated_critere = serializer.save()
+                logger.info(f"Critère {critere_id} modifié: {updated_critere.nom_critere}")
+                return Response(serializer.data)
+            else:
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                
+        elif request.method == 'DELETE':
+            # Suppression d'un critère
+            critere_name = critere.nom_critere
+            appel_offre_id = critere.appel_offre.id
+            critere.delete()
+            
+            logger.info(f"Critère '{critere_name}' supprimé de l'AO {appel_offre_id}")
+            
+            return Response({
+                'message': f'Critère "{critere_name}" supprimé avec succès'
+            }, status=status.HTTP_204_NO_CONTENT)
+            
+    except Exception as e:
+        logger.error(f"Erreur dans critere_detail pour critère {critere_id}: {str(e)}")
+        return Response({
+            'error': f'Erreur lors de la gestion du critère: {str(e)}'
+        }, status=500)
 @api_view(['GET'])
 def validated_matches(request):
     """
@@ -2950,98 +3149,161 @@ def consultant_data(request, consultant_id):
 @api_view(['GET'])
 def get_pending_consultants_safe(request):
     """
-    VERSION ULTRA-SÉCURISÉE pour récupérer les consultants en attente
-    N'utilise QUE les champs de base qui existent dans tous les cas
+    VERSION FINALE ET SÉCURISÉE pour récupérer les consultants en attente
+    Compatible avec PendingConsultants.tsx et gère tous les champs possibles
     """
     try:
-        logger.info("Récupération sécurisée des consultants en attente")
+        logger.info("=== DÉBUT RÉCUPÉRATION CONSULTANTS EN ATTENTE ===")
         
-        # Récupération simple sans .only() pour éviter les erreurs de champs
-        consultants_pending = Consultant.objects.filter(is_validated=False)
+        # Récupération des consultants en attente sans .only() pour éviter les erreurs
+        consultants_pending = Consultant.objects.filter(is_validated=False).select_related('user')
         
-        logger.info(f"Nombre de consultants en attente: {consultants_pending.count()}")
+        logger.info(f"Nombre de consultants en attente trouvés: {consultants_pending.count()}")
         
         consultants_data = []
         
         for consultant in consultants_pending:
             try:
-                # STRUCTURE MINIMALE ET SÛRE
-                data = {
+                # Construction sécurisée des données avec tous les champs possibles
+                consultant_data = {
+                    # IDs et identifiants
                     'id': consultant.id,
-                    'nom': consultant.nom or '',
-                    'prenom': consultant.prenom or '',
-                    'email': consultant.email or '',
-                    'telephone': consultant.telephone or '',
-                    'pays': consultant.pays or '',
-                    'ville': consultant.ville or '',
-                    'domaine_principal': consultant.domaine_principal or 'DIGITAL',
-                    'specialite': consultant.specialite or '',
-                    'expertise': consultant.expertise or 'Débutant',
-                    'statut': consultant.statut or 'En_attente',
-                    'is_validated': consultant.is_validated,
+                    
+                    # Noms (champs principaux + alias pour compatibilité)
+                    'nom': safe_get_field_value(consultant, 'nom', default=''),
+                    'prenom': safe_get_field_value(consultant, 'prenom', default=''),
+                    'firstName': safe_get_field_value(consultant, 'firstName', 'prenom', ''),
+                    'lastName': safe_get_field_value(consultant, 'lastName', 'nom', ''),
+                    
+                    # Contact (champs principaux + alias)
+                    'email': safe_get_field_value(consultant, 'email', default=''),
+                    'telephone': safe_get_field_value(consultant, 'telephone', default=''),
+                    'phone': safe_get_field_value(consultant, 'phone', 'telephone', ''),
+                    
+                    # Localisation (champs principaux + alias)
+                    'pays': safe_get_field_value(consultant, 'pays', default=''),
+                    'country': safe_get_field_value(consultant, 'country', 'pays', ''),
+                    'ville': safe_get_field_value(consultant, 'ville', default=''),
+                    'city': safe_get_field_value(consultant, 'city', 'ville', ''),
+                    
+                    # Disponibilité (champs principaux + alias)
+                    'date_debut_dispo': safe_get_date_field(consultant, 'date_debut_dispo'),
+                    'date_fin_dispo': safe_get_date_field(consultant, 'date_fin_dispo'),
+                    'startAvailability': safe_get_date_field(consultant, 'startAvailability', 'date_debut_dispo'),
+                    'endAvailability': safe_get_date_field(consultant, 'endAvailability', 'date_fin_dispo'),
+                    
+                    # Expertise et domaine
+                    'domaine_principal': safe_get_field_value(consultant, 'domaine_principal', default='DIGITAL'),
+                    'specialite': safe_get_field_value(consultant, 'specialite', default=''),
+                    'expertise': safe_get_field_value(consultant, 'expertise', default='Débutant'),
+                    
+                    # Nouveaux champs d'expertise (avec valeurs par défaut)
+                    'annees_experience': safe_get_field_value(consultant, 'annees_experience', default=0),
+                    'formation_niveau': safe_get_field_value(consultant, 'formation_niveau', default='BAC+3'),
+                    'certifications_count': safe_get_field_value(consultant, 'certifications_count', default=0),
+                    'projets_realises': safe_get_field_value(consultant, 'projets_realises', default=0),
+                    'leadership_experience': safe_get_field_value(consultant, 'leadership_experience', default=False),
+                    'international_experience': safe_get_field_value(consultant, 'international_experience', default=False),
+                    'expertise_score': safe_get_field_value(consultant, 'expertise_score', default=None),
+                    
+                    # Statut et validation
+                    'statut': safe_get_field_value(consultant, 'statut', default='En_attente'),
+                    'is_validated': safe_get_field_value(consultant, 'is_validated', default=False),
+                    
+                    # Fichiers (gestion sécurisée)
+                    'cv': None,
+                    'photo': None,
+                    'cvFilename': safe_get_field_value(consultant, 'cvFilename', default=None),
+                    'standardizedCvFilename': safe_get_field_value(consultant, 'standardizedCvFilename', default=None),
+                    'profileImage': safe_get_field_value(consultant, 'profileImage', default=None),
+                    
+                    # Compétences (sera rempli plus tard)
+                    'skills': '',
+                    
+                    # Métadonnées
+                    'created_at': safe_get_date_field(consultant, 'created_at'),
+                    'updated_at': safe_get_date_field(consultant, 'updated_at'),
                 }
                 
-                # Dates avec gestion d'erreur
+                # Gestion sécurisée des fichiers
                 try:
-                    data['date_debut_dispo'] = consultant.date_debut_dispo.isoformat() if consultant.date_debut_dispo else None
-                    data['date_fin_dispo'] = consultant.date_fin_dispo.isoformat() if consultant.date_fin_dispo else None
-                except Exception:
-                    data['date_debut_dispo'] = None
-                    data['date_fin_dispo'] = None
+                    if hasattr(consultant, 'cv') and consultant.cv:
+                        consultant_data['cv'] = consultant.cv.url
+                        if not consultant_data['cvFilename']:
+                            consultant_data['cvFilename'] = consultant.cv.name.split('/')[-1] if consultant.cv.name else None
+                except Exception as cv_error:
+                    logger.warning(f"Erreur CV pour consultant {consultant.id}: {cv_error}")
+                    consultant_data['cv'] = None
                 
-                # Fichiers avec gestion d'erreur
                 try:
-                    data['cv'] = consultant.cv.url if consultant.cv else None
-                    data['photo'] = consultant.photo.url if consultant.photo else None
-                except Exception:
-                    data['cv'] = None
-                    data['photo'] = None
+                    if hasattr(consultant, 'photo') and consultant.photo:
+                        consultant_data['photo'] = consultant.photo.url
+                except Exception as photo_error:
+                    logger.warning(f"Erreur photo pour consultant {consultant.id}: {photo_error}")
+                    consultant_data['photo'] = None
                 
-                # Métadonnées
-                try:
-                    data['created_at'] = consultant.created_at.isoformat() if consultant.created_at else None
-                    data['updated_at'] = consultant.updated_at.isoformat() if consultant.updated_at else None
-                except Exception:
-                    data['created_at'] = None
-                    data['updated_at'] = None
-                
-                # Récupération des compétences
+                # Récupérer les compétences
                 try:
                     competences = Competence.objects.filter(consultant=consultant)
                     skills_list = [comp.nom_competence for comp in competences]
-                    data['skills'] = ', '.join(skills_list) if skills_list else ''
-                except Exception:
-                    data['skills'] = ''
+                    consultant_data['skills'] = ', '.join(skills_list) if skills_list else ''
+                except Exception as skills_error:
+                    logger.warning(f"Erreur compétences pour consultant {consultant.id}: {skills_error}")
+                    consultant_data['skills'] = ''
                 
-                consultants_data.append(data)
+                # Synchroniser les champs alias si les principaux sont vides
+                if not consultant_data['startAvailability'] and consultant_data['date_debut_dispo']:
+                    consultant_data['startAvailability'] = consultant_data['date_debut_dispo']
+                if not consultant_data['endAvailability'] and consultant_data['date_fin_dispo']:
+                    consultant_data['endAvailability'] = consultant_data['date_fin_dispo']
+                
+                consultants_data.append(consultant_data)
+                
+                logger.debug(f"Consultant {consultant.id} traité avec succès")
                 
             except Exception as e:
                 logger.error(f"Erreur traitement consultant {consultant.id}: {str(e)}")
-                # Ajouter quand même avec des données minimales
+                # Ajouter quand même avec des données minimales pour éviter une page blanche
                 consultants_data.append({
                     'id': consultant.id,
                     'nom': getattr(consultant, 'nom', 'Erreur'),
                     'prenom': getattr(consultant, 'prenom', 'Chargement'),
+                    'firstName': getattr(consultant, 'prenom', 'Erreur'),
+                    'lastName': getattr(consultant, 'nom', 'Chargement'),
                     'email': getattr(consultant, 'email', ''),
-                    'error': str(e)
+                    'telephone': getattr(consultant, 'telephone', ''),
+                    'phone': getattr(consultant, 'telephone', ''),
+                    'pays': getattr(consultant, 'pays', ''),
+                    'country': getattr(consultant, 'pays', ''),
+                    'ville': getattr(consultant, 'ville', ''),
+                    'city': getattr(consultant, 'ville', ''),
+                    'domaine_principal': getattr(consultant, 'domaine_principal', 'DIGITAL'),
+                    'specialite': getattr(consultant, 'specialite', ''),
+                    'expertise': getattr(consultant, 'expertise', 'Débutant'),
+                    'is_validated': False,
+                    'statut': 'En_attente',
+                    'error': f"Erreur traitement: {str(e)}"
                 })
         
+        logger.info(f"=== FIN RÉCUPÉRATION ===")
         logger.info(f"Données finales préparées: {len(consultants_data)} consultants")
         
         return Response({
             "success": True,
             "data": consultants_data,
             "count": len(consultants_data),
-            "method": "safe_retrieval"
+            "message": f"{len(consultants_data)} consultants en attente récupérés"
         })
         
     except Exception as e:
-        logger.error(f"Erreur critique dans get_pending_consultants_safe: {str(e)}")
+        logger.error(f"❌ Erreur critique dans get_pending_consultants_safe: {str(e)}")
         return Response({
             "success": False,
             "error": str(e),
-            "message": "Erreur lors de la récupération des consultants en attente"
+            "message": "Erreur lors de la récupération des consultants en attente",
+            "data": []
         }, status=500)
+        
 @api_view(['GET', 'POST'])
 def admin_consultants_fixed(request):
     """
@@ -3147,131 +3409,429 @@ def get_existing_fields():
 @api_view(['PUT'])
 def admin_validate_consultant(request, pk):
     """
-    Valide un consultant
+    Valide un consultant - VERSION CORRIGÉE FINALE
     """
     try:
         consultant = get_object_or_404(Consultant, pk=pk)
+        
+        logger.info(f"=== VALIDATION CONSULTANT {pk} ===")
+        logger.info(f"Consultant: {consultant.prenom} {consultant.nom}")
 
         # Changer le statut de validation
         consultant.is_validated = True
-        consultant.save()
+        consultant.statut = 'Actif'  # Changer aussi le statut
+        consultant.save(update_fields=['is_validated', 'statut'])
 
         # Envoi d'un email au consultant pour l'informer que son compte a été validé
         try:
-            # Envoi d'email de confirmation de validation
+            from .email_service import send_validation_email
             send_validation_email(consultant)
             logger.info(f"Email de validation envoyé à {consultant.email}")
         except Exception as e:
             logger.error(f"Erreur lors de l'envoi de l'email de validation: {str(e)}")
+
+        logger.info(f"✅ Consultant {consultant.prenom} {consultant.nom} validé avec succès")
 
         return Response({
             "success": True,
             "message": f"Consultant {consultant.prenom} {consultant.nom} validé avec succès"
         })
     except Exception as e:
-        logger.error(f"Erreur lors de la validation du consultant {pk}: {str(e)}")
+        logger.error(f"❌ Erreur lors de la validation du consultant {pk}: {str(e)}")
         return Response({
             "success": False,
             "error": str(e)
         }, status=500)
 
+@api_view(['DELETE'])
+def admin_consultant_detail_delete(request, pk):
+    """
+    Supprime un consultant (rejet) - VERSION FINALE
+    """
+    try:
+        consultant = get_object_or_404(Consultant, pk=pk)
+        
+        logger.info(f"=== SUPPRESSION CONSULTANT {pk} ===")
+        logger.info(f"Consultant: {consultant.prenom} {consultant.nom}")
+        
+        user = consultant.user
+        consultant_name = f"{consultant.prenom} {consultant.nom}"
+        consultant_id = consultant.id
+        
+        # Utiliser une transaction pour garantir la cohérence
+        with transaction.atomic():
+            # 1. Supprimer les notifications
+            try:
+                from .models import Notification
+                notifications_deleted = Notification.objects.filter(consultant=consultant).delete()[0]
+                logger.info(f"Notifications supprimées: {notifications_deleted}")
+            except Exception as e:
+                logger.warning(f"Erreur suppression notifications: {e}")
+
+            # 2. Supprimer les matchings
+            try:
+                from .models import MatchingResult
+                matchings_deleted = MatchingResult.objects.filter(consultant=consultant).delete()[0]
+                logger.info(f"Matchings supprimés: {matchings_deleted}")
+            except Exception as e:
+                logger.warning(f"Erreur suppression matchings: {e}")
+
+            # 3. Supprimer les compétences
+            try:
+                competences_deleted = Competence.objects.filter(consultant=consultant).delete()[0]
+                logger.info(f"Compétences supprimées: {competences_deleted}")
+            except Exception as e:
+                logger.warning(f"Erreur suppression compétences: {e}")
+
+            # 4. Mettre à jour les documents GED
+            try:
+                from .models import DocumentGED
+                doc_ged_updated = DocumentGED.objects.filter(consultant=consultant).update(consultant=None)
+                logger.info(f"Documents GED mis à jour: {doc_ged_updated}")
+            except Exception as e:
+                logger.warning(f"Erreur mise à jour documents GED: {e}")
+
+            # 5. Supprimer les fichiers physiques
+            try:
+                import os
+                if consultant.cv and consultant.cv.name:
+                    if os.path.exists(consultant.cv.path):
+                        os.remove(consultant.cv.path)
+                        logger.info(f"Fichier CV supprimé: {consultant.cv.path}")
+            except Exception as e:
+                logger.warning(f"Erreur suppression fichier CV: {e}")
+            
+            try:
+                if consultant.photo and consultant.photo.name:
+                    if os.path.exists(consultant.photo.path):
+                        os.remove(consultant.photo.path)
+                        logger.info(f"Fichier photo supprimé: {consultant.photo.path}")
+            except Exception as e:
+                logger.warning(f"Erreur suppression fichier photo: {e}")
+
+            # 6. Supprimer le consultant
+            consultant.delete()
+            logger.info(f"Consultant {consultant_id} supprimé")
+
+            # 7. Supprimer l'utilisateur associé
+            if user:
+                try:
+                    user_id = user.id
+                    user.delete()
+                    logger.info(f"Utilisateur {user_id} supprimé")
+                except Exception as e:
+                    logger.error(f"Erreur suppression utilisateur: {e}")
+
+        logger.info(f"✅ Consultant {consultant_name} supprimé avec succès")
+
+        return Response({
+            'success': True,
+            'message': f'Consultant {consultant_name} supprimé avec succès'
+        }, status=200)
+
+    except Exception as e:
+        logger.error(f"❌ Erreur lors de la suppression du consultant {pk}: {str(e)}")
+        return Response({
+            'success': False,
+            'error': f'Erreur lors de la suppression: {str(e)}'
+        }, status=500)
+
+@api_view(['GET'])
+def consultant_notifications(request, consultant_id):
+    """
+    Récupère les notifications d'un consultant - VERSION CORRIGÉE COMPLÈTE
+    """
+    try:
+        consultant = get_object_or_404(Consultant, id=consultant_id)
+        
+        logger.info(f"🔔 Récupération des notifications pour consultant {consultant_id}")
+
+        # Récupérer toutes les notifications avec relations ET tri par priorité et date
+        notifications = Notification.objects.filter(
+            consultant=consultant
+        ).select_related('related_appel', 'related_match', 'related_mission').order_by(
+            '-priority',  # D'abord par priorité (HIGH, NORMAL, LOW)
+            '-created_at'  # Puis par date (plus récent en premier)
+        )
+
+        logger.info(f"📊 Notifications trouvées: {notifications.count()}")
+
+        # Formater pour l'API avec plus de détails
+        results = []
+        for notif in notifications:
+            try:
+                notification_data = {
+                    'id': notif.id,
+                    'type': notif.type,
+                    'title': notif.title,
+                    'content': notif.content,
+                    'priority': getattr(notif, 'priority', 'NORMAL'),
+                    'is_read': notif.is_read,
+                    'created_at': notif.created_at.isoformat(),
+                    'read_at': notif.read_at.isoformat() if notif.read_at else None,
+                    
+                    # Informations sur l'appel d'offre
+                    'appel_offre_id': notif.related_appel.id if notif.related_appel else None,
+                    'appel_offre_nom': getattr(notif.related_appel, 'titre', None) if notif.related_appel else None,
+                    'client': getattr(notif.related_appel, 'client', None) if notif.related_appel else None,
+                    
+                    # Informations sur le matching
+                    'match_id': notif.related_match.id if notif.related_match else None,
+                    'match_score': float(notif.related_match.score) if notif.related_match else None,
+                    
+                    # Informations sur la mission
+                    'mission_id': notif.related_mission.id if notif.related_mission else None,
+                    'mission_title': getattr(notif.related_mission, 'nom_projet', None) if notif.related_mission else None,
+                    
+                    # Métadonnées additionnelles
+                    'metadata': getattr(notif, 'metadata', {}),
+                    
+                    # Âge de la notification
+                    'age_days': (timezone.now() - notif.created_at).days
+                }
+                
+                results.append(notification_data)
+                logger.debug(f"✅ Notification formatée: {notif.title}")
+                
+            except Exception as notif_error:
+                logger.error(f"❌ Erreur formatage notification {notif.id}: {str(notif_error)}")
+                continue
+
+        # Compter les notifications par type et priorité
+        unread_count = notifications.filter(is_read=False).count()
+        priority_counts = {
+            'HIGH': notifications.filter(priority='HIGH', is_read=False).count(),
+            'NORMAL': notifications.filter(priority='NORMAL', is_read=False).count(),
+            'LOW': notifications.filter(priority='LOW', is_read=False).count(),
+        }
+        
+        logger.info(f"✅ {len(results)} notifications formatées, {unread_count} non lues")
+
+        return Response({
+            'success': True,
+            'notifications': results,
+            'unread_count': unread_count,
+            'total_count': len(results),
+            'priority_counts': priority_counts,
+            'consultant_name': f"{consultant.prenom} {consultant.nom}"
+        })
+        
+    except Exception as e:
+        logger.error(f"❌ Erreur lors de la récupération des notifications: {str(e)}")
+        return Response({
+            'success': False,
+            'error': str(e),
+            'notifications': [],
+            'unread_count': 0
+        }, status=500)
 
 @api_view(['GET'])
 def consultant_missions(request, consultant_id):
     """
-    Récupère les missions validées pour un consultant spécifique
+    Version simplifiée sans le champ created_at manquant
     """
     try:
-        # Vérifier que le consultant existe
         consultant = get_object_or_404(Consultant, id=consultant_id)
+        logger.info(f"🔍 Récupération des missions pour consultant {consultant_id}")
 
-        # Log pour débogage
-        logger.info(
-            f"Récupération des missions pour le consultant ID={consultant_id} ({consultant.prenom} {consultant.nom})")
-
-        # Récupérer tous les matchings validés pour ce consultant
+        # Récupération des matchings validés seulement (plus simple)
         validated_matches = MatchingResult.objects.filter(
             consultant=consultant,
             is_validated=True
         ).select_related('appel_offre')
+        
+        logger.info(f"📊 Matchings validés trouvés: {validated_matches.count()}")
 
-        # Log du nombre de matchings trouvés
-        logger.info(f"Nombre de matchings validés trouvés: {validated_matches.count()}")
-
-        # Formater les données pour le frontend
         missions = []
+        
         for match in validated_matches:
-            appel_offre = match.appel_offre
-            logger.info(f"Matching ID={match.id} validé trouvé pour l'appel d'offre {appel_offre.nom_projet}")
+            try:
+                appel_offre = match.appel_offre
+                
+                mission_data = {
+                    'id': f"match_{match.id}",
+                    'appel_offre_id': appel_offre.id,
+                    'nom_projet': getattr(appel_offre, 'titre', 'Projet sans nom'),
+                    'client': getattr(appel_offre, 'client', 'Client non spécifié'),
+                    'description': getattr(appel_offre, 'description', ''),
+                    'date_debut': appel_offre.date_de_publication.isoformat() if getattr(appel_offre, 'date_de_publication', None) else None,
+                    'date_fin': appel_offre.date_limite.isoformat() if getattr(appel_offre, 'date_limite', None) else None,
+                    'score': float(match.score),
+                    'date_validation': match.created_at.isoformat(),
+                    'statut': 'Matching validé',
+                    'type': 'matching'
+                }
+                
+                missions.append(mission_data)
+                logger.info(f"✅ Mission ajoutée: {mission_data['nom_projet']}")
+                
+            except Exception as match_error:
+                logger.error(f"❌ Erreur match {match.id}: {str(match_error)}")
+                continue
 
-            missions.append({
-                'id': match.id,
-                'appel_offre_id': appel_offre.id,
-                'nom_projet': appel_offre.nom_projet,
-                'client': appel_offre.client,
-                'description': appel_offre.description,
-                'date_debut': appel_offre.date_debut,
-                'date_fin': appel_offre.date_fin,
-                'score': float(match.score),
-                'date_validation': match.created_at
-            })
-
-        logger.info(f"Total de {len(missions)} missions formatées pour le consultant {consultant_id}")
+        # Tri par date de validation
+        missions.sort(key=lambda x: x.get('date_validation', ''), reverse=True)
+        
+        logger.info(f"✅ Total {len(missions)} missions pour consultant {consultant_id}")
 
         return Response({
             "success": True,
-            "missions": missions
+            "missions": missions,
+            "total_count": len(missions),
+            "stats": {
+                "direct_missions": 0,  # Temporairement 0 pour éviter les erreurs
+                "validated_matches": validated_matches.count(),
+                "total": len(missions)
+            }
         })
+        
     except Exception as e:
-        logger.error(f"Erreur lors de la récupération des missions du consultant {consultant_id}: {str(e)}")
+        logger.error(f"❌ Erreur missions: {str(e)}")
         return Response({
             "success": False,
-            "error": str(e)
+            "error": str(e),
+            "missions": [],
+            "total_count": 0
         }, status=500)
+def create_mission_from_matching(matching_result):
+    """
+    Crée automatiquement une mission à partir d'un matching validé
+    VERSION CORRIGÉE avec notifications
+    """
+    try:
+        from .models import Mission, Notification
+        from django.utils import timezone
+        from datetime import timedelta
+        
+        # Vérifier si une mission n'existe pas déjà
+        existing_mission = Mission.objects.filter(
+            consultant=matching_result.consultant,
+            appel_offre=matching_result.appel_offre
+        ).first()
+        
+        if existing_mission:
+            logger.info(f"Mission déjà existante pour ce matching: {existing_mission.id}")
+            return existing_mission
+        
+        # 🔥 CRÉER LA NOUVELLE MISSION AVEC ADAPTATION AU NOUVEAU MODÈLE
+        appel_offre = matching_result.appel_offre
+        
+        mission = Mission.objects.create(
+            appel_offre=appel_offre,
+            consultant=matching_result.consultant,
+            # Utiliser les nouveaux champs du modèle AppelOffre
+            nom_projet=getattr(appel_offre, 'titre', 'Mission depuis matching'),
+            client=getattr(appel_offre, 'client', 'Client non spécifié'),
+            description=getattr(appel_offre, 'description', ''),
+            titre=f"Mission: {getattr(appel_offre, 'titre', 'Titre non défini')}",
+            # Gestion des dates avec le nouveau modèle
+            date_debut=getattr(appel_offre, 'date_de_publication', None) or timezone.now().date(),
+            date_fin=getattr(appel_offre, 'date_limite', None) or (timezone.now().date() + timedelta(days=30)),
+            statut='Validée',
+            score=matching_result.score
+        )
+        
+        logger.info(f"✅ Mission créée automatiquement depuis matching {matching_result.id}: {mission.id}")
+        
+        # 🔥 NOUVEAUTÉ - Créer une notification spécifique pour le début de mission
+        try:
+            start_notification = Notification.objects.create(
+                consultant=matching_result.consultant,
+                type="MISSION_START",
+                title=f"🚀 Nouvelle mission assignée",
+                content=(
+                    f"Votre mission '{mission.nom_projet}' chez {mission.client} "
+                    f"a été officiellement créée. "
+                    f"Date de début prévue: {mission.date_debut.strftime('%d/%m/%Y') if mission.date_debut else 'À définir'}. "
+                    f"Consultez tous les détails dans votre espace missions."
+                ),
+                priority="HIGH",
+                related_appel=appel_offre,
+                related_match=matching_result,
+                related_mission=mission,
+                metadata={
+                    'mission_id': mission.id,
+                    'mission_title': mission.nom_projet,
+                    'client': mission.client,
+                    'auto_created': True
+                }
+            )
+            logger.info(f"✅ Notification de début de mission créée: {start_notification.id}")
+        except Exception as notif_error:
+            logger.error(f"❌ Erreur notification début mission: {str(notif_error)}")
+        
+        return mission
+        
+    except Exception as e:
+        logger.error(f"❌ Erreur création mission depuis matching: {str(e)}")
+        return None
 
 
 @api_view(['GET'])
 def debug_consultant_missions(request, consultant_id):
-    """Endpoint de débogage pour diagnostiquer le problème de missions du consultant"""
+    """
+    Endpoint de débogage pour diagnostiquer les problèmes de missions
+    """
     try:
         consultant = get_object_or_404(Consultant, id=consultant_id)
 
         # Récupérer tous les matchings pour ce consultant (validés ou non)
         all_matches = MatchingResult.objects.filter(consultant=consultant)
+        validated_matches = all_matches.filter(is_validated=True)
+        
+        # Récupérer toutes les missions directes
+        from .models import Mission
+        direct_missions = Mission.objects.filter(consultant=consultant)
 
-        # Formater les données pour le débogage
-        result = {
+        # Informations de debug
+        debug_info = {
             "consultant_info": {
                 "id": consultant.id,
                 "nom": consultant.nom,
                 "prenom": consultant.prenom,
-                "email": consultant.email
+                "email": consultant.email,
+                "is_validated": consultant.is_validated,
+                "statut": consultant.statut
             },
-            "all_matchings": [],
-            "validated_matchings": []
+            "missions_directes": {
+                "count": direct_missions.count(),
+                "missions": [
+                    {
+                        "id": mission.id,
+                        "nom_projet": mission.nom_projet,
+                        "appel_offre_id": mission.appel_offre.id,
+                        "appel_offre_titre": getattr(mission.appel_offre, 'titre', 'N/A'),
+                        "statut": mission.statut,
+                        "created_at": mission.created_at.isoformat()
+                    } for mission in direct_missions
+                ]
+            },
+            "matchings": {
+                "total_count": all_matches.count(),
+                "validated_count": validated_matches.count(),
+                "all_matchings": [
+                    {
+                        "id": match.id,
+                        "appel_offre_id": match.appel_offre.id,
+                        "appel_offre_titre": getattr(match.appel_offre, 'titre', 'N/A'),
+                        "is_validated": match.is_validated,
+                        "score": float(match.score),
+                        "created_at": match.created_at.isoformat()
+                    } for match in all_matches
+                ]
+            },
+            "api_test": {
+                "url_missions": f"/api/consultant/{consultant_id}/missions/",
+                "expected_response": "JSON avec success: true et liste missions"
+            }
         }
 
-        for match in all_matches:
-            match_data = {
-                "id": match.id,
-                "appel_offre_id": match.appel_offre.id,
-                "appel_offre_name": match.appel_offre.nom_projet,
-                "client": match.appel_offre.client,
-                "is_validated": match.is_validated,
-                "score": float(match.score),
-                "created_at": match.created_at
-            }
-            result["all_matchings"].append(match_data)
-
-            if match.is_validated:
-                result["validated_matchings"].append(match_data)
-
-        # Ajouter des logs détaillés
         logger.info(f"Debug consultant missions - Consultant ID: {consultant_id}")
-        logger.info(f"Nombre total de matchings: {len(result['all_matchings'])}")
-        logger.info(f"Nombre de matchings validés: {len(result['validated_matchings'])}")
+        logger.info(f"Missions directes: {direct_missions.count()}")
+        logger.info(f"Matchings validés: {validated_matches.count()}")
 
-        return Response(result)
+        return Response(debug_info)
+        
     except Exception as e:
         logger.error(f"Erreur dans debug_consultant_missions: {str(e)}")
         return Response({"error": str(e)}, status=500)

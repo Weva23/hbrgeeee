@@ -88,11 +88,7 @@ const App = () => (
         } />
         
         {/* Route pour le matching d'offres */}
-        <Route path="/matching/:offerId" element={
-          <AdminRoute>
-            <OffreMatching />
-          </AdminRoute>
-        } />
+       <Route path="/admin/matching/:offerId" element={<OffreMatching/>} />
         
         {/* Page 404 */}
         <Route path="*" element={<NotFound />} />

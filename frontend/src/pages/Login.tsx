@@ -14,7 +14,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   // Identifiants fixes pour l'administrateur unique
-  const ADMIN_USERNAME = "wevanahi";
+  const ADMIN_USERNAME = "admin-richat";
   const ADMIN_PASSWORD = "admin123";
 
   // Vérifier si l'utilisateur est déjà connecté en tant qu'admin

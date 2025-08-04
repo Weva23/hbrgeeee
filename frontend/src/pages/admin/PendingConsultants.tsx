@@ -33,17 +33,37 @@ interface Consultant {
   id: number;
   nom: string;
   prenom: string;
+  firstName?: string;
+  lastName?: string;
   email: string;
   telephone: string;
+  phone?: string;
   pays: string;
+  country?: string;
   ville?: string;
+  city?: string;
   domaine_principal: string;
   specialite: string;
   date_debut_dispo: string;
   date_fin_dispo: string;
+  startAvailability?: string;
+  endAvailability?: string;
   expertise: string;
   photo?: string;
   cv?: string;
+  skills?: string;
+  statut?: string;
+  is_validated: boolean;
+  created_at?: string;
+  updated_at?: string;
+  // Nouveaux champs d'expertise
+  annees_experience?: number;
+  formation_niveau?: string;
+  certifications_count?: number;
+  projets_realises?: number;
+  leadership_experience?: boolean;
+  international_experience?: boolean;
+  expertise_score?: number;
 }
 
 const API_URL = "http://localhost:8000/api";
@@ -62,30 +82,82 @@ const PendingConsultants = () => {
   const fetchPendingConsultants = async () => {
     try {
       setLoading(true);
+      console.log("🔄 Récupération des consultants en attente...");
+      
+      // Utiliser l'endpoint sécurisé
       const response = await axios.get(`${API_URL}/admin/consultants/pending/`);
       
+      console.log("📊 Réponse API:", response.data);
+      
       if (response.data.success && Array.isArray(response.data.data)) {
-        setConsultants(response.data.data);
-        toast.success(`${response.data.data.length} consultants en attente chargés`);
-      } else if (Array.isArray(response.data)) {
-        setConsultants(response.data);
+        const consultantsData = response.data.data.map((consultant: any) => ({
+          id: consultant.id,
+          nom: consultant.nom || consultant.lastName || '',
+          prenom: consultant.prenom || consultant.firstName || '',
+          firstName: consultant.firstName || consultant.prenom || '',
+          lastName: consultant.lastName || consultant.nom || '',
+          email: consultant.email || '',
+          telephone: consultant.telephone || consultant.phone || '',
+          phone: consultant.phone || consultant.telephone || '',
+          pays: consultant.pays || consultant.country || '',
+          country: consultant.country || consultant.pays || '',
+          ville: consultant.ville || consultant.city || '',
+          city: consultant.city || consultant.ville || '',
+          domaine_principal: consultant.domaine_principal || 'DIGITAL',
+          specialite: consultant.specialite || '',
+          date_debut_dispo: consultant.date_debut_dispo || consultant.startAvailability || '',
+          date_fin_dispo: consultant.date_fin_dispo || consultant.endAvailability || '',
+          startAvailability: consultant.startAvailability || consultant.date_debut_dispo || '',
+          endAvailability: consultant.endAvailability || consultant.date_fin_dispo || '',
+          expertise: consultant.expertise || 'Débutant',
+          photo: consultant.photo || null,
+          cv: consultant.cv || null,
+          skills: consultant.skills || '',
+          statut: consultant.statut || 'En_attente',
+          is_validated: consultant.is_validated || false,
+          created_at: consultant.created_at || null,
+          updated_at: consultant.updated_at || null,
+          // Nouveaux champs avec valeurs par défaut
+          annees_experience: consultant.annees_experience || 0,
+          formation_niveau: consultant.formation_niveau || 'BAC+3',
+          certifications_count: consultant.certifications_count || 0,
+          projets_realises: consultant.projets_realises || 0,
+          leadership_experience: consultant.leadership_experience || false,
+          international_experience: consultant.international_experience || false,
+          expertise_score: consultant.expertise_score || null
+        }));
+        
+        setConsultants(consultantsData);
+        console.log(`✅ ${consultantsData.length} consultants en attente chargés`);
+        
+        if (consultantsData.length === 0) {
+          toast.info("Aucun consultant en attente de validation");
+        } else {
+          toast.success(`${consultantsData.length} consultants en attente chargés`);
+        }
       } else {
-        console.error("Format de réponse inattendu:", response.data);
+        console.error("❌ Format de réponse inattendu:", response.data);
         setConsultants([]);
         toast.error("Format de données inattendu");
       }
     } catch (error) {
-      console.error("Erreur lors du chargement des consultants en attente:", error);
-      toast.error("Erreur de chargement des consultants en attente");
+      console.error("❌ Erreur lors du chargement des consultants en attente:", error);
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 404) {
+          toast.error("Endpoint des consultants en attente introuvable");
+        } else if (error.response?.status === 500) {
+          toast.error("Erreur serveur lors du chargement");
+        } else {
+          toast.error(`Erreur de connexion: ${error.response?.status || 'Unknown'}`);
+        }
+      } else {
+        toast.error("Erreur de connexion au serveur");
+      }
       setConsultants([]);
     } finally {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchPendingConsultants();
-  }, []);
 
   const handleValidate = async (id: number) => {
     if (validating !== null || rejecting !== null) return;
@@ -93,7 +165,9 @@ const PendingConsultants = () => {
     try {
       setValidating(id);
       const consultant = consultants.find(c => c.id === id);
-      const consultantName = consultant ? `${consultant.prenom} ${consultant.nom}` : `Consultant ${id}`;
+      const consultantName = consultant ? `${consultant.prenom || consultant.firstName} ${consultant.nom || consultant.lastName}` : `Consultant ${id}`;
+      
+      console.log(`🔄 Validation de ${consultantName} (ID: ${id})`);
       
       const loadingToast = toast.loading(`Validation de ${consultantName}...`);
       
@@ -102,8 +176,10 @@ const PendingConsultants = () => {
       if (response.status >= 200 && response.status < 300) {
         setConsultants(prev => prev.filter(c => c.id !== id));
         toast.dismiss(loadingToast);
-        toast.success(`${consultantName} validé avec succès`);
+        toast.success(`✅ ${consultantName} validé avec succès`);
         setValidatedId(id);
+        
+        console.log(`✅ Consultant ${consultantName} validé avec succès`);
         
         // Auto-hide success notification after 3 seconds
         setTimeout(() => setValidatedId(null), 3000);
@@ -112,10 +188,11 @@ const PendingConsultants = () => {
         toast.error("Erreur lors de la validation");
       }
     } catch (error) {
-      console.error("Erreur lors de la validation:", error);
+      console.error("❌ Erreur lors de la validation:", error);
       
       if (axios.isAxiosError(error) && error.response) {
-        toast.error(`Erreur: ${error.response.data.error || "Échec de la validation"}`);
+        const errorMessage = error.response.data.error || "Échec de la validation";
+        toast.error(`Erreur: ${errorMessage}`);
       } else {
         toast.error("Erreur lors de la validation du consultant");
       }
@@ -129,7 +206,9 @@ const PendingConsultants = () => {
     
     try {
       setRejecting(selectedConsultant.id);
-      const consultantName = `${selectedConsultant.prenom} ${selectedConsultant.nom}`;
+      const consultantName = `${selectedConsultant.prenom || selectedConsultant.firstName} ${selectedConsultant.nom || selectedConsultant.lastName}`;
+      
+      console.log(`🔄 Rejet de ${consultantName} (ID: ${selectedConsultant.id})`);
       
       // Fermer le dialogue immédiatement
       setRejectDialogOpen(false);
@@ -142,16 +221,19 @@ const PendingConsultants = () => {
       if (response.status >= 200 && response.status < 300) {
         setConsultants(prev => prev.filter(c => c.id !== selectedConsultant.id));
         toast.dismiss(loadingToast);
-        toast.success(`${consultantName} rejeté avec succès`);
+        toast.success(`✅ ${consultantName} rejeté avec succès`);
+        
+        console.log(`✅ Consultant ${consultantName} rejeté avec succès`);
       } else {
         toast.dismiss(loadingToast);
         toast.error("Erreur lors du rejet");
       }
     } catch (error) {
-      console.error("Erreur lors du rejet:", error);
+      console.error("❌ Erreur lors du rejet:", error);
       
       if (axios.isAxiosError(error) && error.response) {
-        toast.error(`Erreur: ${error.response.data.error || "Échec du rejet"}`);
+        const errorMessage = error.response.data.error || "Échec du rejet";
+        toast.error(`Erreur: ${errorMessage}`);
       } else {
         toast.error("Erreur lors du rejet du consultant");
       }
@@ -166,10 +248,16 @@ const PendingConsultants = () => {
     setRejectDialogOpen(true);
   };
 
+  useEffect(() => {
+    fetchPendingConsultants();
+  }, []);
+
   const filteredConsultants = consultants.filter(
     (c) =>
       (c.prenom && c.prenom.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (c.nom && c.nom.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (c.firstName && c.firstName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (c.lastName && c.lastName.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (c.email && c.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
       (c.specialite && c.specialite.toLowerCase().includes(searchTerm.toLowerCase()))
   );
@@ -197,26 +285,32 @@ const PendingConsultants = () => {
   const getExpertiseBadgeColor = (expertise: string) => {
     switch (expertise) {
       case "Débutant": return "bg-sky-50 text-sky-700 border-sky-200";
+      case "Junior": return "bg-green-50 text-green-700 border-green-200";
       case "Intermédiaire": return "bg-amber-50 text-amber-700 border-amber-200";
       case "Expert": return "bg-blue-50 text-blue-700 border-blue-200";
+      case "Senior": return "bg-purple-50 text-purple-700 border-purple-200";
       default: return "bg-gray-100 text-gray-800 border-gray-300";
     }
   };
 
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString?: string | null) => {
     if (!dateString || dateString === "" || dateString === "1970-01-01") {
       return "Non définie";
     }
     
-    const date = new Date(dateString);
-    if (isNaN(date.getTime())) {
+    try {
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) {
+        return "Non définie";
+      }
+      
+      return new Intl.DateTimeFormat('fr-FR').format(date);
+    } catch {
       return "Non définie";
     }
-    
-    return new Intl.DateTimeFormat('fr-FR').format(date);
   };
 
-  const getImageUrl = (photo: string | undefined) => {
+  const getImageUrl = (photo?: string | null) => {
     if (!photo) return null;
     
     if (photo.startsWith('http')) {
@@ -228,6 +322,28 @@ const PendingConsultants = () => {
     }
     
     return `http://localhost:8000/media/${photo}`;
+  };
+
+  const getExpertiseScore = (consultant: Consultant) => {
+    if (consultant.expertise_score) {
+      return Math.round(consultant.expertise_score);
+    }
+    
+    // Calcul approximatif basé sur les données disponibles
+    let score = 0;
+    if (consultant.annees_experience) {
+      score += Math.min(consultant.annees_experience * 5, 40);
+    }
+    if (consultant.certifications_count) {
+      score += Math.min(consultant.certifications_count * 10, 30);
+    }
+    if (consultant.projets_realises) {
+      score += Math.min(consultant.projets_realises * 3, 20);
+    }
+    if (consultant.leadership_experience) score += 5;
+    if (consultant.international_experience) score += 5;
+    
+    return Math.min(score, 100);
   };
 
   return (
@@ -251,12 +367,10 @@ const PendingConsultants = () => {
                   Consultants en attente de validation
                 </h1>
                 <p className="text-gray-600">
-                  Examinez et validez les nouvelles candidatures de consultants
+                  Examinez et validez les nouvelles candidatures de consultants • {filteredConsultants.length} consultant(s)
                 </p>
               </div>
             </div>
-
-
           </div>
 
           {/* Barre de recherche et actions */}
@@ -347,13 +461,13 @@ const PendingConsultants = () => {
                             <Avatar className="h-12 w-12 ring-2 ring-orange-100">
                               <AvatarImage 
                                 src={getImageUrl(consultant.photo) || undefined} 
-                                alt={`${consultant.prenom} ${consultant.nom}`}
+                                alt={`${consultant.prenom || consultant.firstName} ${consultant.nom || consultant.lastName}`}
                                 onError={(e) => {
                                   (e.target as HTMLImageElement).style.display = 'none';
                                 }}
                               />
                               <AvatarFallback className="bg-gradient-to-br from-orange-500 to-orange-600 text-white font-semibold">
-                                {consultant.prenom.charAt(0)}{consultant.nom.charAt(0)}
+                                {(consultant.prenom || consultant.firstName || '').charAt(0)}{(consultant.nom || consultant.lastName || '').charAt(0)}
                               </AvatarFallback>
                             </Avatar>
                             <div className="absolute -top-1 -right-1 bg-orange-500 text-white rounded-full p-1">
@@ -361,10 +475,17 @@ const PendingConsultants = () => {
                             </div>
                           </div>
                           <div>
-                            <p className="font-semibold text-gray-900">{consultant.prenom} {consultant.nom}</p>
+                            <p className="font-semibold text-gray-900">
+                              {consultant.prenom || consultant.firstName} {consultant.nom || consultant.lastName}
+                            </p>
                             <div className="flex items-center text-gray-500 text-sm">
                               <MapPinIcon className="h-3 w-3 mr-1" />
-                              {consultant.ville || ""}, {consultant.pays}
+                              {consultant.ville || consultant.city || ""}, {consultant.pays || consultant.country}
+                            </div>
+                            {/* Score d'expertise */}
+                            <div className="flex items-center text-xs text-gray-400 mt-1">
+                              <StarIcon className="h-3 w-3 mr-1" />
+                              Score: {getExpertiseScore(consultant)}%
                             </div>
                           </div>
                         </div>
@@ -378,7 +499,7 @@ const PendingConsultants = () => {
                           </div>
                           <div className="flex items-center text-gray-600">
                             <PhoneIcon className="h-3 w-3 mr-2 text-green-500" />
-                            {consultant.telephone}
+                            {consultant.telephone || consultant.phone}
                           </div>
                         </div>
                       </TableCell>
@@ -393,27 +514,39 @@ const PendingConsultants = () => {
                           {consultant.specialite && (
                             <p className="text-sm text-gray-600 font-medium">{consultant.specialite}</p>
                           )}
+                          {consultant.skills && (
+                            <p className="text-xs text-gray-500 truncate max-w-32" title={consultant.skills}>
+                              {consultant.skills}
+                            </p>
+                          )}
                         </div>
                       </TableCell>
                       
                       <TableCell>
-                        <Badge 
-                          className={`px-3 py-1 rounded-full border ${getExpertiseBadgeColor(consultant.expertise)}`}
-                        >
-                          <StarIcon className="h-3 w-3 mr-1" />
-                          {consultant.expertise}
-                        </Badge>
+                        <div className="space-y-1">
+                          <Badge 
+                            className={`px-3 py-1 rounded-full border ${getExpertiseBadgeColor(consultant.expertise)}`}
+                          >
+                            <StarIcon className="h-3 w-3 mr-1" />
+                            {consultant.expertise}
+                          </Badge>
+                          {consultant.annees_experience && consultant.annees_experience > 0 && (
+                            <p className="text-xs text-gray-500">
+                              {consultant.annees_experience} ans d'exp.
+                            </p>
+                          )}
+                        </div>
                       </TableCell>
                       
                       <TableCell>
                         <div className="space-y-1">
                           <div className="flex items-center text-gray-600 text-sm">
                             <CalendarIcon className="h-3 w-3 mr-2 text-blue-500" />
-                            <span>Du {formatDate(consultant.date_debut_dispo)}</span>
+                            <span>Du {formatDate(consultant.date_debut_dispo || consultant.startAvailability)}</span>
                           </div>
                           <div className="flex items-center text-gray-600 text-sm">
                             <CalendarIcon className="h-3 w-3 mr-2 text-red-500" />
-                            <span>Au {formatDate(consultant.date_fin_dispo)}</span>
+                            <span>Au {formatDate(consultant.date_fin_dispo || consultant.endAvailability)}</span>
                           </div>
                         </div>
                       </TableCell>
@@ -516,7 +649,9 @@ const PendingConsultants = () => {
               Confirmation de rejet
             </AlertDialogTitle>
             <AlertDialogDescription className="text-gray-600">
-              Êtes-vous sûr de vouloir refuser la candidature de <strong>{selectedConsultant?.prenom} {selectedConsultant?.nom}</strong> ? 
+              Êtes-vous sûr de vouloir refuser la candidature de <strong>
+                {selectedConsultant?.prenom || selectedConsultant?.firstName} {selectedConsultant?.nom || selectedConsultant?.lastName}
+              </strong> ? 
               <br /><br />
               <div className="bg-red-50 border border-red-200 rounded-lg p-3 mt-2">
                 <p className="text-red-800 text-sm font-medium">⚠️ Cette action est irréversible</p>

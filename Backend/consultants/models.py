@@ -393,12 +393,6 @@ class Consultant(models.Model):
 
 
 
-from django.utils import timezone
-
-from django.db import models
-from django.utils import timezone
-
-
 class AppelOffre(models.Model):
     # Champ principal
     titre = models.CharField(max_length=500, help_text="Titre de l'appel d'offre")
@@ -530,58 +524,291 @@ class MatchingResult(models.Model):
 
 
 class Mission(models.Model):
+    """
+    MODÈLE MISSION CORRIGÉ - Compatible avec le nouveau modèle AppelOffre
+    """
     appel_offre = models.ForeignKey(AppelOffre, on_delete=models.CASCADE, related_name="missions")
     consultant = models.ForeignKey(Consultant, on_delete=models.CASCADE, related_name="missions")
-    nom_projet = models.CharField(max_length=200, blank=True, null=True)  # Ajouté pour compatibilité
-    client = models.CharField(max_length=100, blank=True, null=True)      # Ajouté pour compatibilité
-    description = models.TextField(blank=True, null=True)                 # Ajouté pour compatibilité
-    titre = models.CharField(max_length=191)
-    date_debut = models.DateField()
-    date_fin = models.DateField()
-    statut = models.CharField(max_length=20)
-    score = models.DecimalField(max_digits=5, decimal_places=2, default=0)  # Score du consultant sur cette mission
-    date_validation = models.DateTimeField(auto_now_add=True)               # Date de validation de la mission
+    
+    # Champs principaux
+    titre = models.CharField(max_length=500, help_text="Titre de la mission")
+    nom_projet = models.CharField(max_length=200, blank=True, null=True)  # Compatibilité
+    client = models.CharField(max_length=200, blank=True, null=True)      # Compatibilité
+    description = models.TextField(blank=True, null=True)                 # Compatibilité
+    
+    # Dates de mission
+    date_debut = models.DateField(help_text="Date de début de la mission")
+    date_fin = models.DateField(help_text="Date de fin de la mission")
+    
+    # Statut et scoring
+    statut = models.CharField(max_length=50, choices=[
+        ('En_attente', 'En attente'),
+        ('Validée', 'Validée'),
+        ('En_cours', 'En cours'),
+        ('Terminée', 'Terminée'),
+        ('Annulée', 'Annulée'),
+    ], default='Validée')
+    
+    score = models.DecimalField(max_digits=5, decimal_places=2, default=0)  # Score du consultant
+    
+    # Métadonnées
+    date_validation = models.DateTimeField(auto_now_add=True)  # Date de création/validation
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Mission"
+        verbose_name_plural = "Missions"
+        ordering = ['-date_validation']
+        indexes = [
+            models.Index(fields=['consultant', 'statut']),
+            models.Index(fields=['appel_offre']),
+            models.Index(fields=['date_debut', 'date_fin']),
+        ]
 
     def __str__(self):
-        return self.titre
+        return f"{self.titre} - {self.consultant.nom} {self.consultant.prenom}"
 
     def save(self, *args, **kwargs):
-        # Synchroniser avec l'appel d'offre
-        if self.appel_offre and not self.nom_projet:
-            self.nom_projet = self.appel_offre.nom_projet
-        if self.appel_offre and not self.client:
-            self.client = self.appel_offre.client
-        if self.appel_offre and not self.description:
-            self.description = self.appel_offre.description
+        """
+        Auto-remplissage des champs de compatibilité depuis l'appel d'offre
+        """
+        if self.appel_offre:
+            # Synchroniser avec le nouveau modèle AppelOffre
+            if not self.nom_projet:
+                self.nom_projet = self.appel_offre.titre
+            if not self.client:
+                self.client = self.appel_offre.client
+            if not self.description:
+                self.description = self.appel_offre.description
+            if not self.titre:
+                self.titre = f"Mission: {self.appel_offre.titre}"
+        
         super().save(*args, **kwargs)
+
+    @property
+    def duree_mission(self):
+        """Calcule la durée de la mission en jours"""
+        if self.date_debut and self.date_fin:
+            return (self.date_fin - self.date_debut).days + 1
+        return 0
+
+    @property
+    def is_active(self):
+        """Vérifie si la mission est active"""
+        return self.statut in ['Validée', 'En_cours']
+
+    @property
+    def progress_percentage(self):
+        """Calcule le pourcentage d'avancement de la mission"""
+        if not self.date_debut or not self.date_fin:
+            return 0
+        
+        today = timezone.now().date()
+        if today < self.date_debut:
+            return 0
+        elif today > self.date_fin:
+            return 100
+        else:
+            total_days = (self.date_fin - self.date_debut).days
+            elapsed_days = (today - self.date_debut).days
+            return min(100, max(0, int((elapsed_days / total_days) * 100)))
 
 
 class Notification(models.Model):
-    """Modèle pour stocker les notifications dans l'application"""
+    """
+    MODÈLE NOTIFICATION CORRIGÉ - Système de notifications amélioré
+    """
     NOTIFICATION_TYPES = (
         ('MATCH_VALID', 'Validation de matching'),
         ('NEW_OFFER', 'Nouvelle offre'),
+        ('MISSION_START', 'Début de mission'),
+        ('MISSION_END', 'Fin de mission'),
+        ('MISSION_UPDATE', 'Mise à jour de mission'),
         ('SYSTEM', 'Notification système'),
         ('MATCH_SUGGEST', 'Suggestion de matching'),
         ('ADMIN_INFO', 'Information administrative'),
+        ('PROFILE_UPDATE', 'Mise à jour de profil'),
+        ('CV_PROCESSED', 'CV traité'),
+        ('EXPERTISE_UPDATE', 'Expertise mise à jour'),
     )
     
-    consultant = models.ForeignKey(Consultant, on_delete=models.CASCADE, related_name="notifications")
-    type = models.CharField(max_length=20, choices=NOTIFICATION_TYPES, default='SYSTEM')
-    title = models.CharField(max_length=191)
+    PRIORITY_CHOICES = (
+        ('LOW', 'Faible'),
+        ('NORMAL', 'Normale'),
+        ('HIGH', 'Élevée'),
+        ('URGENT', 'Urgente'),
+    )
+    
+    # Relations
+    consultant = models.ForeignKey(
+        Consultant, 
+        on_delete=models.CASCADE, 
+        related_name="notifications"
+    )
+    
+    # Contenu de la notification
+    type = models.CharField(
+        max_length=20, 
+        choices=NOTIFICATION_TYPES, 
+        default='SYSTEM'
+    )
+    title = models.CharField(max_length=255)
     content = models.TextField()
+    priority = models.CharField(
+        max_length=10, 
+        choices=PRIORITY_CHOICES, 
+        default='NORMAL'
+    )
+    
+    # État de la notification
     is_read = models.BooleanField(default=False)
+    is_archived = models.BooleanField(default=False)
+    
+    # Relations optionnelles (pour traçabilité)
+    related_appel = models.ForeignKey(
+        AppelOffre, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        related_name="notifications"
+    )
+    related_match = models.ForeignKey(
+        MatchingResult, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name="notifications"
+    )
+    related_mission = models.ForeignKey(
+        Mission, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True,
+        related_name="notifications"
+    )
+    
+    # Métadonnées
     created_at = models.DateTimeField(auto_now_add=True)
-    related_appel = models.ForeignKey(AppelOffre, on_delete=models.SET_NULL, null=True, blank=True, related_name="notifications")
-    related_match = models.ForeignKey(MatchingResult, on_delete=models.SET_NULL, null=True, blank=True)
+    read_at = models.DateTimeField(null=True, blank=True)
+    expires_at = models.DateTimeField(null=True, blank=True)
+    
+    # Données additionnelles (JSON)
+    metadata = models.JSONField(default=dict, blank=True)
     
     class Meta:
         ordering = ['-created_at']
+        verbose_name = "Notification"
+        verbose_name_plural = "Notifications"
+        indexes = [
+            models.Index(fields=['consultant', 'is_read']),
+            models.Index(fields=['type', 'created_at']),
+            models.Index(fields=['priority', 'is_read']),
+        ]
 
     def __str__(self):
         return f"{self.title} ({self.consultant.nom} {self.consultant.prenom})"
 
+    def mark_as_read(self):
+        """Marque la notification comme lue"""
+        if not self.is_read:
+            self.is_read = True
+            self.read_at = timezone.now()
+            self.save(update_fields=['is_read', 'read_at'])
 
+    def mark_as_unread(self):
+        """Marque la notification comme non lue"""
+        if self.is_read:
+            self.is_read = False
+            self.read_at = None
+            self.save(update_fields=['is_read', 'read_at'])
+
+    def archive(self):
+        """Archive la notification"""
+        self.is_archived = True
+        self.save(update_fields=['is_archived'])
+
+    @property
+    def is_expired(self):
+        """Vérifie si la notification a expiré"""
+        if self.expires_at:
+            return timezone.now() > self.expires_at
+        return False
+
+    @property
+    def age_in_days(self):
+        """Retourne l'âge de la notification en jours"""
+        return (timezone.now() - self.created_at).days
+
+    @classmethod
+    def create_notification(cls, consultant, notification_type, title, content, 
+                          priority='NORMAL', related_appel=None, related_match=None, 
+                          related_mission=None, metadata=None):
+        """
+        Méthode de classe pour créer des notifications de manière sécurisée
+        """
+        try:
+            notification = cls.objects.create(
+                consultant=consultant,
+                type=notification_type,
+                title=title,
+                content=content,
+                priority=priority,
+                related_appel=related_appel,
+                related_match=related_match,
+                related_mission=related_mission,
+                metadata=metadata or {}
+            )
+            
+            logger.info(f"✅ Notification créée: {title} pour {consultant.nom} {consultant.prenom}")
+            return notification
+            
+        except Exception as e:
+            logger.error(f"❌ Erreur création notification: {str(e)}")
+            return None
+
+    @classmethod
+    def notify_mission_validation(cls, consultant, appel_offre, mission=None, match=None):
+        """
+        Méthode spécialisée pour les notifications de validation de mission
+        """
+        title = f"🎉 Mission confirmée : {appel_offre.titre}"
+        content = (
+            f"Félicitations ! Votre profil a été sélectionné pour la mission "
+            f"'{appel_offre.titre}' chez {appel_offre.client or 'le client'}. "
+            f"Vous pouvez maintenant consulter les détails dans la section 'Mes Missions'."
+        )
+        
+        return cls.create_notification(
+            consultant=consultant,
+            notification_type='MATCH_VALID',
+            title=title,
+            content=content,
+            priority='HIGH',
+            related_appel=appel_offre,
+            related_match=match,
+            related_mission=mission,
+            metadata={
+                'mission_score': float(match.score) if match else 0,
+                'client': appel_offre.client,
+                'auto_created': True
+            }
+        )
+
+    @classmethod
+    def cleanup_old_notifications(cls, days=90):
+        """
+        Nettoie les anciennes notifications lues
+        """
+        cutoff_date = timezone.now() - timedelta(days=days)
+        deleted_count = cls.objects.filter(
+            is_read=True,
+            created_at__lt=cutoff_date
+        ).delete()[0]
+        
+        logger.info(f"🧹 Nettoyage: {deleted_count} anciennes notifications supprimées")
+        return deleted_count
+    
 # Autres modèles (Document, DocumentGED, etc.) restent inchangés...
 class Document(models.Model):
     consultant = models.ForeignKey(Consultant, on_delete=models.CASCADE, related_name="documents")
