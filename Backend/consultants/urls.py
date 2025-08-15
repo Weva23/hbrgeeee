@@ -70,6 +70,8 @@ urlpatterns = [
     path('admin/consultants/<int:pk>/', views.admin_consultant_detail, name='admin-consultant-detail'),
     path('admin/consultants/validate/<int:pk>/', views.admin_validate_consultant, name='admin-validate-consultant'),
     path('admin/consultants/<int:pk>/delete/', views.admin_consultant_detail_delete, name='admin-consultant-delete'),
+    # UNE SEULE route qui gère GET, PUT et DELETE
+
     
     # ==========================================
     # CONSULTANTS - Interface consultant - 🔥 CORRIGÉ

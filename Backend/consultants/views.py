@@ -543,10 +543,13 @@ def get_top_skills_updated(consultant, limit=5):
 @parser_classes([MultiPartParser, FormParser, JSONParser])
 def admin_consultant_detail(request, pk):
     """
-    Gère un consultant spécifique - ENDPOINT PRINCIPAL
+    Gère un consultant spécifique - ENDPOINT PRINCIPAL CORRIGÉ
+    Supprime le conflit entre les décorateurs
     """
     if request.method == 'DELETE':
-        return admin_consultant_detail_delete(request, pk)
+        # CORRECTION: Appel direct de la logique de suppression dans la même fonction
+        return handle_consultant_deletion(request, pk)
+        
     elif request.method == 'PUT':
         # Logique de mise à jour existante
         try:
@@ -607,6 +610,419 @@ def admin_consultant_detail(request, pk):
                 'error': str(e)
             }, status=500)
 
+
+def handle_consultant_deletion(request, pk):
+    """
+    Logique de suppression des consultants - FONCTION INTERNE
+    """
+    try:
+        consultant = get_object_or_404(Consultant, pk=pk)
+        
+        logger.info(f"=== DÉBUT SUPPRESSION CONSULTANT {pk} ===")
+        logger.info(f"Consultant: {consultant.prenom} {consultant.nom}")
+        
+        # Stocker les informations avant suppression
+        user = consultant.user
+        consultant_name = f"{consultant.prenom} {consultant.nom}"
+        consultant_id = consultant.id
+        consultant_email = consultant.email
+        
+        # Utiliser une transaction pour garantir la cohérence
+        with transaction.atomic():
+            
+            # 1. Supprimer les notifications liées
+            try:
+                notifications_deleted = 0
+                try:
+                    from .models import Notification
+                    notifications = Notification.objects.filter(consultant=consultant)
+                    notifications_deleted = notifications.count()
+                    notifications.delete()
+                    logger.info(f"✅ {notifications_deleted} notifications supprimées")
+                except ImportError:
+                    logger.info("ℹ️ Modèle Notification non disponible")
+            except Exception as e:
+                logger.warning(f"⚠️ Erreur suppression notifications: {e}")
+                notifications_deleted = 0
+
+            # 2. Supprimer les matchings liés
+            try:
+                matchings_deleted = 0
+                try:
+                    from .models import MatchingResult
+                    matchings = MatchingResult.objects.filter(consultant=consultant)
+                    matchings_deleted = matchings.count()
+                    matchings.delete()
+                    logger.info(f"✅ {matchings_deleted} matchings supprimés")
+                except ImportError:
+                    logger.info("ℹ️ Modèle MatchingResult non disponible")
+            except Exception as e:
+                logger.warning(f"⚠️ Erreur suppression matchings: {e}")
+                matchings_deleted = 0
+
+            # 3. Supprimer les compétences
+            try:
+                competences = Competence.objects.filter(consultant=consultant)
+                competences_deleted = competences.count()
+                competences.delete()
+                logger.info(f"✅ {competences_deleted} compétences supprimées")
+            except Exception as e:
+                logger.warning(f"⚠️ Erreur suppression compétences: {e}")
+                competences_deleted = 0
+
+            # 4. Mettre à jour les documents GED (ne pas supprimer, juste délier)
+            try:
+                doc_ged_updated = 0
+                try:
+                    from .models import DocumentGED
+                    documents = DocumentGED.objects.filter(consultant=consultant)
+                    doc_ged_updated = documents.update(consultant=None)
+                    logger.info(f"✅ {doc_ged_updated} documents GED déliés")
+                except ImportError:
+                    logger.info("ℹ️ Modèle DocumentGED non disponible")
+            except Exception as e:
+                logger.warning(f"⚠️ Erreur mise à jour documents GED: {e}")
+                doc_ged_updated = 0
+
+            # 5. Supprimer les missions liées
+            try:
+                missions_deleted = 0
+                try:
+                    from .models import Mission
+                    missions = Mission.objects.filter(consultant=consultant)
+                    missions_deleted = missions.count()
+                    missions.delete()
+                    logger.info(f"✅ {missions_deleted} missions supprimées")
+                except ImportError:
+                    logger.info("ℹ️ Modèle Mission non disponible")
+            except Exception as e:
+                logger.warning(f"⚠️ Erreur suppression missions: {e}")
+                missions_deleted = 0
+
+            # 6. Supprimer les fichiers physiques (CV et photo)
+            files_deleted = []
+            
+            # Suppression du CV
+            if consultant.cv and consultant.cv.name:
+                try:
+                    cv_path = consultant.cv.path
+                    if os.path.exists(cv_path):
+                        os.remove(cv_path)
+                        files_deleted.append(f"CV: {cv_path}")
+                        logger.info(f"✅ Fichier CV supprimé: {cv_path}")
+                except Exception as e:
+                    logger.warning(f"⚠️ Erreur suppression CV: {e}")
+            
+            # Suppression de la photo
+            if consultant.photo and consultant.photo.name:
+                try:
+                    photo_path = consultant.photo.path
+                    if os.path.exists(photo_path):
+                        os.remove(photo_path)
+                        files_deleted.append(f"Photo: {photo_path}")
+                        logger.info(f"✅ Fichier photo supprimé: {photo_path}")
+                except Exception as e:
+                    logger.warning(f"⚠️ Erreur suppression photo: {e}")
+
+            # 7. Supprimer les CV standardisés/Richat
+            try:
+                cv_standardises_deleted = 0
+                cv_dir = os.path.join(settings.MEDIA_ROOT, 'standardized_cvs')
+                if os.path.exists(cv_dir):
+                    # Patterns de recherche pour les CV de ce consultant
+                    patterns = [
+                        f"standardized_cv_{consultant_id}_",
+                        f"CV_Richat_{consultant.prenom}_{consultant.nom}",
+                        f"CV_Richat_{consultant.nom}_{consultant.prenom}"
+                    ]
+                    
+                    for filename in os.listdir(cv_dir):
+                        if filename.endswith('.pdf'):
+                            if any(pattern in filename for pattern in patterns if pattern):
+                                try:
+                                    file_path = os.path.join(cv_dir, filename)
+                                    os.remove(file_path)
+                                    cv_standardises_deleted += 1
+                                    files_deleted.append(f"CV standardisé: {filename}")
+                                    logger.info(f"✅ CV standardisé supprimé: {filename}")
+                                except Exception as e:
+                                    logger.warning(f"⚠️ Erreur suppression CV standardisé {filename}: {e}")
+                
+                logger.info(f"✅ {cv_standardises_deleted} CV standardisés supprimés")
+            except Exception as e:
+                logger.warning(f"⚠️ Erreur suppression CV standardisés: {e}")
+                cv_standardises_deleted = 0
+
+            # 8. Supprimer le consultant de la base de données
+            try:
+                consultant.delete()
+                logger.info(f"✅ Consultant {consultant_id} supprimé de la base de données")
+            except Exception as e:
+                logger.error(f"❌ Erreur critique suppression consultant: {e}")
+                raise e
+
+            # 9. Supprimer l'utilisateur associé (si existe et n'est lié à rien d'autre)
+            user_deleted = False
+            if user:
+                try:
+                    user_id = user.id
+                    user_username = user.username
+                    
+                    # Vérifier si l'utilisateur a d'autres relations
+                    has_other_relations = False
+                    
+                    # Vérifier s'il y a d'autres consultants avec ce user
+                    other_consultants = Consultant.objects.filter(user=user).exists()
+                    if other_consultants:
+                        has_other_relations = True
+                        logger.info(f"ℹ️ Utilisateur {user_id} a d'autres consultants, conservation")
+                    
+                    # Si pas d'autres relations, supprimer l'utilisateur
+                    if not has_other_relations:
+                        user.delete()
+                        user_deleted = True
+                        logger.info(f"✅ Utilisateur {user_id} ({user_username}) supprimé")
+                    else:
+                        logger.info(f"ℹ️ Utilisateur {user_id} conservé (autres relations)")
+                        
+                except Exception as e:
+                    logger.error(f"❌ Erreur suppression utilisateur: {e}")
+                    # Ne pas faire échouer toute la transaction pour l'utilisateur
+                    user_deleted = False
+
+        # 10. Résumé des suppressions
+        deletion_summary = {
+            'consultant_id': consultant_id,
+            'consultant_name': consultant_name,
+            'consultant_email': consultant_email,
+            'notifications_deleted': notifications_deleted,
+            'matchings_deleted': matchings_deleted,
+            'competences_deleted': competences_deleted,
+            'missions_deleted': missions_deleted,
+            'documents_ged_unlinked': doc_ged_updated,
+            'files_deleted': files_deleted,
+            'cv_standardises_deleted': cv_standardises_deleted,
+            'user_deleted': user_deleted,
+            'total_files_deleted': len(files_deleted)
+        }
+
+        logger.info(f"✅ SUPPRESSION TERMINÉE AVEC SUCCÈS")
+        logger.info(f"📊 Résumé: {deletion_summary}")
+
+        return Response({
+            'success': True,
+            'message': f'Consultant "{consultant_name}" supprimé avec succès',
+            'deletion_summary': deletion_summary
+        }, status=200)
+
+    except Exception as e:
+        logger.error(f"❌ ERREUR CRITIQUE lors de la suppression du consultant {pk}: {str(e)}")
+        return Response({
+            'success': False,
+            'error': f'Erreur lors de la suppression: {str(e)}',
+            'consultant_id': pk
+        }, status=500)
+
+
+# FONCTION UTILITAIRE SÉPARÉE POUR NETTOYER LES DONNÉES ORPHELINES
+@api_view(['POST'])
+def cleanup_orphaned_data(request):
+    """
+    Nettoie les données orphelines après suppressions
+    """
+    try:
+        if not request.user.is_authenticated or not request.user.is_staff:
+            return Response({
+                'error': 'Permission refusée'
+            }, status=403)
+
+        cleanup_results = {
+            'orphaned_users': 0,
+            'orphaned_files': 0,
+            'orphaned_matchings': 0,
+            'errors': []
+        }
+
+        # 1. Nettoyer les utilisateurs orphelins
+        try:
+            # Utilisateurs CONSULTANT qui n'ont plus de consultant associé
+            consultant_user_ids = set(Consultant.objects.values_list('user_id', flat=True))
+            orphaned_users = User.objects.filter(
+                role='CONSULTANT'
+            ).exclude(id__in=consultant_user_ids)
+            
+            cleanup_results['orphaned_users'] = orphaned_users.count()
+            orphaned_users.delete()
+            
+        except Exception as e:
+            cleanup_results['errors'].append(f"Erreur nettoyage utilisateurs: {str(e)}")
+
+        # 2. Nettoyer les matchings orphelins
+        try:
+            from .models import MatchingResult
+            # Matchings dont le consultant n'existe plus
+            existing_consultant_ids = set(Consultant.objects.values_list('id', flat=True))
+            orphaned_matchings = MatchingResult.objects.exclude(
+                consultant_id__in=existing_consultant_ids
+            )
+            
+            cleanup_results['orphaned_matchings'] = orphaned_matchings.count()
+            orphaned_matchings.delete()
+            
+        except Exception as e:
+            cleanup_results['errors'].append(f"Erreur nettoyage matchings: {str(e)}")
+
+        # 3. Nettoyer les fichiers orphelins
+        try:
+            cv_dir = os.path.join(settings.MEDIA_ROOT, 'standardized_cvs')
+            if os.path.exists(cv_dir):
+                existing_consultant_ids = list(Consultant.objects.values_list('id', flat=True))
+                
+                for filename in os.listdir(cv_dir):
+                    if filename.endswith('.pdf'):
+                        # Extraire l'ID du consultant du nom de fichier
+                        import re
+                        match = re.search(r'standardized_cv_(\d+)_', filename)
+                        if match:
+                            consultant_id = int(match.group(1))
+                            if consultant_id not in existing_consultant_ids:
+                                try:
+                                    file_path = os.path.join(cv_dir, filename)
+                                    os.remove(file_path)
+                                    cleanup_results['orphaned_files'] += 1
+                                except Exception as e:
+                                    cleanup_results['errors'].append(f"Erreur suppression {filename}: {str(e)}")
+                                    
+        except Exception as e:
+            cleanup_results['errors'].append(f"Erreur nettoyage fichiers: {str(e)}")
+
+        return Response({
+            'success': True,
+            'message': 'Nettoyage terminé',
+            'results': cleanup_results
+        })
+
+    except Exception as e:
+        logger.error(f"Erreur lors du nettoyage: {str(e)}")
+        return Response({
+            'success': False,
+            'error': str(e)
+        }, status=500)
+
+
+# FONCTION DE TEST POUR VÉRIFIER QUE TOUT FONCTIONNE
+@api_view(['GET'])
+def test_consultant_deletion_endpoint(request, pk):
+    """
+    Fonction de test pour vérifier l'état d'un consultant avant suppression
+    """
+    try:
+        consultant = get_object_or_404(Consultant, pk=pk)
+        
+        # Compter les relations
+        competences_count = Competence.objects.filter(consultant=consultant).count()
+        
+        try:
+            from .models import MatchingResult
+            matchings_count = MatchingResult.objects.filter(consultant=consultant).count()
+        except ImportError:
+            matchings_count = 0
+            
+        try:
+            from .models import Notification
+            notifications_count = Notification.objects.filter(consultant=consultant).count()
+        except ImportError:
+            notifications_count = 0
+        
+        return Response({
+            'consultant': {
+                'id': consultant.id,
+                'nom': f"{consultant.prenom} {consultant.nom}",
+                'email': consultant.email,
+                'user_id': consultant.user.id if consultant.user else None
+            },
+            'relations': {
+                'competences': competences_count,
+                'matchings': matchings_count,
+                'notifications': notifications_count
+            },
+            'files': {
+                'has_cv': bool(consultant.cv),
+                'has_photo': bool(consultant.photo)
+            }
+        })
+        
+    except Exception as e:
+        return Response({
+            'error': str(e)
+        }, status=500)
+    """
+    Gère un consultant spécifique - ENDPOINT PRINCIPAL CORRIGÉ
+    Supprime le conflit entre les décorateurs
+    """
+    if request.method == 'DELETE':
+        # CORRECTION: Appel direct de la logique de suppression dans la même fonction
+        return handle_consultant_deletion(request, pk)
+        
+    elif request.method == 'PUT':
+        # Logique de mise à jour existante
+        try:
+            consultant = get_object_or_404(Consultant, pk=pk)
+            
+            # Utiliser le serializer pour la mise à jour
+            serializer = ConsultantSerializer(consultant, data=request.data, partial=True)
+            
+            if serializer.is_valid():
+                updated_consultant = serializer.save()
+                
+                # Mettre à jour l'utilisateur associé si nécessaire
+                if 'email' in request.data and consultant.user:
+                    try:
+                        consultant.user.email = request.data['email']
+                        consultant.user.username = request.data['email']
+                        consultant.user.save()
+                        logger.info(f"Utilisateur mis à jour pour consultant {pk}")
+                    except Exception as user_error:
+                        logger.error(f"Erreur mise à jour utilisateur: {user_error}")
+                
+                # Préparer la réponse
+                response_serializer = ConsultantSerializer(updated_consultant)
+                logger.info(f"Consultant {pk} modifié avec succès")
+                
+                return Response({
+                    'success': True,
+                    'data': response_serializer.data,
+                    'message': f'Consultant {updated_consultant.prenom} {updated_consultant.nom} modifié avec succès'
+                }, status=200)
+                
+            else:
+                logger.error(f"Erreurs de validation: {serializer.errors}")
+                return Response({
+                    'success': False,
+                    'errors': serializer.errors,
+                    'message': 'Erreurs de validation'
+                }, status=400)
+                
+        except Exception as e:
+            logger.error(f"Erreur mise à jour consultant {pk}: {str(e)}")
+            return Response({
+                'success': False,
+                'error': str(e)
+            }, status=500)
+    else:  # GET
+        try:
+            consultant = get_object_or_404(Consultant, pk=pk)
+            serializer = ConsultantSerializer(consultant)
+            return Response({
+                'success': True,
+                'data': serializer.data
+            })
+        except Exception as e:
+            logger.error(f"Erreur récupération consultant {pk}: {str(e)}")
+            return Response({
+                'success': False,
+                'error': str(e)
+            }, status=500)
 @api_view(['GET'])
 def consultant_competences(request, consultant_id):
     """Récupère les compétences d'un consultant spécifique"""
@@ -3442,100 +3858,215 @@ def admin_validate_consultant(request, pk):
             "success": False,
             "error": str(e)
         }, status=500)
-
 @api_view(['DELETE'])
 def admin_consultant_detail_delete(request, pk):
     """
-    Supprime un consultant (rejet) - VERSION FINALE
+    Supprime un consultant (rejet) - VERSION CORRIGÉE FINALE
     """
     try:
         consultant = get_object_or_404(Consultant, pk=pk)
         
-        logger.info(f"=== SUPPRESSION CONSULTANT {pk} ===")
+        logger.info(f"=== DÉBUT SUPPRESSION CONSULTANT {pk} ===")
         logger.info(f"Consultant: {consultant.prenom} {consultant.nom}")
         
+        # Stocker les informations avant suppression
         user = consultant.user
         consultant_name = f"{consultant.prenom} {consultant.nom}"
         consultant_id = consultant.id
+        consultant_email = consultant.email
         
         # Utiliser une transaction pour garantir la cohérence
         with transaction.atomic():
-            # 1. Supprimer les notifications
+            
+            # 1. Supprimer les notifications liées
             try:
-                from .models import Notification
-                notifications_deleted = Notification.objects.filter(consultant=consultant).delete()[0]
-                logger.info(f"Notifications supprimées: {notifications_deleted}")
+                notifications_deleted = 0
+                if hasattr(consultant, '_meta') and 'Notification' in [model.__name__ for model in consultant._meta.get_fields()]:
+                    from .models import Notification
+                    notifications = Notification.objects.filter(consultant=consultant)
+                    notifications_deleted = notifications.count()
+                    notifications.delete()
+                    logger.info(f"✅ {notifications_deleted} notifications supprimées")
             except Exception as e:
-                logger.warning(f"Erreur suppression notifications: {e}")
+                logger.warning(f"⚠️ Erreur suppression notifications: {e}")
+                notifications_deleted = 0
 
-            # 2. Supprimer les matchings
+            # 2. Supprimer les matchings liés
             try:
+                matchings_deleted = 0
                 from .models import MatchingResult
-                matchings_deleted = MatchingResult.objects.filter(consultant=consultant).delete()[0]
-                logger.info(f"Matchings supprimés: {matchings_deleted}")
+                matchings = MatchingResult.objects.filter(consultant=consultant)
+                matchings_deleted = matchings.count()
+                matchings.delete()
+                logger.info(f"✅ {matchings_deleted} matchings supprimés")
             except Exception as e:
-                logger.warning(f"Erreur suppression matchings: {e}")
+                logger.warning(f"⚠️ Erreur suppression matchings: {e}")
+                matchings_deleted = 0
 
             # 3. Supprimer les compétences
             try:
-                competences_deleted = Competence.objects.filter(consultant=consultant).delete()[0]
-                logger.info(f"Compétences supprimées: {competences_deleted}")
+                competences = Competence.objects.filter(consultant=consultant)
+                competences_deleted = competences.count()
+                competences.delete()
+                logger.info(f"✅ {competences_deleted} compétences supprimées")
             except Exception as e:
-                logger.warning(f"Erreur suppression compétences: {e}")
+                logger.warning(f"⚠️ Erreur suppression compétences: {e}")
+                competences_deleted = 0
 
-            # 4. Mettre à jour les documents GED
+            # 4. Mettre à jour les documents GED (ne pas supprimer, juste délier)
             try:
-                from .models import DocumentGED
-                doc_ged_updated = DocumentGED.objects.filter(consultant=consultant).update(consultant=None)
-                logger.info(f"Documents GED mis à jour: {doc_ged_updated}")
+                doc_ged_updated = 0
+                # Vérifier si le modèle DocumentGED existe
+                try:
+                    from .models import DocumentGED
+                    documents = DocumentGED.objects.filter(consultant=consultant)
+                    doc_ged_updated = documents.update(consultant=None)
+                    logger.info(f"✅ {doc_ged_updated} documents GED déliés")
+                except ImportError:
+                    logger.info("ℹ️ Modèle DocumentGED non disponible")
             except Exception as e:
-                logger.warning(f"Erreur mise à jour documents GED: {e}")
+                logger.warning(f"⚠️ Erreur mise à jour documents GED: {e}")
+                doc_ged_updated = 0
 
-            # 5. Supprimer les fichiers physiques
+            # 5. Supprimer les missions liées
             try:
-                import os
-                if consultant.cv and consultant.cv.name:
-                    if os.path.exists(consultant.cv.path):
-                        os.remove(consultant.cv.path)
-                        logger.info(f"Fichier CV supprimé: {consultant.cv.path}")
+                missions_deleted = 0
+                # Vérifier si le modèle Mission existe
+                try:
+                    from .models import Mission
+                    missions = Mission.objects.filter(consultant=consultant)
+                    missions_deleted = missions.count()
+                    missions.delete()
+                    logger.info(f"✅ {missions_deleted} missions supprimées")
+                except ImportError:
+                    logger.info("ℹ️ Modèle Mission non disponible")
             except Exception as e:
-                logger.warning(f"Erreur suppression fichier CV: {e}")
+                logger.warning(f"⚠️ Erreur suppression missions: {e}")
+                missions_deleted = 0
+
+            # 6. Supprimer les fichiers physiques (CV et photo)
+            files_deleted = []
             
+            # Suppression du CV
+            if consultant.cv and consultant.cv.name:
+                try:
+                    cv_path = consultant.cv.path
+                    if os.path.exists(cv_path):
+                        os.remove(cv_path)
+                        files_deleted.append(f"CV: {cv_path}")
+                        logger.info(f"✅ Fichier CV supprimé: {cv_path}")
+                except Exception as e:
+                    logger.warning(f"⚠️ Erreur suppression CV: {e}")
+            
+            # Suppression de la photo
+            if consultant.photo and consultant.photo.name:
+                try:
+                    photo_path = consultant.photo.path
+                    if os.path.exists(photo_path):
+                        os.remove(photo_path)
+                        files_deleted.append(f"Photo: {photo_path}")
+                        logger.info(f"✅ Fichier photo supprimé: {photo_path}")
+                except Exception as e:
+                    logger.warning(f"⚠️ Erreur suppression photo: {e}")
+
+            # 7. Supprimer les CV standardisés/Richat
             try:
-                if consultant.photo and consultant.photo.name:
-                    if os.path.exists(consultant.photo.path):
-                        os.remove(consultant.photo.path)
-                        logger.info(f"Fichier photo supprimé: {consultant.photo.path}")
+                cv_standardises_deleted = 0
+                cv_dir = os.path.join(settings.MEDIA_ROOT, 'standardized_cvs')
+                if os.path.exists(cv_dir):
+                    # Patterns de recherche pour les CV de ce consultant
+                    patterns = [
+                        f"standardized_cv_{consultant_id}_",
+                        f"CV_Richat_{consultant.prenom}_{consultant.nom}",
+                        f"CV_Richat_{consultant.nom}_{consultant.prenom}"
+                    ]
+                    
+                    for filename in os.listdir(cv_dir):
+                        if filename.endswith('.pdf'):
+                            if any(pattern in filename for pattern in patterns if pattern):
+                                try:
+                                    file_path = os.path.join(cv_dir, filename)
+                                    os.remove(file_path)
+                                    cv_standardises_deleted += 1
+                                    files_deleted.append(f"CV standardisé: {filename}")
+                                    logger.info(f"✅ CV standardisé supprimé: {filename}")
+                                except Exception as e:
+                                    logger.warning(f"⚠️ Erreur suppression CV standardisé {filename}: {e}")
+                
+                logger.info(f"✅ {cv_standardises_deleted} CV standardisés supprimés")
             except Exception as e:
-                logger.warning(f"Erreur suppression fichier photo: {e}")
+                logger.warning(f"⚠️ Erreur suppression CV standardisés: {e}")
+                cv_standardises_deleted = 0
 
-            # 6. Supprimer le consultant
-            consultant.delete()
-            logger.info(f"Consultant {consultant_id} supprimé")
+            # 8. Supprimer le consultant de la base de données
+            try:
+                consultant.delete()
+                logger.info(f"✅ Consultant {consultant_id} supprimé de la base de données")
+            except Exception as e:
+                logger.error(f"❌ Erreur critique suppression consultant: {e}")
+                raise e
 
-            # 7. Supprimer l'utilisateur associé
+            # 9. Supprimer l'utilisateur associé (si existe et n'est lié à rien d'autre)
+            user_deleted = False
             if user:
                 try:
                     user_id = user.id
-                    user.delete()
-                    logger.info(f"Utilisateur {user_id} supprimé")
+                    user_username = user.username
+                    
+                    # Vérifier si l'utilisateur a d'autres relations
+                    has_other_relations = False
+                    
+                    # Vérifier s'il y a d'autres consultants avec ce user
+                    other_consultants = Consultant.objects.filter(user=user).exists()
+                    if other_consultants:
+                        has_other_relations = True
+                        logger.info(f"ℹ️ Utilisateur {user_id} a d'autres consultants, conservation")
+                    
+                    # Si pas d'autres relations, supprimer l'utilisateur
+                    if not has_other_relations:
+                        user.delete()
+                        user_deleted = True
+                        logger.info(f"✅ Utilisateur {user_id} ({user_username}) supprimé")
+                    else:
+                        logger.info(f"ℹ️ Utilisateur {user_id} conservé (autres relations)")
+                        
                 except Exception as e:
-                    logger.error(f"Erreur suppression utilisateur: {e}")
+                    logger.error(f"❌ Erreur suppression utilisateur: {e}")
+                    # Ne pas faire échouer toute la transaction pour l'utilisateur
+                    user_deleted = False
 
-        logger.info(f"✅ Consultant {consultant_name} supprimé avec succès")
+        # 10. Résumé des suppressions
+        deletion_summary = {
+            'consultant_id': consultant_id,
+            'consultant_name': consultant_name,
+            'consultant_email': consultant_email,
+            'notifications_deleted': notifications_deleted,
+            'matchings_deleted': matchings_deleted,
+            'competences_deleted': competences_deleted,
+            'missions_deleted': missions_deleted,
+            'documents_ged_unlinked': doc_ged_updated,
+            'files_deleted': files_deleted,
+            'cv_standardises_deleted': cv_standardises_deleted,
+            'user_deleted': user_deleted,
+            'total_files_deleted': len(files_deleted)
+        }
+
+        logger.info(f"✅ SUPPRESSION TERMINÉE AVEC SUCCÈS")
+        logger.info(f"📊 Résumé: {deletion_summary}")
 
         return Response({
             'success': True,
-            'message': f'Consultant {consultant_name} supprimé avec succès'
+            'message': f'Consultant "{consultant_name}" supprimé avec succès',
+            'deletion_summary': deletion_summary
         }, status=200)
 
     except Exception as e:
-        logger.error(f"❌ Erreur lors de la suppression du consultant {pk}: {str(e)}")
+        logger.error(f"❌ ERREUR CRITIQUE lors de la suppression du consultant {pk}: {str(e)}")
         return Response({
             'success': False,
-            'error': f'Erreur lors de la suppression: {str(e)}'
+            'error': f'Erreur lors de la suppression: {str(e)}',
+            'consultant_id': pk
         }, status=500)
-
 @api_view(['GET'])
 def consultant_notifications(request, consultant_id):
     """

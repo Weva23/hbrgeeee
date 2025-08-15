@@ -736,9 +736,3 @@ def test_cv_storage_configuration():
 # Exécuter le test final
 test_cv_storage_configuration()
 
-# print(f"\n✅ Configuration Django chargée avec succès")
-# print(f"📊 Résumé: {len(INSTALLED_APPS)} apps, {len(MIDDLEWARE)} middleware, {len(CSRF_TRUSTED_ORIGINS)} origins CSRF")
-# print("🎯 Système prêt pour la sauvegarde automatique des CVs au format Richat")
-# print(f"📁 Dossier de sauvegarde: {CV_STANDARDISE_DIR}")
-# print(f"🔧 Auto-save activé: {CV_PROCESSING['AUTO_SAVE_ENABLED']}")
-# print(f"📝 Métadonnées activées: {CV_PROCESSING['GENERATE_METADATA']}\n")
