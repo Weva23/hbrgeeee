@@ -3001,3 +3001,15 @@ Traceback (most recent call last):
   File "C:\Users\HP\Desktop\Richat_Platform\Backend\consultants\views.py", line 551, in admin_consultant_detail
     return handle_consultant_deletion(request, pk)
 NameError: name 'handle_consultant_deletion' is not defined
+[2025-08-15 11:52:29,361] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-15 11:52:29,423] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-15 11:53:51,061] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-15 11:53:51,092] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-15 11:57:47,879] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-15 11:57:47,907] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-15 12:01:18,418] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-15 12:01:18,459] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-15 12:51:54,636] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-15 12:51:54,684] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/
+[2025-08-15 12:51:54,709] ERROR django.request log log_response:241 - Internal Server Error: /api/debug/matchings/
+[2025-08-15 12:51:54,724] ERROR django.request log log_response:241 - Internal Server Error: /api/validated-matches/

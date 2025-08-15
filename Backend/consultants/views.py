@@ -7867,3 +7867,480 @@ def update_consultant_expertise_info(request, consultant_id):
             'success': False,
             'error': str(e)
         }, status=500)
+        
+@api_view(['POST'])
+def request_password_reset(request):
+    """
+    Endpoint pour demander la réinitialisation du mot de passe - VERSION CORRIGÉE
+    """
+    try:
+        email = request.data.get('email')
+        
+        if not email:
+            return Response({"error": "Email requis"}, status=400)
+        
+        # Validation basique de l'email
+        if '@' not in email or len(email) < 5:
+            return Response({"error": "Format d'email invalide"}, status=400)
+        
+        logger.info(f"Demande de réinitialisation pour: {email}")
+
+        try:
+            # Rechercher l'utilisateur par email (insensible à la casse)
+            user = User.objects.filter(email__iexact=email).first()
+            
+            if not user:
+                logger.info(f"Aucun utilisateur trouvé avec l'email: {email}")
+                # Pour des raisons de sécurité, nous retournons un message positif
+                return Response({
+                    "success": True,
+                    "message": "Si l'adresse email est associée à un compte, un email de réinitialisation a été envoyé."
+                })
+            
+            logger.info(f"Utilisateur trouvé: {user.username} (ID: {user.id})")
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la recherche de l'utilisateur: {str(e)}")
+            return Response({
+                "success": True,
+                "message": "Si l'adresse email est associée à un compte, un email de réinitialisation a été envoyé."
+            })
+
+        # Générer un token pour la réinitialisation du mot de passe
+        try:
+            token = default_token_generator.make_token(user)
+            uid = urlsafe_base64_encode(force_bytes(user.pk))
+            
+            logger.info(f"Token généré - UID: {uid}, Token (premier 10 car.): {token[:10]}...")
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la génération du token: {str(e)}")
+            return Response({
+                "error": "Erreur lors de la génération du token de réinitialisation"
+            }, status=500)
+
+        # Construire l'URL de réinitialisation
+        try:
+            # Obtenir l'origine depuis les headers ou utiliser une valeur par défaut
+            frontend_origin = request.headers.get('Origin') or request.headers.get('Referer')
+            
+            if frontend_origin:
+                # Nettoyer l'URL si elle contient un path
+                if '//' in frontend_origin:
+                    frontend_origin = '://'.join(frontend_origin.split('://')[:-1] + [frontend_origin.split('://')[-1].split('/')[0]])
+            else:
+                frontend_origin = getattr(settings, 'FRONTEND_URL', 'http://localhost:5173')
+            
+            reset_url = f"{frontend_origin}/reset-password/{uid}/{token}"
+            
+            logger.info(f"URL de réinitialisation générée: {reset_url}")
+            
+        except Exception as e:
+            logger.error(f"Erreur construction URL: {str(e)}")
+            return Response({
+                "error": "Erreur lors de la construction du lien de réinitialisation"
+            }, status=500)
+
+        # Envoyer l'email de réinitialisation
+        try:
+            result = send_password_reset_email_corrected(user, reset_url)
+            
+            if result:
+                logger.info(f"Email de réinitialisation envoyé avec succès à {user.email}")
+                return Response({
+                    "success": True,
+                    "message": "Email de réinitialisation envoyé avec succès.",
+                    "debug_info": {
+                        "email_sent": True,
+                        "user_found": True,
+                        "token_generated": True
+                    } if settings.DEBUG else {}
+                })
+            else:
+                logger.error(f"Échec de l'envoi d'email à {user.email}")
+                return Response({
+                    "success": True,
+                    "message": "Si l'adresse email est associée à un compte, un email de réinitialisation a été envoyé.",
+                    "debug_info": {
+                        "email_sent": False,
+                        "user_found": True,
+                        "token_generated": True
+                    } if settings.DEBUG else {}
+                })
+                
+        except Exception as e:
+            logger.error(f"Erreur lors de l'envoi d'email: {str(e)}")
+            return Response({
+                "success": True,
+                "message": "Si l'adresse email est associée à un compte, un email de réinitialisation a été envoyé.",
+                "debug_info": {
+                    "email_error": str(e)
+                } if settings.DEBUG else {}
+            })
+
+    except Exception as e:
+        logger.error(f"Erreur critique lors de la demande de réinitialisation: {str(e)}")
+        logger.error(traceback.format_exc())
+        return Response({
+            "error": "Une erreur s'est produite lors de la demande de réinitialisation."
+        }, status=500)
+
+
+@api_view(['POST'])
+def validate_reset_token(request):
+    """
+    Endpoint pour valider un token de réinitialisation - VERSION CORRIGÉE
+    """
+    try:
+        uid = request.data.get('uid')
+        token = request.data.get('token')
+
+        logger.info(f"Validation de token - UID: {uid}, Token fourni: {token is not None}")
+
+        if not all([uid, token]):
+            return Response({
+                "valid": False,
+                "error": "UID et token requis"
+            }, status=400)
+
+        try:
+            # Décoder l'ID utilisateur depuis base64
+            try:
+                user_id = force_str(urlsafe_base64_decode(uid))
+                logger.info(f"UID décodé avec succès: {user_id}")
+            except Exception as decode_error:
+                logger.error(f"Erreur décodage UID '{uid}': {str(decode_error)}")
+                return Response({
+                    "valid": False,
+                    "error": "Format UID invalide"
+                })
+            
+            # Récupérer l'utilisateur
+            try:
+                user = User.objects.get(pk=user_id)
+                logger.info(f"Utilisateur trouvé: {user.username} (ID: {user.id})")
+            except User.DoesNotExist:
+                logger.error(f"Utilisateur non trouvé avec ID: {user_id}")
+                return Response({
+                    "valid": False,
+                    "error": "Utilisateur non trouvé"
+                })
+            except Exception as user_error:
+                logger.error(f"Erreur lors de la récupération de l'utilisateur: {str(user_error)}")
+                return Response({
+                    "valid": False,
+                    "error": "Erreur de récupération utilisateur"
+                })
+            
+        except Exception as e:
+            logger.error(f"Erreur générale lors de la validation: {str(e)}")
+            return Response({
+                "valid": False,
+                "error": "Lien de réinitialisation invalide"
+            })
+
+        # Vérifier si le token est valide
+        try:
+            is_valid = default_token_generator.check_token(user, token)
+            logger.info(f"Résultat validation token pour {user.email}: {is_valid}")
+            
+            if is_valid:
+                return Response({
+                    "valid": True,
+                    "user_email": user.email,
+                    "user_id": user.id,
+                    "message": "Token valide"
+                })
+            else:
+                logger.warning(f"Token invalide pour l'utilisateur {user.email}")
+                return Response({
+                    "valid": False,
+                    "error": "Le lien de réinitialisation est invalide ou a expiré"
+                })
+                
+        except Exception as token_error:
+            logger.error(f"Erreur lors de la vérification du token: {str(token_error)}")
+            return Response({
+                "valid": False,
+                "error": "Erreur de validation du token"
+            })
+
+    except Exception as e:
+        logger.error(f"Erreur critique lors de la validation du token: {str(e)}")
+        logger.error(traceback.format_exc())
+        return Response({
+            "valid": False,
+            "error": "Erreur de validation du token"
+        }, status=500)
+
+
+@api_view(['POST'])
+def reset_password(request):
+    """
+    Endpoint pour réinitialiser le mot de passe - VERSION CORRIGÉE
+    """
+    try:
+        uid = request.data.get('uid')
+        token = request.data.get('token')
+        new_password = request.data.get('new_password')
+
+        logger.info(f"Réinitialisation mot de passe - UID: {uid}, Token fourni: {token is not None}")
+
+        # Validation des données
+        if not all([uid, token, new_password]):
+            return Response({
+                "error": "Tous les champs sont requis (uid, token, new_password)"
+            }, status=400)
+
+        if len(new_password) < 8:
+            return Response({
+                "error": "Le mot de passe doit contenir au moins 8 caractères"
+            }, status=400)
+
+        try:
+            # Décoder l'ID utilisateur depuis base64
+            try:
+                user_id = force_str(urlsafe_base64_decode(uid))
+                logger.info(f"UID décodé: {user_id}")
+            except Exception as decode_error:
+                logger.error(f"Erreur décodage UID: {str(decode_error)}")
+                return Response({
+                    "error": "Format UID invalide"
+                }, status=400)
+            
+            # Récupérer l'utilisateur
+            try:
+                user = User.objects.get(pk=user_id)
+                logger.info(f"Utilisateur trouvé: {user.username} (ID: {user.id})")
+            except User.DoesNotExist:
+                logger.error(f"Utilisateur non trouvé avec ID: {user_id}")
+                return Response({
+                    "error": "Utilisateur non trouvé"
+                }, status=400)
+                
+        except Exception as e:
+            logger.error(f"Erreur lors de la récupération de l'utilisateur: {str(e)}")
+            return Response({
+                "error": "Lien de réinitialisation invalide"
+            }, status=400)
+
+        # Vérifier si le token est valide
+        try:
+            if not default_token_generator.check_token(user, token):
+                logger.warning(f"Token invalide pour l'utilisateur {user.id}")
+                return Response({
+                    "error": "Le lien de réinitialisation est invalide ou a expiré"
+                }, status=400)
+        except Exception as token_error:
+            logger.error(f"Erreur validation token: {str(token_error)}")
+            return Response({
+                "error": "Erreur de validation du token"
+            }, status=400)
+
+        # Réinitialiser le mot de passe
+        try:
+            user.set_password(new_password)
+            user.save()
+            logger.info(f"Mot de passe réinitialisé avec succès pour {user.email}")
+
+            return Response({
+                "success": True,
+                "message": "Mot de passe réinitialisé avec succès",
+                "user_email": user.email
+            })
+            
+        except Exception as save_error:
+            logger.error(f"Erreur lors de la sauvegarde du mot de passe: {str(save_error)}")
+            return Response({
+                "error": "Erreur lors de la sauvegarde du nouveau mot de passe"
+            }, status=500)
+
+    except Exception as e:
+        logger.error(f"Erreur critique lors de la réinitialisation: {str(e)}")
+        logger.error(traceback.format_exc())
+        return Response({
+            "error": "Une erreur s'est produite lors de la réinitialisation du mot de passe"
+        }, status=500)
+
+
+def send_password_reset_email_corrected(user, reset_url):
+    """
+    Envoie un email de réinitialisation de mot de passe - VERSION CORRIGÉE
+    """
+    try:
+        subject = "Réinitialisation de votre mot de passe - Plateforme Richat"
+        
+        # Message HTML enrichi
+        html_message = f"""
+        <html>
+        <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h1 style="color: #1e40af; margin-bottom: 10px;">Réinitialisation de mot de passe</h1>
+                    <p style="color: #666; font-size: 16px;">Plateforme Richat - Espace Consultant</p>
+                </div>
+                
+                <div style="background: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <p style="margin: 0 0 15px 0;">Bonjour <strong>{user.get_full_name() or user.username}</strong>,</p>
+                    
+                    <p style="margin: 0 0 15px 0;">
+                        Vous avez demandé la réinitialisation de votre mot de passe pour votre compte consultant sur la plateforme Richat.
+                    </p>
+                    
+                    <p style="margin: 0 0 20px 0;">
+                        Cliquez sur le bouton ci-dessous pour créer un nouveau mot de passe :
+                    </p>
+                    
+                    <div style="text-align: center; margin: 25px 0;">
+                        <a href="{reset_url}" 
+                           style="background-color: #1e40af; color: white; padding: 12px 30px; 
+                                  text-decoration: none; border-radius: 5px; font-weight: bold;
+                                  display: inline-block;">
+                            Réinitialiser mon mot de passe
+                        </a>
+                    </div>
+                    
+                    <p style="margin: 20px 0 10px 0; font-size: 14px; color: #666;">
+                        Si le bouton ne fonctionne pas, copiez et collez ce lien dans votre navigateur :
+                    </p>
+                    <p style="margin: 0; font-size: 12px; word-break: break-all; color: #1e40af;">
+                        {reset_url}
+                    </p>
+                </div>
+                
+                <div style="border-top: 1px solid #e5e7eb; padding-top: 20px; font-size: 12px; color: #666;">
+                    <p style="margin: 0 0 10px 0;">
+                        <strong>Important :</strong>
+                    </p>
+                    <ul style="margin: 0; padding-left: 20px;">
+                        <li>Ce lien est valide pendant 24 heures</li>
+                        <li>Si vous n'avez pas demandé cette réinitialisation, ignorez cet email</li>
+                        <li>Pour votre sécurité, ne partagez jamais ce lien</li>
+                    </ul>
+                    
+                    <p style="margin: 20px 0 0 0; text-align: center;">
+                        Équipe Richat<br>
+                        <a href="mailto:support@richat.mr" style="color: #1e40af;">support@richat.mr</a>
+                    </p>
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+        
+        # Message texte de fallback
+        plain_message = f"""
+        Bonjour {user.get_full_name() or user.username},
+
+        Vous avez demandé la réinitialisation de votre mot de passe pour votre compte consultant sur la plateforme Richat.
+
+        Cliquez sur ce lien pour créer un nouveau mot de passe :
+        {reset_url}
+
+        Ce lien est valide pendant 24 heures.
+
+        Si vous n'avez pas demandé cette réinitialisation, ignorez cet email.
+
+        Équipe Richat
+        support@richat.mr
+        """
+
+        # Configuration email corrigée
+        try:
+            from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', 'noreply@richat.mr')
+            
+            # Envoyer l'email
+            result = send_mail(
+                subject=subject,
+                message=plain_message,
+                html_message=html_message,
+                from_email=from_email,
+                recipient_list=[user.email],
+                fail_silently=False,
+            )
+
+            logger.info(f"Email envoyé à {user.email} - Résultat: {result}")
+            return result > 0  # send_mail retourne le nombre d'emails envoyés
+
+        except Exception as mail_error:
+            logger.error(f"Erreur envoi email: {str(mail_error)}")
+            
+            # Tentative avec configuration de base
+            try:
+                from django.core.mail import EmailMessage
+                
+                email = EmailMessage(
+                    subject=subject,
+                    body=html_message,
+                    from_email=from_email,
+                    to=[user.email],
+                )
+                email.content_subtype = "html"
+                result = email.send()
+                
+                logger.info(f"Email envoyé (méthode alternative) à {user.email} - Résultat: {result}")
+                return result > 0
+                
+            except Exception as alt_error:
+                logger.error(f"Erreur méthode alternative: {str(alt_error)}")
+                return False
+
+    except Exception as e:
+        logger.error(f"Erreur générale lors de l'envoi de l'email: {str(e)}")
+        logger.error(traceback.format_exc())
+        return False
+
+
+# FONCTION DE TEST POUR LE DÉVELOPPEMENT
+@api_view(['POST'])
+def test_password_reset_email(request):
+    """
+    Fonction de test pour vérifier l'envoi d'email (DEBUG uniquement)
+    """
+    if not settings.DEBUG:
+        return Response({"error": "Disponible uniquement en mode DEBUG"}, status=403)
+    
+    try:
+        email = request.data.get('email', 'test@example.com')
+        
+        # Créer un utilisateur de test ou utiliser un existant
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return Response({"error": f"Utilisateur avec email {email} non trouvé"}, status=404)
+        
+        # Générer URL de test
+        token = default_token_generator.make_token(user)
+        uid = urlsafe_base64_encode(force_bytes(user.pk))
+        reset_url = f"http://localhost:5173/reset-password/{uid}/{token}"
+        
+        # Tester la validation du token
+        token_valid = default_token_generator.check_token(user, token)
+        
+        # Envoyer email de test
+        result = send_password_reset_email_corrected(user, reset_url)
+        
+        return Response({
+            "success": result,
+            "message": f"Email de test {'envoyé' if result else 'échoué'} à {email}",
+            "reset_url": reset_url,
+            "uid": uid,
+            "token_preview": token[:10] + "...",
+            "token_valid": token_valid,
+            "user_id": user.id,
+            "debug_info": {
+                "email_settings": {
+                    "backend": settings.EMAIL_BACKEND,
+                    "host": getattr(settings, 'EMAIL_HOST', 'Non configuré'),
+                    "port": getattr(settings, 'EMAIL_PORT', 'Non configuré'),
+                    "use_tls": getattr(settings, 'EMAIL_USE_TLS', False),
+                }
+            }
+        })
+        
+    except Exception as e:
+        logger.error(f"Erreur test email: {str(e)}")
+        return Response({
+            "error": str(e),
+            "traceback": traceback.format_exc()
+        }, status=500)

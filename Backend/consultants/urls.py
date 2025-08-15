@@ -49,6 +49,19 @@ urlpatterns = [
     path('validated-matches-updated/', views.validated_matches_updated, name='validated-matches-updated'),
     
     # ==========================================
+    # RÉINITIALISATION DE MOT DE PASSE - 🔥 NOUVELLES ROUTES
+    # ==========================================
+    
+    # Demande de réinitialisation de mot de passe
+    path('password-reset/request/', views.request_password_reset, name='request-password-reset'),
+    
+    # Validation du token de réinitialisation
+    path('password-reset/validate/', views.validate_reset_token, name='validate-reset-token'),
+    
+    # Réinitialisation effective du mot de passe
+    path('password-reset/reset/', views.reset_password, name='reset-password'),
+    
+    # ==========================================
     # CONSULTANTS - Administration - CORRECTIONS 404
     # ==========================================
     
@@ -178,6 +191,13 @@ urlpatterns = [
     path('cleanup/orphaned-users/', views.cleanup_orphaned_users, name='cleanup-orphaned-users'),
     
     # ==========================================
+    # 🔥 ROUTES DE TEST (DEBUG uniquement)
+    # ==========================================
+    
+    # Test d'envoi d'email (uniquement en mode DEBUG)
+    path('test/password-reset-email/', views.test_password_reset_email, name='test-password-reset-email'),
+    
+    # ==========================================
     # DEBUG ET DÉVELOPPEMENT - 🔥 AMÉLIORÉ
     # ==========================================
     
@@ -223,13 +243,23 @@ if settings.DEBUG:
         
         # Test des matchings
         path('test/matchings/<int:appel_offre_id>/', views.matching_for_offer_updated, name='test-matchings'),
+        
+        # 🔥 NOUVEAU: Test des endpoints de réinitialisation
+        path('test/check-reset-routes/', views.test_password_reset_email, name='test-check-reset-routes'),
     ]
     
     print("🔧 Mode DEBUG activé - Routes de débogage ajoutées")
-    print("📍 Routes principales:")
+    print("🔗 Routes principales:")
     print("   - /api/consultant/{id}/missions/ - Récupérer les missions")
     print("   - /api/consultant/{id}/data/ - Données du consultant")
     print("   - /api/consultant/{id}/notifications/ - Notifications")
     print("   - /api/debug/consultant/{id}/missions/ - Debug missions")
+    print("")
+    print("🔑 Routes de réinitialisation de mot de passe:")
+    print("   - /api/password-reset/request/ - Demander la réinitialisation")
+    print("   - /api/password-reset/validate/ - Valider le token")
+    print("   - /api/password-reset/reset/ - Réinitialiser le mot de passe")
+    print("   - /api/test/password-reset-email/ - Test d'envoi d'email")
 else:
     print("🚀 Mode PRODUCTION - Routes de débogage désactivées")
+    print("🔑 Routes de réinitialisation de mot de passe actives")
